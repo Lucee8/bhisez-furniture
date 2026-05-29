@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { ViewState, Product } from '../types';
 import { ALL_PRODUCTS, TESTIMONIALS } from '../data';
 import { motion, AnimatePresence } from 'motion/react';
@@ -21,7 +21,12 @@ import {
   UserCheck,
   Percent,
   Check,
-  CornerDownRight
+  CornerDownRight,
+  Youtube,
+  Plus,
+  Trash2,
+  Play,
+  Film
 } from 'lucide-react';
 
 interface HomeViewProps {
@@ -254,6 +259,45 @@ export default function HomeView({
   const [currentSlide, setCurrentSlide] = useState(0);
   const [gridFilter, setGridFilter] = useState('All');
 
+  // Interactive YouTube Shorts State initialized from localStorage with curated defaults
+  const [youtubeShorts, setYoutubeShorts] = useState<{ id: string; title: string }[]>(() => {
+    const saved = localStorage.getItem('bhisez_youtube_shorts_v2');
+    if (saved) {
+      try {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+      } catch (e) {
+        // Fallback to defaults
+      }
+    }
+    return [
+      { id: 'IhRpzKqwhkk', title: 'Solid Wood Sofa with Premium Box Storage' },
+      { id: 'Hh1f27Wzk6o', title: 'Classic Walnut Finished Queen Bed Setup' },
+      { id: '_fk3E6tfGgo', title: 'Space-Saving Solid Wood Dining Set' },
+      { id: '9wp9xMHV-nI', title: 'Elegant Handcrafted Sheesham Center Table' },
+      { id: 'i5kUP5kOyrA', title: 'Solid Pine Wooden Wardrobe with Sliders' }
+    ];
+  });
+
+  const [activePlayingId, setActivePlayingId] = useState<string | null>(null);
+  const shortsContainerRef = React.useRef<HTMLDivElement>(null);
+
+  const scrollShorts = (direction: 'left' | 'right') => {
+    if (shortsContainerRef.current) {
+      const { scrollLeft, clientWidth } = shortsContainerRef.current;
+      const scrollAmount = clientWidth * 0.75;
+      shortsContainerRef.current.scrollTo({
+        left: direction === 'left' ? scrollLeft - scrollAmount : scrollLeft + scrollAmount,
+        behavior: 'smooth'
+      });
+    }
+  };
+
+  // Auto-sync our Shorts list back to user's localStorage
+  useEffect(() => {
+    localStorage.setItem('bhisez_youtube_shorts_v2', JSON.stringify(youtubeShorts));
+  }, [youtubeShorts]);
+
   const filteredGridCategories = useMemo(() => {
     return IMG_GRID_CATEGORIES.filter(item => item.filters.includes(gridFilter));
   }, [gridFilter]);
@@ -292,6 +336,7 @@ export default function HomeView({
   const handlePrevSlide = () => {
     setCurrentSlide((prev) => (prev - 1 + SUMMER_HERO_SLIDES.length) % SUMMER_HERO_SLIDES.length);
   };
+
 
   const toggleFeature = (id: string) => {
     setFeaturesList(prev => prev.map(f => {
@@ -786,17 +831,107 @@ export default function HomeView({
       </section>
 
 
-      {/* ── SECTION 6: THE AMAZING CLIENT SALES PITCH HARNESS ── */}
-      {/* Dynamic float overlay to toggle side pitch info assistant */}
-      <div className="fixed bottom-6 right-6 sm:bottom-8 sm:right-8 z-50 flex flex-col items-end space-y-2">
-        <button
-          onClick={() => setShowPitchDrawer(true)}
-          className="flex items-center gap-2 bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white font-bold text-xs sm:text-sm shadow-xl hover:shadow-2xl px-5 py-3 rounded-full hover:scale-105 active:scale-95 transition-all uppercase tracking-wider whitespace-nowrap cursor-pointer border border-white/20 select-none animate-pulse"
-        >
-          <FileText size={16} />
-          💼 Pitch Client Proposal (₹18k-25k)
-        </button>
-      </div>
+
+
+      {/* ── SECTION: YOUTUBE SHORTS SHOWCASE CAROUSEL ── */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-16 sm:mt-22 border-t border-stone-100 pt-14 mb-12">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 mb-8">
+          <div>
+            <h2 className="font-serif text-2xl sm:text-3xl font-extrabold text-[#3D2B1F]">
+              Where Craftsmanship Comes Alive
+            </h2>
+            <p className="text-stone-500 text-xs mt-1">
+              Explore handcrafted furniture making, detailing, and modern space transformations.
+            </p>
+          </div>
+          
+          {/* Carousel Next/Prev Controls */}
+          <div className="flex gap-2">
+            <button
+              onClick={() => scrollShorts('left')}
+              className="p-2.5 rounded-full border border-stone-200 bg-white hover:bg-stone-50 text-stone-700 hover:text-stone-900 shadow-2xs transition-all active:scale-95 cursor-pointer flex items-center justify-center select-none"
+              title="Scroll Left"
+            >
+              <ChevronLeft size={16} className="stroke-[2.5]" />
+            </button>
+            <button
+              onClick={() => scrollShorts('right')}
+              className="p-2.5 rounded-full border border-stone-200 bg-white hover:bg-stone-50 text-stone-700 hover:text-stone-900 shadow-2xs transition-all active:scale-95 cursor-pointer flex items-center justify-center select-none"
+              title="Scroll Right"
+            >
+              <ChevronRight size={16} className="stroke-[2.5]" />
+            </button>
+          </div>
+        </div>
+
+        {youtubeShorts.length === 0 ? (
+          <div className="bg-stone-50 border border-stone-200 border-dashed rounded-2xl p-10 text-center flex flex-col items-center justify-center max-w-md mx-auto">
+            <Film size={36} className="text-stone-300 mb-2.5" />
+            <h4 className="font-serif text-base font-bold text-stone-800">No Showcase Videos Saved</h4>
+            <p className="text-stone-500 text-[11px] mt-1 m-4 leading-relaxed">
+              No YouTube Shorts links available to build the design portfolio.
+            </p>
+          </div>
+        ) : (
+          <div 
+            ref={shortsContainerRef}
+            className="flex gap-4 sm:gap-6 overflow-x-auto pb-4 select-none no-scrollbar snap-x snap-mandatory scroll-smooth"
+          >
+            {youtubeShorts.map((short) => {
+              const isPlaying = activePlayingId === short.id;
+              return (
+                <div 
+                  key={short.id}
+                  className="min-w-[200px] sm:min-w-[240px] md:min-w-[260px] max-w-[270px] flex-shrink-0 group relative flex flex-col rounded-2xl overflow-hidden bg-stone-900 border border-stone-200/60 aspect-[9/16] shadow-2xs hover:shadow-lg transition-all duration-300 snap-start"
+                >
+                  <div className="relative flex-1 bg-black">
+                    {isPlaying ? (
+                      <iframe
+                        src={`https://www.youtube.com/embed/${short.id}?autoplay=1&mute=1&rel=0`}
+                        title={short.title}
+                        className="w-full h-full border-none absolute inset-0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                      />
+                    ) : (
+                      <>
+                        {/* High-quality YouTube poster thumbnail */}
+                        <img 
+                          src={`https://img.youtube.com/vi/${short.id}/hqdefault.jpg`}
+                          alt={short.title}
+                          className="w-full h-full object-cover opacity-85 group-hover:opacity-70 group-hover:scale-102 transition-all duration-500"
+                          referrerPolicy="no-referrer"
+                        />
+
+                        {/* Visual Centered Play Circle */}
+                        <div 
+                          onClick={() => setActivePlayingId(short.id)}
+                          className="absolute inset-0 flex flex-col items-center justify-center cursor-pointer z-10"
+                        >
+                          <div className="p-3.5 bg-white/10 backdrop-blur-md text-white rounded-full group-hover:bg-red-650 group-hover:scale-110 transition-all duration-300 shadow-md">
+                            <Play size={18} className="fill-current stroke-none translate-x-[1px]" />
+                          </div>
+                        </div>
+
+                        {/* Info banner at foot */}
+                        <div className="absolute bottom-0 left-0 right-0 p-3.5 bg-gradient-to-t from-black via-black/70 to-transparent z-10 pointer-events-none text-left">
+                          <p className="text-[9px] uppercase font-bold tracking-widest text-white/50">TIMBER SPOTLIGHT</p>
+                          <h4 className="text-white text-xs font-bold mt-0.5 line-clamp-2">
+                            {short.title}
+                          </h4>
+                        </div>
+                      </>
+                    )}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        )}
+      </section>
+
+
+
 
       <AnimatePresence>
         {showPitchDrawer && (

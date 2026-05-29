@@ -299,19 +299,7 @@ export default function App() {
         <MessageCircle size={22} className="fill-current text-white stroke-none" />
       </a>
 
-      {/* Floating back-to-beds button on scroll or general */}
-      {currentView !== 'beds' && (
-        <button
-          onClick={() => {
-            setInitialCategoryFilter('all');
-            handleNavigate('beds');
-          }}
-          className="fixed bottom-6 right-6 z-[90] bg-[#3D2B1F] border border-[#C9983A]/30 text-amber-50 font-bold text-xs py-3 px-5 rounded-full shadow-lg hover:bg-stone-900 transition-transform hover:scale-105 uppercase tracking-wider"
-          id="floating-showroom-explore-btn"
-        >
-          探索 All Beds 🛏️
-        </button>
-      )}
+
 
     </div>
   );
