@@ -1,0 +1,433 @@
+import { ViewState } from '../types';
+import { 
+  ShoppingCart, 
+  Heart, 
+  MapPin, 
+  User, 
+  Search, 
+  Menu, 
+  X,
+  PhoneCall
+} from 'lucide-react';
+
+interface NavbarProps {
+  currentView: ViewState;
+  onNavigate: (view: ViewState) => void;
+  cartCount: number;
+  wishlistCount: number;
+  onSearchChange: (query: string) => void;
+  searchQuery: string;
+  isLoggedIn: boolean;
+  onLogout: () => void;
+  mobileMenuOpen: boolean;
+  setMobileMenuOpen: (open: boolean) => void;
+}
+
+export default function Navbar({
+  currentView,
+  onNavigate,
+  cartCount,
+  wishlistCount,
+  onSearchChange,
+  searchQuery,
+  isLoggedIn,
+  onLogout,
+  mobileMenuOpen,
+  setMobileMenuOpen,
+}: NavbarProps) {
+  // Brand Logo component exactly matching the given style
+  const renderLogo = (isLightBg = true) => {
+    const mainColor = "#FBBD18"; // Brilliant Golden Yellow from image
+    const dotColor = "#E52E2D"; // Vivid Crimson Red from image
+    const textColor = isLightBg ? "#4A2511" : "#FAF7F2"; // Deep Mahogany brown on light, warm white on dark
+    const lineColor = isLightBg ? "#4A2511" : "#FAF7F2"; // Match line color with text color for cohesive border
+
+    return (
+      <div className="flex flex-col items-start select-none text-left">
+        {/* "Bhisez" with custom dotless i and precise Red dot */}
+        <div 
+          className="text-3xl font-black tracking-tight leading-none relative flex items-baseline" 
+          style={{ color: mainColor, fontFamily: '"Playfair Display", Georgia, serif' }}
+        >
+          <span>Bh</span>
+          <span className="relative inline-flex items-center justify-center">
+            ı
+            <span 
+              className="absolute -top-[0.25em] left-[52%] -translate-x-1/2 rounded-full" 
+              style={{ 
+                backgroundColor: dotColor,
+                width: "0.26em",
+                height: "0.26em"
+              }}
+            ></span>
+          </span>
+          <span>sez</span>
+        </div>
+        {/* Underline Rule & FURNITURE */}
+        <div className="flex items-center w-full max-w-[104px] mt-1 bg-transparent">
+          <div className="h-[1.5px] flex-1" style={{ backgroundColor: lineColor }}></div>
+          <span 
+            className="text-[8px] font-black tracking-[0.16em] px-2 leading-none mt-0.5" 
+            style={{ 
+              color: textColor,
+              fontFamily: '"DM Sans", "Space Grotesk", sans-serif'
+            }}
+          >
+            FURNITURE
+          </span>
+          <div className="h-[1.5px] flex-1" style={{ backgroundColor: lineColor }}></div>
+        </div>
+      </div>
+    );
+  };
+
+  return (
+    <>
+      <header className="relative z-[100] bg-white border-b border-[#E0D8CF] shadow-xs">
+      {/* 1. TOP-MOST UTILITY RIBBON (Wooden Street Style) */}
+      <div className="bg-[#FAF7F2] border-b border-[#EBE3D9] text-stone-600 text-[10.5px] font-medium py-1.5 px-4 sm:px-6 lg:px-8 hidden sm:block">
+        <div className="max-w-7xl mx-auto flex justify-between items-center">
+          {/* Left Ribbon Links */}
+          <div className="flex items-center space-x-6">
+            <button 
+              onClick={() => onNavigate('home')} 
+              className="text-[#E52E2D] font-bold hover:opacity-80 transition-opacity cursor-pointer"
+            >
+              Furniture
+            </button>
+            <button 
+              onClick={() => onNavigate('contact')}
+              className="hover:text-stone-900 transition-colors cursor-pointer"
+            >
+              Home Interiors
+            </button>
+            <button 
+              onClick={() => onNavigate('contact')}
+              className="hover:text-stone-900 transition-colors cursor-pointer"
+            >
+              Bulk Order
+            </button>
+          </div>
+          
+          {/* Right Ribbon Links */}
+          <div className="flex items-center space-x-6 text-stone-500">
+            <a 
+              href="tel:+919314444747" 
+              className="flex items-center gap-1 hover:text-stone-900 transition-colors font-bold"
+            >
+              <PhoneCall size={11} className="text-stone-400" />
+              +91-9314444747
+            </a>
+            <span className="text-stone-300">|</span>
+            <button 
+              onClick={() => onNavigate('about')}
+              className="hover:text-stone-900 transition-colors cursor-pointer"
+            >
+              Become a Franchise
+            </button>
+            <span className="text-stone-300">|</span>
+            <button 
+              onClick={() => onNavigate('showroom')}
+              className="hover:text-stone-900 transition-colors cursor-pointer"
+            >
+              Track Order
+            </button>
+            <span className="text-stone-300">|</span>
+            <button 
+              onClick={() => onNavigate('contact')}
+              className="hover:text-stone-900 transition-colors cursor-pointer"
+            >
+              Help Center
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* 2. MAIN HEADER BAR (Wooden Street Layout) */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center py-4 bg-transparent">
+          
+          {/* Logo on Left */}
+          <button 
+            onClick={() => onNavigate('home')} 
+            className="flex items-center bg-transparent border-none cursor-pointer focus:outline-none shrink-0"
+            id="nav-logo-btn"
+          >
+            {renderLogo(true)}
+          </button>
+
+          {/* Centered Large Search Bar (Wooden Street style) */}
+          <div className="flex-1 max-w-xl mx-8 hidden md:block">
+            <div className="relative w-full">
+              <input
+                type="text"
+                placeholder="Search Products, Color & More..."
+                value={searchQuery}
+                onChange={(e) => {
+                  onSearchChange(e.target.value);
+                  if (currentView !== 'beds' && e.target.value) {
+                    onNavigate('beds');
+                  }
+                }}
+                className="w-full bg-white border border-[#C9BFA6] text-stone-800 text-xs rounded-md pl-4 pr-10 py-2.5 shadow-2xs focus:ring-1 focus:ring-[#FBBD18] focus:border-[#FBBD18] outline-none transition-all placeholder-stone-400 font-medium"
+                id="navbar-search-input"
+              />
+              <Search size={16} className="absolute right-3 top-1/2 -translate-y-1/2 text-stone-500 cursor-pointer hover:text-stone-800" />
+            </div>
+          </div>
+
+          {/* Icon Navigation Row on Right with Labels Below (Exactly matching the screenshot) */}
+          <div className="flex items-center space-x-1 sm:space-x-5">
+            
+            {/* Stores Icon */}
+            <button 
+              onClick={() => onNavigate('showroom')} 
+              className="flex flex-col items-center p-1.5 text-stone-700 hover:text-orange-600 transition-colors cursor-pointer group"
+              title="Showroom Stores"
+            >
+              <MapPin size={21} className="group-hover:scale-105 transition-transform" />
+              <span className="text-[10px] font-bold text-stone-500 mt-1 select-none">Stores</span>
+            </button>
+
+            {/* Profile / Account Icon */}
+            <button 
+              onClick={() => onNavigate(isLoggedIn ? 'home' : 'login')} 
+              className="flex flex-col items-center p-1.5 text-stone-700 hover:text-orange-600 transition-colors cursor-pointer group"
+              title={isLoggedIn ? "My Account" : "Sign In"}
+            >
+              <User size={21} className="group-hover:scale-105 transition-transform" />
+              <span className="text-[10px] font-bold text-stone-500 mt-1 select-none">
+                {isLoggedIn ? "Profile" : "Profile"}
+              </span>
+            </button>
+
+            {/* Wishlist Icon */}
+            <button 
+              onClick={() => onNavigate('wishlist')} 
+              className="relative flex flex-col items-center p-1.5 text-stone-700 hover:text-orange-600 transition-colors cursor-pointer group"
+              id="navbar-wishlist-btn"
+              title="My Wishlist"
+            >
+              <div className="relative">
+                <Heart size={21} className={`${currentView === 'wishlist' ? 'fill-red-500 stroke-red-500 text-red-500' : 'text-stone-700'} group-hover:scale-105 transition-transform`} />
+                {wishlistCount > 0 && (
+                  <span className="absolute -top-1 -right-2 bg-red-500 text-white rounded-full text-[8px] font-black w-4 h-4 flex items-center justify-center">
+                    {wishlistCount}
+                  </span>
+                )}
+              </div>
+              <span className="text-[10px] font-bold text-stone-500 mt-1 select-none">
+                Wishlist ({wishlistCount})
+              </span>
+            </button>
+
+            {/* Cart Icon */}
+            <button 
+              onClick={() => onNavigate('cart')} 
+              className="relative flex flex-col items-center p-1.5 text-stone-700 hover:text-orange-600 transition-colors cursor-pointer group"
+              id="navbar-cart-btn"
+              title="My Shopping Cart"
+            >
+              <div className="relative font-bold">
+                <ShoppingCart size={21} className={`${currentView === 'cart' ? 'stroke-orange-500 text-orange-500' : 'text-stone-700'} group-hover:scale-105 transition-transform`} />
+                {cartCount > 0 && (
+                  <span className="absolute -top-1 -right-2 bg-amber-600 text-white rounded-full text-[8px] font-black w-4 h-4 flex items-center justify-center">
+                    {cartCount}
+                  </span>
+                )}
+              </div>
+              <span className="text-[10px] font-bold text-stone-500 mt-1 select-none">
+                Cart ({cartCount})
+              </span>
+            </button>
+
+            {/* Sign Out (If Logged In) */}
+            {isLoggedIn && (
+              <button 
+                onClick={onLogout}
+                className="hidden lg:flex flex-col items-center p-1.5 text-stone-500 hover:text-red-600 transition-colors cursor-pointer text-[10px] font-bold"
+                id="navbar-logout-btn"
+              >
+                <X size={20} />
+                <span className="mt-1">Sign Out</span>
+              </button>
+            )}
+
+            {/* Mobile Menu Button toggle */}
+            <button 
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)} 
+              className="lg:hidden p-2 text-stone-700 hover:bg-stone-50 rounded-md cursor-pointer"
+              id="navbar-mobile-menu-btn"
+            >
+              {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+            </button>
+
+          </div>
+        </div>
+      </div>
+    </header>
+
+      {/* 3. CATEGORY NAVIGATION TAPE / SLAT (Wooden Street style category ribbon) */}
+      <div className="sticky top-0 z-[90] bg-[#FAF7F2] border-t border-b border-[#EBE3D9] overflow-x-auto select-none no-scrollbar shadow-xs">
+        <div className="max-w-7xl mx-auto px-4 flex items-center justify-between py-2 md:py-3 whitespace-nowrap text-xs md:text-sm font-semibold text-stone-700">
+          <button 
+            onClick={() => { onSearchChange(''); onNavigate('beds'); }} 
+            className="px-3 py-1 hover:text-[#C9983A] transition-colors cursor-pointer duration-200"
+          >
+            Sofas
+          </button>
+          <button 
+            onClick={() => { onSearchChange(''); onNavigate('beds'); }} 
+            className="px-3 py-1 hover:text-[#C9983A] transition-colors cursor-pointer duration-200"
+          >
+            Living
+          </button>
+          <button 
+            onClick={() => { onSearchChange(''); onNavigate('beds'); }} 
+            className="px-3 py-1 hover:text-[#C9983A] transition-colors cursor-pointer duration-200 border-b-2 border-orange-600 text-orange-600"
+          >
+            Bedroom
+          </button>
+          <button 
+            onClick={() => { onSearchChange(''); onNavigate('beds'); }} 
+            className="px-3 py-1 hover:text-[#C9983A] transition-colors cursor-pointer duration-200"
+          >
+            Mattress
+          </button>
+          <button 
+            onClick={() => { onSearchChange(''); onNavigate('beds'); }} 
+            className="px-3 py-1 hover:text-[#C9983A] transition-colors cursor-pointer duration-200"
+          >
+            Dining
+          </button>
+          <button 
+            onClick={() => { onSearchChange(''); onNavigate('beds'); }} 
+            className="px-3 py-1 hover:text-[#C9983A] transition-colors cursor-pointer duration-200"
+          >
+            Storage
+          </button>
+          <button 
+            onClick={() => { onSearchChange(''); onNavigate('beds'); }} 
+            className="px-3 py-1 hover:text-[#C9983A] transition-colors cursor-pointer duration-200"
+          >
+            Study & Office
+          </button>
+          <button 
+            onClick={() => { onSearchChange(''); onNavigate('beds'); }} 
+            className="px-3 py-1 hover:text-[#C9983A] transition-colors cursor-pointer duration-200"
+          >
+            Outdoor
+          </button>
+          <button 
+            onClick={() => { onSearchChange(''); onNavigate('beds'); }} 
+            className="px-3 py-1 hover:text-[#C9983A] transition-colors cursor-pointer duration-200"
+          >
+            Decor & Furnishing
+          </button>
+          <button 
+            onClick={() => { onSearchChange(''); onNavigate('beds'); }} 
+            className="px-3 py-1 text-orange-700 hover:text-orange-950 transition-colors cursor-pointer duration-200"
+          >
+            Modular Kitchen & Wardrobe
+          </button>
+          <button 
+            onClick={() => { onSearchChange(''); onNavigate('beds'); }} 
+            className="px-3 py-1 text-[#C9983A] hover:text-amber-950 transition-colors cursor-pointer duration-200"
+          >
+            WS Luxe
+          </button>
+        </div>
+      </div>
+
+      {/* Mobile Drawer Overlay */}
+      {mobileMenuOpen && (
+        <div className="lg:hidden animate-fade-in">
+          <div className="fixed inset-0 z-40 bg-stone-900/40 backdrop-blur-2xs" onClick={() => setMobileMenuOpen(false)}></div>
+          <div className="fixed right-0 top-0 bottom-0 z-50 w-72 max-w-xs bg-[#FAF7F2] p-6 shadow-xl flex flex-col justify-between py-10 transition-transform">
+            
+            <div>
+              {/* Drawer header */}
+              <div className="flex justify-between items-center mb-8 pb-4 border-b border-[#E0D8CF]">
+                {renderLogo(true)}
+                <button 
+                  onClick={() => setMobileMenuOpen(false)} 
+                  className="rounded-full p-1 hover:bg-stone-200 text-stone-400 cursor-pointer"
+                >
+                  <X size={20} />
+                </button>
+              </div>
+
+              {/* Drawer Links */}
+              <nav className="flex flex-col space-y-4">
+                <button 
+                  onClick={() => { onNavigate('home'); setMobileMenuOpen(false); }} 
+                  className="text-left text-sm font-semibold text-[#3D2B1F] py-2 px-3 hover:bg-[#E8DDD1]/40 rounded-md"
+                >
+                  🏠 Home
+                </button>
+                <button 
+                  onClick={() => { onNavigate('beds'); setMobileMenuOpen(false); }} 
+                  className="text-left text-sm font-semibold text-[#3D2B1F] py-2 px-3 hover:bg-[#E8DDD1]/40 rounded-md"
+                >
+                  🛋️ All Products & Beds
+                </button>
+                <button 
+                  onClick={() => { onNavigate('showroom'); setMobileMenuOpen(false); }} 
+                  className="text-left text-sm font-semibold text-[#3D2B1F] py-2 px-3 hover:bg-[#E8DDD1]/40 rounded-md"
+                >
+                  📍 Visit Showroom
+                </button>
+                <button 
+                  onClick={() => { onNavigate('about'); setMobileMenuOpen(false); }} 
+                  className="text-left text-sm font-semibold text-[#3D2B1F] py-2 px-3 hover:bg-[#E8DDD1]/40 rounded-md"
+                >
+                  📖 About Us
+                </button>
+                <button 
+                  onClick={() => { onNavigate('contact'); setMobileMenuOpen(false); }} 
+                  className="text-left text-sm font-semibold text-[#3D2B1F] py-2 px-3 hover:bg-[#E8DDD1]/40 rounded-md"
+                >
+                  ⚙️ Custom Order
+                </button>
+                <button 
+                  onClick={() => { onNavigate('wishlist'); setMobileMenuOpen(false); }} 
+                  className="text-left text-sm font-semibold text-[#3D2B1F] py-2 px-3 hover:bg-[#E8DDD1]/40 rounded-md"
+                >
+                  ❤️ My Wishlist ({wishlistCount})
+                </button>
+              </nav>
+            </div>
+
+            {/* Mobile Footer Area */}
+            <div className="border-t border-[#E0D8CF] pt-4 flex flex-col space-y-3">
+              <a 
+                href="https://wa.me/919999999999?text=Hi! I Want to Enquire About Custom Furniture." 
+                target="_blank" 
+                rel="noreferrer"
+                className="w-full text-center bg-[#25D366] text-white text-xs font-bold py-2.5 px-4 rounded-lg flex items-center justify-center gap-2"
+              >
+                💬 WhatsApp Ramesh
+              </a>
+              {isLoggedIn ? (
+                <button 
+                  onClick={() => { onLogout(); setMobileMenuOpen(false); }}
+                  className="text-center font-bold text-xs text-[#3D2B1F] py-2"
+                >
+                  Sign Out
+                </button>
+              ) : (
+                <button 
+                  onClick={() => { onNavigate('login'); setMobileMenuOpen(false); }}
+                  className="text-center font-bold text-xs text-amber-800 py-2"
+                >
+                  Sign In / Create Account
+                </button>
+              )}
+            </div>
+
+          </div>
+        </div>
+      )}
+    </>
+  );
+}
