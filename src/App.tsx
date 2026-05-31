@@ -170,7 +170,7 @@ export default function App() {
       )}
 
       {/* Primary Header/Navbar */}
-      {currentView !== 'beds' && (
+      <div className={currentView === 'beds' ? 'hidden md:block' : ''}>
         <Navbar 
           currentView={currentView}
           onNavigate={handleNavigate}
@@ -184,7 +184,7 @@ export default function App() {
           setMobileMenuOpen={setMobileMenuOpen}
           onSelectCategory={handleSelectCategory}
         />
-      )}
+      </div>
 
       {/* Main active view port */}
       <main className="flex-1 overflow-hidden relative">
@@ -289,7 +289,9 @@ export default function App() {
       </main>
 
       {/* Primary Footer */}
-      {currentView !== 'beds' && <Footer onNavigate={handleNavigate} />}
+      <div className={currentView === 'beds' ? 'hidden md:block' : ''}>
+        <Footer onNavigate={handleNavigate} />
+      </div>
 
       {/* Ambient Floating WhatsApp helper button */}
       <a 

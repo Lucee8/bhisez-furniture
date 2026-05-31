@@ -106,6 +106,15 @@ export default function BedsView({
     setActiveSubCategory(initialSubCategoryFilter || null);
   }, [initialCategoryFilter, initialSubCategoryFilter]);
 
+  // Reset active category selection to 'all' if user initiates search
+  useEffect(() => {
+    if (searchQuery && searchQuery.trim() !== '') {
+      setActiveCategory('all');
+      setActiveSubCategory(null);
+      setIsSearchVisible(true);
+    }
+  }, [searchQuery]);
+
   // Filters active states
   const [selectedMaterials, setSelectedMaterials] = useState<Set<string>>(new Set());
   const [selectedSizes, setSelectedSizes] = useState<Set<string>>(new Set());
@@ -120,7 +129,7 @@ export default function BedsView({
   const [isLiveVideoOpen, setIsLiveVideoOpen] = useState<boolean>(false);
 
   // Search input visible state
-  const [isSearchVisible, setIsSearchVisible] = useState<boolean>(false);
+  const [isSearchVisible, setIsSearchVisible] = useState<boolean>(!!searchQuery);
 
   // Calculate matching dynamic metadata for active category
   const activeCategoryMeta = useMemo(() => {
@@ -144,10 +153,18 @@ export default function BedsView({
     // 2. Search check
     const query = searchQuery.trim().toLowerCase();
     if (query) {
-      result = result.filter(p => 
-        p.name.toLowerCase().includes(query) || 
-        (p.shortDesc && p.shortDesc.toLowerCase().includes(query))
-      );
+      result = result.filter(p => {
+        const matchesName = p.name.toLowerCase().includes(query);
+        const matchesShortDesc = p.shortDesc && p.shortDesc.toLowerCase().includes(query);
+        const matchesDesc = p.description && p.description.toLowerCase().includes(query);
+        const matchesCategory = p.category && p.category.toLowerCase().includes(query);
+        const matchesSubCategory = p.subCategory && p.subCategory.toLowerCase().includes(query);
+        
+        const catObj = CATEGORY_MAP.find(c => c.slug === p.category);
+        const matchesCategoryName = catObj && catObj.name.toLowerCase().includes(query);
+        
+        return matchesName || matchesShortDesc || matchesDesc || matchesCategory || matchesSubCategory || matchesCategoryName;
+      });
     }
 
     // 3. Material check
@@ -781,6 +798,7 @@ export default function BedsView({
                   { id: 'all', label: 'All Collections', icon: '🪵' },
                   { id: 'door-frames', label: 'Door Frames', icon: '🚪' },
                   { id: 'wooden-sofas', label: 'Wooden Sofas', icon: '🛋️' },
+                  { id: 'wooden-chairs', label: 'Wooden Chairs', icon: '🪑' },
                   { id: 'beds', label: 'Premium Beds', icon: '🛏️' },
                   { id: 'dressing-table', label: 'Dressing Table', icon: '🪞' },
                   { id: 'wooden-swings', label: 'Swings & Jhulas', icon: '🪵' },

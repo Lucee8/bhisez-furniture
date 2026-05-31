@@ -175,6 +175,13 @@ export default function Navbar({
                     onNavigate('beds');
                   }
                 }}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') {
+                    if (currentView !== 'beds') {
+                      onNavigate('beds');
+                    }
+                  }
+                }}
                 className="w-full bg-white border border-[#C9BFA6] text-stone-800 text-xs rounded-md pl-4 pr-10 py-2.5 shadow-2xs focus:ring-1 focus:ring-[#FBBD18] focus:border-[#FBBD18] outline-none transition-all placeholder-stone-400 font-medium"
                 id="navbar-search-input"
               />

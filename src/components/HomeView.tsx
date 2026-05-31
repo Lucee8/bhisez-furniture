@@ -65,79 +65,97 @@ const SUMMER_HERO_SLIDES = [
   }
 ];
 
-// 2. Beautiful Categories Grid matching Wooden Street screenshot
+// 2. Beautiful Categories Grid matching Wooden Street screenshot with the requested 14 categories
 const IMG_GRID_CATEGORIES = [
   { 
-    label: 'SOFAS', 
-    img: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=600&q=80', 
-    categoryKey: 'living', 
-    filters: ['All', 'Living'] 
-  },
-  { 
-    label: 'BEDS', 
+    label: 'Beds', 
     img: 'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=600&q=80', 
-    categoryKey: 'bed', 
+    categoryKey: 'beds', 
     filters: ['All', 'Bedroom'] 
   },
   { 
-    label: 'DINING', 
-    img: 'https://images.unsplash.com/photo-1615066390971-03e4e1c36ddf?w=600&q=80', 
-    categoryKey: 'dining', 
-    filters: ['All', 'Dining'] 
-  },
-  { 
-    label: 'TV UNITS', 
-    img: 'https://images.unsplash.com/photo-1595428774223-ef52624120d2?w=600&q=80', 
-    categoryKey: 'living', 
+    label: 'Wooden Sofas', 
+    img: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=600&q=80', 
+    categoryKey: 'wooden-sofas', 
     filters: ['All', 'Living'] 
   },
   { 
-    label: 'COFFEE TABLES', 
-    img: 'https://images.unsplash.com/photo-1533090161767-e6ffed986c88?w=600&q=80', 
-    categoryKey: 'living', 
-    filters: ['All', 'Living', 'Decor'] 
+    label: 'Wooden Chairs', 
+    img: 'https://images.unsplash.com/photo-1592078615290-033ee584e267?w=600&q=80', 
+    categoryKey: 'wooden-chairs', 
+    filters: ['All', 'Living'] 
   },
   { 
-    label: 'CABINETS', 
-    img: 'https://images.unsplash.com/photo-1538688525198-9b88f6f53126?w=600&q=80', 
-    categoryKey: 'all', 
-    filters: ['All', 'Living', 'Dining'] 
+    label: 'DoorFrames', 
+    img: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?w=600&q=80', 
+    categoryKey: 'door-frames', 
+    filters: ['All', 'Doors & Puja'] 
   },
   { 
-    label: 'MATTRESSES', 
-    img: 'https://images.unsplash.com/photo-1540518614846-7eded433c457?w=600&q=80', 
-    categoryKey: 'bed', 
-    filters: ['All', 'Bedroom', 'Mattress'] 
-  },
-  { 
-    label: 'WARDROBES', 
-    img: 'https://images.unsplash.com/photo-1595515106969-1ce29566ff1c?w=600&q=80', 
-    categoryKey: 'bed', 
+    label: 'Dressing Table', 
+    img: 'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=600&q=80', 
+    categoryKey: 'dressing-table', 
     filters: ['All', 'Bedroom'] 
   },
   { 
-    label: 'SOFA CUM BED', 
+    label: 'Wooden Swings', 
+    img: 'https://images.unsplash.com/photo-1595515106969-1ce29566ff1c?w=600&q=80', 
+    categoryKey: 'wooden-swings', 
+    filters: ['All', 'Living'] 
+  },
+  { 
+    label: 'Wooden Safety Doors', 
+    img: 'https://images.unsplash.com/photo-1509644851169-2acc08aa25b5?w=600&q=80', 
+    categoryKey: 'wooden-safety-doors', 
+    filters: ['All', 'Doors & Puja'] 
+  },
+  { 
+    label: 'Wooden Mandirs', 
+    img: 'https://images.unsplash.com/photo-1600121848594-d8644e57abab?w=600&q=80', 
+    categoryKey: 'wooden-mandirs', 
+    filters: ['All', 'Doors & Puja'] 
+  },
+  { 
+    label: 'Teapoys & Coffee Tables', 
+    img: 'https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=600&q=80', 
+    categoryKey: 'teapoys-coffee-tables', 
+    filters: ['All', 'Living'] 
+  },
+  { 
+    label: 'Sofa Cum Beds', 
     img: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=600&q=80', 
-    categoryKey: 'living', 
+    categoryKey: 'sofa-cum-beds', 
     filters: ['All', 'Living', 'Bedroom'] 
   },
   { 
-    label: 'BOOKSHELVES', 
-    img: 'https://images.unsplash.com/photo-1544644181-1484b3fdfc62?w=600&q=80', 
-    categoryKey: 'all', 
-    filters: ['All', 'Bedroom', 'Decor'] 
+    label: 'Dining Tables', 
+    img: 'https://images.unsplash.com/photo-1615066390971-03e4e1c36ddf?w=600&q=80', 
+    categoryKey: 'dining-tables', 
+    filters: ['All', 'Dining'] 
   },
   { 
-    label: 'ALL STUDY TABLES', 
-    img: 'https://images.unsplash.com/photo-1518455027359-f3f8164ba6bd?w=600&q=80', 
-    categoryKey: 'all', 
+    label: 'Wardrobes', 
+    img: 'https://images.unsplash.com/photo-1595428774223-ef52624120d2?w=600&q=80', 
+    categoryKey: 'wardrobes', 
     filters: ['All', 'Bedroom'] 
   },
   { 
-    label: 'KITCHEN CABINETS', 
-    img: 'https://images.unsplash.com/photo-1556911220-e15b29be8c8f?w=600&q=80', 
-    categoryKey: 'dining', 
-    filters: ['All', 'Dining'] 
+    label: 'TV Units', 
+    img: 'https://images.unsplash.com/photo-16074730318d2-64f26046e8c7?w=600&q=80', 
+    categoryKey: 'tv-units', 
+    filters: ['All', 'Living'] 
+  },
+  { 
+    label: 'Chaurang & Paats', 
+    img: 'https://images.unsplash.com/photo-1581428982868-e410dd047a90?w=600&q=80', 
+    categoryKey: 'chaurang-and-paats', 
+    filters: ['All', 'Doors & Puja'] 
+  },
+  { 
+    label: 'Diwans', 
+    img: 'https://images.unsplash.com/photo-1540518614846-7eded433c457?w=600&q=80', 
+    categoryKey: 'diwans', 
+    filters: ['All', 'Living'] 
   }
 ];
 
@@ -523,7 +541,7 @@ export default function HomeView({
         
         {/* Dynamic Category Filter Pills */}
         <div className="flex flex-wrap justify-center items-center gap-2 sm:gap-3 mb-8 sm:mb-10 select-none">
-          {['All', 'Living', 'Bedroom', 'Dining', 'Mattress', 'Decor'].map((filter) => (
+          {['All', 'Living', 'Bedroom', 'Dining', 'Doors & Puja'].map((filter) => (
             <button
               key={filter}
               onClick={() => setGridFilter(filter)}

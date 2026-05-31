@@ -43,6 +43,23 @@ export const CATEGORY_MAP: CategoryData[] = [
     promoOffer: "Upto 45% Off"
   },
   {
+    name: "WOODEN CHAIRS",
+    slug: "wooden-chairs",
+    img: "https://images.unsplash.com/photo-1592078615290-033ee584e267?w=600&q=80",
+    subCategories: [
+      { name: "cane rocking chair", count: 1, slug: "cane-rocking-chair", basePrice: 8500 },
+      { name: "rocking chair", count: 1, slug: "rocking-chair", basePrice: 7500 },
+      { name: "royal chair", count: 1, slug: "royal-chair", basePrice: 5800 },
+      { name: "aaram chair", count: 1, slug: "aaram-chair", basePrice: 6500 },
+      { name: "curve chair", count: 1, slug: "curve-chair", basePrice: 4200 },
+      { name: "z chair", count: 1, slug: "z-chair", basePrice: 4800 },
+      { name: "chair", count: 8, slug: "chair", basePrice: 3200 },
+      { name: "teacher chair", count: 2, slug: "teacher-chair", basePrice: 3800 }
+    ],
+    promoTitle: "Ergonomic Handcrafted Hardwood Chairs",
+    promoOffer: "Upto 35% Off"
+  },
+  {
     name: "BEDS",
     slug: "beds",
     img: "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=600&q=80",
@@ -187,6 +204,11 @@ const SAMPLE_PHOTOS: Record<string, string[]> = {
     "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=600&q=80",
     "https://images.unsplash.com/photo-1484101403633-562f891dc89a?w=600&q=80"
   ],
+  "wooden-chairs": [
+    "https://images.unsplash.com/photo-1592078615290-033ee584e267?w=600&q=80",
+    "https://images.unsplash.com/photo-1503602642458-232111445657?w=600&q=80",
+    "https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=600&q=80"
+  ],
   "beds": [
     "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=600&q=80",
     "https://images.unsplash.com/photo-1540518614846-7eded433c457?w=600&q=80",
@@ -246,7 +268,16 @@ const generateProducts = (): Product[] => {
         const numStr = i < 10 ? `0${i}` : `${i}`;
         
         // Form beautiful, highly realistic furniture piece titles
-        const name = `${cat.name === "DRESSING TABLE" ? "Premium DT" : cat.name.replace(/s$/i, '')} - ${sub.name} #${numStr}`;
+        let name = '';
+        if (cat.slug === 'wooden-chairs') {
+          if (sub.slug === 'cane-rocking-chair' || sub.slug === 'z-chair') {
+            name = sub.name;
+          } else {
+            name = `${sub.name}-${numStr}`;
+          }
+        } else {
+          name = `${cat.name === "DRESSING TABLE" ? "Premium DT" : cat.name.replace(/s$/i, '')} - ${sub.name} #${numStr}`;
+        }
         
         // Cyclic image lookup
         const photos = SAMPLE_PHOTOS[cat.slug] || [cat.img];
