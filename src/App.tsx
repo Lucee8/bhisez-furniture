@@ -26,6 +26,7 @@ export default function App() {
   const [currentView, setCurrentView] = useState<ViewState>('home');
   const [selectedProduct, setSelectedProduct] = useState<Product>(ALL_PRODUCTS[0]);
   const [initialCategoryFilter, setInitialCategoryFilter] = useState<string | null>('all');
+  const [initialSubCategoryFilter, setInitialSubCategoryFilter] = useState<string | null>(null);
 
   // Search filter
   const [searchQuery, setSearchQuery] = useState<string>('');
@@ -68,8 +69,9 @@ export default function App() {
   };
 
   // Select category from dashboard & redirect
-  const handleSelectCategory = (category: string) => {
+  const handleSelectCategory = (category: string, subCategory?: string | null) => {
     setInitialCategoryFilter(category);
+    setInitialSubCategoryFilter(subCategory || null);
     handleNavigate('beds');
   };
 
@@ -180,6 +182,7 @@ export default function App() {
           onLogout={handleLogout}
           mobileMenuOpen={mobileMenuOpen}
           setMobileMenuOpen={setMobileMenuOpen}
+          onSelectCategory={handleSelectCategory}
         />
       )}
 
@@ -212,6 +215,7 @@ export default function App() {
                 searchQuery={searchQuery}
                 onSearchChange={setSearchQuery}
                 initialCategoryFilter={initialCategoryFilter}
+                initialSubCategoryFilter={initialSubCategoryFilter}
                 cartCount={cart.reduce((s, c) => s + c.quantity, 0)}
                 wishlistCount={wishlist.length}
                 isLoggedIn={isLoggedIn}

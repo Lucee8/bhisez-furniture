@@ -1,6 +1,6 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { Product, ViewState } from '../types';
-import { ALL_PRODUCTS } from '../data';
+import { ALL_PRODUCTS, CATEGORY_MAP } from '../data';
 import { motion, AnimatePresence } from 'motion/react';
 import { 
   Heart, 
@@ -27,6 +27,7 @@ interface BedsViewProps {
   searchQuery: string;
   onSearchChange: (query: string) => void;
   initialCategoryFilter?: string | null;
+  initialSubCategoryFilter?: string | null;
   // Extra e-commerce props to render the gorgeous native header
   cartCount: number;
   wishlistCount: number;
@@ -71,23 +72,39 @@ export default function BedsView({
   searchQuery,
   onSearchChange,
   initialCategoryFilter,
+  initialSubCategoryFilter,
   cartCount,
   wishlistCount,
   isLoggedIn,
   onLogout
 }: BedsViewProps) {
-  // Navigation categories list
-  const CATEGORIES = [
-    { id: 'all', title: 'Premium Timber', subtitle: '14,820 Items Available' },
-    { id: 'bed', title: 'Beds & Cots', subtitle: '3,120 Products Available' },
-    { id: 'living', title: 'Sofa Sets', subtitle: '7,480 Products Available' },
-    { id: 'dining', title: 'Dining Tables', subtitle: '1,840 Products Available' },
-    { id: 'mandir', title: 'Teak Mandirs', subtitle: '650 Products Available' },
-    { id: 'doors', title: 'Safety Doors', subtitle: '920 Designs Available' }
-  ];
+  // Navigation categories list generated dynamically
+  const CATEGORIES = useMemo(() => {
+    const list = [
+      { id: 'all', title: 'All Crafts', subtitle: `${ALL_PRODUCTS.length} Styles Available` }
+    ];
+    CATEGORY_MAP.forEach(cat => {
+      const count = cat.subCategories.reduce((sum, sub) => sum + sub.count, 0);
+      list.push({
+        id: cat.slug,
+        title: cat.name,
+        subtitle: `${count} Custom Designs`
+      });
+    });
+    return list;
+  }, []);
 
   // Selected category state backing
   const [activeCategory, setActiveCategory] = useState<string>(initialCategoryFilter || 'all');
+  const [activeSubCategory, setActiveSubCategory] = useState<string | null>(initialSubCategoryFilter || null);
+
+  // Sync state if initial filters change from navigation
+  useEffect(() => {
+    if (initialCategoryFilter) {
+      setActiveCategory(initialCategoryFilter);
+    }
+    setActiveSubCategory(initialSubCategoryFilter || null);
+  }, [initialCategoryFilter, initialSubCategoryFilter]);
 
   // Filters active states
   const [selectedMaterials, setSelectedMaterials] = useState<Set<string>>(new Set());
@@ -108,7 +125,7 @@ export default function BedsView({
   // Calculate matching dynamic metadata for active category
   const activeCategoryMeta = useMemo(() => {
     return CATEGORIES.find(c => c.id === activeCategory) || CATEGORIES[0];
-  }, [activeCategory]);
+  }, [CATEGORIES, activeCategory]);
 
   // Filter and compute items
   const filteredProducts = useMemo(() => {
@@ -117,6 +134,11 @@ export default function BedsView({
     // 1. Dynamic category check
     if (activeCategory && activeCategory !== 'all') {
       result = result.filter(p => p.category === activeCategory);
+    }
+
+    // 1b. Dynamic sub-category check
+    if (activeSubCategory) {
+      result = result.filter(p => p.subCategory === activeSubCategory);
     }
 
     // 2. Search check
@@ -165,7 +187,7 @@ export default function BedsView({
     }
 
     return result;
-  }, [activeCategory, searchQuery, selectedMaterials, selectedSizes, selectedStorages, selectedPricePreset, sortBy]);
+  }, [activeCategory, activeSubCategory, searchQuery, selectedMaterials, selectedSizes, selectedStorages, selectedPricePreset, sortBy]);
 
   // Swatches mock colors list mapped specifically to elevate grid aesthetic
   const getProductSwatches = (product: Product, index: number) => {
@@ -357,6 +379,39 @@ export default function BedsView({
           </div>
         </div>
       </div>
+
+      {/* ── SUBCATEGORY QUICK-TABS (Wooden Street Category style sub-header) ── */}
+      {activeCategory && activeCategory !== 'all' && (
+        <div className="max-w-7xl mx-auto px-4 mt-3 flex items-center gap-2 overflow-x-auto select-none no-scrollbar whitespace-nowrap">
+          <button
+            onClick={() => setActiveSubCategory(null)}
+            className={`px-4.5 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+              !activeSubCategory 
+                ? 'bg-amber-600 text-white shadow-xs' 
+                : 'bg-stone-100 hover:bg-stone-200 text-stone-700'
+            }`}
+          >
+            All {activeCategoryMeta.title}
+          </button>
+          {(() => {
+            const catObj = CATEGORY_MAP.find(c => c.slug === activeCategory);
+            if (!catObj) return null;
+            return catObj.subCategories.map(sub => (
+              <button
+                key={sub.slug}
+                onClick={() => setActiveSubCategory(sub.slug)}
+                className={`px-4.5 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+                  activeSubCategory === sub.slug 
+                    ? 'bg-[#3d2b1f] text-white shadow-xs' 
+                    : 'bg-stone-100 hover:bg-stone-200 text-stone-700'
+                }`}
+              >
+                {sub.name} ({sub.count})
+              </button>
+            ));
+          })()}
+        </div>
+      )}
 
       {/* ── CORE GRID OR EMPTY STATE ── */}
       <main className="max-w-7xl mx-auto px-2 sm:px-4 flex-1 w-full pt-2">
@@ -721,24 +776,33 @@ export default function BedsView({
 
               <h3 className="font-serif text-lg font-black text-stone-900 mb-4">Furniture Showrooms</h3>
 
-              <div className="grid grid-cols-2 gap-3.5 bg-transparent">
+              <div className="grid grid-cols-2 gap-3.5 bg-transparent overflow-y-auto max-h-[300px] pr-1.5 scrollbar-thin">
                 {[
                   { id: 'all', label: 'All Collections', icon: '🪵' },
-                  { id: 'bed', label: 'Beds & Cots', icon: '🛏️' },
-                  { id: 'living', label: 'Sofa Sets', icon: '🛋️' },
-                  { id: 'dining', label: 'Dining Tables', icon: '🍽️' },
-                  { id: 'mandir', label: 'Teak Mandirs', icon: '🛕' },
-                  { id: 'doors', label: 'Safety Doors', icon: '🚪' }
+                  { id: 'door-frames', label: 'Door Frames', icon: '🚪' },
+                  { id: 'wooden-sofas', label: 'Wooden Sofas', icon: '🛋️' },
+                  { id: 'beds', label: 'Premium Beds', icon: '🛏️' },
+                  { id: 'dressing-table', label: 'Dressing Table', icon: '🪞' },
+                  { id: 'wooden-swings', label: 'Swings & Jhulas', icon: '🪵' },
+                  { id: 'wooden-safety-doors', label: 'Safety Doors', icon: '🛡️' },
+                  { id: 'wooden-mandirs', label: 'Divine Mandirs', icon: '🛕' },
+                  { id: 'teapoys-coffee-tables', label: 'Coffee Tables', icon: '☕' },
+                  { id: 'sofa-cum-beds', label: 'Sofa Cum Beds', icon: '🛏️' },
+                  { id: 'dining-tables', label: 'Dining Tables', icon: '🍽️' },
+                  { id: 'wardrobes', label: 'Wardrobes', icon: '🚪' },
+                  { id: 'tv-units', label: 'TV Units', icon: '📺' },
+                  { id: 'chaurang-and-paats', label: 'Chaurang & Paats', icon: '🪆' },
+                  { id: 'diwans', label: 'Indian Diwans', icon: '🛋️' },
                 ].map((cat) => {
                   const isActive = activeCategory === cat.id;
                   return (
                     <button
                       key={cat.id}
                       onClick={() => handleSelectCategoryFromList(cat.id)}
-                      className={`text-left p-4 rounded-xl border flex flex-col justify-between h-24 transition-all cursor-pointer ${isActive ? 'bg-amber-50 border-[#f06e38] text-stone-900 font-black' : 'bg-stone-50 border-stone-200 text-stone-600 hover:border-stone-400'}`}
+                      className={`text-left p-4 rounded-xl border flex flex-col justify-between h-24 transition-all cursor-[#f06e38] cursor-pointer ${isActive ? 'bg-amber-50 border-[#f06e38] text-stone-900 font-black' : 'bg-stone-50 border-stone-200 text-stone-600 hover:border-stone-400'}`}
                     >
                       <span className="text-2xl">{cat.icon}</span>
-                      <span className="text-xs font-bold leading-none">{cat.label}</span>
+                      <span className="text-[11px] font-bold leading-none">{cat.label}</span>
                     </button>
                   );
                 })}

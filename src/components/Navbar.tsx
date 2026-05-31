@@ -1,4 +1,6 @@
+import { useState } from 'react';
 import { ViewState } from '../types';
+import { CATEGORY_MAP } from '../data';
 import { 
   ShoppingCart, 
   Heart, 
@@ -21,6 +23,7 @@ interface NavbarProps {
   onLogout: () => void;
   mobileMenuOpen: boolean;
   setMobileMenuOpen: (open: boolean) => void;
+  onSelectCategory: (category: string, subCategory?: string | null) => void;
 }
 
 export default function Navbar({
@@ -34,7 +37,10 @@ export default function Navbar({
   onLogout,
   mobileMenuOpen,
   setMobileMenuOpen,
+  onSelectCategory,
 }: NavbarProps) {
+  const [activeMegaCat, setActiveMegaCat] = useState<string | null>(null);
+
   // Brand Logo component exactly matching the given style
   const renderLogo = (isLightBg = true) => {
     const mainColor = "#FBBD18"; // Brilliant Golden Yellow from image
@@ -267,76 +273,108 @@ export default function Navbar({
       </div>
     </header>
 
-      {/* 3. CATEGORY NAVIGATION TAPE / SLAT (Wooden Street style category ribbon) */}
-      <div className="sticky top-0 z-[90] bg-[#FAF7F2] border-t border-b border-[#EBE3D9] overflow-x-auto select-none no-scrollbar shadow-xs">
-        <div className="max-w-7xl mx-auto px-4 flex items-center justify-between py-2 md:py-3 whitespace-nowrap text-xs md:text-sm font-semibold text-stone-700">
-          <button 
-            onClick={() => { onSearchChange(''); onNavigate('beds'); }} 
-            className="px-3 py-1 hover:text-[#C9983A] transition-colors cursor-pointer duration-200"
-          >
-            Sofas
-          </button>
-          <button 
-            onClick={() => { onSearchChange(''); onNavigate('beds'); }} 
-            className="px-3 py-1 hover:text-[#C9983A] transition-colors cursor-pointer duration-200"
-          >
-            Living
-          </button>
-          <button 
-            onClick={() => { onSearchChange(''); onNavigate('beds'); }} 
-            className="px-3 py-1 hover:text-[#C9983A] transition-colors cursor-pointer duration-200 border-b-2 border-orange-600 text-orange-600"
-          >
-            Bedroom
-          </button>
-          <button 
-            onClick={() => { onSearchChange(''); onNavigate('beds'); }} 
-            className="px-3 py-1 hover:text-[#C9983A] transition-colors cursor-pointer duration-200"
-          >
-            Mattress
-          </button>
-          <button 
-            onClick={() => { onSearchChange(''); onNavigate('beds'); }} 
-            className="px-3 py-1 hover:text-[#C9983A] transition-colors cursor-pointer duration-200"
-          >
-            Dining
-          </button>
-          <button 
-            onClick={() => { onSearchChange(''); onNavigate('beds'); }} 
-            className="px-3 py-1 hover:text-[#C9983A] transition-colors cursor-pointer duration-200"
-          >
-            Storage
-          </button>
-          <button 
-            onClick={() => { onSearchChange(''); onNavigate('beds'); }} 
-            className="px-3 py-1 hover:text-[#C9983A] transition-colors cursor-pointer duration-200"
-          >
-            Study & Office
-          </button>
-          <button 
-            onClick={() => { onSearchChange(''); onNavigate('beds'); }} 
-            className="px-3 py-1 hover:text-[#C9983A] transition-colors cursor-pointer duration-200"
-          >
-            Outdoor
-          </button>
-          <button 
-            onClick={() => { onSearchChange(''); onNavigate('beds'); }} 
-            className="px-3 py-1 hover:text-[#C9983A] transition-colors cursor-pointer duration-200"
-          >
-            Decor & Furnishing
-          </button>
-          <button 
-            onClick={() => { onSearchChange(''); onNavigate('beds'); }} 
-            className="px-3 py-1 text-orange-700 hover:text-orange-950 transition-colors cursor-pointer duration-200"
-          >
-            Modular Kitchen & Wardrobe
-          </button>
-          <button 
-            onClick={() => { onSearchChange(''); onNavigate('beds'); }} 
-            className="px-3 py-1 text-[#C9983A] hover:text-amber-950 transition-colors cursor-pointer duration-200"
-          >
-            WS Luxe
-          </button>
+      {/* 3. CATEGORY NAVIGATION TAPE / SLAT (Wooden Street style category ribbon with hovering rich Mega Menus) */}
+      <div 
+        className="sticky top-0 z-[120] bg-[#FAF7F2] border-t border-b border-[#EBE3D9] shadow-xs relative"
+        onMouseLeave={() => setActiveMegaCat(null)}
+      >
+        <div className="max-w-7xl mx-auto px-4 flex items-center justify-between py-2.5 md:py-3.5 overflow-x-auto select-none no-scrollbar whitespace-nowrap text-xs md:text-[13px] font-bold text-stone-700">
+          {CATEGORY_MAP.map((cat) => (
+            <button
+              key={cat.slug}
+              onMouseEnter={() => setActiveMegaCat(cat.slug)}
+              onClick={() => {
+                onSelectCategory(cat.slug, null);
+                setActiveMegaCat(null);
+              }}
+              className={`px-3 py-1 hover:text-[#CBB89D] hover:scale-[1.02] transition-all cursor-pointer duration-200 uppercase tracking-wide text-stone-800 ${
+                activeMegaCat === cat.slug ? 'text-amber-600 font-extrabold border-b-[2px] border-amber-600' : ''
+              }`}
+            >
+              {cat.name}
+            </button>
+          ))}
         </div>
+
+        {/* ── RICH HOVER MEGA DROPDOWN POPUP MENU ── */}
+        {activeMegaCat && (
+          <div 
+            className="absolute top-full left-0 right-0 w-full bg-white border-t border-stone-200 shadow-2xl z-[150] px-8 py-8 animate-fade-in block"
+            onMouseEnter={() => setActiveMegaCat(activeMegaCat)}
+            onMouseLeave={() => setActiveMegaCat(null)}
+          >
+            <div className="max-w-7xl mx-auto grid grid-cols-4 gap-8">
+              {/* Left Sub-Categories Panel (Cols 1-3) */}
+              <div className="col-span-3 grid grid-cols-3 gap-8">
+                {(() => {
+                  const currentCat = CATEGORY_MAP.find(c => c.slug === activeMegaCat);
+                  if (!currentCat) return null;
+                  return currentCat.subCategories.map((sub) => (
+                    <div key={sub.slug} className="space-y-3.5 border-r border-stone-100 last:border-r-0 pr-4">
+                      <button
+                        onClick={() => {
+                          onSelectCategory(currentCat.slug, sub.slug);
+                          setActiveMegaCat(null);
+                        }}
+                        className="font-serif text-[15px] font-black text-[#5C4033] hover:text-[#CBB89D] transition-colors text-left block border-b border-stone-100 pb-1.5 w-full uppercase tracking-wider"
+                      >
+                        {sub.name}
+                      </button>
+                      <div className="flex flex-col space-y-2.5 text-stone-500 text-xs">
+                        <button 
+                          onClick={() => {
+                            onSelectCategory(currentCat.slug, sub.slug);
+                            setActiveMegaCat(null);
+                          }}
+                          className="text-left font-bold text-amber-700 hover:text-amber-900 transition-colors"
+                        >
+                          ✦ Explore All {sub.name} Options ({sub.count} Designs)
+                        </button>
+                        <span className="text-stone-400 block font-medium">✦ 100% Seasoned Malvani Hardwood</span>
+                        <span className="text-stone-400 block font-medium">✦ Eco-friendly Oil-polish Finish</span>
+                        <span className="text-stone-400 block font-medium">✦ 5-Year Termite Proof Assurance</span>
+                      </div>
+                    </div>
+                  ));
+                })()}
+              </div>
+
+              {/* Right Side Promo Panel (Col 4) */}
+              {(() => {
+                const currentCat = CATEGORY_MAP.find(c => c.slug === activeMegaCat);
+                if (!currentCat) return null;
+                return (
+                  <div className="relative rounded-2xl overflow-hidden shadow-md border border-stone-100 group h-[210px] bg-stone-900">
+                    <img 
+                      src={currentCat.img} 
+                      alt={currentCat.name} 
+                      className="w-full h-full object-cover group-hover:scale-103 transition-transform duration-500 opacity-80" 
+                      referrerPolicy="no-referrer"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-stone-950 via-stone-950/30 to-stone-950/10"></div>
+                    <div className="absolute inset-x-4 bottom-4 text-white z-10 flex flex-col justify-end">
+                      <span className="bg-[#FBBD18] text-stone-950 text-[10px] font-black px-2 py-0.5 rounded uppercase tracking-wider block w-fit mb-1.5">
+                        {currentCat.promoOffer}
+                      </span>
+                      <h4 className="font-serif text-[15px] font-bold leading-tight uppercase tracking-wide text-white">{currentCat.promoTitle}</h4>
+                      <p className="text-stone-300 text-[11px] mt-0.5">By Ramesh Bhise Carpenters</p>
+                      
+                      <button
+                        onClick={() => {
+                          onSelectCategory(currentCat.slug, null);
+                          setActiveMegaCat(null);
+                        }}
+                        className="mt-3 text-[10px] bg-amber-500 hover:bg-amber-600 text-stone-950 px-4 py-2 rounded-xl font-bold uppercase tracking-wider transition-colors w-fit shadow-xs"
+                      >
+                        Browse Showcase
+                      </button>
+                    </div>
+                  </div>
+                );
+              })()}
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Mobile Drawer Overlay */}

@@ -1,7 +1,8 @@
 export interface Product {
   id: number | string;
   name: string;
-  category: 'bed' | 'living' | 'dining' | 'mandir' | 'doors' | 'custom';
+  category: string;
+  subCategory?: string;
   size?: 'king' | 'queen' | 'single' | 'double' | string;
   material?: 'solid-wood' | 'engineered-wood' | 'teak' | 'mango-wood' | 'sheesham' | string;
   storage?: 'hydraulic' | 'box' | 'drawer' | 'no-storage' | string;
