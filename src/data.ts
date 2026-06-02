@@ -206,8 +206,8 @@ export const CATEGORY_MAP: CategoryData[] = [
 ];
 
 // ── LOCAL IMAGE MAPS — keyed by sub-category slug ──
-// All images live under public/images/<Folder>/<name> NN.jpg
-// Filenames exactly match what is in your public/images/ directory.
+// All images live under images/<Folder>/<name> NN.jpg
+// Filenames exactly match what is in your images/ directory.
 
 const BED_IMAGES: Record<string, string[]> = {
   "premium-bed": [
@@ -217,50 +217,50 @@ const BED_IMAGES: Record<string, string[]> = {
     "images/Bed/Premium bed 04.jpg",   // note capital P — matches your file
   ],
   "open-bed": [
-    "public/images/Bed/open bed 01.jpg",
-    "public/images/Bed/open bed 02.jpg",
-    "public/images/Bed/open bed 03.jpg",
-    "public/images/Bed/open bed 04.jpg",
-    "public/images/Bed/open bed 05.jpg",
-    "public/images/Bed/open bed 06.jpg",
-    "public/images/Bed/open bed 07.jpg",
-    "public/images/Bed/open bed 08.jpg",
-    "public/images/Bed/open bed 09.jpg",
-    "public/images/Bed/open bed 10.jpg",
-    "public/images/Bed/open bed 11.jpg",
+    "images/Bed/open bed 01.jpg",
+    "images/Bed/open bed 02.jpg",
+    "images/Bed/open bed 03.jpg",
+    "images/Bed/open bed 04.jpg",
+    "images/Bed/open bed 05.jpg",
+    "images/Bed/open bed 06.jpg",
+    "images/Bed/open bed 07.jpg",
+    "images/Bed/open bed 08.jpg",
+    "images/Bed/open bed 09.jpg",
+    "images/Bed/open bed 10.jpg",
+    "images/Bed/open bed 11.jpg",
   ],
   "floating-bed": [
-    "public/images/Bed/floating bed.jpg",
+    "images/Bed/floating bed.jpg",
   ],
   "box-bed": [
-    "public/images/Bed/box bed 01.jpg",
-    "public/images/Bed/box bed 02.jpg",
-    "public/images/Bed/box bed 03.jpg",
-    "public/images/Bed/box bed 04.jpg",
+    "images/Bed/box bed 01.jpg",
+    "images/Bed/box bed 02.jpg",
+    "images/Bed/box bed 03.jpg",
+    "images/Bed/box bed 04.jpg",
   ],
   "trolley-bed": [
-    "public/images/Bed/trolley bed 01.jpg",
-    "public/images/Bed/trolley bed 02.jpg",
-    "public/images/Bed/trolley bed 03.jpg",
-    "public/images/Bed/trolley bed 04.jpg",
-    "public/images/Bed/trolley bed 05.jpg",
-    "public/images/Bed/trolley bed 06.jpg",
-    "public/images/Bed/trolley bed 07.jpg",
-    "public/images/Bed/trolley bed 08.jpg",
-    "public/images/Bed/trolley bed 09.jpg",
-    "public/images/Bed/trolley bed 10.jpg",
-    "public/images/Bed/trolley bed 11.jpg",
-    "public/images/Bed/trolley bed 12.jpg",
-    "public/images/Bed/trolley bed 13.jpg",
+    "images/Bed/trolley bed 01.jpg",
+    "images/Bed/trolley bed 02.jpg",
+    "images/Bed/trolley bed 03.jpg",
+    "images/Bed/trolley bed 04.jpg",
+    "images/Bed/trolley bed 05.jpg",
+    "images/Bed/trolley bed 06.jpg",
+    "images/Bed/trolley bed 07.jpg",
+    "images/Bed/trolley bed 08.jpg",
+    "images/Bed/trolley bed 09.jpg",
+    "images/Bed/trolley bed 10.jpg",
+    "images/Bed/trolley bed 11.jpg",
+    "images/Bed/trolley bed 12.jpg",
+    "images/Bed/trolley bed 13.jpg",
   ],
   "poster-bed": [
-    "public/images/Bed/poster bed.jpg",
+    "images/Bed/poster bed.jpg",
   ],
   "bunk-bed": [
-    "public/images/Bed/bunk bed 01.jpg",
+    "images/Bed/bunk bed 01.jpg",
   ],
   "hydraulic-bed": [
-    "public/images/Bed/hydrolic bed 01.jpg",
+    "images/Bed/hydrolic bed 01.jpg",
   ],
 };
 
