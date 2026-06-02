@@ -211,10 +211,10 @@ export const CATEGORY_MAP: CategoryData[] = [
 
 const BED_IMAGES: Record<string, string[]> = {
   "premium-bed": [
-    "bhisez-furniture/public/images/Bed/premium bed 01.jpg",
-    "bhisez-furniture/public/images/Bed/premium bed 02.jpg",
-    "bhisez-furniture/public/images/Bed/premium bed 03.jpg",
-    "bhisez-furniture/public/images/Bed/Premium bed 04.jpg",   // note capital P — matches your file
+    "/images/Bed/premium bed 01.jpg",
+    "/images/Bed/premium bed 02.jpg",
+    "/images/Bed/premium bed 03.jpg",
+    "/images/Bed/Premium bed 04.jpg",   // note capital P — matches your file
   ],
   "open-bed": [
     "public/images/Bed/open bed 01.jpg",
