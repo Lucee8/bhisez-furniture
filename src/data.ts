@@ -199,10 +199,10 @@ const LOCAL_IMAGES: Record<string, string[]> = {
 
   // BEDS
   "beds-premium-bed": [
-    "public/images/Bed/premium bed 01.WebP",
-    "public/images/Bed/premium bed 02.WebP",
-    "public/images/Bed/premium bed 03.WebP",
-    "public/images/Bed/premium bed 04.WebP",
+    "/images/BEDS/premium bed 01.WebP",
+    "/images/BEDS/premium bed 02.WebP",
+    "/images/BEDS/premium bed 03.WebP",
+    "/images/BEDS/premium bed 04.WebP",
   ],
   "beds-open-bed": [
     "/images/BEDS/open bed 01.WebP",
