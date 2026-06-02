@@ -214,7 +214,7 @@ const BED_IMAGES: Record<string, string[]> = {
     "images/Bed/premium bed 01.jpg",
     "images/Bed/premium bed 02.jpg",
     "images/Bed/premium bed 03.jpg",
-    "images/Bed/Premium bed 04.jpg",   // note capital P — matches your file
+    "images/Bed/premium bed 04.jpg",   // note capital P — matches your file
   ],
   "open-bed": [
     "images/Bed/open bed 01.jpg",
