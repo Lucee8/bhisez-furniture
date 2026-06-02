@@ -59,10 +59,11 @@ export const CATEGORY_MAP: CategoryData[] = [
     promoTitle: "Ergonomic Handcrafted Hardwood Chairs",
     promoOffer: "Upto 35% Off"
   },
+
   {
     name: "BEDS",
     slug: "beds",
-    img: "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=600&q=80",
+    img: "/images/Beds/open bed 01.jpg",
     subCategories: [
       { name: "premium bed", count: 4, slug: "premium-bed", basePrice: 42000 },
       { name: "open bed", count: 11, slug: "open-bed", basePrice: 24000 },
@@ -76,6 +77,7 @@ export const CATEGORY_MAP: CategoryData[] = [
     promoTitle: "Durable Teakwood Beds",
     promoOffer: "Upto 40% Off"
   },
+
   {
     name: "DRESSING TABLE",
     slug: "dressing-table",
@@ -86,6 +88,7 @@ export const CATEGORY_MAP: CategoryData[] = [
     promoTitle: "Royal Teak Vanity Dressers",
     promoOffer: "Upto 30% Off"
   },
+
   {
     name: "WOODEN SWINGS",
     slug: "wooden-swings",
@@ -96,6 +99,7 @@ export const CATEGORY_MAP: CategoryData[] = [
     promoTitle: "Solid Timber Courtyard Jhulas",
     promoOffer: "Upto 35% Off"
   },
+
   {
     name: "WOODEN SAFETY DOORS",
     slug: "wooden-safety-doors",
@@ -106,6 +110,7 @@ export const CATEGORY_MAP: CategoryData[] = [
     promoTitle: "Carved Hardwood Main Security Gates",
     promoOffer: "Upto 25% Off"
   },
+
   {
     name: "WOODEN MANDIRS",
     slug: "wooden-mandirs",
@@ -118,6 +123,7 @@ export const CATEGORY_MAP: CategoryData[] = [
     promoTitle: "Devine solid Rosewood Shrines",
     promoOffer: "Upto 50% Off"
   },
+
   {
     name: "TEAPOYS AND COFEE TABLES",
     slug: "teapoys-coffee-tables",
@@ -128,6 +134,7 @@ export const CATEGORY_MAP: CategoryData[] = [
     promoTitle: "Contemporary Living Teapoys",
     promoOffer: "Upto 30% Off"
   },
+
   {
     name: "SOFA CUM BEDS",
     slug: "sofa-cum-beds",
@@ -138,6 +145,7 @@ export const CATEGORY_MAP: CategoryData[] = [
     promoTitle: "Space-Saving Modern Sliders",
     promoOffer: "Upto 45% Off"
   },
+
   {
     name: "DINING TABLES",
     slug: "dining-tables",
@@ -148,6 +156,7 @@ export const CATEGORY_MAP: CategoryData[] = [
     promoTitle: "Premium 6-Seater Banquet Sets",
     promoOffer: "Upto 40% Off"
   },
+
   {
     name: "WARDROBES",
     slug: "wardrobes",
@@ -158,6 +167,7 @@ export const CATEGORY_MAP: CategoryData[] = [
     promoTitle: "Multi-Compartment Wooden Armoires",
     promoOffer: "Upto 35% Off"
   },
+
   {
     name: "T.V UNITS",
     slug: "tv-units",
@@ -168,6 +178,7 @@ export const CATEGORY_MAP: CategoryData[] = [
     promoTitle: "Floating Entertainment Credenzas",
     promoOffer: "Upto 35% Off"
   },
+
   {
     name: "CHAURANG And PAATS",
     slug: "chaurang-and-paats",
@@ -178,6 +189,7 @@ export const CATEGORY_MAP: CategoryData[] = [
     promoTitle: "Aesthetic Pooja Worship Pedestals",
     promoOffer: "Upto 20% Off"
   },
+
   {
     name: "DIWANS",
     slug: "diwans",
@@ -193,8 +205,73 @@ export const CATEGORY_MAP: CategoryData[] = [
   }
 ];
 
-// Helper array of alternate realistic high quality Unsplash photos representing crafted wood furniture
+// ── LOCAL IMAGE MAPS — keyed by sub-category slug ──
+// All images live under public/images/<Folder>/<name> NN.jpg
+// Filenames exactly match what is in your public/images/ directory.
+
+const BED_IMAGES: Record<string, string[]> = {
+  "premium-bed": [
+    "public/images/Bed/premium bed 01.jpg",
+    "public/images/Bed/premium bed 02.jpg",
+    "public/images/Bed/premium bed 03.jpg",
+    "public/images/Bed/Premium bed 04.jpg",   // note capital P — matches your file
+  ],
+  "open-bed": [
+    "public/images/Bed/open bed 01.jpg",
+    "public/images/Bed/open bed 02.jpg",
+    "public/images/Bed/open bed 03.jpg",
+    "public/images/Bed/open bed 04.jpg",
+    "public/images/Bed/open bed 05.jpg",
+    "public/images/Bed/open bed 06.jpg",
+    "public/images/Bed/open bed 07.jpg",
+    "public/images/Bed/open bed 08.jpg",
+    "public/images/Bed/open bed 09.jpg",
+    "public/images/Bed/open bed 10.jpg",
+    "public/images/Bed/open bed 11.jpg",
+  ],
+  "floating-bed": [
+    "public/images/Bed/floating bed.jpg",
+  ],
+  "box-bed": [
+    "public/images/Bed/box bed 01.jpg",
+    "public/images/Bed/box bed 02.jpg",
+    "public/images/Bed/box bed 03.jpg",
+    "public/images/Bed/box bed 04.jpg",
+  ],
+  "trolley-bed": [
+    "public/images/Bed/trolley bed 01.jpg",
+    "public/images/Bed/trolley bed 02.jpg",
+    "public/images/Bed/trolley bed 03.jpg",
+    "public/images/Bed/trolley bed 04.jpg",
+    "public/images/Bed/trolley bed 05.jpg",
+    "public/images/Bed/trolley bed 06.jpg",
+    "public/images/Bed/trolley bed 07.jpg",
+    "public/images/Bed/trolley bed 08.jpg",
+    "public/images/Bed/trolley bed 09.jpg",
+    "public/images/Bed/trolley bed 10.jpg",
+    "public/images/Bed/trolley bed 11.jpg",
+    "public/images/Bed/trolley bed 12.jpg",
+    "public/images/Bed/trolley bed 13.jpg",
+  ],
+  "poster-bed": [
+    "public/images/Bed/poster bed.jpg",
+  ],
+  "bunk-bed": [
+    "public/images/Bed/bunk bed 01.jpg",
+  ],
+  "hydraulic-bed": [
+    "public/images/Bed/hydrolic bed 01.jpg",
+  ],
+};
+
+// ── SAMPLE_PHOTOS: local images for Beds, Unsplash fallback for others ──
+// Add your own folders here as you upload more images:
+//   e.g. "/images/Sofas/sofa 01.jpg"  →  "wooden-sofas": [...]
 const SAMPLE_PHOTOS: Record<string, string[]> = {
+  // ── BEDS — all local ──
+  "beds": Object.values(BED_IMAGES).flat(),
+
+  // ── Everything else still uses Unsplash until you add local images ──
   "door-frames": [
     "https://images.unsplash.com/photo-1513694203232-719a280e022f?w=600&q=80",
     "https://images.unsplash.com/photo-1509644851169-2acc08aa25b5?w=600&q=80",
@@ -208,12 +285,6 @@ const SAMPLE_PHOTOS: Record<string, string[]> = {
     "https://images.unsplash.com/photo-1592078615290-033ee584e267?w=600&q=80",
     "https://images.unsplash.com/photo-1503602642458-232111445657?w=600&q=80",
     "https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=600&q=80"
-  ],
-  "beds": [
-    "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=600&q=80",
-    "https://images.unsplash.com/photo-1540518614846-7eded433c457?w=600&q=80",
-    "https://images.unsplash.com/photo-1588046130717-0eb0c9a3ba15?w=600&q=80",
-    "https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=600&q=80"
   ],
   "dressing-table": [
     "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=600&q=80",
@@ -260,13 +331,13 @@ const SAMPLE_PHOTOS: Record<string, string[]> = {
 
 const generateProducts = (): Product[] => {
   const list: Product[] = [];
-  
+
   CATEGORY_MAP.forEach((cat) => {
     cat.subCategories.forEach((sub) => {
       for (let i = 1; i <= sub.count; i++) {
         const id = `${cat.slug}-${sub.slug}-${i}`;
         const numStr = i < 10 ? `0${i}` : `${i}`;
-        
+
         // Form beautiful, highly realistic furniture piece titles
         let name = '';
         if (cat.slug === 'wooden-chairs') {
@@ -278,11 +349,19 @@ const generateProducts = (): Product[] => {
         } else {
           name = `${cat.name === "DRESSING TABLE" ? "Premium DT" : cat.name.replace(/s$/i, '')} - ${sub.name} #${numStr}`;
         }
-        
-        // Cyclic image lookup
-        const photos = SAMPLE_PHOTOS[cat.slug] || [cat.img];
-        const img = photos[(i - 1) % photos.length];
-        
+
+        // ── IMAGE LOOKUP ──
+        // For beds: use the exact per-sub-category list so image i maps to file i
+        // For everything else: cycle through the category photo pool
+        let img: string;
+        if (cat.slug === 'beds' && BED_IMAGES[sub.slug]) {
+          const pool = BED_IMAGES[sub.slug];
+          img = pool[Math.min(i - 1, pool.length - 1)]; // use last if count > files
+        } else {
+          const photos = SAMPLE_PHOTOS[cat.slug] || [cat.img];
+          img = photos[(i - 1) % photos.length];
+        }
+
         // Scale prices dynamically
         const calculatedPrice = sub.basePrice + (i - 1) * 350;
         const discountMult = 1.35 + (i % 3) * 0.05;
@@ -301,7 +380,7 @@ const generateProducts = (): Product[] => {
           subCategory: sub.slug,
           price: calculatedPrice,
           orig: origPrice,
-          img: img,
+          img,
           badge,
           colors: ['#4A2511', '#2C1608', '#CBB89D'],
           shortDesc: `Handcrafted with seasoned native timber wood. Built using durable standard premium joinery for generation-lasting strength.`,
