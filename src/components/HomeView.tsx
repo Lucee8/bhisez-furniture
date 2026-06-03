@@ -242,7 +242,7 @@ const NEW_DISCOVERIES = [
     discount: '63% OFF',
     stars: 5,
     count: 20,
-    img: 'public/images/Common/swing.webP',
+    img: '/images/Common/swing.webP',
     id: 'sofa-1'
   }
 ];
@@ -906,7 +906,7 @@ export default function HomeView({
           
           <div className="relative rounded-2xl h-[240px] overflow-hidden group border border-stone-100">
            
-           <img src="public/images/Common/sofa102.webP" alt="Sofa Suite" className="w-full h-full object-cover group-hover:scale-103 transition-transform duration-500" referrerPolicy="no-referrer" />
+           <img src="/images/Common/sofa102.webP" alt="Sofa Suite" className="w-full h-full object-cover group-hover:scale-103 transition-transform duration-500" referrerPolicy="no-referrer" />
 
             <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent"></div>
             <div className="absolute bottom-5 left-5 text-white">
@@ -918,7 +918,7 @@ export default function HomeView({
 
           <div className="relative rounded-2xl h-[240px] overflow-hidden group border border-stone-100">
             
-            <img src="public/images/Common/dining103.webP" alt="Dining Set" className="w-full h-full object-cover group-hover:scale-103 transition-transform duration-500" referrerPolicy="no-referrer" />
+            <img src="/images/Common/dining103.webP" alt="Dining Set" className="w-full h-full object-cover group-hover:scale-103 transition-transform duration-500" referrerPolicy="no-referrer" />
 
             <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent"></div>
             <div className="absolute bottom-5 left-5 text-white">
