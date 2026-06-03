@@ -20,7 +20,7 @@ export const CATEGORY_MAP: CategoryData[] = [
   {
     name: "DOOR FRAMES",
     slug: "door-frames",
-    img: "/images/DOOR AND FRAMES/set 01.WebP",
+    img: "/images/DOOR AND FRAMES/set 01.webP",
     subCategories: [
       { name: "Set", count: 33, slug: "set", basePrice: 14500 },
       { name: "Mandir room", count: 16, slug: "mandir-room", basePrice: 9500 },
@@ -34,7 +34,7 @@ export const CATEGORY_MAP: CategoryData[] = [
   {
     name: "WOODEN SOFAS",
     slug: "wooden-sofas",
-    img: "/images/SOFA/sofa 01.WebP",
+    img: "/images/SOFA/sofa 01.webP",
     subCategories: [
       { name: "Sofa", count: 15, slug: "sofa", basePrice: 22000 }
     ],
@@ -44,7 +44,7 @@ export const CATEGORY_MAP: CategoryData[] = [
   {
     name: "WOODEN CHAIRS",
     slug: "wooden-chairs",
-    img: "/images/CHAIRS/chair 01.WebP",
+    img: "/images/CHAIR/chair 01.webP",
     subCategories: [
       { name: "cane rocking chair", count: 1, slug: "cane-rocking-chair", basePrice: 8500 },
       { name: "rocking chair", count: 1, slug: "rocking-chair", basePrice: 7500 },
@@ -61,7 +61,7 @@ export const CATEGORY_MAP: CategoryData[] = [
   {
     name: "BEDS",
     slug: "beds",
-    img: "/images/BEDS/open bed 01.WebP",
+    img: "/images/BED/open bed 01.webP",
     subCategories: [
       { name: "premium bed", count: 4, slug: "premium-bed", basePrice: 42000 },
       { name: "open bed", count: 11, slug: "open-bed", basePrice: 24000 },
@@ -78,7 +78,7 @@ export const CATEGORY_MAP: CategoryData[] = [
   {
     name: "DRESSING TABLE",
     slug: "dressing-table",
-    img: "/images/DRESSING TABLE/dressing table 01.WebP",
+    img: "/images/DRESSING TABLE/dressing table 01.webP",
     subCategories: [
       { name: "DT", count: 5, slug: "dt", basePrice: 11000 }
     ],
@@ -88,7 +88,7 @@ export const CATEGORY_MAP: CategoryData[] = [
   {
     name: "WOODEN SWINGS",
     slug: "wooden-swings",
-    img: "/images/SWING/swing 01.WebP",
+    img: "/images/SWING/swing 01.webP",
     subCategories: [
       { name: "Swing", count: 8, slug: "swing", basePrice: 18500 }
     ],
@@ -98,7 +98,7 @@ export const CATEGORY_MAP: CategoryData[] = [
   {
     name: "WOODEN SAFETY DOORS",
     slug: "wooden-safety-doors",
-    img: "/images/DOOR AND FRAMES/safety door 01.WebP",
+    img: "/images/DOOR AND FRAMES/safety door 01.webP",
     subCategories: [
       { name: "Safety doors", count: 6, slug: "safety-doors", basePrice: 15500 }
     ],
@@ -108,7 +108,7 @@ export const CATEGORY_MAP: CategoryData[] = [
   {
     name: "WOODEN MANDIRS",
     slug: "wooden-mandirs",
-    img: "/images/MANDIR/mandir 01.WebP",
+    img: "/images/MANDIR/mandir 01.webP",
     subCategories: [
       { name: "Mandir", count: 35, slug: "mandir", basePrice: 13000 },
       { name: "Rajasans", count: 14, slug: "rajasans", basePrice: 3800 },
@@ -120,7 +120,7 @@ export const CATEGORY_MAP: CategoryData[] = [
   {
     name: "TEAPOYS AND COFEE TABLES",
     slug: "teapoys-coffee-tables",
-    img: "/images/TEAPOY/teapoy 01.WebP",
+    img: "/images/TEAPOY/teapoy 01.webP",
     subCategories: [
       { name: "Teapoy", count: 17, slug: "teapoy", basePrice: 5800 }
     ],
@@ -130,7 +130,7 @@ export const CATEGORY_MAP: CategoryData[] = [
   {
     name: "SOFA CUM BEDS",
     slug: "sofa-cum-beds",
-    img: "/images/SOFA/sofa cum bed 01.WebP",
+    img: "/images/SOFA/sofa cum bed 01.webP",
     subCategories: [
       { name: "Sofa cum Beds", count: 9, slug: "sofa-cum-beds", basePrice: 21500 }
     ],
@@ -140,7 +140,7 @@ export const CATEGORY_MAP: CategoryData[] = [
   {
     name: "DINING TABLES",
     slug: "dining-tables",
-    img: "/images/DINING/dining 01.WebP",
+    img: "/images/DINING/dining 01.webP",
     subCategories: [
       { name: "Dining", count: 9, slug: "dining", basePrice: 29000 }
     ],
@@ -150,7 +150,7 @@ export const CATEGORY_MAP: CategoryData[] = [
   {
     name: "WARDROBES",
     slug: "wardrobes",
-    img: "/images/WADROBE/wardrobe 01.WebP",
+    img: "/images/WARDROBE/wardrobe 01.webP",
     subCategories: [
       { name: "Wardrobe", count: 12, slug: "wardrobe", basePrice: 31000 }
     ],
@@ -160,7 +160,7 @@ export const CATEGORY_MAP: CategoryData[] = [
   {
     name: "T.V UNITS",
     slug: "tv-units",
-    img: "/images/TV UNIT/tv unit 01.WebP",
+    img: "/images/TV UNIT/tv unit 01.webP",
     subCategories: [
       { name: "T.V Unit", count: 7, slug: "tv-unit", basePrice: 14500 }
     ],
@@ -170,7 +170,7 @@ export const CATEGORY_MAP: CategoryData[] = [
   {
     name: "CHAURANG And PAATS",
     slug: "chaurang-and-paats",
-    img: "/images/CHAURANG AND PATH/chaurang 01.WebP",
+    img: "/images/CHAURANG AND PATH/chaurang 01.webP",
     subCategories: [
       { name: "CHAURANG", count: 5, slug: "chaurang", basePrice: 2800 }
     ],
@@ -180,7 +180,7 @@ export const CATEGORY_MAP: CategoryData[] = [
   {
     name: "DIWANS",
     slug: "diwans",
-    img: "/images/DIWAN/open diwan.WebP",
+    img: "/images/DIWAN/open diwan.webP",
     subCategories: [
       { name: "Open Diwan", count: 1, slug: "open-diwan", basePrice: 16500 },
       { name: "Box Diwan", count: 1, slug: "box-diwan", basePrice: 21000 },
@@ -193,184 +193,185 @@ export const CATEGORY_MAP: CategoryData[] = [
 ];
 
 // ── ALL LOCAL IMAGE MAPS ──
-// Folder names match exactly what is in your public/images/ directory.
+// Folder names exactly match public/images/ as seen in VS Code explorer:
+// BED, CHAIR, CHAURANG AND PATH, DINING, DIWAN,
+// DOOR AND FRAMES, DRESSING TABLE, MANDIR,
+// SOFA, SWING, TEAPOY, TV UNIT, WARDROBE
 
 const LOCAL_IMAGES: Record<string, string[]> = {
 
-  // BEDS
+  // ── BED ──
   "beds-premium-bed": [
-    "/images/BEDS/premium bed 01.webP",
-    "/images/BEDS/premium bed 02.webP",
-    "/images/BEDS/premium bed 03.webP",
-    "/images/BEDS/premium bed 04.webP",
+    "/images/BED/premium bed 01.webP",
+    "/images/BED/premium bed 02.webP",
+    "/images/BED/premium bed 03.webP",
+    "/images/BED/premium bed 04.webP",
   ],
   "beds-open-bed": [
-    "/images/BEDS/open bed 01.webP",
-    "/images/BEDS/open bed 02.webP",
-    "/images/BEDS/open bed 03.webP",
-    "/images/BEDS/open bed 04.webP",
-    "/images/BEDS/open bed 05.webP",
-    "/images/BEDS/open bed 06.webP",
-    "/images/BEDS/open bed 07.webP",
-    "/images/BEDS/open bed 08.webP",
-    "/images/BEDS/open bed 09.webP",
-    "/images/BEDS/open bed 10.webP",
-    "/images/BEDS/open bed 11.webP",
+    "/images/BED/open bed 01.webP",
+    "/images/BED/open bed 02.webP",
+    "/images/BED/open bed 03.webP",
+    "/images/BED/open bed 04.webP",
+    "/images/BED/open bed 05.webP",
+    "/images/BED/open bed 06.webP",
+    "/images/BED/open bed 07.webP",
+    "/images/BED/open bed 08.webP",
+    "/images/BED/open bed 09.webP",
+    "/images/BED/open bed 10.webP",
+    "/images/BED/open bed 11.webP",
   ],
   "beds-floating-bed": [
-    "/images/BEDS/floating bed.WebP",
+    "/images/BED/floating bed.webP",
   ],
   "beds-box-bed": [
-    "/images/BEDS/box bed 01.WebP",
-    "/images/BEDS/box bed 02.WebP",
-    "/images/BEDS/box bed 03.WebP",
-    "/images/BEDS/box bed 04.WebP",
+    "/images/BED/box bed 01.webP",
+    "/images/BED/box bed 02.webP",
+    "/images/BED/box bed 03.webP",
+    "/images/BED/box bed 04.webP",
   ],
   "beds-trolley-bed": [
-    "/images/BEDS/trolley bed 01.WebP",
-    "/images/BEDS/trolley bed 02.WebP",
-    "/images/BEDS/trolley bed 03.WebP",
-    "/images/BEDS/trolley bed 04.WebP",
-    "/images/BEDS/trolley bed 05.WebP",
-    "/images/BEDS/trolley bed 06.WebP",
-    "/images/BEDS/trolley bed 07.WebP",
-    "/images/BEDS/trolley bed 08.WebP",
-    "/images/BEDS/trolley bed 09.WebP",
-    "/images/BEDS/trolley bed 10.WebP",
-    "/images/BEDS/trolley bed 11.WebP",
-    "/images/BEDS/trolley bed 12.WebP",
-    "/images/BEDS/trolley bed 13.WebP",
+    "/images/BED/trolley bed 01.webP",
+    "/images/BED/trolley bed 02.webP",
+    "/images/BED/trolley bed 03.webP",
+    "/images/BED/trolley bed 04.webP",
+    "/images/BED/trolley bed 05.webP",
+    "/images/BED/trolley bed 06.webP",
+    "/images/BED/trolley bed 07.webP",
+    "/images/BED/trolley bed 08.webP",
+    "/images/BED/trolley bed 09.webP",
+    "/images/BED/trolley bed 10.webP",
+    "/images/BED/trolley bed 11.webP",
+    "/images/BED/trolley bed 12.webP",
+    "/images/BED/trolley bed 13.webP",
   ],
   "beds-poster-bed": [
-    "/images/BEDS/poster bed.WebP",
+    "/images/BED/poster bed.webP",
   ],
   "beds-bunk-bed": [
-    "/images/BEDS/bunk bed 01.WebP",
+    "/images/BED/bunk bed 01.webP",
   ],
   "beds-hydraulic-bed": [
-    "/images/BEDS/hydrolic bed 01.WebP",
+    "/images/BED/hydrolic bed 01.webP",
   ],
 
-  // CHAIRS
+  // ── CHAIR ──
   "wooden-chairs-cane-rocking-chair": [
-    "/images/CHAIRS/cane rocking chair.WebP",
+    "/images/CHAIR/cane rocking chair.webP",
   ],
   "wooden-chairs-rocking-chair": [
-    "/images/CHAIRS/cane rocking chair.WebP", // no separate rocking chair file — fallback
+    "/images/CHAIR/cane rocking chair.webP",
   ],
   "wooden-chairs-royal-chair": [
-    "/images/CHAIRS/royal chair 01.WebP",
+    "/images/CHAIR/royal chair 01.webP",
   ],
   "wooden-chairs-aaram-chair": [
-    "/images/CHAIRS/aaram chair 01.WebP",
+    "/images/CHAIR/aaram chair 01.webP",
   ],
   "wooden-chairs-curve-chair": [
-    "/images/CHAIRS/curve chair 01.WebP",
+    "/images/CHAIR/curve chair 01.webP",
   ],
   "wooden-chairs-z-chair": [
-    "/images/CHAIRS/z chair.WebP",
+    "/images/CHAIR/z chair.webP",
   ],
   "wooden-chairs-chair": [
-    "/images/CHAIRS/chair 01.WebP",
-    "/images/CHAIRS/chair 02.WebP",
-    "/images/CHAIRS/chair 03.WebP",
-    "/images/CHAIRS/chair 04.WebP",
-    "/images/CHAIRS/chair 05.WebP",
-    "/images/CHAIRS/chair 06.WebP",
-    "/images/CHAIRS/chair 07.WebP",
-    "/images/CHAIRS/chair 08.WebP",
+    "/images/CHAIR/chair 01.webP",
+    "/images/CHAIR/chair 02.webP",
+    "/images/CHAIR/chair 03.webP",
+    "/images/CHAIR/chair 04.webP",
+    "/images/CHAIR/chair 05.webP",
+    "/images/CHAIR/chair 06.webP",
+    "/images/CHAIR/chair 07.webP",
+    "/images/CHAIR/chair 08.webP",
   ],
   "wooden-chairs-teacher-chair": [
-    "/images/CHAIRS/teacher chair 01.WebP",
-    "/images/CHAIRS/teacher chair 02.WebP",
+    "/images/CHAIR/teacher chair 01.webP",
+    "/images/CHAIR/teacher chair 02.webP",
   ],
 
-  // DOOR AND FRAMES
+  // ── DOOR AND FRAMES ──
   "door-frames-set": Array.from({ length: 33 }, (_, i) =>
-    `/images/DOOR AND FRAMES/set ${String(i + 1).padStart(2, '0')}.WebP`
+    `/images/DOOR AND FRAMES/set ${String(i + 1).padStart(2, '0')}.webP`
   ),
   "door-frames-mandir-room": Array.from({ length: 16 }, (_, i) =>
-    `/images/DOOR AND FRAMES/mandir ${String(i + 1).padStart(2, '0')}.WebP`
+    `/images/DOOR AND FRAMES/mandir ${String(i + 1).padStart(2, '0')}.webP`
   ),
   "door-frames-door": Array.from({ length: 10 }, (_, i) =>
-    `/images/DOOR AND FRAMES/door ${String(i + 1).padStart(2, '0')}.WebP`
+    `/images/DOOR AND FRAMES/door ${String(i + 1).padStart(2, '0')}.webP`
   ),
   "door-frames-christian-door": [
-    "/images/DOOR AND FRAMES/christian 01.WebP",
-    "/images/DOOR AND FRAMES/christian 02.WebP",
+    "/images/DOOR AND FRAMES/christian 01.webP",
+    "/images/DOOR AND FRAMES/christian 02.webP",
   ],
   "door-frames-frame": [
-    "/images/DOOR AND FRAMES/frame 01.WebP",
-    "/images/DOOR AND FRAMES/frame 02.WebP",
-    "/images/DOOR AND FRAMES/frame 03.WebP",
+    "/images/DOOR AND FRAMES/frame 01.webP",
+    "/images/DOOR AND FRAMES/frame 02.webP",
+    "/images/DOOR AND FRAMES/frame 03.webP",
   ],
 
-  // WOODEN SAFETY DOORS
+  // ── WOODEN SAFETY DOORS (inside DOOR AND FRAMES folder) ──
   "wooden-safety-doors-safety-doors": Array.from({ length: 6 }, (_, i) =>
-    `/images/DOOR AND FRAMES/safety door ${String(i + 1).padStart(2, '0')}.WebP`
+    `/images/DOOR AND FRAMES/safety door ${String(i + 1).padStart(2, '0')}.webP`
   ),
 
-  // DRESSING TABLE
+  // ── DRESSING TABLE ──
   "dressing-table-dt": Array.from({ length: 5 }, (_, i) =>
-    `/images/DRESSING TABLE/dressing table ${String(i + 1).padStart(2, '0')}.WebP`
+    `/images/DRESSING TABLE/dressing table ${String(i + 1).padStart(2, '0')}.webP`
   ),
 
-  // WOODEN SWINGS
+  // ── SWING ──
   "wooden-swings-swing": Array.from({ length: 8 }, (_, i) =>
-    `/images/SWING/swing ${String(i + 1).padStart(2, '0')}.WebP`
+    `/images/SWING/swing ${String(i + 1).padStart(2, '0')}.webP`
   ),
 
-  // WOODEN MANDIRS
+  // ── MANDIR ──
   "wooden-mandirs-mandir": Array.from({ length: 35 }, (_, i) =>
-    `/images/MANDIR/mandir ${String(i + 1).padStart(2, '0')}.WebP`
+    `/images/MANDIR/mandir ${String(i + 1).padStart(2, '0')}.webP`
   ),
   "wooden-mandirs-rajasans": Array.from({ length: 14 }, (_, i) =>
-    `/images/MANDIR/Rajasan ${String(i + 1).padStart(2, '0')}.WebP`
+    `/images/MANDIR/Rajasan ${String(i + 1).padStart(2, '0')}.webP`
   ),
   "wooden-mandirs-pooja-mandir": Array.from({ length: 9 }, (_, i) =>
-    `/images/MANDIR/Pooja mandir ${String(i + 1).padStart(2, '0')}.WebP`
+    `/images/MANDIR/Pooja mandir ${String(i + 1).padStart(2, '0')}.webP`
   ),
 
-  // TEAPOYS
+  // ── TEAPOY ──
   "teapoys-coffee-tables-teapoy": Array.from({ length: 17 }, (_, i) =>
-    `/images/TEAPOY/teapoy ${String(i + 1).padStart(2, '0')}.WebP`
+    `/images/TEAPOY/teapoy ${String(i + 1).padStart(2, '0')}.webP`
   ),
 
-  // SOFA CUM BEDS
-  "sofa-cum-beds-sofa-cum-beds": Array.from({ length: 9 }, (_, i) =>
-    `/images/SOFA/sofa cum bed ${String(i + 1).padStart(2, '0')}.WebP`
-  ),
-
-  // WOODEN SOFAS
+  // ── SOFA ──
   "wooden-sofas-sofa": Array.from({ length: 15 }, (_, i) =>
-    `/images/SOFA/sofa ${String(i + 1).padStart(2, '0')}.WebP`
+    `/images/SOFA/sofa ${String(i + 1).padStart(2, '0')}.webP`
+  ),
+  "sofa-cum-beds-sofa-cum-beds": Array.from({ length: 9 }, (_, i) =>
+    `/images/SOFA/sofa cum bed ${String(i + 1).padStart(2, '0')}.webP`
   ),
 
-  // DINING
+  // ── DINING ──
   "dining-tables-dining": Array.from({ length: 9 }, (_, i) =>
-    `/images/DINING/dining ${String(i + 1).padStart(2, '0')}.WebP`
+    `/images/DINING/dining ${String(i + 1).padStart(2, '0')}.webP`
   ),
 
-  // WARDROBES
+  // ── WARDROBE ──
   "wardrobes-wardrobe": Array.from({ length: 12 }, (_, i) =>
-    `/images/WADROBE/wardrobe ${String(i + 1).padStart(2, '0')}.WebP`
+    `/images/WARDROBE/wardrobe ${String(i + 1).padStart(2, '0')}.webP`
   ),
 
-  // TV UNITS
+  // ── TV UNIT ──
   "tv-units-tv-unit": Array.from({ length: 7 }, (_, i) =>
-    `/images/TV UNIT/tv unit ${String(i + 1).padStart(2, '0')}.WebP`
+    `/images/TV UNIT/tv unit ${String(i + 1).padStart(2, '0')}.webP`
   ),
 
-  // CHAURANG
+  // ── CHAURANG AND PATH ──
   "chaurang-and-paats-chaurang": Array.from({ length: 5 }, (_, i) =>
-    `/images/CHAURANG AND PATH/chaurang ${String(i + 1).padStart(2, '0')}.WebP`
+    `/images/CHAURANG AND PATH/chaurang ${String(i + 1).padStart(2, '0')}.webP`
   ),
 
-  // DIWANS
-  "diwans-open-diwan": ["/images/DIWAN/open diwan.WebP"],
-  "diwans-box-diwan": ["/images/DIWAN/box diwan.WebP"],
-  "diwans-trolley-diwan": ["/images/DIWAN/trolley diwan.WebP"],
-  "diwans-bhaiyya-khat": ["/images/DIWAN/bhaiyya khat.WebP"],
+  // ── DIWAN ──
+  "diwans-open-diwan":    ["/images/DIWAN/open diwan.webP"],
+  "diwans-box-diwan":     ["/images/DIWAN/box diwan.webP"],
+  "diwans-trolley-diwan": ["/images/DIWAN/trolley diwan.webP"],
+  "diwans-bhaiyya-khat":  ["/images/DIWAN/bhaiyya khat.webP"],
 };
 
 const generateProducts = (): Product[] => {
@@ -393,18 +394,15 @@ const generateProducts = (): Product[] => {
           name = `${cat.name === "DRESSING TABLE" ? "Premium DT" : cat.name.replace(/s$/i, '')} - ${sub.name} #${numStr}`;
         }
 
-        // ── IMAGE LOOKUP ──
-        // Key is "cat.slug-sub.slug", picks image i (1-indexed), clamps to last if fewer files
+        // Image lookup: key = "cat.slug-sub.slug", pick image i (1-indexed), clamp to last
         const key = `${cat.slug}-${sub.slug}`;
         const pool = LOCAL_IMAGES[key] || [cat.img];
         const img = pool[Math.min(i - 1, pool.length - 1)];
 
-        // Scale prices dynamically
         const calculatedPrice = sub.basePrice + (i - 1) * 350;
         const discountMult = 1.35 + (i % 3) * 0.05;
         const origPrice = Math.round((calculatedPrice * discountMult) / 500) * 500;
 
-        // Custom badges for variety
         let badge: 'bs' | 'new' | 'cus' | null = null;
         if (i === 1) badge = 'bs';
         else if (i === 2) badge = 'new';
