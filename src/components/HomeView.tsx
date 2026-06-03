@@ -75,85 +75,85 @@ const IMG_GRID_CATEGORIES = [
   },
   { 
     label: 'Wooden Sofas', 
-    img: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=600&q=80', 
+    img: '/images/SOFA/sofa 05.webP', 
     categoryKey: 'wooden-sofas', 
     filters: ['All', 'Living'] 
   },
   { 
     label: 'Wooden Chairs', 
-    img: 'https://images.unsplash.com/photo-1592078615290-033ee584e267?w=600&q=80', 
+    img: '/images/CHAIR/z chair.webP', 
     categoryKey: 'wooden-chairs', 
     filters: ['All', 'Living'] 
   },
   { 
     label: 'DoorFrames', 
-    img: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?w=600&q=80', 
+    img: '/images/DOOR AND FRAMES/set 01.webP', 
     categoryKey: 'door-frames', 
     filters: ['All', 'Doors & Puja'] 
   },
   { 
     label: 'Dressing Table', 
-    img: 'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=600&q=80', 
+    img: '/images/DRESSING TABLE/dressing table 02.webP', 
     categoryKey: 'dressing-table', 
     filters: ['All', 'Bedroom'] 
   },
   { 
     label: 'Wooden Swings', 
-    img: 'https://images.unsplash.com/photo-1595515106969-1ce29566ff1c?w=600&q=80', 
+    img: '/images/SWING/wooden swing 01.webP', 
     categoryKey: 'wooden-swings', 
     filters: ['All', 'Living'] 
   },
   { 
     label: 'Wooden Safety Doors', 
-    img: 'https://images.unsplash.com/photo-1509644851169-2acc08aa25b5?w=600&q=80', 
+    img: '/images/DOOR AND FRAMES/safety door 04.webP', 
     categoryKey: 'wooden-safety-doors', 
     filters: ['All', 'Doors & Puja'] 
   },
   { 
     label: 'Wooden Mandirs', 
-    img: 'https://images.unsplash.com/photo-1600121848594-d8644e57abab?w=600&q=80', 
+    img: '/images/MANDIR/mandir 35.webP', 
     categoryKey: 'wooden-mandirs', 
     filters: ['All', 'Doors & Puja'] 
   },
   { 
     label: 'Teapoys & Coffee Tables', 
-    img: 'https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=600&q=80', 
+    img: '/images/TEAPOY/teapoy 07.webP', 
     categoryKey: 'teapoys-coffee-tables', 
     filters: ['All', 'Living'] 
   },
   { 
     label: 'Sofa Cum Beds', 
-    img: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=600&q=80', 
+    img: '/images/SOFA/sofa cum bed 03.webP', 
     categoryKey: 'sofa-cum-beds', 
     filters: ['All', 'Living', 'Bedroom'] 
   },
   { 
     label: 'Dining Tables', 
-    img: 'https://images.unsplash.com/photo-1615066390971-03e4e1c36ddf?w=600&q=80', 
+    img: '/images/DINING/dining 07.webP', 
     categoryKey: 'dining-tables', 
     filters: ['All', 'Dining'] 
   },
   { 
     label: 'Wardrobes', 
-    img: 'https://images.unsplash.com/photo-1595428774223-ef52624120d2?w=600&q=80', 
+    img: '/images/WARDROBE/wardrobe 11.webP', 
     categoryKey: 'wardrobes', 
     filters: ['All', 'Bedroom'] 
   },
   { 
     label: 'TV Units', 
-    img: 'https://images.unsplash.com/photo-16074730318d2-64f26046e8c7?w=600&q=80', 
+    img: '/images/TV UNIT/tv unit 01.webP', 
     categoryKey: 'tv-units', 
     filters: ['All', 'Living'] 
   },
   { 
     label: 'Chaurang & Paats', 
-    img: 'https://images.unsplash.com/photo-1581428982868-e410dd047a90?w=600&q=80', 
+    img: '/images/CHAURANG AND PATH/chaurang 03.webP', 
     categoryKey: 'chaurang-and-paats', 
     filters: ['All', 'Doors & Puja'] 
   },
   { 
     label: 'Diwans', 
-    img: 'https://images.unsplash.com/photo-1540518614846-7eded433c457?w=600&q=80', 
+    img: '/images/DIWAN/trolley diwan.webP', 
     categoryKey: 'diwans', 
     filters: ['All', 'Living'] 
   }
