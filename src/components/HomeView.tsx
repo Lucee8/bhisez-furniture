@@ -93,7 +93,7 @@ const IMG_GRID_CATEGORIES = [
   },
   { 
     label: 'Dressing Table', 
-    img: 'images/DRESSING TABLE/dressing table 002.webP', 
+    img: '/images/DRESSING TABLE/dressing table 002.webP', 
     categoryKey: 'dressing-table', 
     filters: ['All', 'Bedroom'] 
   },
