@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { ViewState } from '../types';
 
 interface FooterProps {
@@ -5,6 +6,8 @@ interface FooterProps {
 }
 
 export default function Footer({ onNavigate }: FooterProps) {
+  const [logoError, setLogoError] = useState(false);
+
   return (
     <footer className="bg-[#1A1209] text-stone-300 border-t border-[#3D2B1F] pt-16 pb-8 px-4 sm:px-6 lg:px-8 mt-auto">
       
@@ -15,36 +18,48 @@ export default function Footer({ onNavigate }: FooterProps) {
         
         {/* Brand Column */}
         <div className="flex flex-col space-y-4">
-          <div className="flex flex-col items-start select-none">
-            {/* "Bhisez" with custom dotless i and precise Red dot */}
-            <div 
-              className="text-3xl font-black tracking-tight leading-none relative flex items-baseline text-[#FBBD18]"
-              style={{ fontFamily: '"Playfair Display", Georgia, serif' }}
-            >
-              <span>Bh</span>
-              <span className="relative inline-flex items-center justify-center">
-                ı
-                <span 
-                  className="absolute -top-[0.25em] left-[52%] -translate-x-1/2 rounded-full bg-[#E52E2D]"
-                  style={{ 
-                    width: "0.26em",
-                    height: "0.26em"
-                  }}
-                ></span>
-              </span>
-              <span>sez</span>
-            </div>
-            {/* Underline Rule & FURNITURE */}
-            <div className="flex items-center w-full max-w-[104px] mt-1 bg-transparent">
-              <div className="h-[1.5px] flex-1 bg-[#FAF7F2]"></div>
-              <span 
-                className="text-[8px] font-black tracking-[0.16em] px-2 leading-none mt-0.5 text-[#FAF7F2]"
-                style={{ fontFamily: '"DM Sans", "Space Grotesk", sans-serif' }}
-              >
-                FURNITURE
-              </span>
-              <div className="h-[1.5px] flex-1 bg-[#FAF7F2]"></div>
-            </div>
+          <div 
+            onClick={() => onNavigate('home')} 
+            className="cursor-pointer select-none"
+          >
+            {!logoError ? (
+                <img src="\images\bhisez logo.png" alt="Bhisez Furniture" className="h-10 sm:h-20 w-auto object-contain block py-0.5" 
+          onError={() => setLogoError(true)}
+          referrerPolicy="no-referrer"
+        />  
+            ) : (
+              <div className="flex flex-col items-start select-none">
+                {/* "Bhisez" with custom dotless i and precise Red dot */}
+                <div 
+                  className="text-3xl font-black tracking-tight leading-none relative flex items-baseline text-[#FBBD18]"
+                  style={{ fontFamily: '"Playfair Display", Georgia, serif' }}
+                >
+                  <span>Bh</span>
+                  <span className="relative inline-flex items-center justify-center">
+                    ı
+                    <span 
+                      className="absolute -top-[0.25em] left-[52%] -translate-x-1/2 rounded-full bg-[#E52E2D]"
+                      style={{ 
+                        width: "0.26em",
+                        height: "0.26em"
+                      }}
+                    ></span>
+                  </span>
+                  <span>sez</span>
+                </div>
+                {/* Underline Rule & FURNITURE */}
+                <div className="flex items-center w-full max-w-[104px] mt-1 bg-transparent">
+                  <div className="h-[1.5px] flex-1 bg-[#FAF7F2]"></div>
+                  <span 
+                    className="text-[8px] font-black tracking-[0.16em] px-2 leading-none mt-0.5 text-[#FAF7F2]"
+                    style={{ fontFamily: '"DM Sans", "Space Grotesk", sans-serif' }}
+                  >
+                    FURNITURE
+                  </span>
+                  <div className="h-[1.5px] flex-1 bg-[#FAF7F2]"></div>
+                </div>
+              </div>
+            )}
           </div>
           <p className="text-xs text-stone-400 leading-relaxed max-w-sm">
             Handcrafted with solid teak, sheesham, and mango hardwoods based out of the premium coastal region of Malvan & Sukalwad, Sindhudurg since 2010. Designed to outlast trends.

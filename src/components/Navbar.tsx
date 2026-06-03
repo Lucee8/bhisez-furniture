@@ -41,8 +41,22 @@ export default function Navbar({
 }: NavbarProps) {
   const [activeMegaCat, setActiveMegaCat] = useState<string | null>(null);
 
+  const [logoError, setLogoError] = useState(false);
+
   // Brand Logo component exactly matching the given style
   const renderLogo = (isLightBg = true) => {
+    if (!logoError) {
+      return (
+        <img 
+          src="/images/bhisez logo.png" 
+          alt="Bhisez Furniture" 
+          className="h-8 sm:h-20 w-auto object-contain block py-0.5" 
+          onError={() => setLogoError(true)}
+          referrerPolicy="no-referrer"
+        />
+      );
+    }
+
     const mainColor = "#FBBD18"; // Brilliant Golden Yellow from image
     const dotColor = "#E52E2D"; // Vivid Crimson Red from image
     const textColor = isLightBg ? "#4A2511" : "#FAF7F2"; // Deep Mahogany brown on light, warm white on dark
@@ -151,7 +165,7 @@ export default function Navbar({
 
       {/* 2. MAIN HEADER BAR (Wooden Street Layout) */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center py-4 bg-transparent">
+        <div className="flex justify-between items-center py-2 sm:py-2.5 bg-transparent">
           
           {/* Logo on Left */}
           <button 
@@ -182,7 +196,7 @@ export default function Navbar({
                     }
                   }
                 }}
-                className="w-full bg-white border border-[#C9BFA6] text-stone-800 text-xs rounded-md pl-4 pr-10 py-2.5 shadow-2xs focus:ring-1 focus:ring-[#FBBD18] focus:border-[#FBBD18] outline-none transition-all placeholder-stone-400 font-medium"
+                className="w-full bg-white border border-[#C9BFA6] text-stone-800 text-xs rounded-md pl-4 pr-10 py-1.5 sm:py-2 shadow-2xs focus:ring-1 focus:ring-[#FBBD18] focus:border-[#FBBD18] outline-none transition-all placeholder-stone-400 font-medium"
                 id="navbar-search-input"
               />
               <Search size={16} className="absolute right-3 top-1/2 -translate-y-1/2 text-stone-500 cursor-pointer hover:text-stone-800" />
@@ -190,26 +204,26 @@ export default function Navbar({
           </div>
 
           {/* Icon Navigation Row on Right with Labels Below (Exactly matching the screenshot) */}
-          <div className="flex items-center space-x-1 sm:space-x-5">
+          <div className="flex items-center space-x-1 sm:space-x-4">
             
             {/* Stores Icon */}
             <button 
               onClick={() => onNavigate('showroom')} 
-              className="flex flex-col items-center p-1.5 text-stone-700 hover:text-orange-600 transition-colors cursor-pointer group"
+              className="flex flex-col items-center p-1 text-stone-700 hover:text-orange-600 transition-colors cursor-pointer group"
               title="Showroom Stores"
             >
-              <MapPin size={21} className="group-hover:scale-105 transition-transform" />
-              <span className="text-[10px] font-bold text-stone-500 mt-1 select-none">Stores</span>
+              <MapPin size={19} className="group-hover:scale-105 transition-transform" />
+              <span className="text-[10px] font-bold text-stone-500 mt-0.5 select-none">Stores</span>
             </button>
 
             {/* Profile / Account Icon */}
             <button 
               onClick={() => onNavigate(isLoggedIn ? 'home' : 'login')} 
-              className="flex flex-col items-center p-1.5 text-stone-700 hover:text-orange-600 transition-colors cursor-pointer group"
+              className="flex flex-col items-center p-1 text-stone-700 hover:text-orange-600 transition-colors cursor-pointer group"
               title={isLoggedIn ? "My Account" : "Sign In"}
             >
-              <User size={21} className="group-hover:scale-105 transition-transform" />
-              <span className="text-[10px] font-bold text-stone-500 mt-1 select-none">
+              <User size={19} className="group-hover:scale-105 transition-transform" />
+              <span className="text-[10px] font-bold text-stone-500 mt-0.5 select-none">
                 {isLoggedIn ? "Profile" : "Profile"}
               </span>
             </button>
@@ -217,19 +231,19 @@ export default function Navbar({
             {/* Wishlist Icon */}
             <button 
               onClick={() => onNavigate('wishlist')} 
-              className="relative flex flex-col items-center p-1.5 text-stone-700 hover:text-orange-600 transition-colors cursor-pointer group"
+              className="relative flex flex-col items-center p-1 text-stone-700 hover:text-orange-600 transition-colors cursor-pointer group"
               id="navbar-wishlist-btn"
               title="My Wishlist"
             >
               <div className="relative">
-                <Heart size={21} className={`${currentView === 'wishlist' ? 'fill-red-500 stroke-red-500 text-red-500' : 'text-stone-700'} group-hover:scale-105 transition-transform`} />
+                <Heart size={19} className={`${currentView === 'wishlist' ? 'fill-red-500 stroke-red-500 text-red-500' : 'text-stone-700'} group-hover:scale-105 transition-transform`} />
                 {wishlistCount > 0 && (
                   <span className="absolute -top-1 -right-2 bg-red-500 text-white rounded-full text-[8px] font-black w-4 h-4 flex items-center justify-center">
                     {wishlistCount}
                   </span>
                 )}
               </div>
-              <span className="text-[10px] font-bold text-stone-500 mt-1 select-none">
+              <span className="text-[10px] font-bold text-stone-500 mt-0.5 select-none">
                 Wishlist ({wishlistCount})
               </span>
             </button>
@@ -237,19 +251,19 @@ export default function Navbar({
             {/* Cart Icon */}
             <button 
               onClick={() => onNavigate('cart')} 
-              className="relative flex flex-col items-center p-1.5 text-stone-700 hover:text-orange-600 transition-colors cursor-pointer group"
+              className="relative flex flex-col items-center p-1 text-stone-700 hover:text-orange-600 transition-colors cursor-pointer group"
               id="navbar-cart-btn"
               title="My Shopping Cart"
             >
               <div className="relative font-bold">
-                <ShoppingCart size={21} className={`${currentView === 'cart' ? 'stroke-orange-500 text-orange-500' : 'text-stone-700'} group-hover:scale-105 transition-transform`} />
+                <ShoppingCart size={19} className={`${currentView === 'cart' ? 'stroke-orange-500 text-orange-500' : 'text-stone-700'} group-hover:scale-105 transition-transform`} />
                 {cartCount > 0 && (
                   <span className="absolute -top-1 -right-2 bg-amber-600 text-white rounded-full text-[8px] font-black w-4 h-4 flex items-center justify-center">
                     {cartCount}
                   </span>
                 )}
               </div>
-              <span className="text-[10px] font-bold text-stone-500 mt-1 select-none">
+              <span className="text-[10px] font-bold text-stone-500 mt-0.5 select-none">
                 Cart ({cartCount})
               </span>
             </button>
@@ -258,11 +272,11 @@ export default function Navbar({
             {isLoggedIn && (
               <button 
                 onClick={onLogout}
-                className="hidden lg:flex flex-col items-center p-1.5 text-stone-500 hover:text-red-600 transition-colors cursor-pointer text-[10px] font-bold"
+                className="hidden lg:flex flex-col items-center p-1 text-stone-500 hover:text-red-600 transition-colors cursor-pointer text-[10px] font-bold"
                 id="navbar-logout-btn"
               >
-                <X size={20} />
-                <span className="mt-1">Sign Out</span>
+                <X size={18} />
+                <span className="mt-0.5">Sign Out</span>
               </button>
             )}
 
@@ -285,7 +299,7 @@ export default function Navbar({
         className="sticky top-0 z-[120] bg-[#FAF7F2] border-t border-b border-[#EBE3D9] shadow-xs relative"
         onMouseLeave={() => setActiveMegaCat(null)}
       >
-        <div className="max-w-7xl mx-auto px-4 flex items-center justify-between py-2.5 md:py-3.5 overflow-x-auto select-none no-scrollbar whitespace-nowrap text-xs md:text-[13px] font-bold text-stone-700">
+        <div className="max-w-7xl mx-auto px-4 flex items-center justify-between py-1.5 md:py-2 overflow-x-auto select-none no-scrollbar whitespace-nowrap text-xs md:text-[12px] font-bold text-stone-700">
           {CATEGORY_MAP.map((cat) => (
             <button
               key={cat.slug}
@@ -294,7 +308,7 @@ export default function Navbar({
                 onSelectCategory(cat.slug, null);
                 setActiveMegaCat(null);
               }}
-              className={`px-3 py-1 hover:text-[#CBB89D] hover:scale-[1.02] transition-all cursor-pointer duration-200 uppercase tracking-wide text-stone-800 ${
+              className={`px-3 py-0.5 hover:text-[#CBB89D] hover:scale-[1.02] transition-all cursor-pointer duration-200 uppercase tracking-wide text-stone-800 ${
                 activeMegaCat === cat.slug ? 'text-amber-600 font-extrabold border-b-[2px] border-amber-600' : ''
               }`}
             >
