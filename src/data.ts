@@ -256,36 +256,36 @@ const LOCAL_IMAGES: Record<string, string[]> = {
 
   // ── CHAIR ──
   "wooden-chairs-cane-rocking-chair": [
-    "/images/CHAIR/cane rocking chair.webP",
+    "public/images/CHAIR/cane rocking chair.webP",
   ],
   "wooden-chairs-rocking-chair": [
-    "/images/CHAIR/cane rocking chair.webP",
+    "public/images/CHAIR/cane rocking chair.webP",
   ],
   "wooden-chairs-royal-chair": [
-    "/images/CHAIR/royal chair 01.webP",
+    "public/images/CHAIR/royal chair 01.webP",
   ],
   "wooden-chairs-aaram-chair": [
-    "/images/CHAIR/aaram chair 01.webP",
+    "public/images/CHAIR/aaram chair 01.webP",
   ],
   "wooden-chairs-curve-chair": [
-    "/images/CHAIR/curve chair 01.webP",
+    "public/images/CHAIR/curve chair 01.webP",
   ],
   "wooden-chairs-z-chair": [
-    "/images/CHAIR/z chair.webP",
+    "public/images/CHAIR/z chair.webP",
   ],
   "wooden-chairs-chair": [
-    "/images/CHAIR/chair 01.webP",
-    "/images/CHAIR/chair 02.webP",
-    "/images/CHAIR/chair 03.webP",
-    "/images/CHAIR/chair 04.webP",
-    "/images/CHAIR/chair 05.webP",
-    "/images/CHAIR/chair 06.webP",
-    "/images/CHAIR/chair 07.webP",
-    "/images/CHAIR/chair 08.webP",
+    "public/images/CHAIR/chair 01.webP",
+    "public/images/CHAIR/chair 02.webP",
+    "public/images/CHAIR/chair 03.webP",
+    "public/images/CHAIR/chair 04.webP",
+    "public/images/CHAIR/chair 05.webP",
+    "public/images/CHAIR/chair 06.webP",
+    "public/images/CHAIR/chair 07.webP",
+    "public/images/CHAIR/chair 08.webP",
   ],
   "wooden-chairs-teacher-chair": [
-    "/images/CHAIR/teacher chair 01.webP",
-    "/images/CHAIR/teacher chair 02.webP",
+    "public/images/CHAIR/teacher chair 01.webP",
+    "public/images/CHAIR/teacher chair 02.webP",
   ],
 
   // ── DOOR AND FRAMES ──
