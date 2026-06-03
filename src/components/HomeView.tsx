@@ -99,7 +99,7 @@ const IMG_GRID_CATEGORIES = [
   },
   { 
     label: 'Wooden Swings', 
-    img: '/images/SWING/wooden swing 01.webP', 
+    img: '/images/SWING/swing 02.webP', 
     categoryKey: 'wooden-swings', 
     filters: ['All', 'Living'] 
   },
