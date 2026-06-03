@@ -69,7 +69,7 @@ const SUMMER_HERO_SLIDES = [
 const IMG_GRID_CATEGORIES = [
   { 
     label: 'Beds', 
-    img: 'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=600&q=80', 
+    img: '/images/BED/trolley bed 07.webP', 
     categoryKey: 'beds', 
     filters: ['All', 'Bedroom'] 
   },
