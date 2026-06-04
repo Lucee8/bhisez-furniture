@@ -176,7 +176,7 @@ Notes: ${walkthroughForm.notes}`;
 
                 <div className="flex flex-col sm:flex-row gap-3 pt-4 border-t border-[#F2EDE4] bg-transparent">
                   <a 
-                    href={activeShowroom === 'malvan' ? 'https://maps.app.goo.gl/A3REZbYvPhUAH3gC8' : 'https://maps.app.goo.gl/KKGuhCPWUrApU2xM8'}
+                    href={activeShowroom === 'malvan' ? 'https://maps.app.goo.gl/4UfDKLww5VhuDU39A' : 'https://maps.app.goo.gl/KKGuhCPWUrApU2xM8'}
                     target="_blank"
                     rel="noreferrer"
                     className="flex-1 text-center bg-[#3D2B1F] hover:bg-[#1C120A] text-amber-50 font-bold text-xs py-3.5 rounded-xl transition-colors active:scale-95 duration-200"
