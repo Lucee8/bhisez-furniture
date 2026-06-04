@@ -50,7 +50,7 @@ export default function Navbar({
         <img 
           src="/images/bhisez logo.png" 
           alt="Bhisez Furniture" 
-          className="h-8 sm:h-20 w-auto object-contain block py-0.5" 
+          className="h-12 md:h-16 lg:h-20 w-auto object-contain block" 
           onError={() => setLogoError(true)}
           referrerPolicy="no-referrer"
         />
