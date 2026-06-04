@@ -499,7 +499,7 @@ export default function HomeView({
 
       {/* ── CAROUSEL INFO STRIP ── */}
       <div className="bg-[#1A1209] py-3.5 mt-10 overflow-hidden border-b border-[#3D2B1F]">
-        <div className="flex whitespace-nowrap animate-slide-track">
+        <div className="animate-slide-track">
           <div className="flex space-x-16 text-stone-300 text-xs tracking-wider uppercase font-bold">
             <span className="flex items-center gap-1.5"><Truck size={14} className="text-[#FBBD18]" /> FREE DELIVERY ACROSS SINDHUDURG, GOA, RATNAGIRI</span>
             <span className="flex items-center gap-1.5"><Award size={14} className="text-[#FBBD18]" /> 36-MONTH SOLID WOOD WARRANTY</span>
