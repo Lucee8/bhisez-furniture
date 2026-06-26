@@ -33,34 +33,201 @@ export default function ProductDetailView({
   onToggleWishlist,
   wishlist,
 }: ProductDetailViewProps) {
+  // Determine dynamic options & labels based on product configurations
+  const seriesName = product.seriesName || "seasoned hardwood series";
+  const brandName = product.brandName || "Bhise'z Furniture Showroom";
+
+  const isBedProduct = (product.category === 'beds' || product.subCategory?.includes('bed') || product.id?.toString().startsWith('beds-')) && product.category !== 'sofa-cum-beds';
+
+  const sizingLabel = isBedProduct
+    ? "Dimensions / Bed Sizing"
+    : (product.sizingLabel || (
+        product.category === 'wooden-sofas' || product.category === 'sofa-cum-beds'
+          ? "Seating Capacity / Lounge Sizing"
+          : product.category === 'wooden-chairs'
+          ? "Seating Height Options"
+          : product.category === 'wooden-mandirs'
+          ? "Temple Height / Width Sizing"
+          : "Dimensions / Bed Sizing"
+      ));
+
+  const sizesList = isBedProduct
+    ? ["King Size", "Queen Size"]
+    : (product.sizesList || (
+        product.category === 'wooden-sofas' || product.category === 'sofa-cum-beds'
+          ? ["3 Seater", "2 Seater", "1 Seater"]
+          : product.category === 'wooden-chairs'
+          ? ["Standard Height", "Counter Height"]
+          : product.category === 'wooden-mandirs'
+          ? ["Standard Width (24\")", "Wide Width (36\")"]
+          : ["King Size", "Queen Size"]
+      ));
+
+  const finishesLabel = product.finishesLabel || "Hardwood Finish / Seal";
+  const finishesList = product.finishesList || FINISHES;
+
+  const optionsLabel = product.optionsLabel || (
+    product.category === 'beds' || product.subCategory?.includes('bed') || product.id?.toString().startsWith('beds-')
+      ? "Underbed storage options"
+      : product.category === 'wooden-mandirs'
+      ? "Drawer & Tray Configuration"
+      : product.category === 'wooden-sofas' || product.category === 'sofa-cum-beds'
+      ? "Cushion Padding Mode"
+      : ""
+  );
+
+  const optionsList = product.optionsList || (
+    product.category === 'beds' || product.subCategory?.includes('bed') || product.id?.toString().startsWith('beds-')
+      ? ["Hydraulic Storage", "Non Storage"]
+      : product.category === 'wooden-mandirs'
+      ? ["Pooja Drawers Included", "Standard Platform Only"]
+      : product.category === 'wooden-sofas' || product.category === 'sofa-cum-beds'
+      ? ["Ultra-density Foam", "Standard Tufted Classic"]
+      : []
+  );
+
+  const deliverySubtext = product.deliverySubtext || "Includes free local white-glove installation & GST invoice.";
+
+  const availableWoodTypes = product.woodTypePrices && Object.keys(product.woodTypePrices).length > 0
+    ? (Object.keys(product.woodTypePrices) as ('Aakashi' | 'Shivan' | 'Sagwan')[])
+    : (['Aakashi', 'Shivan', 'Sagwan'] as ('Aakashi' | 'Shivan' | 'Sagwan')[]);
+
   // Config state
-  const [selectedSize, setSelectedSize] = useState<string>(product.size === 'king' ? 'King Size' : 'Queen Size');
-  const [selectedFinish, setSelectedFinish] = useState<string>('Amber Walnut');
-  const [selectedStorage, setSelectedStorage] = useState<string>('Hydraulic Storage');
+  const [selectedSize, setSelectedSize] = useState<string>(() => {
+    return sizesList.length > 0 ? sizesList[0] : 'King Size';
+  });
+  const [selectedFinish, setSelectedFinish] = useState<string>(() => {
+    return finishesList.length > 0 ? finishesList[0].name : 'Amber Walnut';
+  });
+  const [selectedWoodType, setSelectedWoodType] = useState<string>(() => {
+    return availableWoodTypes.includes('Sagwan') ? 'Sagwan' : (availableWoodTypes.length > 0 ? availableWoodTypes[0] : 'Sagwan');
+  });
+  const [selectedStorage, setSelectedStorage] = useState<string>(() => {
+    return optionsList.length > 0 ? optionsList[0] : '';
+  });
+
   const [quantity, setQuantity] = useState<number>(1);
   const [pincode, setPincode] = useState<string>('');
   const [pincodeChecked, setPincodeChecked] = useState<boolean>(false);
   const [deliveryDate, setDeliveryDate] = useState<string>('');
   const [activeTab, setActiveTab] = useState<string>('desc');
 
+  // Sync state if product changes (Very important to keep selected options updated when switching products)
+  const [prevProductId, setPrevProductId] = useState<any>(product.id);
+  if (product.id !== prevProductId) {
+    setPrevProductId(product.id);
+    const isNewProductABed = (product.category === 'beds' || product.subCategory?.includes('bed') || product.id?.toString().startsWith('beds-')) && product.category !== 'sofa-cum-beds';
+    const newSizes = isNewProductABed
+      ? ["King Size", "Queen Size"]
+      : (product.sizesList || (
+          product.category === 'wooden-sofas' || product.category === 'sofa-cum-beds'
+            ? ["3 Seater", "2 Seater", "1 Seater"]
+            : product.category === 'wooden-chairs'
+            ? ["Standard Height", "Counter Height"]
+            : product.category === 'wooden-mandirs'
+            ? ["Standard Width (24\")", "Wide Width (36\")"]
+            : ["King Size", "Queen Size"]
+        ));
+    const newFinishes = product.finishesList || FINISHES;
+    const newOptions = product.optionsList || (
+      product.category === 'beds' || product.subCategory?.includes('bed') || product.id?.toString().startsWith('beds-')
+        ? ["Hydraulic Storage", "Non Storage"]
+        : product.category === 'wooden-mandirs'
+        ? ["Pooja Drawers Included", "Standard Platform Only"]
+        : product.category === 'wooden-sofas' || product.category === 'sofa-cum-beds'
+        ? ["Ultra-density Foam", "Standard Tufted Classic"]
+        : []
+    );
+    setSelectedSize(newSizes.length > 0 ? newSizes[0] : 'King Size');
+    setSelectedFinish(newFinishes.length > 0 ? newFinishes[0].name : 'Amber Walnut');
+    setSelectedStorage(newOptions.length > 0 ? newOptions[0] : '');
+    
+    const newWoodTypes = product.woodTypePrices && Object.keys(product.woodTypePrices).length > 0
+      ? (Object.keys(product.woodTypePrices) as ('Aakashi' | 'Shivan' | 'Sagwan')[])
+      : (['Aakashi', 'Shivan', 'Sagwan'] as ('Aakashi' | 'Shivan' | 'Sagwan')[]);
+    setSelectedWoodType(newWoodTypes.includes('Sagwan') ? 'Sagwan' : (newWoodTypes.length > 0 ? newWoodTypes[0] : 'Sagwan'));
+
+    setDeliveryDate('');
+    setPincodeChecked(false);
+    setPincode('');
+  }
+
   // Main Image state
   const [mainImageUrl, setMainImageUrl] = useState<string>(product.img);
+  
+  // Sync image if product itself changes
+  const [prevImgUrl, setPrevImgUrl] = useState<string>(product.img);
+  if (product.img !== prevImgUrl) {
+    setPrevImgUrl(product.img);
+    setMainImageUrl(product.img);
+  }
 
-  const discountAmount = product.orig && product.orig > 0 ? product.orig - product.price : 0;
   const isWished = wishlist.includes(product.id);
 
   // Live price adjustment
   const computedPrice = (() => {
-    let base = product.price;
-    if (selectedSize === 'Queen Size') base -= 5000; // Live Queen Sizing discount
-    if (selectedStorage === 'Non Storage') base -= 10000; // Live Sizing discount
+    let base = product.woodTypePrices && product.woodTypePrices[selectedWoodType as keyof typeof product.woodTypePrices]
+      ? product.woodTypePrices[selectedWoodType as keyof typeof product.woodTypePrices]!
+      : product.price;
+
+    if (product.priceRules?.sizeAdjustments) {
+      if (typeof product.priceRules.sizeAdjustments[selectedSize] !== 'undefined') {
+        base += product.priceRules.sizeAdjustments[selectedSize];
+      }
+    } else {
+      // Default beds live adjustments fallback
+      if (product.category === 'beds' || product.subCategory?.includes('bed') || product.id?.toString().startsWith('beds-')) {
+        if (selectedSize === 'Queen Size') base -= 5000;
+      } else if (product.category === 'wooden-sofas' || product.category === 'sofa-cum-beds') {
+        if (selectedSize === '2 Seater') base -= 4000;
+        else if (selectedSize === '1 Seater') base -= 8000;
+      }
+    }
+
+    if (product.priceRules?.optionAdjustments) {
+      if (typeof product.priceRules.optionAdjustments[selectedStorage] !== 'undefined') {
+        base += product.priceRules.optionAdjustments[selectedStorage];
+      }
+    } else {
+      // Default beds live adjustments fallback
+      if (product.category === 'beds' || product.subCategory?.includes('bed') || product.id?.toString().startsWith('beds-')) {
+        if (selectedStorage === 'Non Storage') base -= 10000;
+      }
+    }
+
     return base > 0 ? base : 0;
   })();
 
   const computedOrigPrice = (() => {
-    let base = product.orig || product.price;
-    if (selectedSize === 'Queen Size') base -= 8000;
-    if (selectedStorage === 'Non Storage') base -= 14000;
+    let base = product.woodTypePrices && product.woodTypePrices[selectedWoodType as keyof typeof product.woodTypePrices]
+      ? Math.round((product.woodTypePrices[selectedWoodType as keyof typeof product.woodTypePrices]! * 1.35) / 100) * 100
+      : (product.orig || product.price);
+
+    if (product.priceRules?.origSizeAdjustments) {
+      if (typeof product.priceRules.origSizeAdjustments[selectedSize] !== 'undefined') {
+        base += product.priceRules.origSizeAdjustments[selectedSize];
+      }
+    } else {
+      // Default beds live adjustments fallback
+      if (product.category === 'beds' || product.subCategory?.includes('bed') || product.id?.toString().startsWith('beds-')) {
+        if (selectedSize === 'Queen Size') base -= 8000;
+      } else if (product.category === 'wooden-sofas' || product.category === 'sofa-cum-beds') {
+        if (selectedSize === '2 Seater') base -= 6000;
+        else if (selectedSize === '1 Seater') base -= 11000;
+      }
+    }
+
+    if (product.priceRules?.origOptionAdjustments) {
+      if (typeof product.priceRules.origOptionAdjustments[selectedStorage] !== 'undefined') {
+        base += product.priceRules.origOptionAdjustments[selectedStorage];
+      }
+    } else {
+      // Default beds live adjustments fallback
+      if (product.category === 'beds' || product.subCategory?.includes('bed') || product.id?.toString().startsWith('beds-')) {
+        if (selectedStorage === 'Non Storage') base -= 14000;
+      }
+    }
+
     return base > 0 ? base : 0;
   })();
 
@@ -79,7 +246,7 @@ export default function ProductDetailView({
   };
 
   const handleAddToCartClick = () => {
-    onAddToCart(product, quantity, selectedSize, selectedFinish, selectedStorage);
+    onAddToCart(product, quantity, selectedSize, selectedWoodType, selectedStorage);
     // After adding, go to cart
     onNavigate('cart');
   };
@@ -176,61 +343,85 @@ export default function ProductDetailView({
           <div className="space-y-6">
             
             <div>
-              <span className="text-xs font-black tracking-widest text-[#8B6F5C] uppercase">seasoned hardwood series</span>
+              <span className="text-xs font-black tracking-widest text-[#8B6F5C] uppercase">{seriesName}</span>
               <h1 className="font-serif text-2xl sm:text-3xl font-black text-amber-950 mt-1 leading-tight">{product.name}</h1>
-              <p className="text-xs text-[#8B6F5C] mt-2">By <button onClick={() => onNavigate('about')} className="underline hover:text-amber-900 bg-transparent border-none p-0">Bhise'z Ferniture Showroom</button></p>
+              <p className="text-xs text-[#8B6F5C] mt-2">By <button onClick={() => onNavigate('about')} className="underline hover:text-amber-900 bg-transparent border-none p-0">{brandName}</button></p>
+              
+              {product.availableSize && !isBedProduct && (
+                <div className="mt-3.5 inline-flex items-center space-x-1.5 bg-amber-50 border border-amber-200 px-3.5 py-1.5 rounded-xl text-xs font-bold text-amber-900 shadow-3xs">
+                  <span>📐</span>
+                  <span>Available Size/Dimensions: <strong>{product.availableSize}</strong></span>
+                </div>
+              )}
             </div>
 
             <hr className="border-[#E0D8CF]" />
 
             {/* Sizing switch triggers */}
-            <div className="space-y-2.5">
-              <span className="text-xs font-bold text-stone-500 uppercase tracking-wider block">Dimensions / Bed Sizing</span>
-              <div className="flex space-x-3">
-                {['King Size', 'Queen Size'].map(opt => (
-                  <button
-                    key={opt}
-                    onClick={() => setSelectedSize(opt)}
-                    className={`px-4 py-2.5 border rounded-xl text-xs font-bold transition-all ${selectedSize === opt ? 'bg-[#3D2B1F] border-[#3D2B1F] text-amber-50' : 'bg-transparent border-[#E0D8CF] text-[#3D2B1F] hover:border-[#3D2B1F]'}`}
-                  >
-                    {opt}
-                  </button>
-                ))}
+            {sizesList.length > 0 && (
+              <div className="space-y-2.5">
+                <span className="text-xs font-bold text-stone-500 uppercase tracking-wider block">{sizingLabel}</span>
+                <div className="flex flex-wrap gap-2.5">
+                  {sizesList.map(opt => (
+                    <button
+                      key={opt}
+                      onClick={() => setSelectedSize(opt)}
+                      className={`px-4 py-2.5 border rounded-xl text-xs font-bold transition-all ${selectedSize === opt ? 'bg-[#3D2B1F] border-[#3D2B1F] text-amber-50' : 'bg-transparent border-[#E0D8CF] text-[#3D2B1F] hover:border-[#3D2B1F]'}`}
+                    >
+                      {opt}
+                    </button>
+                  ))}
+                </div>
               </div>
-            </div>
+            )}
 
-            {/* Polish finish swatches */}
-            <div className="space-y-2.5">
-              <span className="text-xs font-bold text-stone-500 uppercase tracking-wider block">Hardwood Finish / Seal</span>
-              <div className="flex space-x-3">
-                {FINISHES.map(f => (
-                  <button
-                    key={f.name}
-                    onClick={() => setSelectedFinish(f.name)}
-                    className={`flex items-center space-x-2 px-3 py-2 border rounded-xl text-xs font-bold transition-all ${selectedFinish === f.name ? 'bg-[#3D2B1F] border-[#3D2B1F] text-amber-50' : 'bg-transparent border-[#E0D8CF] text-[#3D2B1F] hover:border-[#3D2B1F]'}`}
-                  >
-                    <span className="w-3.5 h-3.5 rounded-full border border-stone-400" style={{ backgroundColor: f.color }} />
-                    <span>{f.name}</span>
-                  </button>
-                ))}
+            {/* Wood Type Selection */}
+            {availableWoodTypes.length > 0 && (
+              <div className="space-y-2.5">
+                <span className="text-xs font-bold text-stone-500 uppercase tracking-wider block">Wood Type selection</span>
+                <div className="flex flex-wrap gap-2.5">
+                  {availableWoodTypes.map(wood => {
+                    const colors = { Sagwan: '#8F4A14', Shivan: '#C9A36C', Aakashi: '#A37233' };
+                    const detailColor = colors[wood as keyof typeof colors] || '#C9A36C';
+                    const price = product.woodTypePrices?.[wood as keyof typeof product.woodTypePrices];
+                    return (
+                      <button
+                        key={wood}
+                        onClick={() => setSelectedWoodType(wood)}
+                        className={`flex flex-col items-start p-3 border rounded-xl transition-all min-w-[120px] cursor-pointer text-left ${selectedWoodType === wood ? 'bg-[#3D2B1F] border-[#2C1C11] text-amber-50 shadow-xs ring-1 ring-[#3D2B1F]' : 'bg-white border-[#E0D8CF] text-[#3D2B1F] hover:border-[#3D2B1F]'}`}
+                        id={`wood-type-${wood}`}
+                      >
+                        <div className="flex items-center space-x-2 mb-1">
+                          <span className="w-3 h-3 rounded-full border border-stone-300" style={{ backgroundColor: detailColor }} />
+                          <span className="font-extrabold text-xs tracking-wider">{wood}</span>
+                        </div>
+                        <span className={`text-[10px] font-bold ${selectedWoodType === wood ? 'text-amber-200' : 'text-stone-500'}`}>
+                          {price ? `₹${price.toLocaleString('en-IN')}` : 'Contact Quote'}
+                        </span>
+                      </button>
+                    );
+                  })}
+                </div>
               </div>
-            </div>
+            )}
 
             {/* Storage configuration */}
-            <div className="space-y-2.5">
-              <span className="text-xs font-bold text-stone-500 uppercase tracking-wider block">Underbed storage options</span>
-              <div className="flex space-x-3">
-                {['Hydraulic Storage', 'Non Storage'].map(opt => (
-                  <button
-                    key={opt}
-                    onClick={() => setSelectedStorage(opt)}
-                    className={`px-4 py-2.5 border rounded-xl text-xs font-bold transition-all ${selectedStorage === opt ? 'bg-[#3D2B1F] border-[#3D2B1F] text-amber-50' : 'bg-transparent border-[#E0D8CF] text-[#3D2B1F] hover:border-[#3D2B1F]'}`}
-                  >
-                    {opt}
-                  </button>
-                ))}
+            {optionsList.length > 0 && optionsLabel && (
+              <div className="space-y-2.5">
+                <span className="text-xs font-bold text-stone-500 uppercase tracking-wider block">{optionsLabel}</span>
+                <div className="flex flex-wrap gap-2.5">
+                  {optionsList.map(opt => (
+                    <button
+                      key={opt}
+                      onClick={() => setSelectedStorage(opt)}
+                      className={`px-4 py-2.5 border rounded-xl text-xs font-bold transition-all ${selectedStorage === opt ? 'bg-[#3D2B1F] border-[#3D2B1F] text-amber-50' : 'bg-transparent border-[#E0D8CF] text-[#3D2B1F] hover:border-[#3D2B1F]'}`}
+                    >
+                      {opt}
+                    </button>
+                  ))}
+                </div>
               </div>
-            </div>
+            )}
 
             <hr className="border-[#E0D8CF]" />
 
@@ -247,7 +438,7 @@ export default function ProductDetailView({
                     </>
                   )}
                 </div>
-                <p className="text-[11px] text-stone-500">Includes free local white-glove installation & GST invoice.</p>
+                <p className="text-[11px] text-stone-500">{deliverySubtext}</p>
               </div>
             ) : (
               <div className="bg-white border border-[#E0D8CF] p-5 rounded-2xl flex flex-col items-start space-y-1">
@@ -343,7 +534,7 @@ export default function ProductDetailView({
               )}
 
               <a 
-                href={`https://wa.me/919999999999?text=${encodeURIComponent(`Hi Ramesh! I want to order/enquire details. \nProduct: ${product.name}\nSize: ${selectedSize}\nFinish: ${selectedFinish}\nStorage: ${selectedStorage}\nQty: ${quantity}`)}`}
+                href={`https://wa.me/919999999999?text=${encodeURIComponent(`Hi Ramesh! I want to order/enquire details.\nProduct: ${product.name}${product.availableSize ? `\nAvailable Size: ${product.availableSize}` : (sizesList.length > 0 ? `\n${sizingLabel}: ${selectedSize}` : '')}\nWood Type: ${selectedWoodType}${optionsList.length > 0 && optionsLabel ? `\n${optionsLabel}: ${selectedStorage}` : ''}\nQty: ${quantity}`)}`}
                 target="_blank"
                 rel="noreferrer"
                 className="w-full bg-[#25D366] hover:bg-[#1ebd59] text-white font-bold text-xs uppercase tracking-wider py-4 rounded-xl flex items-center justify-center gap-2 shadow-xs text-center"
@@ -363,7 +554,7 @@ export default function ProductDetailView({
           <div className="flex border-b border-[#E0D8CF] space-x-6 overflow-x-auto">
             {[
               { id: 'desc', label: 'Description' },
-              { id: 'spec', label: 'Specifications (Amber Walnut)' },
+              { id: 'spec', label: `Specifications (${selectedWoodType})` },
               { id: 'care', label: 'Woodwork Care' },
               { id: 'returns', label: 'Assembly & Returns' }
             ].map(tab => (
@@ -391,8 +582,20 @@ export default function ProductDetailView({
                 <tbody>
                   <tr className="border-b border-stone-100">
                     <td className="py-2.5 font-bold text-stone-800 w-1/3">Seasoned Timber</td>
-                    <td className="py-2.5">Solid Teak Hardwood (Grade A seasoned)</td>
+                    <td className="py-2.5">Solid {selectedWoodType} Hardwood (Grade A seasoned, borer-proof)</td>
                   </tr>
+                  {isBedProduct && (
+                    <tr className="border-b border-stone-100">
+                      <td className="py-2.5 font-bold text-stone-800">Available Dimensions</td>
+                      <td className="py-2.5 text-stone-900 font-bold">King Size: 72x78 inches | Queen Size: 60x78 inches</td>
+                    </tr>
+                  )}
+                  {product.availableSize && !isBedProduct && (
+                    <tr className="border-b border-stone-100">
+                      <td className="py-2.5 font-bold text-stone-800">Available Dimensions</td>
+                      <td className="py-2.5 text-stone-900 font-bold">{product.availableSize}</td>
+                    </tr>
+                  )}
                   <tr className="border-b border-stone-100">
                     <td className="py-2.5 font-bold text-stone-800">Support Base Frame</td>
                     <td className="py-2.5">Engineered teak core board panels</td>

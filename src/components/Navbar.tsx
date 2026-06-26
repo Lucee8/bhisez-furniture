@@ -48,9 +48,9 @@ export default function Navbar({
     if (!logoError) {
       return (
         <img 
-          src="/images/bhisez logo.png" 
+          src="/bhisez%20logo.png" 
           alt="Bhisez Furniture" 
-          className="h-16 md:h-16 lg:h-20 w-auto object-contain block" 
+          className="h-8 sm:h-9 w-auto object-contain block py-0.5" 
           onError={() => setLogoError(true)}
           referrerPolicy="no-referrer"
         />
@@ -158,6 +158,14 @@ export default function Navbar({
               className="hover:text-stone-900 transition-colors cursor-pointer"
             >
               Help Center
+            </button>
+            <span className="text-stone-300">|</span>
+            <button 
+              onClick={() => onNavigate('admin')}
+              className="text-amber-700 hover:text-amber-900 transition-colors cursor-pointer font-bold"
+              id="navbar-admin-btn"
+            >
+              🔒 Admin Panel
             </button>
           </div>
         </div>
@@ -453,6 +461,12 @@ export default function Navbar({
                   className="text-left text-sm font-semibold text-[#3D2B1F] py-2 px-3 hover:bg-[#E8DDD1]/40 rounded-md"
                 >
                   ❤️ My Wishlist ({wishlistCount})
+                </button>
+               <button 
+                  onClick={() => { onNavigate('admin'); setMobileMenuOpen(false); }} 
+                  className="text-left text-sm font-bold text-amber-800 py-2 px-3 hover:bg-[#E8DDD1]/40 rounded-md"
+                >
+                  🔒 Workshop Admin Portal
                 </button>
               </nav>
             </div>

@@ -23,10 +23,13 @@ export default function Footer({ onNavigate }: FooterProps) {
             className="cursor-pointer select-none"
           >
             {!logoError ? (
-                <img src="\images\bhisez logo.png" alt="Bhisez Furniture" className="h-10 sm:h-20 w-auto object-contain block py-0.5" 
-          onError={() => setLogoError(true)}
-          referrerPolicy="no-referrer"
-        />  
+              <img 
+                src="/bhisez%20logo.png" 
+                alt="Bhisez Furniture" 
+                className="h-10 sm:h-12 w-auto object-contain block py-0.5" 
+                onError={() => setLogoError(true)}
+                referrerPolicy="no-referrer"
+              />
             ) : (
               <div className="flex flex-col items-start select-none">
                 {/* "Bhisez" with custom dotless i and precise Red dot */}
@@ -144,7 +147,7 @@ export default function Footer({ onNavigate }: FooterProps) {
       </div>
 
       <div className="max-w-7xl mx-auto mt-16 pt-8 border-t border-[#3D2B1F] flex flex-col md:flex-row justify-between items-center text-xs text-stone-500">
-        <p>© 2026 Bhise'z Ferniture. Handcrafted with Care in Southern Konkan (Maharashtra). All rights reserved.</p>
+        <p>© 2026 Bhise'z Furniture. Handcrafted with Care in Southern Konkan (Maharashtra). All rights reserved.</p>
         <div className="flex space-x-6 mt-4 md:mt-0">
           <button onClick={() => onNavigate('contact')} className="hover:underline bg-transparent border-none text-stone-500 cursor-pointer">Inquire</button>
           <span>·</span>

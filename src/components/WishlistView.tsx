@@ -13,6 +13,8 @@ interface WishlistViewProps {
   onSelectProduct: (id: string | number) => void;
   onToggleWishlist: (id: string | number) => void;
   wishlist: (string | number)[];
+  products?: Product[];
+
 }
 
 export default function WishlistView({
@@ -20,8 +22,9 @@ export default function WishlistView({
   onSelectProduct,
   onToggleWishlist,
   wishlist,
+  products
 }: WishlistViewProps) {
-  const wishlistedItems = ALL_PRODUCTS.filter(p => wishlist.includes(p.id));
+  const wishlistedItems = (products || ALL_PRODUCTS).filter(p => wishlist.includes(p.id));
 
   return (
     <div className="bg-[#FAF7F2] min-h-screen py-8">

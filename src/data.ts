@@ -1,4 +1,7 @@
 import { Product } from './types';
+import { CUSTOM_PRODUCTS, PRODUCT_OVERRIDES } from './components/custom_products';
+import { PRODUCT_DESCRIPTIONS } from './product_descriptions';
+import { getCsvSpecs } from './csv_pricing';
 
 export interface SubCategory {
   name: string;
@@ -289,15 +292,71 @@ const LOCAL_IMAGES: Record<string, string[]> = {
   ],
 
   // ── DOOR AND FRAMES ──
-  "door-frames-set": Array.from({ length: 33 }, (_, i) =>
-    `/images/DOOR AND FRAMES/set ${String(i + 1).padStart(2, '0')}.webP`
-  ),
-  "door-frames-mandir-room": Array.from({ length: 16 }, (_, i) =>
-    `/images/DOOR AND FRAMES/mandir ${String(i + 1).padStart(2, '0')}.webP`
-  ),
-  "door-frames-door": Array.from({ length: 10 }, (_, i) =>
-    `/images/DOOR AND FRAMES/door ${String(i + 1).padStart(2, '0')}.webP`
-  ),
+  "door-frames-set": [
+    "/images/DOOR AND FRAMES/set 01.webP",
+    "/images/DOOR AND FRAMES/set 02.webP",
+    "/images/DOOR AND FRAMES/set 03.webP",
+    "/images/DOOR AND FRAMES/set 04.webP",
+    "/images/DOOR AND FRAMES/set 05.webP",
+    "/images/DOOR AND FRAMES/set 06.webP",
+    "/images/DOOR AND FRAMES/set 07.webP",
+    "/images/DOOR AND FRAMES/set 08.webP",
+    "/images/DOOR AND FRAMES/set 09.webP",
+    "/images/DOOR AND FRAMES/set 10.webP",
+    "/images/DOOR AND FRAMES/set 11.webP",
+    "/images/DOOR AND FRAMES/set 12.webP",
+    "/images/DOOR AND FRAMES/set 13.webP",
+    "/images/DOOR AND FRAMES/set 14.webP",
+    "/images/DOOR AND FRAMES/set 15.webP",
+    "/images/DOOR AND FRAMES/set 16.webP",
+    "/images/DOOR AND FRAMES/set 17.webP",
+    "/images/DOOR AND FRAMES/set 18.webP",
+    "/images/DOOR AND FRAMES/set 19.webP",
+    "/images/DOOR AND FRAMES/set 20.webP",
+    "/images/DOOR AND FRAMES/set 21.webP",
+    "/images/DOOR AND FRAMES/set 22.webP",
+    "/images/DOOR AND FRAMES/set 23.webP",
+    "/images/DOOR AND FRAMES/set 24.webP",
+    "/images/DOOR AND FRAMES/set 25.webP",
+    "/images/DOOR AND FRAMES/set 26.webP",
+    "/images/DOOR AND FRAMES/set 27.webP",
+    "/images/DOOR AND FRAMES/set 28.webP",
+    "/images/DOOR AND FRAMES/set 29.webP",
+    "/images/DOOR AND FRAMES/set 30.webP",
+    "/images/DOOR AND FRAMES/set 31.webP",
+    "/images/DOOR AND FRAMES/set 32.webP",
+    "/images/DOOR AND FRAMES/set 33.webP"
+  ],
+  "door-frames-mandir-room": [
+    "/images/DOOR AND FRAMES/mandir 01.webP",
+    "/images/DOOR AND FRAMES/mandir 02.webP",
+    "/images/DOOR AND FRAMES/mandir 03.webP",
+    "/images/DOOR AND FRAMES/mandir 04.webP",
+    "/images/DOOR AND FRAMES/mandir 05.webP",
+    "/images/DOOR AND FRAMES/mandir 06.webP",
+    "/images/DOOR AND FRAMES/mandir 07.webP",
+    "/images/DOOR AND FRAMES/mandir 08.webP",
+    "/images/DOOR AND FRAMES/mandir 09.webP",
+    "/images/DOOR AND FRAMES/mandir 10.webP",
+    "/images/DOOR AND FRAMES/mandir 11.webP",
+    "/images/DOOR AND FRAMES/mandir 12.webP",
+    "/images/DOOR AND FRAMES/mandir 13.webP",
+    "/images/DOOR AND FRAMES/mandir 14.webP",
+    "/images/DOOR AND FRAMES/mandir 15.webP",
+    "/images/DOOR AND FRAMES/mandir 16.webP"
+  ],
+  "door-frames-door": [
+    "/images/DOOR AND FRAMES/door 01.webP",
+    "/images/DOOR AND FRAMES/door 02.webP",
+    "/images/DOOR AND FRAMES/door 03.webP",
+    "/images/DOOR AND FRAMES/door 04.webP",
+    "/images/DOOR AND FRAMES/door 05.webP",
+    "/images/DOOR AND FRAMES/door 06.webP",
+    "/images/DOOR AND FRAMES/door 07.webP",
+    "/images/DOOR AND FRAMES/door 08.webP",
+    "/images/DOOR AND FRAMES/door 09.webP",
+    "/images/DOOR AND FRAMES/door 10.webP"
+  ],
   "door-frames-christian-door": [
     "/images/DOOR AND FRAMES/christian 01.webP",
     "/images/DOOR AND FRAMES/christian 02.webP",
@@ -309,63 +368,201 @@ const LOCAL_IMAGES: Record<string, string[]> = {
   ],
 
   // ── WOODEN SAFETY DOORS (inside DOOR AND FRAMES folder) ──
-  "wooden-safety-doors-safety-doors": Array.from({ length: 6 }, (_, i) =>
-    `/images/DOOR AND FRAMES/safety door ${String(i + 1).padStart(2, '0')}.webP`
-  ),
+  "wooden-safety-doors-safety-doors": [
+    "/images/DOOR AND FRAMES/safety door 01.webP",
+    "/images/DOOR AND FRAMES/safety door 02.webP",
+    "/images/DOOR AND FRAMES/safety door 03.webP",
+    "/images/DOOR AND FRAMES/safety door 04.webP",
+    "/images/DOOR AND FRAMES/safety door 05.webP",
+    "/images/DOOR AND FRAMES/safety door 06.webP"
+  ],
 
   // ── DRESSING TABLE ──
-  "dressing-table-dt": Array.from({ length: 5 }, (_, i) =>
-    `/images/DRESSING TABLE/dressing table ${String(i + 1).padStart(2, '0')}.webP`
-  ),
+  "dressing-table-dt": [
+    "/images/DRESSING TABLE/dressing table 01.webP",
+    "/images/DRESSING TABLE/dressing table 02.webP",
+    "/images/DRESSING TABLE/dressing table 03.webP",
+    "/images/DRESSING TABLE/dressing table 04.webP",
+    "/images/DRESSING TABLE/dressing table 05.webP"
+  ],
 
   // ── SWING ──
-  "wooden-swings-swing": Array.from({ length: 8 }, (_, i) =>
-    `/images/SWING/swing ${String(i + 1).padStart(2, '0')}.webP`
-  ),
+  "wooden-swings-swing": [
+    "/images/SWING/swing 01.webP",
+    "/images/SWING/swing 02.webP",
+    "/images/SWING/swing 03.webP",
+    "/images/SWING/swing 04.webP",
+    "/images/SWING/swing 05.webP",
+    "/images/SWING/swing 06.webP",
+    "/images/SWING/swing 07.webP",
+    "/images/SWING/swing 08.webP"
+  ],
 
   // ── MANDIR ──
-  "wooden-mandirs-mandir": Array.from({ length: 35 }, (_, i) =>
-    `/images/MANDIR/mandir ${String(i + 1).padStart(2, '0')}.webP`
-  ),
-  "wooden-mandirs-rajasans": Array.from({ length: 14 }, (_, i) =>
-    `/images/MANDIR/Rajasan ${String(i + 1).padStart(2, '0')}.webP`
-  ),
-  "wooden-mandirs-pooja-mandir": Array.from({ length: 9 }, (_, i) =>
-    `/images/MANDIR/Pooja mandir ${String(i + 1).padStart(2, '0')}.webP`
-  ),
+  "wooden-mandirs-mandir": [
+    "/images/MANDIR/mandir 01.webP",
+    "/images/MANDIR/mandir 02.webP",
+    "/images/MANDIR/mandir 03.webP",
+    "/images/MANDIR/mandir 04.webP",
+    "/images/MANDIR/mandir 05.webP",
+    "/images/MANDIR/mandir 06.webP",
+    "/images/MANDIR/mandir 07.webP",
+    "/images/MANDIR/mandir 08.webP",
+    "/images/MANDIR/mandir 09.webP",
+    "/images/MANDIR/mandir 10.webP",
+    "/images/MANDIR/mandir 11.webP",
+    "/images/MANDIR/mandir 12.webP",
+    "/images/MANDIR/mandir 13.webP",
+    "/images/MANDIR/mandir 14.webP",
+    "/images/MANDIR/mandir 15.webP",
+    "/images/MANDIR/mandir 16.webP",
+    "/images/MANDIR/mandir 17.webP",
+    "/images/MANDIR/mandir 18.webP",
+    "/images/MANDIR/mandir 19.webP",
+    "/images/MANDIR/mandir 20.webP",
+    "/images/MANDIR/mandir 21.webP",
+    "/images/MANDIR/mandir 22.webP",
+    "/images/MANDIR/mandir 23.webP",
+    "/images/MANDIR/mandir 24.webP",
+    "/images/MANDIR/mandir 25.webP",
+    "/images/MANDIR/mandir 26.webP",
+    "/images/MANDIR/mandir 27.webP",
+    "/images/MANDIR/mandir 28.webP",
+    "/images/MANDIR/mandir 29.webP",
+    "/images/MANDIR/mandir 30.webP",
+    "/images/MANDIR/mandir 31.webP",
+    "/images/MANDIR/mandir 32.webP",
+    "/images/MANDIR/mandir 33.webP",
+    "/images/MANDIR/mandir 34.webP",
+    "/images/MANDIR/mandir 35.webP"
+  ],
+  "wooden-mandirs-rajasans": [
+    "/images/MANDIR/Rajasan 01.webP",
+    "/images/MANDIR/Rajasan 02.webP",
+    "/images/MANDIR/Rajasan 03.webP",
+    "/images/MANDIR/Rajasan 04.webP",
+    "/images/MANDIR/Rajasan 05.webP",
+    "/images/MANDIR/Rajasan 06.webP",
+    "/images/MANDIR/Rajasan 07.webP",
+    "/images/MANDIR/Rajasan 08.webP",
+    "/images/MANDIR/Rajasan 09.webP",
+    "/images/MANDIR/Rajasan 10.webP",
+    "/images/MANDIR/Rajasan 11.webP",
+    "/images/MANDIR/Rajasan 12.webP",
+    "/images/MANDIR/Rajasan 13.webP",
+    "/images/MANDIR/Rajasan 14.webP"
+  ],
+  "wooden-mandirs-pooja-mandir": [
+    "/images/MANDIR/Pooja mandir 01.webP",
+    "/images/MANDIR/Pooja mandir 02.webP",
+    "/images/MANDIR/Pooja mandir 03.webP",
+    "/images/MANDIR/Pooja mandir 04.webP",
+    "/images/MANDIR/Pooja mandir 05.webP",
+    "/images/MANDIR/Pooja mandir 06.webP",
+    "/images/MANDIR/Pooja mandir 07.webP",
+    "/images/MANDIR/Pooja mandir 08.webP",
+    "/images/MANDIR/Pooja mandir 09.webP"
+  ],
 
   // ── TEAPOY ──
-  "teapoys-coffee-tables-teapoy": Array.from({ length: 17 }, (_, i) =>
-    `/images/TEAPOY/teapoy ${String(i + 1).padStart(2, '0')}.webP`
-  ),
+  "teapoys-coffee-tables-teapoy": [
+    "/images/TEAPOY/teapoy 01.webP",
+    "/images/TEAPOY/teapoy 02.webP",
+    "/images/TEAPOY/teapoy 03.webP",
+    "/images/TEAPOY/teapoy 04.webP",
+    "/images/TEAPOY/teapoy 05.webP",
+    "/images/TEAPOY/teapoy 06.webP",
+    "/images/TEAPOY/teapoy 07.webP",
+    "/images/TEAPOY/teapoy 08.webP",
+    "/images/TEAPOY/teapoy 09.webP",
+    "/images/TEAPOY/teapoy 10.webP",
+    "/images/TEAPOY/teapoy 11.webP",
+    "/images/TEAPOY/teapoy 12.webP",
+    "/images/TEAPOY/teapoy 13.webP",
+    "/images/TEAPOY/teapoy 14.webP",
+    "/images/TEAPOY/teapoy 15.webP",
+    "/images/TEAPOY/teapoy 16.webP",
+    "/images/TEAPOY/teapoy 17.webP"
+  ],
 
   // ── SOFA ──
-  "wooden-sofas-sofa": Array.from({ length: 15 }, (_, i) =>
-    `/images/SOFA/sofa ${String(i + 1).padStart(2, '0')}.webP`
-  ),
-  "sofa-cum-beds-sofa-cum-beds": Array.from({ length: 9 }, (_, i) =>
-    `/images/SOFA/sofa cum bed ${String(i + 1).padStart(2, '0')}.webP`
-  ),
+  "wooden-sofas-sofa": [
+    "/images/SOFA/sofa 01.webP",
+    "/images/SOFA/sofa 02.webP",
+    "/images/SOFA/sofa 03.webP",
+    "/images/SOFA/sofa 04.webP",
+    "/images/SOFA/sofa 05.webP",
+    "/images/SOFA/sofa 06.webP",
+    "/images/SOFA/sofa 07.webP",
+    "/images/SOFA/sofa 08.webP",
+    "/images/SOFA/sofa 09.webP",
+    "/images/SOFA/sofa 10.webP",
+    "/images/SOFA/sofa 11.webP",
+    "/images/SOFA/sofa 12.webP",
+    "/images/SOFA/sofa 13.webP",
+    "/images/SOFA/sofa 14.webP",
+    "/images/SOFA/sofa 15.webP"
+  ],
+  "sofa-cum-beds-sofa-cum-beds": [
+    "/images/SOFA/sofa cum bed 01.webP",
+    "/images/SOFA/sofa cum bed 02.webP",
+    "/images/SOFA/sofa cum bed 03.webP",
+    "/images/SOFA/sofa cum bed 04.webP",
+    "/images/SOFA/sofa cum bed 05.webP",
+    "/images/SOFA/sofa cum bed 06.webP",
+    "/images/SOFA/sofa cum bed 07.webP",
+    "/images/SOFA/sofa cum bed 08.webP",
+    "/images/SOFA/sofa cum bed 09.webP"
+  ],
 
   // ── DINING ──
-  "dining-tables-dining": Array.from({ length: 9 }, (_, i) =>
-    `/images/DINING/dining ${String(i + 1).padStart(2, '0')}.webP`
-  ),
+  "dining-tables-dining": [
+    "/images/DINING/dining 01.webP",
+    "/images/DINING/dining 02.webP",
+    "/images/DINING/dining 03.webP",
+    "/images/DINING/dining 04.webP",
+    "/images/DINING/dining 05.webP",
+    "/images/DINING/dining 06.webP",
+    "/images/DINING/dining 07.webP",
+    "/images/DINING/dining 08.webP",
+    "/images/DINING/dining 09.webP"
+  ],
 
   // ── WARDROBE ──
-  "wardrobes-wardrobe": Array.from({ length: 12 }, (_, i) =>
-    `/images/WARDROBE/wardrobe ${String(i + 1).padStart(2, '0')}.webP`
-  ),
+  "wardrobes-wardrobe": [
+    "/images/WARDROBE/wardrobe 01.webP",
+    "/images/WARDROBE/wardrobe 02.webP",
+    "/images/WARDROBE/wardrobe 03.webP",
+    "/images/WARDROBE/wardrobe 04.webP",
+    "/images/WARDROBE/wardrobe 05.webP",
+    "/images/WARDROBE/wardrobe 06.webP",
+    "/images/WARDROBE/wardrobe 07.webP",
+    "/images/WARDROBE/wardrobe 08.webP",
+    "/images/WARDROBE/wardrobe 09.webP",
+    "/images/WARDROBE/wardrobe 10.webP",
+    "/images/WARDROBE/wardrobe 11.webP",
+    "/images/WARDROBE/wardrobe 12.webP"
+  ],
 
   // ── TV UNIT ──
-  "tv-units-tv-unit": Array.from({ length: 7 }, (_, i) =>
-    `/images/TV UNIT/tv unit ${String(i + 1).padStart(2, '0')}.webP`
-  ),
+  "tv-units-tv-unit": [
+    "/images/TV UNIT/tv unit 01.webP",
+    "/images/TV UNIT/tv unit 02.webP",
+    "/images/TV UNIT/tv unit 03.webP",
+    "/images/TV UNIT/tv unit 04.webP",
+    "/images/TV UNIT/tv unit 05.webP",
+    "/images/TV UNIT/tv unit 06.webP",
+    "/images/TV UNIT/tv unit 07.webP"
+  ],
 
   // ── CHAURANG AND PATH ──
-  "chaurang-and-paats-chaurang": Array.from({ length: 5 }, (_, i) =>
-    `/images/CHAURANG AND PATH/chaurang ${String(i + 1).padStart(2, '0')}.webP`
-  ),
+  "chaurang-and-paats-chaurang": [
+    "/images/CHAURANG AND PATH/chaurang 01.webP",
+    "/images/CHAURANG AND PATH/chaurang 02.webP",
+    "/images/CHAURANG AND PATH/chaurang 03.webP",
+    "/images/CHAURANG AND PATH/chaurang 04.webP",
+    "/images/CHAURANG AND PATH/chaurang 05.webP"
+  ],
 
   // ── DIWAN ──
   "diwans-open-diwan":    ["/images/DIWAN/open diwan.webP"],
@@ -374,11 +571,204 @@ const LOCAL_IMAGES: Record<string, string[]> = {
   "diwans-bhaiyya-khat":  ["/images/DIWAN/bhaiyya khat.webP"],
 };
 
+const getCategoryDefaults = (categorySlug: string) => {
+  const FINISHES = [
+    { name: 'Amber Walnut', color: '#c9a87c' },
+    { name: 'Danish Walnut', color: '#5a3e28' },
+    { name: 'Teak Brown', color: '#7a5230' }
+  ];
+
+  if (categorySlug === 'beds') {
+    return {
+      seriesName: "seasoned hardwood series",
+      brandName: "Bhise'z Furniture Showroom",
+      sizingLabel: "Dimensions / Bed Sizing",
+      sizesList: ["King Size", "Queen Size"],
+      finishesLabel: "Hardwood Finish / Seal",
+      finishesList: FINISHES,
+      optionsLabel: "Underbed storage options",
+      optionsList: ["Hydraulic Storage", "Non Storage"],
+      priceRules: {
+        sizeAdjustments: { "King Size": 0, "Queen Size": -5000 },
+        origSizeAdjustments: { "King Size": 0, "Queen Size": -8000 },
+        optionAdjustments: { "Hydraulic Storage": 0, "Non Storage": -10000 },
+        origOptionAdjustments: { "Hydraulic Storage": 0, "Non Storage": -14000 }
+      },
+      deliverySubtext: "Includes free local white-glove installation & GST invoice."
+    };
+  }
+
+  if (categorySlug === 'wooden-sofas' || categorySlug === 'sofa-cum-beds') {
+    return {
+      seriesName: "modular lounge series",
+      brandName: "Bhise'z Furniture Showroom",
+      sizingLabel: "Seating Capacity / Lounge Sizing",
+      sizesList: ["3 Seater", "2 Seater", "1 Seater"],
+      finishesLabel: "Wood Finish & Polish",
+      finishesList: [
+        { name: 'Honey Teak', color: '#b98c5c' },
+        { name: 'Dark Mahogany', color: '#4a2e1b' },
+        { name: 'Teak Brown', color: '#7a5230' }
+      ],
+      optionsLabel: "Cushion Density Mode",
+      optionsList: ["Ultra-density Foam", "Standard Tufted Classic"],
+      priceRules: {
+        sizeAdjustments: { "3 Seater": 0, "2 Seater": -4000, "1 Seater": -8000 },
+        origSizeAdjustments: { "3 Seater": 0, "2 Seater": -6000, "1 Seater": -11000 },
+        optionAdjustments: { "Ultra-density Foam": 0, "Standard Tufted Classic": -2000 },
+        origOptionAdjustments: { "Ultra-density Foam": 0, "Standard Tufted Classic": -3000 }
+      },
+      deliverySubtext: "Includes free white-glove living room installation and cushion quality warranty."
+    };
+  }
+
+  if (categorySlug === 'wooden-chairs') {
+    return {
+      seriesName: "ergonomic seating series",
+      brandName: "Bhise'z Furniture Showroom",
+      sizingLabel: "Seating Elevation / Height",
+      sizesList: ["Standard Dining Height", "Counter Height (+₹1,500)"],
+      finishesLabel: "Sealer Coating & Stain",
+      finishesList: FINISHES,
+      optionsLabel: "Bottom Cushion Type",
+      optionsList: ["Comfort Fabric Padding", "Wooden Flat Seat"],
+      priceRules: {
+        sizeAdjustments: { "Standard Dining Height": 0, "Counter Height (+₹1,500)": 1500 },
+        origSizeAdjustments: { "Standard Dining Height": 0, "Counter Height (+₹1,500)": 2200 },
+        optionAdjustments: { "Comfort Fabric Padding": 0, "Wooden Flat Seat": -500 },
+        origOptionAdjustments: { "Comfort Fabric Padding": 0, "Wooden Flat Seat": -800 }
+      },
+      deliverySubtext: "Fully assembled and wood-waxed before handoff."
+    };
+  }
+
+  if (categorySlug === 'wooden-mandirs') {
+    return {
+      seriesName: "divine sanctuary collection",
+      brandName: "Bhise'z Furniture Showroom",
+      sizingLabel: "Temple Width & Height Sizing",
+      sizesList: ["Standard Width (24\")", "Wide Width (36\") (+₹6,000)"],
+      finishesLabel: "Glow polish luster",
+      finishesList: [
+        { name: 'Glossy Teak Glow', color: '#c9a87c' },
+        { name: 'Rosewood Polish', color: '#5a3e28' }
+      ],
+      optionsLabel: "Utility Drawer Accessory",
+      optionsList: ["Pooja Drawers Included", "Standard Platform Only (-₹2,000)"],
+      priceRules: {
+        sizeAdjustments: { "Standard Width (24\")": 0, "Wide Width (36\") (+₹6,000)": 6000 },
+        origSizeAdjustments: { "Standard Width (24\")": 0, "Wide Width (36\") (+₹6,000)": 8500 },
+        optionAdjustments: { "Pooja Drawers Included": 0, "Standard Platform Only (-₹2,000)": -2000 },
+        origOptionAdjustments: { "Pooja Drawers Included": 0, "Standard Platform Only (-₹2,000)": -3000 }
+      },
+      deliverySubtext: "Shipped in safe wooden-crate packing with free local installation."
+    };
+  }
+
+  if (categorySlug === 'door-frames' || categorySlug === 'wooden-safety-doors') {
+    return {
+      seriesName: "seasoned structural wood series",
+      brandName: "Bhise'z Furniture Showroom",
+      sizingLabel: "Thickness & Sizing",
+      sizesList: ["Standard Size (7' x 3')", "Large Size (8' x 4') (+₹5,000)"],
+      finishesLabel: "Hardwood Weatherproof Shield",
+      finishesList: FINISHES,
+      optionsLabel: "Hinge & Lock Prep Slots",
+      optionsList: ["Standard Pre-bored Hinges", "No Boring (Raw Frame)"],
+      priceRules: {
+        sizeAdjustments: { "Standard Size (7' x 3')": 0, "Large Size (8' x 4') (+₹5,000)": 5000 },
+        origSizeAdjustments: { "Standard Size (7' x 3')": 0, "Large Size (8' x 4') (+₹5,000)": 7000 },
+        optionAdjustments: { "Standard Pre-bored Hinges": 0, "No Boring (Raw Frame)": -800 },
+        origOptionAdjustments: { "Standard Pre-bored Hinges": 0, "No Boring (Raw Frame)": -1200 }
+      },
+      deliverySubtext: "Made strictly with seasoned wood for absolute anti-warp durability."
+    };
+  }
+
+  if (categorySlug === 'teapoys-coffee-tables' || categorySlug === 'dining-tables') {
+    return {
+      seriesName: "classic tabletop collection",
+      brandName: "Bhise'z Furniture Showroom",
+      sizingLabel: "Tabletop Dimensions",
+      sizesList: ["Standard Oval/Rectangle", "Premium Large Extension (+₹4,500)"],
+      finishesLabel: "Spill-resistant PU Seal",
+      finishesList: FINISHES,
+      optionsLabel: "Glass Cover Protection",
+      optionsList: ["8mm Tempered Glass Top", "Polished Solid Wood Only"],
+      priceRules: {
+        sizeAdjustments: { "Standard Oval/Rectangle": 0, "Premium Large Extension (+₹4,500)": 4500 },
+        origSizeAdjustments: { "Standard Oval/Rectangle": 0, "Premium Large Extension (+₹4,500)": 6000 },
+        optionAdjustments: { "8mm Tempered Glass Top": 0, "Polished Solid Wood Only": -2000 },
+        origOptionAdjustments: { "8mm Tempered Glass Top": 0, "Polished Solid Wood Only": -3000 }
+      },
+      deliverySubtext: "Delivered completely bubble-wrapped with free local assembly."
+    };
+  }
+
+  if (categorySlug === 'wardrobes' || categorySlug === 'dressing-table' || categorySlug === 'tv-units') {
+    return {
+      seriesName: "premium utility cabinetry",
+      brandName: "Bhise'z Furniture Showroom",
+      sizingLabel: "Layout & Sizing Options",
+      sizesList: ["Standard Cabinet", "Royal Combo (+₹5,500)"],
+      finishesLabel: "Premium Lamination Polish",
+      finishesList: FINISHES,
+      optionsLabel: "Internal Locker Type",
+      optionsList: ["Dual Godrej Mechanical Lock", "Standard Magnetic Latches Only"],
+      priceRules: {
+        sizeAdjustments: { "Standard Cabinet": 0, "Royal Combo (+₹5,500)": 5500 },
+        origSizeAdjustments: { "Standard Cabinet": 0, "Royal Combo (+₹5,500)": 7500 },
+        optionAdjustments: { "Dual Godrej Mechanical Lock": 0, "Standard Magnetic Latches Only": -1500 },
+        origOptionAdjustments: { "Dual Godrej Mechanical Lock": 0, "Standard Magnetic Latches Only": -2200 }
+      },
+      deliverySubtext: "Premium hardware sliders and free alignment service included."
+    };
+  }
+
+  if (categorySlug === 'wooden-swings') {
+    return {
+      seriesName: "royal timber swings",
+      brandName: "Bhise'z Furniture Showroom",
+      sizingLabel: "Swing Plank Length",
+      sizesList: ["4.5 Feet (Double-Seater)", "5.5 Feet (Triple-Seater) (+₹5,000)"],
+      finishesLabel: "Glossy Waterproof Polish",
+      finishesList: FINISHES,
+      optionsLabel: "Supporting Hooks & Chains",
+      optionsList: ["Brass Chains Set", "Rope/Standard S-hooks (-₹3,000)"],
+      priceRules: {
+        sizeAdjustments: { "4.5 Feet (Double-Seater)": 0, "5.5 Feet (Triple-Seater) (+₹5,000)": 5000 },
+        origSizeAdjustments: { "4.5 Feet (Double-Seater)": 0, "5.5 Feet (Triple-Seater) (+₹5,000)": 7000 },
+        optionAdjustments: { "Brass Chains Set": 0, "Rope/Standard S-hooks (-₹3,000)": -3000 },
+        origOptionAdjustments: { "Brass Chains Set": 0, "Rope/Standard S-hooks (-₹3,000)": -4500 }
+      },
+      deliverySubtext: "Installation support for roof anchors can be coordinated locally on delivery."
+    };
+  }
+
+  // General Fallback (e.g. Chaurang, Diwan, etc.)
+  return {
+    seriesName: "seasoned timber workshop series",
+    brandName: "Bhise'z Furniture Showroom",
+    sizingLabel: "Standard Sizing",
+    sizesList: ["Full Size"],
+    finishesLabel: "Premium Sealer Wax",
+    finishesList: FINISHES,
+    optionsLabel: "Optional Extra Layer",
+    optionsList: ["Waterproof Lacquer Shield", "Traditional Wood Finish Only"],
+    priceRules: {
+      sizeAdjustments: { "Full Size": 0 },
+      optionAdjustments: { "Waterproof Lacquer Shield": 0, "Traditional Wood Finish Only": -1200 }
+    },
+    deliverySubtext: "Proudly handcrafted in Ramesh Bhise's Sindhudurg workshop."
+  };
+};
+
 const generateProducts = (): Product[] => {
   const list: Product[] = [];
 
   CATEGORY_MAP.forEach((cat) => {
     cat.subCategories.forEach((sub) => {
+      const defaults = getCategoryDefaults(cat.slug);
       for (let i = 1; i <= sub.count; i++) {
         const id = `${cat.slug}-${sub.slug}-${i}`;
         const numStr = i < 10 ? `0${i}` : `${i}`;
@@ -401,25 +791,60 @@ const generateProducts = (): Product[] => {
 
         const calculatedPrice = sub.basePrice + (i - 1) * 350;
         const discountMult = 1.35 + (i % 3) * 0.05;
-        const origPrice = Math.round((calculatedPrice * discountMult) / 500) * 500;
 
         let badge: 'bs' | 'new' | 'cus' | null = null;
         if (i === 1) badge = 'bs';
         else if (i === 2) badge = 'new';
         else if (i % 12 === 0) badge = 'cus';
 
+        const descOverride = PRODUCT_DESCRIPTIONS[id];
+        const shortDesc = descOverride?.shortDesc || `Handcrafted with seasoned native timber wood. Built using durable standard premium joinery for generation-lasting strength.`;
+        const description = descOverride?.description || `Designed and perfected in Bhisez Sindhudurg workshop of Ramesh Bhise, this ${sub.name} is a fine specimen of Indian carpentry. Features premium selected grains, borer resistant seasoning, and flawless double coat PU satin finish. Excellent ergonomics matching compact as well as royal traditional architecture.`;
+
+        // Retrieve specs mapped from CSV file
+        const csvSpecs = getCsvSpecs(cat.slug, sub.slug, i);
+        let woodTypePrices = csvSpecs.woodTypePrices;
+        const availableSize = csvSpecs.availableSize;
+
+        // If no explicit wood type prices are in the CSV, generate fallbacks dynamically
+        if (!woodTypePrices) {
+          woodTypePrices = {
+            Aakashi: Math.round((calculatedPrice * 0.8) / 100) * 100,
+            Shivan: Math.round(calculatedPrice / 100) * 100,
+            Sagwan: Math.round((calculatedPrice * 1.25) / 100) * 100
+          };
+        }
+
+        // Set the default base price in catalog list to Sagwan wood type's price (or first available if Sagwan is not in the set)
+        let baseProductPrice = calculatedPrice;
+        if (woodTypePrices) {
+          if (woodTypePrices.Sagwan) {
+            baseProductPrice = woodTypePrices.Sagwan;
+          } else {
+            const keys = Object.keys(woodTypePrices) as ('Aakashi' | 'Shivan' | 'Sagwan')[];
+            if (keys.length > 0) {
+              baseProductPrice = woodTypePrices[keys[0]] || calculatedPrice;
+            }
+          }
+        }
+
+        const origPrice = Math.round((baseProductPrice * discountMult) / 500) * 500;
+
         list.push({
           id,
           name,
           category: cat.slug,
           subCategory: sub.slug,
-          price: calculatedPrice,
+          price: baseProductPrice,
           orig: origPrice,
           img,
           badge,
           colors: ['#4A2511', '#2C1608', '#CBB89D'],
-          shortDesc: `Handcrafted with seasoned native timber wood. Built using durable standard premium joinery for generation-lasting strength.`,
-          description: `Designed and perfected in Bhisez Sindhudurg workshop of Ramesh Bhise, this ${sub.name} is a fine specimen of Indian carpentry. Features premium selected grains, borer resistant seasoning, and flawless double coat PU satin finish. Excellent ergonomics matching compact as well as royal traditional architecture.`
+          shortDesc,
+          description,
+          woodTypePrices,
+          availableSize,
+          ...defaults
         });
       }
     });
@@ -428,7 +853,29 @@ const generateProducts = (): Product[] => {
   return list;
 };
 
-export const ALL_PRODUCTS: Product[] = generateProducts();
+export const ALL_PRODUCTS: Product[] = (() => {
+  const generated = generateProducts();
+  const mergedMap = new Map<string | number, Product>();
+
+  // Add all generated products first
+  generated.forEach((p) => mergedMap.set(p.id, p));
+
+  // Overwrite or append with custom defined products
+  CUSTOM_PRODUCTS.forEach((p) => mergedMap.set(p.id, p));
+
+  // Apply individual overrides from PRODUCT_OVERRIDES dictionary
+  mergedMap.forEach((product, id) => {
+    const override = PRODUCT_OVERRIDES[id as string];
+    if (override) {
+      mergedMap.set(id, {
+        ...product,
+        ...override
+      });
+    }
+  });
+
+  return Array.from(mergedMap.values());
+})();
 
 export const TESTIMONIALS = [
   {

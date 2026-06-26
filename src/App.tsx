@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { ViewState, CartItem, Product, ShowroomWalkthrough } from './types';
-import { ALL_PRODUCTS } from './data';
+import { ALL_PRODUCTS, CATEGORY_MAP } from './data';
 import { motion, AnimatePresence } from 'motion/react';
 
 // Import sub components
@@ -17,14 +17,106 @@ import AboutView from './components/AboutView';
 import ContactView from './components/ContactView';
 import WishlistView from './components/WishlistView';
 import LoginView from './components/LoginView';
+import AdminView from './components/AdminView';
+
 
 // Named icons
 import { MessageCircle, Heart, X, Check } from 'lucide-react';
 
+const DEFAULT_INQUIRIES = [
+  {
+    id: 'inq-1',
+    name: 'Siddharth Rane',
+    phone: '+91 98201 12234',
+    city: 'Malvan',
+    subject: 'Custom Furniture Inquiry',
+    message: 'Need 3 massive teak door frames seasoned with custom walnut polish. Please provide sizing options and shipping durations.',
+    notes: 'Teak wood, custom walnut polish',
+    status: 'Pending',
+    date: '2026-06-10'
+  },
+  {
+    id: 'inq-2',
+    name: 'Priyanka Desai',
+    phone: '+91 91672 55431',
+    city: 'Kudal',
+    subject: 'Showroom visit guide',
+    message: 'Planning to visit Sukalwad NH-66 showroom to lock premium double beds with hydraulic storage. Will Ramesh be there on Saturday?',
+    notes: 'Premium double bed, hydraulic storage',
+    status: 'Reviewed',
+    date: '2026-06-09'
+  },
+  {
+    id: 'inq-3',
+    name: 'Ramesh Patil',
+    phone: '+91 93245 67781',
+    city: 'Sawantwadi',
+    subject: 'Bulk/Commercial quote',
+    message: 'Require 10 standard counter height wooden chairs and 4 mango-wood dining tables for our family homestay project. Need Grade-A seasoned logs.',
+    notes: 'Homestay project, mango wood',
+    status: 'Resolved',
+    date: '2026-06-08'
+  }
+];
+
+const DEFAULT_WEBSITE_CONTENT = {
+  heroTitle: 'Genuine Malvani Hardwoods. Masterfully Carved.',
+  heroSubtitle: 'By Ramesh Bhise Carpenter Workshop. Direct heirloom luxury for doors, double-beds, and customized Mandirs since 1995.',
+  aboutQuote: "Every ring in a log represents a monsoon we stood together. We don't just shape wood; we preserve Malvan's heritage in your living quarters.",
+  whatsappLine: '+91 9314444747',
+  malvanAddress: 'Main Market Road, Malvan, Sindhudurg, Maharashtra – 416606',
+  sukalwadAddress: 'NH-66 Highway, Sukalwad, Sindhudurg, Maharashtra – 416520',
+  adminPasscode: '1234',
+  currencySymbol: '₹',
+  gstPercent: 18
+};
+
 export default function App() {
   // Navigation states
   const [currentView, setCurrentView] = useState<ViewState>('home');
-  const [selectedProduct, setSelectedProduct] = useState<Product>(ALL_PRODUCTS[0]);
+
+  // Dynamic application state systems
+  const [products, setProducts] = useState<Product[]>(() => {
+    try {
+      const saved = localStorage.getItem('bhisez_products');
+      if (saved) return JSON.parse(saved);
+    } catch (e) {
+      console.error(e);
+    }
+    return ALL_PRODUCTS;
+  });
+
+  const [categories, setCategories] = useState<any[]>(() => {
+    try {
+      const saved = localStorage.getItem('bhisez_categories');
+      if (saved) return JSON.parse(saved);
+    } catch (e) {
+      console.error(e);
+    }
+    return CATEGORY_MAP;
+  });
+
+  const [inquiries, setInquiries] = useState<any[]>(() => {
+    try {
+      const saved = localStorage.getItem('bhisez_inquiries');
+      if (saved) return JSON.parse(saved);
+    } catch (e) {
+      console.error(e);
+    }
+    return DEFAULT_INQUIRIES;
+  });
+
+  const [websiteContent, setWebsiteContent] = useState<any>(() => {
+    try {
+      const saved = localStorage.getItem('bhisez_webcontent');
+      if (saved) return JSON.parse(saved);
+    } catch (e) {
+      console.error(e);
+    }
+    return DEFAULT_WEBSITE_CONTENT;
+  });
+
+  const [selectedProduct, setSelectedProduct] = useState<Product>(products[0] || ALL_PRODUCTS[0]);
   const [initialCategoryFilter, setInitialCategoryFilter] = useState<string | null>('all');
   const [initialSubCategoryFilter, setInitialSubCategoryFilter] = useState<string | null>(null);
 
@@ -42,6 +134,23 @@ export default function App() {
   // Active Toast notify
   const [toastMessage, setToastMessage] = useState<string>('');
   const [toastVisible, setToastVisible] = useState<boolean>(false);
+
+  // Sync state changes with localStorage
+  useEffect(() => {
+    localStorage.setItem('bhisez_products', JSON.stringify(products));
+  }, [products]);
+
+  useEffect(() => {
+    localStorage.setItem('bhisez_categories', JSON.stringify(categories));
+  }, [categories]);
+
+  useEffect(() => {
+    localStorage.setItem('bhisez_inquiries', JSON.stringify(inquiries));
+  }, [inquiries]);
+
+  useEffect(() => {
+    localStorage.setItem('bhisez_webcontent', JSON.stringify(websiteContent));
+  }, [websiteContent]);
 
   // Load wishlist from local storage on launch
   useEffect(() => {
@@ -77,7 +186,7 @@ export default function App() {
 
   // View specific product detailed setup
   const handleSelectProduct = (productId: string | number) => {
-    const prod = ALL_PRODUCTS.find(p => p.id === productId);
+    const prod = products.find(p => p.id === productId);
     if (prod) {
       setSelectedProduct(prod);
       handleNavigate('product-detail');
@@ -220,6 +329,8 @@ export default function App() {
                 wishlistCount={wishlist.length}
                 isLoggedIn={isLoggedIn}
                 onLogout={handleLogout}
+                products={products}
+
               />
             )}
 
@@ -275,6 +386,7 @@ export default function App() {
                 onSelectProduct={handleSelectProduct}
                 onToggleWishlist={handleToggleWishlist}
                 wishlist={wishlist}
+                products={products}
               />
             )}
 
@@ -282,6 +394,20 @@ export default function App() {
               <LoginView 
                 onNavigate={handleNavigate}
                 onLoginSuccess={handleLoginSuccess}
+              />
+            )}
+
+            {currentView === 'admin' && (
+              <AdminView 
+                products={products}
+                onUpdateProducts={setProducts}
+                categories={categories}
+                onUpdateCategories={setCategories}
+                inquiries={inquiries}
+                onUpdateInquiries={setInquiries}
+                websiteContent={websiteContent}
+                onUpdateWebsiteContent={setWebsiteContent}
+                onNavigate={handleNavigate}
               />
             )}
           </motion.div>

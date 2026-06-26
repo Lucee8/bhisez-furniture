@@ -33,6 +33,8 @@ interface BedsViewProps {
   wishlistCount: number;
   isLoggedIn: boolean;
   onLogout: () => void;
+  products?: Product[];
+
 }
 
 const MATERIAL_MAP: Record<string, string> = {
@@ -76,12 +78,13 @@ export default function BedsView({
   cartCount,
   wishlistCount,
   isLoggedIn,
-  onLogout
+  onLogout,
+  products
 }: BedsViewProps) {
   // Navigation categories list generated dynamically
   const CATEGORIES = useMemo(() => {
     const list = [
-      { id: 'all', title: 'All Crafts', subtitle: `${ALL_PRODUCTS.length} Styles Available` }
+      { id: 'all', title: 'All Crafts', subtitle: `${(products || ALL_PRODUCTS).length} Styles Available` }
     ];
     CATEGORY_MAP.forEach(cat => {
       const count = cat.subCategories.reduce((sum, sub) => sum + sub.count, 0);
@@ -138,7 +141,7 @@ export default function BedsView({
 
   // Filter and compute items
   const filteredProducts = useMemo(() => {
-    let result = ALL_PRODUCTS.slice();
+    let result = (products || ALL_PRODUCTS).slice();
 
     // 1. Dynamic category check
     if (activeCategory && activeCategory !== 'all') {
@@ -174,12 +177,28 @@ export default function BedsView({
 
     // 4. Size check
     if (selectedSizes.size > 0) {
-      result = result.filter(p => p.size && selectedSizes.has(p.size));
+      result = result.filter(p => {
+        const sizes = p.sizesList || (p.category === 'beds' ? ["King Size", "Queen Size"] : []);
+        return Array.from(selectedSizes).some(sz => {
+          if (sz === 'king') return sizes.some((s: any) => typeof s === 'string' && s.toLowerCase().includes('king'));
+          if (sz === 'queen') return sizes.some((s: any) => typeof s === 'string' && s.toLowerCase().includes('queen'));
+          return sizes.some((s: any) => typeof s === 'string' && s.toLowerCase().includes((sz as string).toLowerCase()));
+        });
+      });
     }
 
     // 5. Storage check
     if (selectedStorages.size > 0) {
-      result = result.filter(p => p.storage && selectedStorages.has(p.storage));
+      result = result.filter(p => {
+        const storages = p.optionsList || (p.category === 'beds' ? ["Hydraulic Storage", "Non Storage"] : []);
+        return Array.from(selectedStorages).some(st => {
+          if (st === 'hydraulic') return storages.some((s: any) => typeof s === 'string' && s.toLowerCase().includes('hydraulic'));
+          if (st === 'box') return storages.some((s: any) => typeof s === 'string' && s.toLowerCase().includes('box'));
+          if (st === 'drawer') return storages.some((s: any) => typeof s === 'string' && s.toLowerCase().includes('drawer'));
+          if (st === 'no-storage') return storages.some((s: any) => typeof s === 'string' && (s.toLowerCase().includes('non') || s.toLowerCase().includes('no storage')));
+          return storages.some((s: any) => typeof s === 'string' && s.toLowerCase().includes((st as string).toLowerCase()));
+        });
+      });
     }
 
     // 6. Price Preset Check
@@ -897,7 +916,7 @@ export default function BedsView({
                 </div>
 
                 {/* 2. Sizing if applicable */}
-                {activeCategory === 'bed' && (
+                {activeCategory === 'beds' && (
                   <div className="space-y-2.5">
                     <span className="text-xs font-bold text-stone-400 uppercase tracking-wider block">Bed sizes</span>
                     <div className="space-y-2">
@@ -920,7 +939,7 @@ export default function BedsView({
                 )}
 
                 {/* 3. Storage layout if applicable */}
-                {activeCategory === 'bed' && (
+                {activeCategory === 'beds' && (
                   <div className="space-y-2.5">
                     <span className="text-xs font-bold text-stone-400 uppercase tracking-wider block">Storage designs</span>
                     <div className="space-y-2">
