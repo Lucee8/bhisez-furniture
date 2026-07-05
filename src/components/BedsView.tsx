@@ -34,7 +34,6 @@ interface BedsViewProps {
   isLoggedIn: boolean;
   onLogout: () => void;
   products?: Product[];
-
 }
 
 const MATERIAL_MAP: Record<string, string> = {

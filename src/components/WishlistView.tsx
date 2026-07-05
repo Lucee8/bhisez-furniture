@@ -14,7 +14,6 @@ interface WishlistViewProps {
   onToggleWishlist: (id: string | number) => void;
   wishlist: (string | number)[];
   products?: Product[];
-
 }
 
 export default function WishlistView({

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { motion } from 'motion/react';
 import { 
   Phone, 
   MessageCircle, 
@@ -9,13 +10,32 @@ import {
   BookmarkCheck
 } from 'lucide-react';
 
-export default function ContactView() {
+interface ContactViewProps {
+  onAddInquiry?: (inquiry: {
+    name: string;
+    phone: string;
+    city: string;
+    subject: string;
+    message: string;
+    customLength?: string;
+    customWidth?: string;
+    woodGrade?: string;
+  }) => void;
+}
+
+export default function ContactView({ onAddInquiry }: ContactViewProps) {
   const [name, setName] = useState<string>('');
   const [phone, setPhone] = useState<string>('');
   const [city, setCity] = useState<string>('');
   const [message, setMessage] = useState<string>('');
   const [subject, setSubject] = useState<string>('Custom Furniture Inquiry');
   const [sent, setSent] = useState<boolean>(false);
+
+  // Custom Sizing & Wood Grade states
+  const [useCustomGrid, setUseCustomGrid] = useState<boolean>(false);
+  const [customLength, setCustomLength] = useState<string>('');
+  const [customWidth, setCustomWidth] = useState<string>('');
+  const [woodGrade, setWoodGrade] = useState<string>('Grade-A Sagwan');
 
   const handleInquirySubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -25,11 +45,28 @@ export default function ContactView() {
     }
     setSent(true);
 
+    const customDetailsText = useCustomGrid 
+      ? `\n[Custom Sizing Grid - Length: ${customLength || 'Custom'} inches | Width: ${customWidth || 'Custom'} inches | Wood Grade: ${woodGrade}]`
+      : '';
+
+    if (onAddInquiry) {
+      onAddInquiry({ 
+        name, 
+        phone, 
+        city, 
+        subject, 
+        message: message + customDetailsText,
+        customLength: useCustomGrid ? customLength : '',
+        customWidth: useCustomGrid ? customWidth : '',
+        woodGrade: useCustomGrid ? woodGrade : ''
+      });
+    }
+
     const payload = `Hi Bhise'z! I'd like to submit an inquiry over the website.
 Name: ${name}
 Phone: ${phone}
 City: ${city}
-Subject: ${subject}
+Subject: ${subject}${useCustomGrid ? `\n--- Custom Sizing Grid --- \nLength: ${customLength || 'Custom'} inches\nWidth: ${customWidth || 'Custom'} inches\nWood Grade: ${woodGrade}\n-------------------------` : ''}
 Message: ${message}`;
 
     setTimeout(() => {
@@ -149,6 +186,60 @@ Message: ${message}`;
                     className="border border-[#E0D8CF] rounded-xl px-4 py-2.5 text-xs text-stone-700 outline-none focus:ring-1 focus:ring-amber-500 bg-[#FAF7F2]"
                   />
                 </div>
+              </div>
+
+              {/* Custom Measurement Sizing Grid */}
+              <div className="bg-[#FAF7F2] border border-[#E0D8CF] p-4 rounded-2xl space-y-3">
+                <label className="flex items-center space-x-3 cursor-pointer">
+                  <input 
+                    type="checkbox" 
+                    checked={useCustomGrid}
+                    onChange={(e) => setUseCustomGrid(e.target.checked)}
+                    className="w-4 h-4 text-amber-600 focus:ring-amber-500 border-stone-300 rounded"
+                  />
+                  <div>
+                    <span className="text-xs font-bold text-stone-800 uppercase tracking-wide block">Need Custom Dimensions? (Length, Width & Wood Grade)</span>
+                    <span className="text-[10px] text-stone-400 block">Add customized carpentry constraints directly to the live request</span>
+                  </div>
+                </label>
+
+                {useCustomGrid && (
+                  <div className="pt-3 border-t border-[#E0D8CF]/60 grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    <div className="flex flex-col space-y-1">
+                      <label className="text-[9px] font-black text-stone-400 uppercase tracking-wider">Custom Length (Inches / Feet)</label>
+                      <input 
+                        type="text" 
+                        placeholder="E.g. 78 inches"
+                        value={customLength}
+                        onChange={(e) => setCustomLength(e.target.value)}
+                        className="bg-white border border-[#E0D8CF] rounded-xl px-3 py-2 text-xs text-stone-700 outline-none focus:ring-1 focus:ring-amber-500"
+                      />
+                    </div>
+                    <div className="flex flex-col space-y-1">
+                      <label className="text-[9px] font-black text-stone-400 uppercase tracking-wider">Custom Width (Inches / Feet)</label>
+                      <input 
+                        type="text" 
+                        placeholder="E.g. 72 inches"
+                        value={customWidth}
+                        onChange={(e) => setCustomWidth(e.target.value)}
+                        className="bg-white border border-[#E0D8CF] rounded-xl px-3 py-2 text-xs text-stone-700 outline-none focus:ring-1 focus:ring-amber-500"
+                      />
+                    </div>
+                    <div className="flex flex-col space-y-1">
+                      <label className="text-[9px] font-black text-stone-400 uppercase tracking-wider">Timber Wood Grade Selection</label>
+                      <select
+                        value={woodGrade}
+                        onChange={(e) => setWoodGrade(e.target.value)}
+                        className="bg-white border border-[#E0D8CF] rounded-xl px-3 py-2 text-xs text-stone-700 outline-none focus:ring-1 focus:ring-amber-500 font-bold"
+                      >
+                        <option value="Grade-A Sagwan">Grade-A Sagwan</option>
+                        <option value="Premium Shivan">Premium Shivan</option>
+                        <option value="Classic Nilgiri">Classic Nilgiri</option>
+                        <option value="Standard Seasoned Teak">Standard Seasoned Teak</option>
+                      </select>
+                    </div>
+                  </div>
+                )}
               </div>
 
               <div className="flex flex-col space-y-1.5">

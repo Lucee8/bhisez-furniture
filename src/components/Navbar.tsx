@@ -462,7 +462,7 @@ export default function Navbar({
                 >
                   ❤️ My Wishlist ({wishlistCount})
                 </button>
-               <button 
+                <button 
                   onClick={() => { onNavigate('admin'); setMobileMenuOpen(false); }} 
                   className="text-left text-sm font-bold text-amber-800 py-2 px-3 hover:bg-[#E8DDD1]/40 rounded-md"
                 >

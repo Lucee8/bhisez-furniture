@@ -1,7 +1,11 @@
 import { Product } from './types';
-import { CUSTOM_PRODUCTS, PRODUCT_OVERRIDES } from './components/custom_products';
+// import { CUSTOM_PRODUCTS, PRODUCT_OVERRIDES } from './custom_products';
 import { PRODUCT_DESCRIPTIONS } from './product_descriptions';
 import { getCsvSpecs } from './csv_pricing';
+
+// Fallback empty values if custom_products.ts doesn't exist
+const CUSTOM_PRODUCTS: Product[] = [];
+const PRODUCT_OVERRIDES: Record<string, Partial<Product>> = {};
 
 export interface SubCategory {
   name: string;
@@ -897,3 +901,52 @@ export const TESTIMONIALS = [
     text: 'Ramesh made us a custom layout sofa-bed matching our drawing room dimensions. They understood our fabric tastes and crafted a masterpiece!'
   }
 ];
+
+export const DEFAULT_INQUIRIES = [
+  {
+    id: 'inq-1',
+    name: 'Siddharth Rane',
+    phone: '+91 98201 12234',
+    city: 'Malvan',
+    subject: 'Custom Furniture Inquiry',
+    message: 'Need 3 massive teak door frames seasoned with custom walnut polish. Please provide sizing options and shipping durations.',
+    notes: 'Teak wood, custom walnut polish',
+    status: 'Pending',
+    date: '2026-06-10'
+  },
+  {
+    id: 'inq-2',
+    name: 'Priyanka Desai',
+    phone: '+91 91672 55431',
+    city: 'Kudal',
+    subject: 'Showroom visit guide',
+    message: 'Planning to visit Sukalwad NH-66 showroom to lock premium double beds with hydraulic storage. Will Ramesh be there on Saturday?',
+    notes: 'Premium double bed, hydraulic storage',
+    status: 'Reviewed',
+    date: '2026-06-09'
+  },
+  {
+    id: 'inq-3',
+    name: 'Ramesh Patil',
+    phone: '+91 93245 67781',
+    city: 'Sawantwadi',
+    subject: 'Bulk/Commercial quote',
+    message: 'Require 10 standard counter height wooden chairs and 4 mango-wood dining tables for our family homestay project. Need Grade-A seasoned logs.',
+    notes: 'Homestay project, mango wood',
+    status: 'Resolved',
+    date: '2026-06-08'
+  }
+];
+
+export const DEFAULT_WEBSITE_CONTENT = {
+  heroTitle: 'Genuine Malvani Hardwoods. Masterfully Carved.',
+  heroSubtitle: 'By Ramesh Bhise Carpenter Workshop. Direct heirloom luxury for doors, double-beds, and customized Mandirs since 1995.',
+  aboutQuote: "Every ring in a log represents a monsoon we stood together. We don't just shape wood; we preserve Malvan's heritage in your living quarters.",
+  whatsappLine: '+91 9314444747',
+  malvanAddress: 'Main Market Road, Malvan, Sindhudurg, Maharashtra – 416606',
+  sukalwadAddress: 'NH-66 Highway, Sukalwad, Sindhudurg, Maharashtra – 416520',
+  adminPasscode: '1234',
+  currencySymbol: '₹',
+  gstPercent: 18
+};
+

@@ -571,10 +571,20 @@ export default function ProductDetailView({
           <div className="text-xs sm:text-sm text-stone-600 leading-relaxed space-y-4">
             
             {activeTab === 'desc' && (
-              <>
-                <p>Designed and seasoned meticulously within our regional workshops in Malvan, Sindhudurg. This custom product has been the absolute masterpiece of Ramesh Bhise’s traditional structural cabinetry range.</p>
-                <p>Constructed completely using seasoned grade solid hardwood boards. Each frame segment undergo double-jointed lockouts preventing alignment failures under extreme humidity levels, accompanied by eco-friendly polyurethane hand lacquer finish.</p>
-              </>
+              <div className="space-y-4">
+                {product.description ? (
+                  product.description.trim().startsWith('<') || product.description.includes('</') ? (
+                    <div dangerouslySetInnerHTML={{ __html: product.description }} className="rich-description text-stone-600 text-xs sm:text-sm leading-relaxed" />
+                  ) : (
+                    <p className="whitespace-pre-line">{product.description}</p>
+                  )
+                ) : (
+                  <>
+                    <p>Designed and seasoned meticulously within our regional workshops in Malvan, Sindhudurg. This custom product has been the absolute masterpiece of Ramesh Bhise’s traditional structural cabinetry range.</p>
+                    <p>Constructed completely using seasoned grade solid hardwood boards. Each frame segment undergo double-jointed lockouts preventing alignment failures under extreme humidity levels, accompanied by eco-friendly polyurethane hand lacquer finish.</p>
+                  </>
+                )}
+              </div>
             )}
 
             {activeTab === 'spec' && (

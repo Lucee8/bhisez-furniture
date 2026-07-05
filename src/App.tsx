@@ -1,7 +1,15 @@
 import { useState, useEffect } from 'react';
 import { ViewState, CartItem, Product, ShowroomWalkthrough } from './types';
-import { ALL_PRODUCTS, CATEGORY_MAP } from './data';
+import { ALL_PRODUCTS, CATEGORY_MAP, DEFAULT_INQUIRIES, DEFAULT_WEBSITE_CONTENT } from './data';
 import { motion, AnimatePresence } from 'motion/react';
+
+// Import Firebase CRUD integrations
+import { 
+  getDbProducts, saveDbProduct, deleteDbProduct, 
+  getDbCategories, saveDbCategory, deleteDbCategory, 
+  getDbInquiries, saveDbInquiry, deleteDbInquiry, 
+  getDbWebsiteContent, saveDbWebsiteContent 
+} from './firebase';
 
 // Import sub components
 import Navbar from './components/Navbar';
@@ -19,57 +27,9 @@ import WishlistView from './components/WishlistView';
 import LoginView from './components/LoginView';
 import AdminView from './components/AdminView';
 
-
 // Named icons
 import { MessageCircle, Heart, X, Check } from 'lucide-react';
 
-const DEFAULT_INQUIRIES = [
-  {
-    id: 'inq-1',
-    name: 'Siddharth Rane',
-    phone: '+91 98201 12234',
-    city: 'Malvan',
-    subject: 'Custom Furniture Inquiry',
-    message: 'Need 3 massive teak door frames seasoned with custom walnut polish. Please provide sizing options and shipping durations.',
-    notes: 'Teak wood, custom walnut polish',
-    status: 'Pending',
-    date: '2026-06-10'
-  },
-  {
-    id: 'inq-2',
-    name: 'Priyanka Desai',
-    phone: '+91 91672 55431',
-    city: 'Kudal',
-    subject: 'Showroom visit guide',
-    message: 'Planning to visit Sukalwad NH-66 showroom to lock premium double beds with hydraulic storage. Will Ramesh be there on Saturday?',
-    notes: 'Premium double bed, hydraulic storage',
-    status: 'Reviewed',
-    date: '2026-06-09'
-  },
-  {
-    id: 'inq-3',
-    name: 'Ramesh Patil',
-    phone: '+91 93245 67781',
-    city: 'Sawantwadi',
-    subject: 'Bulk/Commercial quote',
-    message: 'Require 10 standard counter height wooden chairs and 4 mango-wood dining tables for our family homestay project. Need Grade-A seasoned logs.',
-    notes: 'Homestay project, mango wood',
-    status: 'Resolved',
-    date: '2026-06-08'
-  }
-];
-
-const DEFAULT_WEBSITE_CONTENT = {
-  heroTitle: 'Genuine Malvani Hardwoods. Masterfully Carved.',
-  heroSubtitle: 'By Ramesh Bhise Carpenter Workshop. Direct heirloom luxury for doors, double-beds, and customized Mandirs since 1995.',
-  aboutQuote: "Every ring in a log represents a monsoon we stood together. We don't just shape wood; we preserve Malvan's heritage in your living quarters.",
-  whatsappLine: '+91 9314444747',
-  malvanAddress: 'Main Market Road, Malvan, Sindhudurg, Maharashtra – 416606',
-  sukalwadAddress: 'NH-66 Highway, Sukalwad, Sindhudurg, Maharashtra – 416520',
-  adminPasscode: '1234',
-  currencySymbol: '₹',
-  gstPercent: 18
-};
 
 export default function App() {
   // Navigation states
@@ -119,6 +79,141 @@ export default function App() {
   const [selectedProduct, setSelectedProduct] = useState<Product>(products[0] || ALL_PRODUCTS[0]);
   const [initialCategoryFilter, setInitialCategoryFilter] = useState<string | null>('all');
   const [initialSubCategoryFilter, setInitialSubCategoryFilter] = useState<string | null>(null);
+
+  const [loadingDb, setLoadingDb] = useState<boolean>(true);
+
+  // Fetch all initial data from live Firebase Firestore
+  useEffect(() => {
+    async function initFirestore() {
+      try {
+        const dbProds = await getDbProducts();
+        setProducts(dbProds);
+        if (dbProds && dbProds.length > 0) {
+          setSelectedProduct(dbProds[0]);
+        }
+        
+        const dbCats = await getDbCategories();
+        setCategories(dbCats);
+        
+        const dbInqs = await getDbInquiries();
+        setInquiries(dbInqs);
+        
+        const dbContent = await getDbWebsiteContent();
+        setWebsiteContent(dbContent);
+      } catch (err) {
+        console.error("Failed to fetch initial Firestore records:", err);
+      } finally {
+        setLoadingDb(false);
+      }
+    }
+    initFirestore();
+  }, []);
+
+  const handleUpdateProducts = async (nextProds: Product[]) => {
+    setProducts(nextProds);
+    try {
+      const prevMap = new Map(products.map(p => [p.id, p]));
+      const nextMap = new Map(nextProds.map(p => [p.id, p]));
+      for (const p of products) {
+        if (!nextMap.has(p.id)) {
+          await deleteDbProduct(p.id);
+        }
+      }
+      for (const p of nextProds) {
+        const prev = prevMap.get(p.id);
+        if (!prev || JSON.stringify(prev) !== JSON.stringify(p)) {
+          await saveDbProduct(p);
+        }
+      }
+    } catch (e) {
+      console.error("Firestore sync error:", e);
+    }
+  };
+
+  const handleUpdateCategories = async (nextCats: any[]) => {
+    setCategories(nextCats);
+    try {
+      const prevMap = new Map(categories.map(c => [c.slug, c]));
+      const nextMap = new Map(nextCats.map(c => [c.slug, c]));
+      for (const c of categories) {
+        if (!nextMap.has(c.slug)) {
+          await deleteDbCategory(c.slug);
+        }
+      }
+      for (const c of nextCats) {
+        const prev = prevMap.get(c.slug);
+        if (!prev || JSON.stringify(prev) !== JSON.stringify(c)) {
+          await saveDbCategory(c);
+        }
+      }
+    } catch (e) {
+      console.error("Firestore sync error:", e);
+    }
+  };
+
+  const handleUpdateInquiries = async (nextInqs: any[]) => {
+    setInquiries(nextInqs);
+    try {
+      const prevMap = new Map(inquiries.map(i => [i.id, i]));
+      const nextMap = new Map(nextInqs.map(i => [i.id, i]));
+      for (const i of inquiries) {
+        if (!nextMap.has(i.id)) {
+          await deleteDbInquiry(i.id);
+        }
+      }
+      for (const i of nextInqs) {
+        const prev = prevMap.get(i.id);
+        if (!prev || JSON.stringify(prev) !== JSON.stringify(i)) {
+          await saveDbInquiry(i);
+        }
+      }
+    } catch (e) {
+      console.error("Firestore sync error:", e);
+    }
+  };
+
+  const handleUpdateWebsiteContent = async (nextContent: any) => {
+    setWebsiteContent(nextContent);
+    try {
+      await saveDbWebsiteContent(nextContent);
+    } catch (e) {
+      console.error("Firestore sync error:", e);
+    }
+  };
+
+  const handleAddInquiry = async (inqData: {
+    name: string;
+    phone: string;
+    city: string;
+    subject: string;
+    message: string;
+    customLength?: string;
+    customWidth?: string;
+    woodGrade?: string;
+  }) => {
+    const newInq = {
+      id: `inq-${Date.now()}`,
+      name: inqData.name,
+      phone: inqData.phone,
+      city: inqData.city,
+      subject: inqData.subject,
+      message: inqData.message,
+      customLength: inqData.customLength || '',
+      customWidth: inqData.customWidth || '',
+      woodGrade: inqData.woodGrade || '',
+      notes: 'Submitted via web portal',
+      status: 'Pending',
+      date: new Date().toISOString().split('T')[0]
+    };
+    const nextInqs = [newInq, ...inquiries];
+    setInquiries(nextInqs);
+    try {
+      await saveDbInquiry(newInq);
+    } catch (e) {
+      console.error("Firestore sync error:", e);
+    }
+    triggerToast('✓ Request registered in database!');
+  };
 
   // Search filter
   const [searchQuery, setSearchQuery] = useState<string>('');
@@ -268,6 +363,14 @@ export default function App() {
   return (
     <div className="flex flex-col min-h-screen bg-[#FAF7F2] font-sans antialiased text-[#3D2B1F]">
       
+      {/* Live Database Sync Status Ribbon */}
+      {loadingDb && (
+        <div className="bg-[#EAE1D5]/80 backdrop-blur-md text-[#3D2B1F] text-[10px] sm:text-xs font-semibold py-2 px-4 text-center border-b border-[#E0D8CF] flex items-center justify-center gap-2 select-none z-[100] transition-opacity">
+          <span className="w-3 h-3 rounded-full border-2 border-[#3D2B1F] border-t-transparent animate-spin shrink-0"></span>
+          <span>Connecting to live Ramesh Bhise Workshop Firebase Database...</span>
+        </div>
+      )}
+
       {/* Dynamic Alert Toast */}
       {toastVisible && (
         <div className="fixed bottom-24 right-6 sm:bottom-8 sm:right-8 z-[200] max-w-sm bg-[#1A1209] text-[#FAF7F2] border border-[#3D2B1F] shadow-xl px-5 py-3.5 rounded-xl flex items-center space-x-2.5 animate-scale-in">
@@ -330,7 +433,6 @@ export default function App() {
                 isLoggedIn={isLoggedIn}
                 onLogout={handleLogout}
                 products={products}
-
               />
             )}
 
@@ -369,7 +471,7 @@ export default function App() {
             )}
 
             {currentView === 'showroom' && (
-              <ShowroomView />
+              <ShowroomView onAddInquiry={handleAddInquiry} />
             )}
 
             {currentView === 'about' && (
@@ -377,7 +479,7 @@ export default function App() {
             )}
 
             {currentView === 'contact' && (
-              <ContactView />
+              <ContactView onAddInquiry={handleAddInquiry} />
             )}
 
             {currentView === 'wishlist' && (
@@ -400,13 +502,13 @@ export default function App() {
             {currentView === 'admin' && (
               <AdminView 
                 products={products}
-                onUpdateProducts={setProducts}
+                onUpdateProducts={handleUpdateProducts}
                 categories={categories}
-                onUpdateCategories={setCategories}
+                onUpdateCategories={handleUpdateCategories}
                 inquiries={inquiries}
-                onUpdateInquiries={setInquiries}
+                onUpdateInquiries={handleUpdateInquiries}
                 websiteContent={websiteContent}
-                onUpdateWebsiteContent={setWebsiteContent}
+                onUpdateWebsiteContent={handleUpdateWebsiteContent}
                 onNavigate={handleNavigate}
               />
             )}

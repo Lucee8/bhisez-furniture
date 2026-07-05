@@ -12,7 +12,20 @@ import {
   Building
 } from 'lucide-react';
 
-export default function ShowroomView() {
+interface ShowroomViewProps {
+  onAddInquiry?: (inquiry: {
+    name: string;
+    phone: string;
+    city: string;
+    subject: string;
+    message: string;
+    customLength?: string;
+    customWidth?: string;
+    woodGrade?: string;
+  }) => void;
+}
+
+export default function ShowroomView({ onAddInquiry }: ShowroomViewProps) {
   const [activeShowroom, setActiveShowroom] = useState<'malvan' | 'sukalwad'>('malvan');
   const [walkthroughForm, setWalkthroughForm] = useState<ShowroomWalkthrough>({
     name: '',
@@ -24,6 +37,12 @@ export default function ShowroomView() {
   });
   const [scheduled, setScheduled] = useState<boolean>(false);
 
+  // Custom Sizing & Wood Grade states for showroom walkthroughs
+  const [useCustomGrid, setUseCustomGrid] = useState<boolean>(false);
+  const [customLength, setCustomLength] = useState<string>('');
+  const [customWidth, setCustomWidth] = useState<string>('');
+  const [woodGrade, setWoodGrade] = useState<string>('Grade-A Sagwan');
+
   const handleBookWalkthrough = (e: React.FormEvent) => {
     e.preventDefault();
     if (!walkthroughForm.name || !walkthroughForm.phone || !walkthroughForm.date) {
@@ -32,12 +51,29 @@ export default function ShowroomView() {
     }
     setScheduled(true);
 
+    const customDetailsText = useCustomGrid 
+      ? `\n[Custom Sizing Grid - Length: ${customLength || 'Custom'} inches | Width: ${customWidth || 'Custom'} inches | Wood Grade: ${woodGrade}]`
+      : '';
+
+    if (onAddInquiry) {
+      onAddInquiry({
+        name: walkthroughForm.name,
+        phone: walkthroughForm.phone,
+        city: walkthroughForm.location === 'malvan' ? 'Malvan' : 'Sukalwad',
+        subject: 'Showroom visit guide',
+        message: `Walkthrough booked for: ${walkthroughForm.date}. Interested category: ${walkthroughForm.category}. Notes: ${walkthroughForm.notes || 'None'}${customDetailsText}`,
+        customLength: useCustomGrid ? customLength : '',
+        customWidth: useCustomGrid ? customWidth : '',
+        woodGrade: useCustomGrid ? woodGrade : ''
+      });
+    }
+
     const textPayload = `Hi Bhise'z! I would like to schedule a showroom walkthrough.
 Name: ${walkthroughForm.name}
 Phone: ${walkthroughForm.phone}
 Location: ${walkthroughForm.location === 'malvan' ? 'Malvan Flagship' : 'Sukalwad Highway'}
 Date: ${walkthroughForm.date}
-Interests: ${walkthroughForm.category}
+Interests: ${walkthroughForm.category}${useCustomGrid ? `\n--- Custom Sizing Grid --- \nLength: ${customLength || 'Custom'} inches\nWidth: ${customWidth || 'Custom'} inches\nWood Grade: ${woodGrade}\n-------------------------` : ''}
 Notes: ${walkthroughForm.notes}`;
 
     // Open prefilled WhatsApp
@@ -344,6 +380,60 @@ Notes: ${walkthroughForm.notes}`;
                   <option>Concealed Pooja Mandirs</option>
                   <option>Custom Handcrafted designs</option>
                 </select>
+              </div>
+
+              {/* Custom Measurement Sizing Grid */}
+              <div className="bg-[#FAF7F2] border border-[#E0D8CF] p-4 rounded-2xl space-y-3">
+                <label className="flex items-center space-x-3 cursor-pointer">
+                  <input 
+                    type="checkbox" 
+                    checked={useCustomGrid}
+                    onChange={(e) => setUseCustomGrid(e.target.checked)}
+                    className="w-4 h-4 text-amber-600 focus:ring-amber-500 border-stone-300 rounded"
+                  />
+                  <div>
+                    <span className="text-xs font-bold text-stone-800 uppercase tracking-wide block">Need Custom Dimensions? (Length, Width & Wood Grade)</span>
+                    <span className="text-[10px] text-stone-400 block">Bring pre-calculated measurements or requested timber types to the walkthrough</span>
+                  </div>
+                </label>
+
+                {useCustomGrid && (
+                  <div className="pt-3 border-t border-[#E0D8CF]/60 grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    <div className="flex flex-col space-y-1">
+                      <label className="text-[9px] font-black text-stone-400 uppercase tracking-wider">Custom Length (Inches / Feet)</label>
+                      <input 
+                        type="text" 
+                        placeholder="E.g. 78 inches"
+                        value={customLength}
+                        onChange={(e) => setCustomLength(e.target.value)}
+                        className="bg-white border border-[#E0D8CF] rounded-xl px-3 py-2 text-xs text-stone-700 outline-none focus:ring-1 focus:ring-amber-500"
+                      />
+                    </div>
+                    <div className="flex flex-col space-y-1">
+                      <label className="text-[9px] font-black text-stone-400 uppercase tracking-wider">Custom Width (Inches / Feet)</label>
+                      <input 
+                        type="text" 
+                        placeholder="E.g. 72 inches"
+                        value={customWidth}
+                        onChange={(e) => setCustomWidth(e.target.value)}
+                        className="bg-white border border-[#E0D8CF] rounded-xl px-3 py-2 text-xs text-stone-700 outline-none focus:ring-1 focus:ring-amber-500"
+                      />
+                    </div>
+                    <div className="flex flex-col space-y-1">
+                      <label className="text-[9px] font-black text-stone-400 uppercase tracking-wider">Timber Wood Grade Selection</label>
+                      <select
+                        value={woodGrade}
+                        onChange={(e) => setWoodGrade(e.target.value)}
+                        className="bg-white border border-[#E0D8CF] rounded-xl px-3 py-2 text-xs text-stone-700 outline-none focus:ring-1 focus:ring-amber-500 font-bold"
+                      >
+                        <option value="Grade-A Sagwan">Grade-A Sagwan</option>
+                        <option value="Premium Shivan">Premium Shivan</option>
+                        <option value="Classic Nilgiri">Classic Nilgiri</option>
+                        <option value="Standard Seasoned Teak">Standard Seasoned Teak</option>
+                      </select>
+                    </div>
+                  </div>
+                )}
               </div>
 
               <div className="flex flex-col space-y-1.5">
