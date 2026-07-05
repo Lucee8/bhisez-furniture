@@ -1,9 +1,7 @@
 import { Product } from './types';
 import { PRODUCT_DESCRIPTIONS } from './product_descriptions';
 import { getCsvSpecs } from './csv_pricing';
-
-const CUSTOM_PRODUCTS: Product[] = [];
-const PRODUCT_OVERRIDES: Record<string, Partial<Product>> = {};
+import { CUSTOM_PRODUCTS, PRODUCT_OVERRIDES } from './components/custom_products';
 
 export interface SubCategory {
   name: string;
