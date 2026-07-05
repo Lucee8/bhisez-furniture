@@ -85,12 +85,15 @@ export default function AdminView({
   onUpdateWebsiteContent,
   onNavigate
 }: AdminViewProps) {
-  const [activeTab, setActiveTab] = useState<'dashboard' | 'products' | 'categories' | 'inquiries' | 'content' | 'settings'>('dashboard');
+  const [activeTab, setActiveTab] = useState<'dashboard' | 'products' | 'categories' | 'inquiries' | 'quotations' | 'payments' | 'delivery' | 'content' | 'logs' | 'settings'>('dashboard');
   
-  // Security passcode validation
+  // Security passcode validation and Role-based Access Control
   const [passcode, setPasscode] = useState('');
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(() => {
     return localStorage.getItem('bhisez_admin_auth') === 'true';
+  });
+  const [adminRole, setAdminRole] = useState<'owner' | 'staff'>(() => {
+    return (localStorage.getItem('bhisez_admin_role') as 'owner' | 'staff') || 'owner';
   });
   const [securityError, setSecurityError] = useState('');
 
@@ -112,8 +115,158 @@ export default function AdminView({
     img: '/images/BED/premium bed 01.webP',
     badge: null,
     shortDesc: 'Handcrafted premium series for ultimate comfort.',
-    description: 'Detailed high quality wood construction.'
+    description: 'Detailed high quality wood construction.',
+    dimensions: '78L x 72W x 40H inches',
+    finish: 'Polyurethane Semi-Gloss Polish',
+    stockStatus: 'In Stock',
+    images: [],
+    featured: false
   });
+
+  // Quotation Generator Module State
+  const [quotations, setQuotations] = useState<any[]>(() => {
+    try {
+      const saved = localStorage.getItem('bhisez_quotations');
+      if (saved) return JSON.parse(saved);
+    } catch (e) {}
+    return [
+      {
+        id: 'EST-1001',
+        date: '2026-07-01',
+        customerName: 'Siddharth Rane',
+        customerPhone: '9820112234',
+        customerAddress: 'Malvan Center, Sindhudurg, Maharashtra',
+        items: [
+          { name: 'Teakwood Single Bed Door Frame', quantity: 2, rate: 14500, total: 29000 },
+          { name: 'Custom Handcrafted Floral Arch Carving', quantity: 1, rate: 8500, total: 8500 }
+        ],
+        extraCharges: 2500,
+        discount: 1500,
+        taxableAmount: 38500,
+        gstAmount: 6930,
+        grandTotal: 45430,
+        status: 'Approved'
+      }
+    ];
+  });
+
+  const [quoteForm, setQuoteForm] = useState<any>({
+    customerName: '',
+    customerPhone: '',
+    customerAddress: '',
+    items: [] as any[],
+    extraCharges: 0,
+    discount: 0
+  });
+
+  const [selectedQuoteProd, setSelectedQuoteProd] = useState<string>('');
+  const [customItemName, setCustomItemName] = useState<string>('');
+  const [customItemQty, setCustomItemQty] = useState<number>(1);
+  const [customItemRate, setCustomItemRate] = useState<number>(0);
+
+  // Payment Tracking Module State
+  const [payments, setPayments] = useState<any[]>(() => {
+    try {
+      const saved = localStorage.getItem('bhisez_payments');
+      if (saved) return JSON.parse(saved);
+    } catch (e) {}
+    return [
+      {
+        id: 'PAY-1001',
+        date: '2026-07-02',
+        customerName: 'Siddharth Rane',
+        customerPhone: '9820112234',
+        totalAmount: 45430,
+        advancePaid: 15000,
+        balance: 30430,
+        paymentMode: 'GPay UPI',
+        screenshotUrl: 'https://images.unsplash.com/photo-1554415707-6e8cfc93fe23?auto=format&fit=crop&w=300&q=80',
+        status: 'Partially Paid'
+      }
+    ];
+  });
+
+  const [paymentForm, setPaymentForm] = useState<any>({
+    customerName: '',
+    customerPhone: '',
+    totalAmount: 0,
+    advancePaid: 0,
+    paymentMode: 'GPay UPI',
+    screenshotUrl: '',
+    status: 'Partially Paid'
+  });
+
+  const [showPaymentModal, setShowPaymentModal] = useState(false);
+
+  // Delivery Planner Schedule Module State
+  const [deliveries, setDeliveries] = useState<any[]>(() => {
+    try {
+      const saved = localStorage.getItem('bhisez_deliveries');
+      if (saved) return JSON.parse(saved);
+    } catch (e) {}
+    return [
+      {
+        id: 'DEL-1001',
+        date: '2026-07-10',
+        customerName: 'Siddharth Rane',
+        customerPhone: '9820112234',
+        address: 'Malvan Center, Sindhudurg, near Market Gate',
+        assignedStaff: 'Amit Polisher & Vilas Carpenter',
+        installationStatus: 'Scheduled'
+      }
+    ];
+  });
+
+  const [deliveryForm, setDeliveryForm] = useState<any>({
+    date: '',
+    customerName: '',
+    customerPhone: '',
+    address: '',
+    assignedStaff: '',
+    installationStatus: 'Scheduled'
+  });
+
+  const [showDeliveryModal, setShowDeliveryModal] = useState(false);
+
+  // Security activity and Audit logging states
+  const [activityLogs, setActivityLogs] = useState<any[]>(() => {
+    try {
+      const saved = localStorage.getItem('bhisez_activity_logs');
+      if (saved) return JSON.parse(saved);
+    } catch (e) {}
+    return [
+      { id: 'log-1', timestamp: new Date(Date.now() - 3600000 * 2).toLocaleString(), action: 'System Init', details: 'Bhisez security token verified.', user: 'System Admin' },
+      { id: 'log-2', timestamp: new Date(Date.now() - 3600000).toLocaleString(), action: 'Cloud Check', details: 'Linked master datasets successfully.', user: 'System Admin' }
+    ];
+  });
+
+  // Synchronizers
+  React.useEffect(() => {
+    localStorage.setItem('bhisez_quotations', JSON.stringify(quotations));
+  }, [quotations]);
+
+  React.useEffect(() => {
+    localStorage.setItem('bhisez_payments', JSON.stringify(payments));
+  }, [payments]);
+
+  React.useEffect(() => {
+    localStorage.setItem('bhisez_deliveries', JSON.stringify(deliveries));
+  }, [deliveries]);
+
+  React.useEffect(() => {
+    localStorage.setItem('bhisez_activity_logs', JSON.stringify(activityLogs));
+  }, [activityLogs]);
+
+  const logActivity = (action: string, details: string) => {
+    const newLog = {
+      id: `log-${Date.now()}`,
+      timestamp: new Date().toLocaleString(),
+      action,
+      details,
+      user: adminRole === 'owner' ? 'Owner Admin' : 'Staff Worker'
+    };
+    setActivityLogs(prev => [newLog, ...prev]);
+  };
 
   // Kanban CRM, File Upload, and Rich Text editor states
   const [crmMode, setCrmMode] = useState<'list' | 'kanban'>('kanban');
@@ -187,6 +340,66 @@ export default function AdminView({
     const link = document.createElement('a');
     link.setAttribute('href', url);
     link.setAttribute('download', `Ramesh_Bhise_Workshop_CRM_Inquiries_${new Date().toISOString().slice(0, 10)}.csv`);
+    link.style.visibility = 'hidden';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  const handleExportProductsCSV = () => {
+    if (products.length === 0) {
+      alert('No products available to export!');
+      return;
+    }
+    const headers = ['Product ID', 'Name', 'Category', 'Sub-Category', 'Price (INR)', 'Original Price', 'Material', 'Stock Status', 'Dimensions', 'Finish', 'Featured'];
+    const rows = products.map((prod) => [
+      `"${String(prod.id || '').replace(/"/g, '""')}"`,
+      `"${String(prod.name || '').replace(/"/g, '""')}"`,
+      `"${String(prod.category || '').replace(/"/g, '""')}"`,
+      `"${String(prod.subCategory || '').replace(/"/g, '""')}"`,
+      `"${prod.price}"`,
+      `"${prod.orig || ''}"`,
+      `"${String(prod.material || '').replace(/"/g, '""')}"`,
+      `"${String(prod.stockStatus || 'In Stock').replace(/"/g, '""')}"`,
+      `"${String(prod.dimensions || '').replace(/"/g, '""')}"`,
+      `"${String(prod.finish || '').replace(/"/g, '""')}"`,
+      `"${prod.featured ? 'Yes' : 'No'}"`
+    ]);
+    const csvContent = [headers.join(','), ...rows.map(r => r.join(','))].join('\n');
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.setAttribute('href', url);
+    link.setAttribute('download', `Ramesh_Bhise_Workshop_Products_${new Date().toISOString().slice(0, 10)}.csv`);
+    link.style.visibility = 'hidden';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  const handleExportQuotationsCSV = () => {
+    if (quotations.length === 0) {
+      alert('No quotations available to export!');
+      return;
+    }
+    const headers = ['Estimate Code', 'Issued Date', 'Customer Name', 'Phone', 'Address', 'Fitting Charges', 'Discounts', 'Grand Total (INR)', 'Status'];
+    const rows = quotations.map((q) => [
+      `"${q.id}"`,
+      `"${q.date}"`,
+      `"${(q.customerName || '').replace(/"/g, '""')}"`,
+      `"${(q.customerPhone || '').replace(/"/g, '""')}"`,
+      `"${(q.customerAddress || '').replace(/"/g, '""')}"`,
+      `"${q.extraCharges}"`,
+      `"${q.discount}"`,
+      `"${q.grandTotal}"`,
+      `"${q.status || 'Approved'}"`
+    ]);
+    const csvContent = [headers.join(','), ...rows.map(r => r.join(','))].join('\n');
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.setAttribute('href', url);
+    link.setAttribute('download', `Ramesh_Bhise_Workshop_Quotations_${new Date().toISOString().slice(0, 10)}.csv`);
     link.style.visibility = 'hidden';
     document.body.appendChild(link);
     link.click();
@@ -448,16 +661,28 @@ export default function AdminView({
     e.preventDefault();
     if (passcode === '1234' || passcode === 'admin' || passcode === websiteContent.adminPasscode) {
       setIsAuthenticated(true);
+      setAdminRole('owner');
       setSecurityError('');
       localStorage.setItem('bhisez_admin_auth', 'true');
+      localStorage.setItem('bhisez_admin_role', 'owner');
+      logActivity('Admin Login', 'Authenticated successfully as Owner Admin');
+    } else if (passcode === 'staff' || passcode === '9999') {
+      setIsAuthenticated(true);
+      setAdminRole('staff');
+      setSecurityError('');
+      localStorage.setItem('bhisez_admin_auth', 'true');
+      localStorage.setItem('bhisez_admin_role', 'staff');
+      logActivity('Staff Login', 'Authenticated successfully as Staff Worker');
     } else {
       setSecurityError('Incorrect administrator secure passcode token. Please verify.');
     }
   };
 
   const handleLogoutAdmin = () => {
+    logActivity('Admin Logout', `Session ended for ${adminRole === 'owner' ? 'Owner' : 'Staff'}`);
     setIsAuthenticated(false);
     localStorage.removeItem('bhisez_admin_auth');
+    localStorage.removeItem('bhisez_admin_role');
   };
 
   // CRUD: Products
@@ -471,8 +696,19 @@ export default function AdminView({
 
     if (editingProduct) {
       // Edit
-      const nextProds = products.map(p => p.id === editingProduct.id ? { ...p, ...productForm } : p);
+      const nextProds = products.map(p => p.id === editingProduct.id ? { 
+        ...p, 
+        ...productForm,
+        price: Number(productForm.price) || 0,
+        orig: productForm.orig ? Number(productForm.orig) : undefined,
+        dimensions: productForm.dimensions || '',
+        finish: productForm.finish || 'Melamine Polish',
+        stockStatus: productForm.stockStatus || 'In Stock',
+        images: productForm.images || [],
+        featured: !!productForm.featured
+      } : p);
       onUpdateProducts(nextProds as Product[]);
+      logActivity('Product Updated', `Modified product details for ID: ${editingProduct.id} (${productForm.name})`);
       alert('Product modified successfully');
     } else {
       // Add
@@ -483,14 +719,20 @@ export default function AdminView({
         category: productForm.category || 'beds',
         subCategory: productForm.subCategory,
         price: Number(productForm.price) || 0,
-        orig: Number(productForm.orig) || undefined,
+        orig: productForm.orig ? Number(productForm.orig) : undefined,
         material: productForm.material || 'Premium Wood',
         img: productForm.img || '/images/BED/premium bed 01.webP',
         badge: (productForm.badge || null) as any,
         shortDesc: productForm.shortDesc || 'Elegant premium design layout.',
-        description: productForm.description || 'Premium solid wood series.'
+        description: productForm.description || 'Premium solid wood series.',
+        dimensions: productForm.dimensions || '',
+        finish: productForm.finish || 'Melamine Polish',
+        stockStatus: productForm.stockStatus || 'In Stock',
+        images: productForm.images || [],
+        featured: !!productForm.featured
       };
       onUpdateProducts([newProd, ...products]);
+      logActivity('Product Created', `Created new catalog model: ${nextId} (${productForm.name})`);
       alert('Product created successfully');
     }
 
@@ -499,15 +741,28 @@ export default function AdminView({
   };
 
   const handleDeleteProduct = (productId: string | number) => {
+    if (adminRole !== 'owner') {
+      alert('❌ Permission Denied: Only Owner administrators can delete products from the catalog.');
+      return;
+    }
     if (confirm('Are you strictly sure you want to remove this product item permanently?')) {
+      const target = products.find(p => p.id === productId);
       const next = products.filter(p => p.id !== productId);
       onUpdateProducts(next);
+      logActivity('Product Deleted', `Removed catalog item ID: ${productId} (${target?.name || 'Unknown'})`);
     }
   };
 
   const handleOpenEditProduct = (prod: Product) => {
     setEditingProduct(prod);
-    setProductForm({ ...prod });
+    setProductForm({ 
+      ...prod,
+      dimensions: prod.dimensions || '',
+      finish: prod.finish || 'Melamine Polish',
+      stockStatus: prod.stockStatus || 'In Stock',
+      images: prod.images || [],
+      featured: !!prod.featured
+    });
     setShowProductModal(true);
   };
 
@@ -524,7 +779,12 @@ export default function AdminView({
       img: '/images/BED/premium bed 01.webP',
       badge: null,
       shortDesc: 'Finished under expert supervision of seasoned carvers.',
-      description: 'Hand-rubbed finishes with deep timber details.'
+      description: 'Hand-rubbed finishes with deep timber details.',
+      dimensions: '78L x 72W x 40H inches',
+      finish: 'Melamine Polish',
+      stockStatus: 'In Stock',
+      images: [],
+      featured: false
     });
     setShowProductModal(true);
   };
@@ -765,6 +1025,50 @@ export default function AdminView({
                 {unresolvedInquiriesCount > 0 && (
                   <span className="bg-[#E52E2D] text-white text-[9px] font-black px-1.5 py-0.5 rounded-full animate-bounce">{unresolvedInquiriesCount}</span>
                 )}
+              </button>
+
+              <button 
+                onClick={() => setActiveTab('quotations')}
+                className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-xs font-bold transition-all text-left cursor-pointer ${activeTab === 'quotations' ? 'bg-[#3D2B1F] text-amber-50' : 'text-stone-600 hover:bg-[#FAF7F2] hover:text-stone-900'}`}
+              >
+                <div className="flex items-center space-x-2.5">
+                  <FileText size={16} className="text-amber-700" />
+                  <span>Quotation Generator</span>
+                </div>
+                <span className="bg-amber-100 text-stone-900 text-[10px] font-black px-1.5 py-0.5 rounded-full">{quotations.length}</span>
+              </button>
+
+              <button 
+                onClick={() => setActiveTab('payments')}
+                className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-xs font-bold transition-all text-left cursor-pointer ${activeTab === 'payments' ? 'bg-[#3D2B1F] text-amber-50' : 'text-stone-600 hover:bg-[#FAF7F2] hover:text-stone-900'}`}
+              >
+                <div className="flex items-center space-x-2.5">
+                  <DollarSign size={16} className="text-emerald-700" />
+                  <span>Payment Tracking</span>
+                </div>
+                <span className="bg-emerald-50 text-emerald-900 border border-emerald-100 text-[10px] font-black px-1.5 py-0.5 rounded-full">{payments.length}</span>
+              </button>
+
+              <button 
+                onClick={() => setActiveTab('delivery')}
+                className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-xs font-bold transition-all text-left cursor-pointer ${activeTab === 'delivery' ? 'bg-[#3D2B1F] text-amber-50' : 'text-stone-600 hover:bg-[#FAF7F2] hover:text-stone-900'}`}
+              >
+                <div className="flex items-center space-x-2.5">
+                  <Calendar size={16} className="text-blue-700" />
+                  <span>Delivery Schedule</span>
+                </div>
+                <span className="bg-blue-50 text-blue-900 border border-blue-100 text-[10px] font-black px-1.5 py-0.5 rounded-full">{deliveries.length}</span>
+              </button>
+
+              <button 
+                onClick={() => setActiveTab('logs')}
+                className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-xs font-bold transition-all text-left cursor-pointer ${activeTab === 'logs' ? 'bg-[#3D2B1F] text-amber-50' : 'text-stone-600 hover:bg-[#FAF7F2] hover:text-stone-900'}`}
+              >
+                <div className="flex items-center space-x-2.5">
+                  <ShieldAlert size={16} className="text-red-700" />
+                  <span>Security & Audit Logs</span>
+                </div>
+                <span className="bg-stone-200 text-stone-800 text-[9px] font-bold px-2 py-0.5 rounded-full uppercase">{adminRole}</span>
               </button>
 
               <button 
@@ -1116,12 +1420,20 @@ export default function AdminView({
                     <p className="text-stone-400 text-xs font-light">Create, revise pricing models, adjust sizing parameters, or wipe products.</p>
                   </div>
 
-                  <button 
-                    onClick={handleOpenAddProduct}
-                    className="bg-[#3D2B1F] hover:bg-stone-900 text-amber-50 text-xs font-bold uppercase tracking-wider px-4 py-2.5 rounded-xl cursor-pointer flex items-center gap-1.5 shadow-xs"
-                  >
-                    <Plus size={14} /> Add New Model
-                  </button>
+                  <div className="flex flex-wrap gap-2.5">
+                    <button 
+                      onClick={handleExportProductsCSV}
+                      className="bg-stone-100 hover:bg-stone-200 border border-stone-300 text-stone-700 text-xs font-bold uppercase tracking-wider px-4 py-2.5 rounded-xl cursor-pointer flex items-center gap-1.5 shadow-xs"
+                    >
+                      📥 Export to Excel
+                    </button>
+                    <button 
+                      onClick={handleOpenAddProduct}
+                      className="bg-[#3D2B1F] hover:bg-stone-900 text-amber-50 text-xs font-bold uppercase tracking-wider px-4 py-2.5 rounded-xl cursor-pointer flex items-center gap-1.5 shadow-xs"
+                    >
+                      <Plus size={14} /> Add New Model
+                    </button>
+                  </div>
                 </div>
 
                 {/* Filters Row */}
@@ -1379,19 +1691,26 @@ export default function AdminView({
                   </div>
                 ) : crmMode === 'kanban' ? (
                   /* 🗂️ CRM KANBAN BOARD VIEW */
-                  <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 pt-2">
+                  <div className="flex xl:grid xl:grid-cols-6 overflow-x-auto gap-5 pt-2 pb-4 select-none scrollbar-thin">
                     {[
-                      { id: 'Pending', name: 'Pending Validation', color: 'border-amber-600 bg-amber-50/10' },
-                      { id: 'Reviewed', name: 'Reviewed / Active Specs', color: 'border-blue-600 bg-blue-50/10' },
-                      { id: 'Resolved', name: 'Completed & Shipped', color: 'border-emerald-600 bg-emerald-50/10' }
+                      { id: 'New', name: '🆕 New Leads', color: 'border-rose-500 bg-rose-50/10' },
+                      { id: 'Contacted', name: '📞 Contacted', color: 'border-sky-500 bg-sky-50/10' },
+                      { id: 'Quote Sent', name: '✉️ Quote Sent', color: 'border-purple-500 bg-purple-50/10' },
+                      { id: 'Follow-up', name: '🕒 Follow-up', color: 'border-amber-500 bg-amber-50/10' },
+                      { id: 'Converted', name: '🎉 Converted', color: 'border-emerald-500 bg-emerald-50/10' },
+                      { id: 'Lost', name: '❌ Lost Deal', color: 'border-stone-400 bg-stone-50/10' }
                     ].map(col => {
-                      const colInquiries = inquiries.filter(inq => (inq.status || 'Pending') === col.id);
+                      const colInquiries = inquiries.filter(inq => {
+                        const s = inq.status || 'New';
+                        const normalized = s === 'Pending' ? 'New' : s === 'Reviewed' ? 'Contacted' : s === 'Resolved' ? 'Converted' : s;
+                        return normalized === col.id;
+                      });
                       return (
                         <div 
                           key={col.id}
                           onDragOver={handleDragOverInq}
                           onDrop={(e) => handleDropInq(e, col.id)}
-                          className={`border-t-4 ${col.color} rounded-2xl p-4 min-h-[500px] flex flex-col space-y-4 border border-[#E0D8CF]/80 shadow-3xs`}
+                          className={`border-t-4 ${col.color} rounded-2xl p-4 min-h-[500px] flex flex-col space-y-4 border border-[#E0D8CF]/80 shadow-3xs shrink-0 w-80 xl:w-auto`}
                         >
                           <div className="flex justify-between items-center pb-2 border-b border-[#E0D8CF]/40">
                             <span className="text-[11px] font-black text-stone-800 uppercase tracking-wider">{col.name}</span>
@@ -1828,8 +2147,19 @@ export default function AdminView({
                       <label className="text-[10px] font-black text-stone-400 uppercase tracking-widest">WhatsApp Enquiries Line Number</label>
                       <input 
                         type="text" 
-                        value={websiteContent.whatsappLine}
+                        value={websiteContent.whatsappLine || '+91 9314444747'}
                         onChange={(e) => handleUpdateContentField('whatsappLine', e.target.value)}
+                        className="border border-[#E0D8CF] rounded-xl px-4 py-2.5 text-xs text-stone-700 bg-[#FAF7F2]"
+                      />
+                    </div>
+
+                    <div className="flex flex-col space-y-1.5">
+                      <label className="text-[10px] font-black text-stone-400 uppercase tracking-widest">Active Storefront Offer Announcement Banner</label>
+                      <input 
+                        type="text" 
+                        placeholder="E.g. SUMMER SALE: Get 15% instant cashbacks on Seasoned Sagwan Beds"
+                        value={websiteContent.activeOfferBanner || '✨ GANESH FESTIVAL SPECIAL: Free home delivery and free hydraulic polish across Sindhudurg!'}
+                        onChange={(e) => handleUpdateContentField('activeOfferBanner', e.target.value)}
                         className="border border-[#E0D8CF] rounded-xl px-4 py-2.5 text-xs text-stone-700 bg-[#FAF7F2]"
                       />
                     </div>
@@ -1855,6 +2185,82 @@ export default function AdminView({
 
                 </div>
 
+                {/* Testimonials CMS Subsection */}
+                <div className="border-t border-stone-100 pt-6 space-y-4">
+                  <div className="flex justify-between items-center pb-2 border-b border-stone-100">
+                    <div>
+                      <h4 className="font-serif text-sm font-black text-stone-800">Verified Client Testimonials CMS</h4>
+                      <p className="text-[10px] text-stone-400 font-light">Add, update or delete reviews displayed on the main workshop homepage.</p>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        const name = prompt('Enter customer name:');
+                        const location = prompt('Enter customer location (e.g. Malvan):') || 'Sindhudurg';
+                        const text = prompt('Enter testimonial text:');
+                        if (name && text) {
+                          const currentTestimonials = websiteContent.testimonialsList || [
+                            { name: 'Rahul Desai', location: 'Malvan', stars: 5, text: "Got our complete solid teak bedroom bed and wardrobes from Bhise'z. The quality of seasoned timber is outstanding." },
+                            { name: 'Sunita Naik', location: 'Kudal', stars: 5, text: "The home pooja mandir they hand-polished is incredibly gorgeous. Karigars here are masters!" }
+                          ];
+                          const nextTestimonials = [
+                            ...currentTestimonials,
+                            { name, location, stars: 5, text }
+                          ];
+                          handleUpdateContentField('testimonialsList', nextTestimonials);
+                          logActivity('Testimonial Added', `Added testimonial from client ${name}`);
+                          alert('✓ Testimonial added to cache!');
+                        }
+                      }}
+                      className="text-xs bg-amber-50 hover:bg-amber-100 border border-amber-200 text-amber-900 font-bold px-3 py-1.5 rounded-lg flex items-center gap-1 cursor-pointer"
+                    >
+                      ➕ Add Review Card
+                    </button>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {(websiteContent.testimonialsList || [
+                      { name: 'Rahul Desai', location: 'Malvan', stars: 5, text: "Got our complete solid teak bedroom bed and wardrobes from Bhise'z. The quality of seasoned timber is outstanding." },
+                      { name: 'Sunita Naik', location: 'Kudal', stars: 5, text: "The home pooja mandir they hand-polished is incredibly gorgeous. Karigars here are masters!" }
+                    ]).map((test: any, idx: number) => (
+                      <div key={idx} className="p-4 bg-stone-50 border border-stone-200 rounded-2xl flex flex-col justify-between">
+                        <div>
+                          <div className="flex justify-between items-start mb-2">
+                            <div>
+                              <span className="font-serif text-xs font-black text-stone-800">{test.name}</span>
+                              <span className="text-[9px] text-stone-400 block font-light">{test.location}</span>
+                            </div>
+                            <div className="flex text-amber-500 text-[10px]">
+                              {'★'.repeat(test.stars || 5)}
+                            </div>
+                          </div>
+                          <p className="text-[11px] text-stone-600 font-light leading-relaxed italic">"{test.text}"</p>
+                        </div>
+                        <div className="flex justify-end pt-3 mt-3 border-t border-dashed border-stone-200">
+                          <button
+                            type="button"
+                            onClick={() => {
+                              if (confirm('Delete this testimonial card?')) {
+                                const currentTestimonials = websiteContent.testimonialsList || [
+                                  { name: 'Rahul Desai', location: 'Malvan', stars: 5, text: "Got our complete solid teak bedroom bed and wardrobes from Bhise'z. The quality of seasoned timber is outstanding." },
+                                  { name: 'Sunita Naik', location: 'Kudal', stars: 5, text: "The home pooja mandir they hand-polished is incredibly gorgeous. Karigars here are masters!" }
+                                ];
+                                const nextTestimonials = currentTestimonials.filter((_: any, i: number) => i !== idx);
+                                handleUpdateContentField('testimonialsList', nextTestimonials);
+                                logActivity('Testimonial Deleted', `Removed customer review by ${test.name}`);
+                                alert('✓ Testimonial deleted.');
+                              }
+                            }}
+                            className="text-[10px] text-[#E52E2D] font-bold hover:underline cursor-pointer"
+                          >
+                            Remove Card
+                          </button>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
                 <div className="pt-4 border-t border-stone-100 flex justify-end">
                   <button 
                     onClick={() => {
@@ -1869,7 +2275,722 @@ export default function AdminView({
               </div>
             )}
 
-            {/* 6. SETTINGS VIEWPORT */}
+            {/* 6. QUOTATION GENERATOR VIEWPORT */}
+            {activeTab === 'quotations' && (
+              <div className="bg-white border border-[#E0D8CF] rounded-3xl p-6 sm:p-8 space-y-6 shadow-2xs">
+                
+                <div className="pb-4 border-b border-stone-100 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                  <div>
+                    <h3 className="font-serif text-lg font-black text-stone-800">Quotation Generator</h3>
+                    <p className="text-stone-400 text-xs font-light">Generate itemised pricing estimates for custom beds, mandirs, and premium wooden doors with automatic taxes and wood grade additions.</p>
+                  </div>
+                  <button
+                    onClick={() => {
+                      setQuoteForm({
+                        customerName: '',
+                        customerPhone: '',
+                        customerAddress: '',
+                        items: [],
+                        extraCharges: 0,
+                        discount: 0
+                      });
+                      alert('Quotation form cleared and loaded. Enter client parameters below.');
+                    }}
+                    className="bg-stone-100 hover:bg-stone-200 text-stone-800 text-[11px] font-black uppercase tracking-wider px-4 py-2 rounded-xl transition-all cursor-pointer"
+                  >
+                    Clear Form
+                  </button>
+                </div>
+
+                {/* Main Estimate Form */}
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                  
+                  {/* Form fields (Left 7 cols) */}
+                  <div className="lg:col-span-7 space-y-5 bg-stone-50/40 p-5 rounded-2xl border border-stone-100">
+                    <h4 className="font-serif text-xs font-black text-amber-950 uppercase tracking-widest border-b border-stone-100 pb-2">Client Details</h4>
+                    
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div className="flex flex-col space-y-1.5">
+                        <label className="text-[10px] font-black text-stone-400 uppercase tracking-widest">Customer Full Name *</label>
+                        <input 
+                          type="text" 
+                          required
+                          placeholder="E.g. Siddharth Rane"
+                          value={quoteForm.customerName}
+                          onChange={(e) => setQuoteForm({...quoteForm, customerName: e.target.value})}
+                          className="border border-[#E0D8CF] rounded-xl px-4 py-2.5 text-xs text-stone-700 bg-white"
+                        />
+                      </div>
+
+                      <div className="flex flex-col space-y-1.5">
+                        <label className="text-[10px] font-black text-stone-400 uppercase tracking-widest">WhatsApp / Phone *</label>
+                        <input 
+                          type="text" 
+                          required
+                          placeholder="E.g. 9820112234"
+                          value={quoteForm.customerPhone}
+                          onChange={(e) => setQuoteForm({...quoteForm, customerPhone: e.target.value})}
+                          className="border border-[#E0D8CF] rounded-xl px-4 py-2.5 text-xs text-stone-700 bg-white"
+                        />
+                      </div>
+                    </div>
+
+                    <div className="flex flex-col space-y-1.5">
+                      <label className="text-[10px] font-black text-stone-400 uppercase tracking-widest">Delivery / Shipping Address</label>
+                      <input 
+                        type="text" 
+                        placeholder="E.g. Malvan Center, Sindhudurg, Maharashtra"
+                        value={quoteForm.customerAddress}
+                        onChange={(e) => setQuoteForm({...quoteForm, customerAddress: e.target.value})}
+                        className="border border-[#E0D8CF] rounded-xl px-4 py-2.5 text-xs text-stone-700 bg-white"
+                      />
+                    </div>
+
+                    {/* Interactive Itemization */}
+                    <div className="pt-4 border-t border-stone-100 space-y-4">
+                      <h4 className="font-serif text-xs font-black text-amber-950 uppercase tracking-widest">Add Item to Estimate</h4>
+                      
+                      {/* Option A: Select from live catalog */}
+                      <div className="p-3 bg-white border border-stone-150 rounded-xl space-y-3">
+                        <span className="text-[9px] font-black text-stone-400 uppercase tracking-widest block">Option A: Insert Product from Active Catalog</span>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                          <select
+                            value={selectedQuoteProd}
+                            onChange={(e) => {
+                              setSelectedQuoteProd(e.target.value);
+                              const found = products.find(p => p.id === e.target.value);
+                              if (found) {
+                                setCustomItemName(found.name);
+                                setCustomItemRate(found.price);
+                              }
+                            }}
+                            className="border border-stone-200 rounded-lg p-2 text-xs text-stone-700"
+                          >
+                            <option value="">-- Choose Catalog Product --</option>
+                            {products.map(p => (
+                              <option key={p.id} value={p.id}>{p.name} (₹{p.price})</option>
+                            ))}
+                          </select>
+
+                          <button
+                            type="button"
+                            onClick={() => {
+                              if (!selectedQuoteProd) {
+                                alert('Please choose a catalog model product first');
+                                return;
+                              }
+                              const found = products.find(p => p.id === selectedQuoteProd);
+                              if (found) {
+                                const newItem = {
+                                  name: found.name,
+                                  quantity: 1,
+                                  rate: found.price,
+                                  total: found.price
+                                };
+                                setQuoteForm({
+                                  ...quoteForm,
+                                  items: [...quoteForm.items, newItem]
+                                });
+                                setSelectedQuoteProd('');
+                              }
+                            }}
+                            className="bg-[#3D2B1F] hover:bg-stone-900 text-amber-50 text-[10px] font-black uppercase rounded-lg py-2.5 px-3 cursor-pointer"
+                          >
+                            Add Catalog Item
+                          </button>
+                        </div>
+                      </div>
+
+                      {/* Option B: Custom item specification */}
+                      <div className="p-3 bg-white border border-stone-150 rounded-xl space-y-3">
+                        <span className="text-[9px] font-black text-stone-400 uppercase tracking-widest block">Option B: Type Custom Hand-Carving specifications</span>
+                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                          <input 
+                            type="text" 
+                            placeholder="E.g. Custom Sagwan Wood mandir"
+                            value={customItemName}
+                            onChange={(e) => setCustomItemName(e.target.value)}
+                            className="border border-stone-200 rounded-lg p-2 text-xs text-stone-700 col-span-1 sm:col-span-3"
+                          />
+                          <input 
+                            type="number" 
+                            placeholder="Qty"
+                            value={customItemQty}
+                            onChange={(e) => setCustomItemQty(Number(e.target.value) || 1)}
+                            className="border border-stone-200 rounded-lg p-2 text-xs text-stone-700"
+                          />
+                          <input 
+                            type="number" 
+                            placeholder="Rate (INR)"
+                            value={customItemRate}
+                            onChange={(e) => setCustomItemRate(Number(e.target.value) || 0)}
+                            className="border border-stone-200 rounded-lg p-2 text-xs text-stone-700"
+                          />
+                          <button
+                            type="button"
+                            onClick={() => {
+                              if (!customItemName || customItemRate <= 0) {
+                                alert('Please provide a valid Custom Item Name and Base Rate.');
+                                return;
+                              }
+                              const newItem = {
+                                name: customItemName,
+                                quantity: customItemQty,
+                                rate: customItemRate,
+                                total: customItemQty * customItemRate
+                              };
+                              setQuoteForm({
+                                ...quoteForm,
+                                items: [...quoteForm.items, newItem]
+                              });
+                              setCustomItemName('');
+                              setCustomItemQty(1);
+                              setCustomItemRate(0);
+                            }}
+                            className="bg-amber-700 hover:bg-amber-800 text-amber-50 text-[10px] font-black uppercase rounded-lg py-2 cursor-pointer text-center"
+                          >
+                            Add Custom Item
+                          </button>
+                        </div>
+                      </div>
+
+                    </div>
+
+                    {/* Adjustments */}
+                    <div className="grid grid-cols-2 gap-4 pt-4 border-t border-stone-100">
+                      <div className="flex flex-col space-y-1.5">
+                        <label className="text-[10px] font-black text-stone-400 uppercase tracking-widest">Extra logistics / Fitting charges (INR)</label>
+                        <input 
+                          type="number" 
+                          placeholder="0"
+                          value={quoteForm.extraCharges || ''}
+                          onChange={(e) => setQuoteForm({...quoteForm, extraCharges: Number(e.target.value) || 0})}
+                          className="border border-stone-200 rounded-xl p-2.5 text-xs text-stone-700 bg-white"
+                        />
+                      </div>
+
+                      <div className="flex flex-col space-y-1.5">
+                        <label className="text-[10px] font-black text-stone-400 uppercase tracking-widest">Deduct Special Discount (INR)</label>
+                        <input 
+                          type="number" 
+                          placeholder="0"
+                          value={quoteForm.discount || ''}
+                          onChange={(e) => setQuoteForm({...quoteForm, discount: Number(e.target.value) || 0})}
+                          className="border border-stone-200 rounded-xl p-2.5 text-xs text-stone-700 bg-white"
+                        />
+                      </div>
+                    </div>
+
+                    <button
+                      type="button"
+                      onClick={() => {
+                        if (!quoteForm.customerName || !quoteForm.customerPhone) {
+                          alert('Please enter client Name and WhatsApp phone number');
+                          return;
+                        }
+                        if (quoteForm.items.length === 0) {
+                          alert('Please add at least one item list to estimate');
+                          return;
+                        }
+
+                        // Calculate tax math
+                        const baseSubtotal = quoteForm.items.reduce((sum: number, item: any) => sum + item.total, 0);
+                        const taxableAmount = baseSubtotal + Number(quoteForm.extraCharges) - Number(quoteForm.discount);
+                        const gstRate = websiteContent.gstPercent || 18;
+                        const gstAmount = Math.round(taxableAmount * (gstRate / 100));
+                        const grandTotal = taxableAmount + gstAmount;
+
+                        const newQuote = {
+                          id: `EST-${1000 + quotations.length + 1}`,
+                          date: new Date().toISOString().split('T')[0],
+                          customerName: quoteForm.customerName,
+                          customerPhone: quoteForm.customerPhone,
+                          customerAddress: quoteForm.customerAddress || 'Direct Workshop Counter Pickup',
+                          items: quoteForm.items,
+                          extraCharges: Number(quoteForm.extraCharges),
+                          discount: Number(quoteForm.discount),
+                          taxableAmount,
+                          gstAmount,
+                          grandTotal,
+                          status: 'Approved'
+                        };
+
+                        setQuotations([newQuote, ...quotations]);
+                        logActivity('Estimate Created', `Generated pricing quotation ${newQuote.id} for ${quoteForm.customerName} totalling ₹${grandTotal}`);
+                        alert(`✓ Est pricing quotation ${newQuote.id} created successfully! See preview on the right column.`);
+                      }}
+                      className="w-full bg-[#3D2B1F] hover:bg-stone-900 text-amber-50 text-xs font-bold uppercase tracking-wider py-3.5 rounded-xl cursor-pointer transition-all text-center block"
+                    >
+                      Issue & Register Estimate
+                    </button>
+
+                  </div>
+
+                  {/* Pricing Output Preview Card (Right 5 cols) */}
+                  <div className="lg:col-span-5 space-y-4">
+                    <div id="print-estimate-section" className="bg-[#FFFDF9] border-2 border-[#EADFCB] rounded-2xl p-5 shadow-xs space-y-4 text-stone-800">
+                      
+                      {/* Logo and Header */}
+                      <div className="flex justify-between items-start border-b border-stone-200 pb-3">
+                        <div>
+                          <h4 className="font-serif text-sm font-black tracking-tight text-stone-900">Bhise'z Workshop</h4>
+                          <span className="text-[9px] text-[#8B6F5C] font-mono tracking-widest uppercase block">Premium Timber Artistry</span>
+                          <span className="text-[8px] text-stone-400 block leading-tight mt-0.5">Sukalwad, Malvan, Sindhudurg</span>
+                        </div>
+                        <div className="text-right">
+                          <span className="bg-amber-100 text-amber-950 font-black text-[9px] px-2 py-0.5 rounded uppercase tracking-wider">Estimate</span>
+                          <span className="text-[10px] font-bold text-stone-500 block mt-1">Date: {new Date().toLocaleDateString()}</span>
+                        </div>
+                      </div>
+
+                      {/* Client specs */}
+                      <div className="text-[11px] space-y-0.5 text-stone-600 bg-amber-50/30 p-2.5 rounded-lg border border-amber-200/20">
+                        <div>Client: <strong className="text-stone-900">{quoteForm.customerName || '__________________'}</strong></div>
+                        <div>WhatsApp: <span className="text-stone-800 font-mono">{quoteForm.customerPhone || '__________________'}</span></div>
+                        <div className="truncate">Address: <span className="text-stone-500 italic">{quoteForm.customerAddress || 'Pickup Counter'}</span></div>
+                      </div>
+
+                      {/* Items table */}
+                      <div className="space-y-1.5 pt-1">
+                        <span className="text-[9px] font-black text-stone-400 uppercase tracking-widest block">Quoted Line Items</span>
+                        {quoteForm.items.length === 0 ? (
+                          <div className="text-stone-400 italic text-xs text-center py-4 bg-stone-50 rounded-lg">No line items specified yet. Add catalog or custom items on left.</div>
+                        ) : (
+                          <div className="divide-y divide-stone-150 text-[11px]">
+                            {quoteForm.items.map((item: any, idx: number) => (
+                              <div key={idx} className="flex justify-between py-1.5">
+                                <div className="flex-1 pr-2">
+                                  <span className="font-bold text-stone-900">{item.name}</span>
+                                  <div className="text-[9px] text-stone-400">{item.quantity} Unit(s) x ₹{item.rate}</div>
+                                </div>
+                                <span className="font-mono font-bold text-stone-900 text-right">₹{item.total}</span>
+                              </div>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+
+                      {/* Financial Math */}
+                      <div className="border-t border-stone-200 pt-3 space-y-1 text-xs">
+                        <div className="flex justify-between text-stone-500">
+                          <span>Items Subtotal:</span>
+                          <span className="font-mono">₹{quoteForm.items.reduce((sum: number, i: any) => sum + i.total, 0)}</span>
+                        </div>
+                        {quoteForm.extraCharges > 0 && (
+                          <div className="flex justify-between text-stone-500">
+                            <span>Fitting / Logistics Additions:</span>
+                            <span className="font-mono text-stone-700">+ ₹{quoteForm.extraCharges}</span>
+                          </div>
+                        )}
+                        {quoteForm.discount > 0 && (
+                          <div className="flex justify-between text-[#E52E2D]">
+                            <span>Deducted Special Discount:</span>
+                            <span className="font-mono">- ₹{quoteForm.discount}</span>
+                          </div>
+                        )}
+                        <div className="flex justify-between text-stone-500">
+                          <span>Composite Sales Tax ({websiteContent.gstPercent || 18}% GST):</span>
+                          <span className="font-mono">
+                            ₹{Math.round(
+                              (quoteForm.items.reduce((sum: number, i: any) => sum + i.total, 0) + Number(quoteForm.extraCharges) - Number(quoteForm.discount)) * 
+                              ((websiteContent.gstPercent || 18) / 100)
+                            )}
+                          </span>
+                        </div>
+                        
+                        <div className="flex justify-between text-sm font-black text-stone-950 pt-2 border-t border-dashed border-stone-200">
+                          <span>Quoted Estimate Total:</span>
+                          <span className="font-mono text-emerald-800">
+                            ₹{
+                              (quoteForm.items.reduce((sum: number, i: any) => sum + i.total, 0) + Number(quoteForm.extraCharges) - Number(quoteForm.discount)) +
+                              Math.round(
+                                (quoteForm.items.reduce((sum: number, i: any) => sum + i.total, 0) + Number(quoteForm.extraCharges) - Number(quoteForm.discount)) * 
+                                ((websiteContent.gstPercent || 18) / 100)
+                              )
+                            }
+                          </span>
+                        </div>
+                      </div>
+
+                      <div className="text-[9px] text-stone-400 italic text-center pt-2 border-t border-stone-100">
+                        * All Bhise'z wood models use Grade-A seasoned teakwood timber with a 10-year warp warranty.
+                      </div>
+
+                    </div>
+
+                    {/* Print Estimate trigger */}
+                    <button
+                      onClick={() => {
+                        window.print();
+                      }}
+                      className="w-full bg-stone-900 text-white text-xs font-black uppercase tracking-wider py-3 rounded-xl hover:bg-stone-950 transition-all cursor-pointer flex items-center justify-center gap-2 shadow-xs"
+                    >
+                      🖨️ Print / Download PDF Estimate
+                    </button>
+                  </div>
+
+                </div>
+
+                {/* Historical Quotations Register */}
+                <div className="pt-6 border-t border-stone-100 space-y-4">
+                  <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+                    <h4 className="font-serif text-sm font-black text-stone-800">Historical Estimations Register</h4>
+                    <button
+                      onClick={handleExportQuotationsCSV}
+                      className="bg-stone-100 hover:bg-stone-200 border border-stone-300 text-stone-700 text-[10px] font-black uppercase tracking-wider px-3.5 py-2 rounded-xl cursor-pointer transition-all flex items-center gap-1.5 shadow-3xs"
+                    >
+                      📥 Export Estimates to Excel
+                    </button>
+                  </div>
+                  
+                  <div className="overflow-x-auto border border-[#E0D8CF] rounded-2xl bg-stone-50/20">
+                    <table className="w-full text-left border-collapse text-xs">
+                      <thead>
+                        <tr className="bg-[#FAF7F2] border-b border-[#E0D8CF] text-[10px] font-black uppercase tracking-wider text-stone-400">
+                          <th className="p-3">Est Code</th>
+                          <th className="p-3">Issued Date</th>
+                          <th className="p-3">Customer Name</th>
+                          <th className="p-3">WhatsApp Phone</th>
+                          <th className="p-3 text-right">Estimate Net Amount</th>
+                          <th className="p-3 text-center">Export / Share Quick Action</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-stone-200">
+                        {quotations.map((q) => {
+                          const quoteBreakdownText = `Hello *${q.customerName}*! रमेश भिसे here from *Bhise'z Workshop*. 
+
+Here is the custom furniture quotation estimate for your review:
+----------------------------------
+Estimate Code: *${q.id}*
+Date: *${q.date}*
+
+Quoted Line Items:
+${q.items.map((i: any) => `• _${i.name}_ - ${i.quantity} unit(s) x ₹${i.rate}`).join('\n')}
+
+Extra logistics/Fitting: ₹${q.extraCharges}
+Special Discount: -₹${q.discount}
+Composite GST (${websiteContent.gstPercent || 18}%): ₹${q.gstAmount}
+----------------------------------
+*Grand Total amount*: *₹${q.grandTotal}*
+
+All wood pieces are Grade-A seasoned teakwood. Please let us know if we can proceed with hand-carving cutting!`;
+
+                          const waLink = `https://wa.me/${q.customerPhone.replace(/[^\d]/g, '')}?text=${encodeURIComponent(quoteBreakdownText)}`;
+
+                          return (
+                            <tr key={q.id} className="hover:bg-amber-50/15">
+                              <td className="p-3 font-mono font-bold text-stone-900">{q.id}</td>
+                              <td className="p-3 text-stone-500">{q.date}</td>
+                              <td className="p-3 font-bold text-stone-800">{q.customerName}</td>
+                              <td className="p-3 text-stone-600 font-mono">{q.customerPhone}</td>
+                              <td className="p-3 text-right font-mono font-bold text-emerald-800">₹{q.grandTotal}</td>
+                              <td className="p-3 text-center flex justify-center gap-2">
+                                <a 
+                                  href={waLink} 
+                                  target="_blank" 
+                                  rel="noreferrer"
+                                  className="bg-emerald-600 hover:bg-emerald-700 text-white text-[10px] font-bold px-3 py-1.5 rounded-lg transition-colors flex items-center gap-1 cursor-pointer"
+                                >
+                                  💬 Share to WhatsApp
+                                </a>
+                                <button
+                                  onClick={() => {
+                                    setQuoteForm({
+                                      customerName: q.customerName,
+                                      customerPhone: q.customerPhone,
+                                      customerAddress: q.customerAddress,
+                                      items: q.items,
+                                      extraCharges: q.extraCharges,
+                                      discount: q.discount
+                                    });
+                                    alert(`✓ Loaded estimate ${q.id} back into builder form for adjustments!`);
+                                  }}
+                                  className="bg-stone-100 hover:bg-stone-200 text-stone-700 text-[10px] font-bold px-2.5 py-1.5 rounded-lg cursor-pointer"
+                                >
+                                  Load
+                                </button>
+                              </td>
+                            </tr>
+                          );
+                        })}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+
+              </div>
+            )}
+
+            {/* 7. PAYMENT TRACKING VIEWPORT */}
+            {activeTab === 'payments' && (
+              <div className="bg-white border border-[#E0D8CF] rounded-3xl p-6 sm:p-8 space-y-6 shadow-2xs">
+                
+                <div className="pb-4 border-b border-stone-100 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                  <div>
+                    <h3 className="font-serif text-lg font-black text-stone-800">Payment Tracking</h3>
+                    <p className="text-stone-400 text-xs font-light">Monitor deposit advances, trace balance outstanding values, and review receipt screenshot attachments.</p>
+                  </div>
+                  <button
+                    onClick={() => {
+                      setPaymentForm({
+                        customerName: '',
+                        customerPhone: '',
+                        totalAmount: 35000,
+                        advancePaid: 15000,
+                        paymentMode: 'GPay UPI',
+                        screenshotUrl: 'https://images.unsplash.com/photo-1554415707-6e8cfc93fe23?auto=format&fit=crop&w=300&q=80',
+                        status: 'Partially Paid'
+                      });
+                      setShowPaymentModal(true);
+                    }}
+                    className="bg-[#3D2B1F] hover:bg-stone-900 text-amber-50 text-xs font-bold uppercase tracking-wider px-5 py-3 rounded-xl transition-all shadow-xs cursor-pointer"
+                  >
+                    Register Payment Receipt
+                  </button>
+                </div>
+
+                {/* Outstanding financial stats */}
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                  <div className="bg-emerald-50/40 border border-emerald-100 p-4 rounded-2xl">
+                    <span className="text-[9px] font-black text-emerald-800 uppercase tracking-widest block">Total Receipts Collected</span>
+                    <span className="text-2xl font-serif font-black text-emerald-950 block mt-1">
+                      ₹{payments.reduce((sum, p) => sum + Number(p.advancePaid), 0)}
+                    </span>
+                    <span className="text-[10px] text-emerald-700">From {payments.length} registered entries</span>
+                  </div>
+
+                  <div className="bg-amber-50/40 border border-amber-100 p-4 rounded-2xl">
+                    <span className="text-[9px] font-black text-amber-800 uppercase tracking-widest block">Pending Balance Outstanding</span>
+                    <span className="text-2xl font-serif font-black text-amber-950 block mt-1 text-amber-900">
+                      ₹{payments.reduce((sum, p) => sum + Number(p.balance), 0)}
+                    </span>
+                    <span className="text-[10px] text-amber-700">Requires follow-up on delivery</span>
+                  </div>
+
+                  <div className="bg-blue-50/40 border border-blue-100 p-4 rounded-2xl">
+                    <span className="text-[9px] font-black text-blue-800 uppercase tracking-widest block">Total Contract values</span>
+                    <span className="text-2xl font-serif font-black text-blue-950 block mt-1">
+                      ₹{payments.reduce((sum, p) => sum + Number(p.totalAmount), 0)}
+                    </span>
+                    <span className="text-[10px] text-blue-700">Active design contracts sum</span>
+                  </div>
+                </div>
+
+                {/* Payments Register list table */}
+                <div className="overflow-x-auto border border-[#E0D8CF] rounded-2xl bg-white">
+                  <table className="w-full text-left border-collapse text-xs">
+                    <thead>
+                      <tr className="bg-[#FAF7F2] border-b border-[#E0D8CF] text-[10px] font-black uppercase tracking-wider text-stone-400">
+                        <th className="p-3">Receipt Code</th>
+                        <th className="p-3">Customer Name</th>
+                        <th className="p-3">Total Amount</th>
+                        <th className="p-3">Advance Paid</th>
+                        <th className="p-3 text-amber-800">Remaining Balance</th>
+                        <th className="p-3">Mode</th>
+                        <th className="p-3 text-center">Receipt attachment</th>
+                        <th className="p-3 text-center">Status</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-stone-200">
+                      {payments.map((p) => (
+                        <tr key={p.id} className="hover:bg-amber-50/10">
+                          <td className="p-3 font-mono font-bold text-stone-900">{p.id}</td>
+                          <td className="p-3">
+                            <span className="font-bold text-stone-850 block">{p.customerName}</span>
+                            <span className="text-[10px] text-stone-400 font-mono">{p.customerPhone}</span>
+                          </td>
+                          <td className="p-3 font-mono text-stone-800">₹{p.totalAmount}</td>
+                          <td className="p-3 font-mono text-emerald-800 font-semibold">₹{p.advancePaid}</td>
+                          <td className="p-3 font-mono text-amber-900 font-bold">₹{p.balance}</td>
+                          <td className="p-3">
+                            <span className="bg-stone-100 text-stone-700 text-[9px] font-bold px-2 py-0.5 rounded uppercase">{p.paymentMode}</span>
+                          </td>
+                          <td className="p-3 text-center">
+                            {p.screenshotUrl ? (
+                              <a href={p.screenshotUrl} target="_blank" rel="noreferrer" className="text-blue-600 hover:underline text-[10px] font-bold block">
+                                🖼️ View Screenshot
+                              </a>
+                            ) : (
+                              <span className="text-stone-400 italic text-[10px]">No receipt uploaded</span>
+                            )}
+                          </td>
+                          <td className="p-3 text-center">
+                            <span className={`text-[9px] font-black px-2 py-0.5 rounded-full uppercase tracking-wider ${
+                              p.status === 'Fully Paid' ? 'bg-emerald-100 text-emerald-900' :
+                              p.status === 'Partially Paid' ? 'bg-amber-100 text-amber-900' : 'bg-red-100 text-red-900'
+                            }`}>
+                              {p.status}
+                            </span>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+
+                {/* Export button for Excel list tracking */}
+                <div className="flex justify-end">
+                  <button
+                    onClick={() => {
+                      const csvRows = [
+                        ['Receipt ID', 'Customer Name', 'Phone', 'Total Amount', 'Advance Paid', 'Remaining Balance', 'Payment Mode', 'Status'],
+                        ...payments.map(p => [p.id, p.customerName, p.customerPhone, p.totalAmount, p.advancePaid, p.balance, p.paymentMode, p.status])
+                      ];
+                      const csvContent = "data:text/csv;charset=utf-8," + csvRows.map(e => e.join(",")).join("\n");
+                      const encodedUri = encodeURI(csvContent);
+                      const link = document.createElement("a");
+                      link.setAttribute("href", encodedUri);
+                      link.setAttribute("download", `bhisez_payments_ledger_${new Date().toISOString().split('T')[0]}.csv`);
+                      document.body.appendChild(link);
+                      link.click();
+                      document.body.removeChild(link);
+                      logActivity('Export Payments Excel', 'Ledger payments list exported to Excel CSV layout.');
+                    }}
+                    className="bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-bold uppercase tracking-wider px-5 py-2.5 rounded-xl transition-colors cursor-pointer flex items-center gap-1.5"
+                  >
+                    📥 Export Payments Register to Excel (CSV)
+                  </button>
+                </div>
+
+              </div>
+            )}
+
+            {/* 8. DELIVERY PLANNING SCHEDULE VIEWPORT */}
+            {activeTab === 'delivery' && (
+              <div className="bg-white border border-[#E0D8CF] rounded-3xl p-6 sm:p-8 space-y-6 shadow-2xs">
+                
+                <div className="pb-4 border-b border-stone-100 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                  <div>
+                    <h3 className="font-serif text-lg font-black text-stone-800">Delivery Schedule Planner</h3>
+                    <p className="text-stone-400 text-xs font-light">Schedule seasoned timber delivery timelines, assign workshop polishing workers, and lock installation status updates.</p>
+                  </div>
+                  <button
+                    onClick={() => {
+                      setDeliveryForm({
+                        date: new Date().toISOString().split('T')[0],
+                        customerName: '',
+                        customerPhone: '',
+                        address: '',
+                        assignedStaff: 'Amit Polisher & Vilas Carpenter',
+                        installationStatus: 'Scheduled'
+                      });
+                      setShowDeliveryModal(true);
+                    }}
+                    className="bg-[#3D2B1F] hover:bg-stone-900 text-amber-50 text-xs font-bold uppercase tracking-wider px-5 py-3 rounded-xl transition-all shadow-xs cursor-pointer"
+                  >
+                    Add Dispatch Schedule
+                  </button>
+                </div>
+
+                {/* Delivery schedule tables list */}
+                <div className="overflow-x-auto border border-[#E0D8CF] rounded-2xl bg-white">
+                  <table className="w-full text-left border-collapse text-xs">
+                    <thead>
+                      <tr className="bg-[#FAF7F2] border-b border-[#E0D8CF] text-[10px] font-black uppercase tracking-wider text-stone-400">
+                        <th className="p-3">Job ID</th>
+                        <th className="p-3">Delivery Target Date</th>
+                        <th className="p-3">Customer Name</th>
+                        <th className="p-3">Target Address</th>
+                        <th className="p-3">Assigned Staff Workers</th>
+                        <th className="p-3 text-center">Installation Pipeline Status</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-stone-200">
+                      {deliveries.map((d) => (
+                        <tr key={d.id} className="hover:bg-blue-50/10">
+                          <td className="p-3 font-mono font-bold text-stone-900">{d.id}</td>
+                          <td className="p-3 font-mono text-blue-900 font-bold">{d.date}</td>
+                          <td className="p-3">
+                            <span className="font-bold text-stone-850 block">{d.customerName}</span>
+                            <span className="text-[10px] text-stone-400 font-mono">{d.customerPhone}</span>
+                          </td>
+                          <td className="p-3 text-stone-600 font-light max-w-xs truncate">{d.address}</td>
+                          <td className="p-3 text-stone-700 font-medium">🔨 {d.assignedStaff}</td>
+                          <td className="p-3 text-center">
+                            <select
+                              value={d.installationStatus}
+                              onChange={(e) => {
+                                const nextStatus = e.target.value;
+                                const next = deliveries.map(item => item.id === d.id ? { ...item, installationStatus: nextStatus } : item);
+                                setDeliveries(next);
+                                logActivity('Delivery Updated', `Modified delivery job ${d.id} pipeline status to: ${nextStatus}`);
+                              }}
+                              className="bg-stone-50 border border-stone-200 text-stone-800 rounded px-2 py-1 text-[11px]"
+                            >
+                              <option value="Scheduled">🗓️ Scheduled</option>
+                              <option value="In Transit">🚚 In Transit</option>
+                              <option value="Installed">🟢 Installed & Signed</option>
+                              <option value="On Hold">🔴 On Hold / Postponed</option>
+                            </select>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+
+              </div>
+            )}
+
+            {/* 9. SECURITY ACTIVITY & AUDIT LOGS VIEWPORT */}
+            {activeTab === 'logs' && (
+              <div className="bg-white border border-[#E0D8CF] rounded-3xl p-6 sm:p-8 space-y-6 shadow-2xs">
+                
+                <div className="pb-4 border-b border-stone-100 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                  <div>
+                    <h3 className="font-serif text-lg font-black text-stone-850">Security Audit Trail Journals</h3>
+                    <p className="text-stone-400 text-xs font-light">Verify historical logging actions, authorization changes, catalog creation, deletion details, and portal accesses.</p>
+                  </div>
+                  <button
+                    onClick={() => {
+                      if (adminRole !== 'owner') {
+                        alert('❌ Permission Denied: Only Owner Administrators can clear security logs.');
+                        return;
+                      }
+                      if (confirm('Clear all security audit trails permanently?')) {
+                        setActivityLogs([]);
+                        alert('Activity logs wiped successfully');
+                      }
+                    }}
+                    className="bg-red-50 text-red-700 hover:bg-red-100 text-[10px] font-black uppercase px-3 py-1.5 rounded-lg cursor-pointer"
+                  >
+                    Clear Logs Ledger
+                  </button>
+                </div>
+
+                <div className="bg-[#FAF7F2] border border-[#E0D8CF] rounded-2xl p-4 flex justify-between items-center text-xs">
+                  <div>
+                    Active Operator Authority Role: <strong>{adminRole === 'owner' ? '👑 Owner Admin (Ramesh Bhise / Full Master Privilege)' : '🛠️ Staff Worker (Read & Update-only access)'}</strong>
+                  </div>
+                  <div className="text-[10px] text-stone-400 uppercase font-bold tracking-widest bg-white border border-stone-200 px-3 py-1 rounded-full">
+                    Logs: {activityLogs.length}
+                  </div>
+                </div>
+
+                {/* Audit trail list */}
+                <div className="space-y-2 max-h-[500px] overflow-y-auto">
+                  {activityLogs.length === 0 ? (
+                    <div className="text-center italic text-stone-400 py-10 bg-stone-50 border border-dashed border-stone-200 rounded-2xl text-xs">No administrative actions logged yet.</div>
+                  ) : (
+                    activityLogs.map((log) => (
+                      <div key={log.id} className="flex justify-between items-start gap-4 p-3 bg-stone-50 border border-stone-100 rounded-xl text-xs hover:bg-stone-100 transition-colors">
+                        <div className="space-y-1">
+                          <div className="flex items-center gap-2">
+                            <span className="font-black text-stone-900 bg-stone-200 px-1.5 py-0.5 rounded text-[10px] font-mono">{log.action}</span>
+                            <span className="text-[10px] text-stone-400">{log.timestamp}</span>
+                          </div>
+                          <p className="text-stone-600 font-light">{log.details}</p>
+                        </div>
+                        <span className="text-[10px] font-mono bg-amber-50 text-amber-900 border border-amber-200/40 px-2 py-0.5 rounded-md font-bold shrink-0">{log.user}</span>
+                      </div>
+                    ))
+                  )}
+                </div>
+
+              </div>
+            )}
+
+            {/* 10. SETTINGS VIEWPORT */}
             {activeTab === 'settings' && (
               <div className="bg-white border border-[#E0D8CF] rounded-3xl p-6 sm:p-8 space-y-6 shadow-2xs">
                 
@@ -2090,12 +3211,81 @@ export default function AdminView({
               </div>
 
               <div className="flex flex-col space-y-1.5">
+                <label className="text-[10px] font-black text-stone-400 uppercase tracking-widest">Short Summary Tagline *</label>
                 <input 
                   type="text" 
+                  required
                   value={productForm.shortDesc}
                   onChange={(e) => setProductForm({...productForm, shortDesc: e.target.value})}
                   className="border border-[#E0D8CF] rounded-xl px-4 py-2.5 text-xs text-stone-700"
                   placeholder="Short summary tagline..."
+                />
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="flex flex-col space-y-1.5">
+                  <label className="text-[10px] font-black text-stone-400 uppercase tracking-widest">Dimensions (Length x Width x Height) *</label>
+                  <input 
+                    type="text" 
+                    required 
+                    placeholder="E.g. 78L x 72W x 40H inches"
+                    value={productForm.dimensions}
+                    onChange={(e) => setProductForm({...productForm, dimensions: e.target.value})}
+                    className="border border-[#E0D8CF] rounded-xl px-4 py-2.5 text-xs text-stone-700"
+                  />
+                </div>
+
+                <div className="flex flex-col space-y-1.5">
+                  <label className="text-[10px] font-black text-stone-400 uppercase tracking-widest">Wood Finish / Polish Grade *</label>
+                  <input 
+                    type="text" 
+                    required 
+                    placeholder="E.g. Melamine Semi-Gloss Polish"
+                    value={productForm.finish}
+                    onChange={(e) => setProductForm({...productForm, finish: e.target.value})}
+                    className="border border-[#E0D8CF] rounded-xl px-4 py-2.5 text-xs text-stone-700"
+                  />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="flex flex-col space-y-1.5">
+                  <label className="text-[10px] font-black text-stone-400 uppercase tracking-widest">Stock Availability Status *</label>
+                  <select
+                    value={productForm.stockStatus || 'In Stock'}
+                    onChange={(e) => setProductForm({...productForm, stockStatus: e.target.value})}
+                    className="bg-[#FAF7F2] border border-[#E0D8CF] rounded-xl px-3 py-2 text-xs text-stone-700"
+                  >
+                    <option value="In Stock">🟢 In Stock (Ready to Deliver)</option>
+                    <option value="Out of Stock">🔴 Out of Stock</option>
+                    <option value="Made on Order">🔨 Made on Order (7-10 Days)</option>
+                  </select>
+                </div>
+
+                <div className="flex items-center space-x-3 pt-4 sm:pt-6">
+                  <input 
+                    type="checkbox" 
+                    id="is_featured_toggle"
+                    checked={!!productForm.featured}
+                    onChange={(e) => setProductForm({...productForm, featured: e.target.checked})}
+                    className="w-4 h-4 text-amber-600 border-[#E0D8CF] rounded-md focus:ring-amber-500 cursor-pointer"
+                  />
+                  <label htmlFor="is_featured_toggle" className="text-xs font-bold text-stone-700 select-none cursor-pointer">
+                    ⭐ Feature Model on Homepage Showcase
+                  </label>
+                </div>
+              </div>
+
+              <div className="flex flex-col space-y-1.5">
+                <label className="text-[10px] font-black text-stone-400 uppercase tracking-widest">Gallery Image URLs (Comma-separated, optional)</label>
+                <textarea 
+                  placeholder="https://image-link1.jpg, https://image-link2.jpg"
+                  value={Array.isArray(productForm.images) ? productForm.images.join(', ') : ''}
+                  onChange={(e) => {
+                    const urls = e.target.value.split(',').map(s => s.trim()).filter(Boolean);
+                    setProductForm({...productForm, images: urls});
+                  }}
+                  className="border border-[#E0D8CF] rounded-xl px-4 py-2 text-xs text-stone-700 min-h-[50px] resize-y"
                 />
               </div>
 
@@ -2277,6 +3467,268 @@ export default function AdminView({
                   className="px-5 py-2.5 bg-[#3D2B1F] hover:bg-stone-900 text-amber-50 text-xs font-bold uppercase tracking-wider rounded-xl cursor-pointer shadow-xs"
                 >
                   Create Department
+                </button>
+              </div>
+
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* 3. REGISTER PAYMENT DIALOG MODAL */}
+      {showPaymentModal && (
+        <div className="fixed inset-0 z-[250] bg-stone-950/40 backdrop-blur-3xs flex items-center justify-center p-4">
+          <div className="bg-white border border-[#E0D8CF] rounded-3xl w-full max-w-md p-6 sm:p-8 space-y-5 shadow-2xl relative">
+            
+            <button 
+              onClick={() => setShowPaymentModal(false)}
+              className="absolute top-5 right-5 text-stone-400 hover:text-stone-700 cursor-pointer"
+            >
+              <X size={20} />
+            </button>
+
+            <h3 className="font-serif text-lg font-black text-stone-800 border-b border-stone-100 pb-2">
+              💰 Register Received Payment Advance
+            </h3>
+
+            <form 
+              onSubmit={(e) => {
+                e.preventDefault();
+                if (!paymentForm.customerName || !paymentForm.totalAmount) {
+                  alert('Please enter client Name and Total Contract values');
+                  return;
+                }
+                const bal = Number(paymentForm.totalAmount) - Number(paymentForm.advancePaid);
+                const nextStatus = bal <= 0 ? 'Fully Paid' : 'Partially Paid';
+
+                const newPay = {
+                  id: `PAY-${1000 + payments.length + 1}`,
+                  date: new Date().toISOString().split('T')[0],
+                  customerName: paymentForm.customerName,
+                  customerPhone: paymentForm.customerPhone || '9820112234',
+                  totalAmount: Number(paymentForm.totalAmount),
+                  advancePaid: Number(paymentForm.advancePaid),
+                  balance: bal,
+                  paymentMode: paymentForm.paymentMode,
+                  screenshotUrl: paymentForm.screenshotUrl || 'https://images.unsplash.com/photo-1554415707-6e8cfc93fe23?auto=format&fit=crop&w=300&q=80',
+                  status: nextStatus
+                };
+
+                setPayments([newPay, ...payments]);
+                logActivity('Payment Registered', `Logged payment advance for ${paymentForm.customerName}: ₹${paymentForm.advancePaid} received. Balance outstanding is ₹${bal}`);
+                setShowPaymentModal(false);
+                alert('✓ Payment advance receipt registered successfully!');
+              }} 
+              className="space-y-4 text-xs font-medium"
+            >
+              <div className="grid grid-cols-2 gap-3">
+                <div className="flex flex-col space-y-1.5 col-span-2">
+                  <label className="text-[10px] font-black text-stone-400 uppercase tracking-widest">Customer Full Name *</label>
+                  <input 
+                    type="text" 
+                    required 
+                    placeholder="E.g. Siddharth Rane"
+                    value={paymentForm.customerName}
+                    onChange={(e) => setPaymentForm({...paymentForm, customerName: e.target.value})}
+                    className="border border-[#E0D8CF] rounded-xl px-4 py-2.5 text-xs text-stone-700"
+                  />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-2 gap-3">
+                <div className="flex flex-col space-y-1.5">
+                  <label className="text-[10px] font-black text-stone-400 uppercase tracking-widest">Total Contract Value (INR) *</label>
+                  <input 
+                    type="number" 
+                    required 
+                    placeholder="45000"
+                    value={paymentForm.totalAmount || ''}
+                    onChange={(e) => setPaymentForm({...paymentForm, totalAmount: Number(e.target.value)})}
+                    className="border border-[#E0D8CF] rounded-xl px-4 py-2.5 text-xs text-stone-700"
+                  />
+                </div>
+
+                <div className="flex flex-col space-y-1.5">
+                  <label className="text-[10px] font-black text-stone-400 uppercase tracking-widest">Advance Deposited (INR) *</label>
+                  <input 
+                    type="number" 
+                    required 
+                    placeholder="15000"
+                    value={paymentForm.advancePaid || ''}
+                    onChange={(e) => setPaymentForm({...paymentForm, advancePaid: Number(e.target.value)})}
+                    className="border border-[#E0D8CF] rounded-xl px-4 py-2.5 text-xs text-stone-700"
+                  />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-2 gap-3">
+                <div className="flex flex-col space-y-1.5">
+                  <label className="text-[10px] font-black text-stone-400 uppercase tracking-widest">Payment Mode *</label>
+                  <select
+                    value={paymentForm.paymentMode}
+                    onChange={(e) => setPaymentForm({...paymentForm, paymentMode: e.target.value})}
+                    className="bg-[#FAF7F2] border border-[#E0D8CF] rounded-xl px-3 py-2 text-xs text-stone-700"
+                  >
+                    <option value="GPay UPI">GPay UPI</option>
+                    <option value="PhonePe UPI">PhonePe UPI</option>
+                    <option value="Bank NEFT">Bank NEFT Transfer</option>
+                    <option value="Cash">Direct Cash</option>
+                    <option value="Cheque">Bank Cheque</option>
+                  </select>
+                </div>
+
+                <div className="flex flex-col space-y-1.5">
+                  <label className="text-[10px] font-black text-stone-400 uppercase tracking-widest">Screenshot Link Proof</label>
+                  <input 
+                    type="text" 
+                    placeholder="https://..."
+                    value={paymentForm.screenshotUrl}
+                    onChange={(e) => setPaymentForm({...paymentForm, screenshotUrl: e.target.value})}
+                    className="border border-[#E0D8CF] rounded-xl px-4 py-2.5 text-xs text-stone-700"
+                  />
+                </div>
+              </div>
+
+              <div className="pt-3 border-t border-stone-100 flex gap-2 justify-end">
+                <button 
+                  type="button" 
+                  onClick={() => setShowPaymentModal(false)}
+                  className="px-4 py-2.5 border border-[#E0D8CF] text-xs font-bold rounded-xl text-stone-600 hover:text-stone-900 cursor-pointer"
+                >
+                  Cancel
+                </button>
+                <button 
+                  type="submit" 
+                  className="px-5 py-2.5 bg-[#3D2B1F] hover:bg-stone-900 text-amber-50 text-xs font-bold uppercase tracking-wider rounded-xl cursor-pointer shadow-xs"
+                >
+                  Confirm Receipt
+                </button>
+              </div>
+
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* 4. DISPATCH TIMELINE SCHEDULE MODAL */}
+      {showDeliveryModal && (
+        <div className="fixed inset-0 z-[250] bg-stone-950/40 backdrop-blur-3xs flex items-center justify-center p-4">
+          <div className="bg-white border border-[#E0D8CF] rounded-3xl w-full max-w-md p-6 sm:p-8 space-y-5 shadow-2xl relative">
+            
+            <button 
+              onClick={() => setShowDeliveryModal(false)}
+              className="absolute top-5 right-5 text-stone-400 hover:text-stone-700 cursor-pointer"
+            >
+              <X size={20} />
+            </button>
+
+            <h3 className="font-serif text-lg font-black text-stone-800 border-b border-stone-100 pb-2">
+              🚚 Schedule Dispatch & Installation Timelines
+            </h3>
+
+            <form 
+              onSubmit={(e) => {
+                e.preventDefault();
+                if (!deliveryForm.customerName || !deliveryForm.date || !deliveryForm.address) {
+                  alert('Please enter Name, target Date, and complete delivery Address');
+                  return;
+                }
+
+                const newDel = {
+                  id: `DEL-${1000 + deliveries.length + 1}`,
+                  date: deliveryForm.date,
+                  customerName: deliveryForm.customerName,
+                  customerPhone: deliveryForm.customerPhone || '9820112234',
+                  address: deliveryForm.address,
+                  assignedStaff: deliveryForm.assignedStaff || 'Amit Polisher',
+                  installationStatus: deliveryForm.installationStatus || 'Scheduled'
+                };
+
+                setDeliveries([newDel, ...deliveries]);
+                logActivity('Delivery Scheduled', `Assigned delivery ${newDel.id} to ${deliveryForm.customerName} on ${deliveryForm.date}. Assigned staff: ${deliveryForm.assignedStaff}`);
+                setShowDeliveryModal(false);
+                alert('✓ Dispatch schedule registered successfully!');
+              }} 
+              className="space-y-4 text-xs font-medium"
+            >
+              <div className="grid grid-cols-2 gap-3">
+                <div className="flex flex-col space-y-1.5">
+                  <label className="text-[10px] font-black text-stone-400 uppercase tracking-widest">Delivery Date *</label>
+                  <input 
+                    type="date" 
+                    required 
+                    value={deliveryForm.date}
+                    onChange={(e) => setDeliveryForm({...deliveryForm, date: e.target.value})}
+                    className="border border-[#E0D8CF] rounded-xl px-4 py-2.5 text-xs text-stone-700 bg-stone-50"
+                  />
+                </div>
+
+                <div className="flex flex-col space-y-1.5">
+                  <label className="text-[10px] font-black text-stone-400 uppercase tracking-widest">Customer Name *</label>
+                  <input 
+                    type="text" 
+                    required 
+                    placeholder="Siddharth Rane"
+                    value={deliveryForm.customerName}
+                    onChange={(e) => setDeliveryForm({...deliveryForm, customerName: e.target.value})}
+                    className="border border-[#E0D8CF] rounded-xl px-4 py-2.5 text-xs text-stone-700"
+                  />
+                </div>
+              </div>
+
+              <div className="flex flex-col space-y-1.5">
+                <label className="text-[10px] font-black text-stone-400 uppercase tracking-widest">Complete Shipping / Dispatch Address *</label>
+                <input 
+                  type="text" 
+                  required 
+                  placeholder="E.g. near Malvan Gate, Sindhudurg, MH"
+                  value={deliveryForm.address}
+                  onChange={(e) => setDeliveryForm({...deliveryForm, address: e.target.value})}
+                  className="border border-[#E0D8CF] rounded-xl px-4 py-2.5 text-xs text-stone-700"
+                />
+              </div>
+
+              <div className="grid grid-cols-2 gap-3">
+                <div className="flex flex-col space-y-1.5">
+                  <label className="text-[10px] font-black text-stone-400 uppercase tracking-widest">Assigned Carving / Polishing Staff *</label>
+                  <input 
+                    type="text" 
+                    required 
+                    placeholder="E.g. Amit Polisher & Vilas Carpenter"
+                    value={deliveryForm.assignedStaff}
+                    onChange={(e) => setDeliveryForm({...deliveryForm, assignedStaff: e.target.value})}
+                    className="border border-[#E0D8CF] rounded-xl px-4 py-2.5 text-xs text-stone-700"
+                  />
+                </div>
+
+                <div className="flex flex-col space-y-1.5">
+                  <label className="text-[10px] font-black text-stone-400 uppercase tracking-widest">Initial Pipeline Status</label>
+                  <select
+                    value={deliveryForm.installationStatus}
+                    onChange={(e) => setDeliveryForm({...deliveryForm, installationStatus: e.target.value})}
+                    className="bg-[#FAF7F2] border border-[#E0D8CF] rounded-xl px-3 py-2 text-xs text-stone-700"
+                  >
+                    <option value="Scheduled">🗓️ Scheduled</option>
+                    <option value="In Transit">🚚 In Transit</option>
+                    <option value="Installed">🟢 Installed & Signed</option>
+                    <option value="On Hold">On Hold</option>
+                  </select>
+                </div>
+              </div>
+
+              <div className="pt-3 border-t border-stone-100 flex gap-2 justify-end">
+                <button 
+                  type="button" 
+                  onClick={() => setShowDeliveryModal(false)}
+                  className="px-4 py-2.5 border border-[#E0D8CF] text-xs font-bold rounded-xl text-stone-600 hover:text-stone-900 cursor-pointer"
+                >
+                  Cancel
+                </button>
+                <button 
+                  type="submit" 
+                  className="px-5 py-2.5 bg-[#3D2B1F] hover:bg-stone-900 text-amber-50 text-xs font-bold uppercase tracking-wider rounded-xl cursor-pointer shadow-xs"
+                >
+                  Schedule Dispatch
                 </button>
               </div>
 

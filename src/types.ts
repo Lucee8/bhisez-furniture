@@ -29,6 +29,11 @@ export interface Product {
     Sagwan?: number;
   };
   availableSize?: string;     // e.g. "78x36"
+  dimensions?: string;        // e.g. "78L x 72W x 40H inches"
+  finish?: string;            // e.g. "Polyurethane Glossy Polish"
+  stockStatus?: 'In Stock' | 'Out of Stock' | 'Made on Order' | string;
+  images?: string[];          // Multiple gallery images
+  featured?: boolean;         // Featured toggle
   priceRules?: {
     sizeAdjustments?: Record<string, number>;        // adjustments for the selected size
     origSizeAdjustments?: Record<string, number>;    // adjustments for the original (un-discounted) price
