@@ -94,7 +94,7 @@ export default function BedsView({
       });
     });
     return list;
-  }, []);
+  }, [products]);
 
   // Selected category state backing
   const [activeCategory, setActiveCategory] = useState<string>(initialCategoryFilter || 'all');
@@ -222,7 +222,7 @@ export default function BedsView({
     }
 
     return result;
-  }, [activeCategory, activeSubCategory, searchQuery, selectedMaterials, selectedSizes, selectedStorages, selectedPricePreset, sortBy]);
+  }, [products, activeCategory, activeSubCategory, searchQuery, selectedMaterials, selectedSizes, selectedStorages, selectedPricePreset, sortBy]);
 
   // Swatches mock colors list mapped specifically to elevate grid aesthetic
   const getProductSwatches = (product: Product, index: number) => {

@@ -75,22 +75,58 @@ const DEFAULT_WEBSITE_CONTENT = {
   gstPercent: 18
 };
 
+// Helper utility to strip undefined properties recursively before sending to Firestore
+function cleanUndefined<T>(obj: T): T {
+  if (obj === null || obj === undefined) {
+    return null as any;
+  }
+  if (Array.isArray(obj)) {
+    return obj
+      .filter((item) => item !== undefined)
+      .map((item) => cleanUndefined(item)) as any;
+  }
+  if (typeof obj === 'object') {
+    const cleaned: any = {};
+    for (const key in obj) {
+      if (Object.prototype.hasOwnProperty.call(obj, key)) {
+        const val = obj[key];
+        if (val !== undefined) {
+          cleaned[key] = cleanUndefined(val);
+        }
+      }
+    }
+    return cleaned;
+  }
+  return obj;
+}
+
 // 1. PRODUCTS
 export async function getDbProducts(): Promise<Product[]> {
   try {
     const querySnapshot = await getDocs(collection(db, "products"));
-    if (querySnapshot.empty) {
-      console.log("No products in Firestore. Seeding default products...");
-      // Seed ALL_PRODUCTS
-      for (const prod of ALL_PRODUCTS) {
-        await setDoc(doc(db, "products", String(prod.id)), prod);
-      }
-      return ALL_PRODUCTS;
-    }
     const list: Product[] = [];
     querySnapshot.forEach((docSnap) => {
       list.push(docSnap.data() as Product);
     });
+
+    if (list.length < ALL_PRODUCTS.length) {
+      console.log(`Firestore has only ${list.length} products, but we expect ${ALL_PRODUCTS.length}. Seeding missing products...`);
+      const existingIds = new Set(list.map(p => String(p.id)));
+      const missingProducts = ALL_PRODUCTS.filter(prod => !existingIds.has(String(prod.id)));
+      
+      // Seed missing products in small parallel chunks to be fast and safe
+      const chunkSize = 25;
+      for (let i = 0; i < missingProducts.length; i += chunkSize) {
+        const chunk = missingProducts.slice(i, i + chunkSize);
+        await Promise.all(chunk.map(prod => 
+          setDoc(doc(db, "products", String(prod.id)), cleanUndefined(prod))
+        ));
+      }
+      
+      // Refetch or append to list
+      missingProducts.forEach(p => list.push(p));
+      console.log("Seeding of missing products completed successfully.");
+    }
     return list;
   } catch (error) {
     console.error("Firestore getDbProducts error, falling back to localState:", error);
@@ -100,7 +136,7 @@ export async function getDbProducts(): Promise<Product[]> {
 
 export async function saveDbProduct(prod: Product): Promise<void> {
   try {
-    await setDoc(doc(db, "products", String(prod.id)), prod);
+    await setDoc(doc(db, "products", String(prod.id)), cleanUndefined(prod));
   } catch (error) {
     console.error("Firestore saveDbProduct error:", error);
   }
@@ -118,17 +154,23 @@ export async function deleteDbProduct(id: string | number): Promise<void> {
 export async function getDbCategories(): Promise<any[]> {
   try {
     const querySnapshot = await getDocs(collection(db, "categories"));
-    if (querySnapshot.empty) {
-      console.log("No categories in Firestore. Seeding default categories...");
-      for (const cat of CATEGORY_MAP) {
-        await setDoc(doc(db, "categories", cat.slug), cat);
-      }
-      return CATEGORY_MAP;
-    }
     const list: any[] = [];
     querySnapshot.forEach((docSnap) => {
       list.push(docSnap.data());
     });
+
+    if (list.length < CATEGORY_MAP.length) {
+      console.log(`Firestore has only ${list.length} categories, but we expect ${CATEGORY_MAP.length}. Seeding missing categories...`);
+      const existingSlugs = new Set(list.map(c => c.slug));
+      const missingCategories = CATEGORY_MAP.filter(cat => !existingSlugs.has(cat.slug));
+      
+      await Promise.all(missingCategories.map(cat => 
+        setDoc(doc(db, "categories", cat.slug), cleanUndefined(cat))
+      ));
+      
+      missingCategories.forEach(c => list.push(c));
+      console.log("Seeding of missing categories completed successfully.");
+    }
     return list;
   } catch (error) {
     console.error("Firestore getDbCategories error:", error);
@@ -138,7 +180,7 @@ export async function getDbCategories(): Promise<any[]> {
 
 export async function saveDbCategory(cat: any): Promise<void> {
   try {
-    await setDoc(doc(db, "categories", cat.slug), cat);
+    await setDoc(doc(db, "categories", cat.slug), cleanUndefined(cat));
   } catch (error) {
     console.error("Firestore saveDbCategory error:", error);
   }
@@ -159,7 +201,7 @@ export async function getDbInquiries(): Promise<any[]> {
     if (querySnapshot.empty) {
       console.log("No inquiries in Firestore. Seeding default inquiries...");
       for (const inq of DEFAULT_INQUIRIES) {
-        await setDoc(doc(db, "inquiries", String(inq.id)), inq);
+        await setDoc(doc(db, "inquiries", String(inq.id)), cleanUndefined(inq));
       }
       return DEFAULT_INQUIRIES;
     }
@@ -177,7 +219,7 @@ export async function getDbInquiries(): Promise<any[]> {
 
 export async function saveDbInquiry(inq: any): Promise<void> {
   try {
-    await setDoc(doc(db, "inquiries", String(inq.id)), inq);
+    await setDoc(doc(db, "inquiries", String(inq.id)), cleanUndefined(inq));
   } catch (error) {
     console.error("Firestore saveDbInquiry error:", error);
   }
@@ -197,7 +239,7 @@ export async function getDbWebsiteContent(): Promise<any> {
     const querySnapshot = await getDocs(collection(db, "website_content"));
     if (querySnapshot.empty) {
       console.log("No website_content in Firestore. Seeding defaults...");
-      await setDoc(doc(db, "website_content", "main"), DEFAULT_WEBSITE_CONTENT);
+      await setDoc(doc(db, "website_content", "main"), cleanUndefined(DEFAULT_WEBSITE_CONTENT));
       return DEFAULT_WEBSITE_CONTENT;
     }
     let data = DEFAULT_WEBSITE_CONTENT;
@@ -215,7 +257,7 @@ export async function getDbWebsiteContent(): Promise<any> {
 
 export async function saveDbWebsiteContent(content: any): Promise<void> {
   try {
-    await setDoc(doc(db, "website_content", "main"), content);
+    await setDoc(doc(db, "website_content", "main"), cleanUndefined(content));
   } catch (error) {
     console.error("Firestore saveDbWebsiteContent error:", error);
   }
