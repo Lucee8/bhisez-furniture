@@ -32,8 +32,22 @@ import { MessageCircle, Heart, X, Check } from 'lucide-react';
 
 
 export default function App() {
+  // Helper to determine if current URL is the dedicated admin link
+  const isAdminRoute = () => {
+    return (
+      window.location.pathname === '/admin' || 
+      window.location.pathname === '/admin/' || 
+      window.location.hash === '#/admin' || 
+      window.location.hash === '#admin' || 
+      window.location.search.includes('admin=true') ||
+      window.location.search.includes('view=admin')
+    );
+  };
+
   // Navigation states
-  const [currentView, setCurrentView] = useState<ViewState>('home');
+  const [currentView, setCurrentView] = useState<ViewState>(() => {
+    return isAdminRoute() ? 'admin' : 'home';
+  });
 
   // Dynamic application state systems
   const [products, setProducts] = useState<Product[]>(() => {
@@ -322,6 +336,23 @@ export default function App() {
     }
   }, []);
 
+  // Sync state with URL location changes (for back button, separate tab navigation)
+  useEffect(() => {
+    const handleLocationChange = () => {
+      if (isAdminRoute()) {
+        setCurrentView('admin');
+      } else if (currentView === 'admin' && !isAdminRoute()) {
+        setCurrentView('home');
+      }
+    };
+    window.addEventListener('popstate', handleLocationChange);
+    window.addEventListener('hashchange', handleLocationChange);
+    return () => {
+      window.removeEventListener('popstate', handleLocationChange);
+      window.removeEventListener('hashchange', handleLocationChange);
+    };
+  }, [currentView]);
+
   const triggerToast = (msg: string) => {
     setToastMessage(msg);
     setToastVisible(true);
@@ -331,6 +362,10 @@ export default function App() {
   };
 
   const handleNavigate = (view: ViewState) => {
+    if (isAdminRoute() && view === 'home') {
+      window.location.href = window.location.origin;
+      return;
+    }
     window.scrollTo({ top: 0, behavior: 'smooth' });
     setCurrentView(view);
   };
@@ -445,21 +480,23 @@ export default function App() {
       )}
 
       {/* Primary Header/Navbar */}
-      <div className={currentView === 'beds' ? 'hidden md:block' : ''}>
-        <Navbar 
-          currentView={currentView}
-          onNavigate={handleNavigate}
-          cartCount={cart.reduce((s, c) => s + c.quantity, 0)}
-          wishlistCount={wishlist.length}
-          onSearchChange={setSearchQuery}
-          searchQuery={searchQuery}
-          isLoggedIn={isLoggedIn}
-          onLogout={handleLogout}
-          mobileMenuOpen={mobileMenuOpen}
-          setMobileMenuOpen={setMobileMenuOpen}
-          onSelectCategory={handleSelectCategory}
-        />
-      </div>
+      {!isAdminRoute() && currentView !== 'admin' && (
+        <div className={currentView === 'beds' ? 'hidden md:block' : ''}>
+          <Navbar 
+            currentView={currentView}
+            onNavigate={handleNavigate}
+            cartCount={cart.reduce((s, c) => s + c.quantity, 0)}
+            wishlistCount={wishlist.length}
+            onSearchChange={setSearchQuery}
+            searchQuery={searchQuery}
+            isLoggedIn={isLoggedIn}
+            onLogout={handleLogout}
+            mobileMenuOpen={mobileMenuOpen}
+            setMobileMenuOpen={setMobileMenuOpen}
+            onSelectCategory={handleSelectCategory}
+          />
+        </div>
+      )}
 
       {/* Main active view port */}
       <main className="flex-1 overflow-hidden relative">
@@ -584,21 +621,25 @@ export default function App() {
       </main>
 
       {/* Primary Footer */}
-      <div className={currentView === 'beds' ? 'hidden md:block' : ''}>
-        <Footer onNavigate={handleNavigate} />
-      </div>
+      {!isAdminRoute() && currentView !== 'admin' && (
+        <div className={currentView === 'beds' ? 'hidden md:block' : ''}>
+          <Footer onNavigate={handleNavigate} />
+        </div>
+      )}
 
       {/* Ambient Floating WhatsApp helper button */}
-      <a 
-        href={`https://wa.me/919999999999?text=${encodeURIComponent(`Hi Ramesh! I'd like to get an estimate for solid hardwood furniture.`)}`}
-        target="_blank"
-        className="fixed bottom-6 left-6 z-[90] w-12 h-12 bg-[#25D366] hover:bg-[#1ebd59] text-white rounded-full flex items-center justify-center shadow-lg transition-transform hover:scale-110"
-        rel="noreferrer"
-        title="Chat on WhatsApp"
-        id="whatsapp-floating-btn"
-      >
-        <MessageCircle size={22} className="fill-current text-white stroke-none" />
-      </a>
+      {!isAdminRoute() && currentView !== 'admin' && (
+        <a 
+          href={`https://wa.me/919999999999?text=${encodeURIComponent(`Hi Ramesh! I'd like to get an estimate for solid hardwood furniture.`)}`}
+          target="_blank"
+          className="fixed bottom-6 left-6 z-[90] w-12 h-12 bg-[#25D366] hover:bg-[#1ebd59] text-white rounded-full flex items-center justify-center shadow-lg transition-transform hover:scale-110"
+          rel="noreferrer"
+          title="Chat on WhatsApp"
+          id="whatsapp-floating-btn"
+        >
+          <MessageCircle size={22} className="fill-current text-white stroke-none" />
+        </a>
+      )}
 
 
 

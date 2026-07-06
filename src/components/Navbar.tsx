@@ -160,13 +160,15 @@ export default function Navbar({
               Help Center
             </button>
             <span className="text-stone-300">|</span>
-            <button 
-              onClick={() => onNavigate('admin')}
+            <a 
+              href="?view=admin"
+              target="_blank"
+              rel="noopener noreferrer"
               className="text-amber-700 hover:text-amber-900 transition-colors cursor-pointer font-bold"
               id="navbar-admin-btn"
             >
               🔒 Admin Panel
-            </button>
+            </a>
           </div>
         </div>
       </div>
@@ -462,12 +464,15 @@ export default function Navbar({
                 >
                   ❤️ My Wishlist ({wishlistCount})
                 </button>
-                <button 
-                  onClick={() => { onNavigate('admin'); setMobileMenuOpen(false); }} 
-                  className="text-left text-sm font-bold text-amber-800 py-2 px-3 hover:bg-[#E8DDD1]/40 rounded-md"
+                <a 
+                  href="?view=admin"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="text-left text-sm font-bold text-amber-800 py-2 px-3 hover:bg-[#E8DDD1]/40 rounded-md block"
                 >
                   🔒 Workshop Admin Portal
-                </button>
+                </a>
               </nav>
             </div>
 
