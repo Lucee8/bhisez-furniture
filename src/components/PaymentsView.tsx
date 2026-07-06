@@ -10,16 +10,31 @@ import {
   Heart
 } from 'lucide-react';
 
+interface ShippingDetails {
+  firstName: string;
+  lastName: string;
+  streetAddress: string;
+  city: string;
+  pincode: string;
+  mobile: string;
+  email: string;
+  addressType: string;
+}
+
 interface PaymentsViewProps {
   onNavigate: (view: ViewState) => void;
   cart: CartItem[];
   onClearCart: () => void;
+  shippingDetails: ShippingDetails | null;
+  onPlaceOrder: (orderId: string, paymentMethod: string) => void;
 }
 
 export default function PaymentsView({
   onNavigate,
   cart,
   onClearCart,
+  shippingDetails,
+  onPlaceOrder,
 }: PaymentsViewProps) {
   const [selectedMethod, setSelectedMethod] = useState<string>('gpay');
   const [orderPlaced, setOrderPlaced] = useState<boolean>(false);
@@ -40,6 +55,8 @@ export default function PaymentsView({
     const randomId = 'BHISEZ-' + Math.floor(100000 + Math.random() * 90000);
     setOrderId(randomId);
     setOrderPlaced(true);
+    // Call the callback to persist the order to database
+    onPlaceOrder(randomId, selectedMethod);
     // Clear shopping cart on callback
     onClearCart();
   };

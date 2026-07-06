@@ -7,23 +7,38 @@ import {
   ShieldCheck
 } from 'lucide-react';
 
+interface ShippingDetails {
+  firstName: string;
+  lastName: string;
+  streetAddress: string;
+  city: string;
+  pincode: string;
+  mobile: string;
+  email: string;
+  addressType: string;
+}
+
 interface CheckoutViewProps {
   onNavigate: (view: ViewState) => void;
   cart: CartItem[];
+  shippingDetails: ShippingDetails | null;
+  onSaveShippingDetails: (details: ShippingDetails) => void;
 }
 
 export default function CheckoutView({
   onNavigate,
   cart,
+  shippingDetails,
+  onSaveShippingDetails,
 }: CheckoutViewProps) {
-  const [addressType, setAddressType] = useState<string>('Home');
-  const [firstName, setFirstName] = useState<string>('');
-  const [lastName, setLastName] = useState<string>('');
-  const [streetAddress, setStreetAddress] = useState<string>('');
-  const [city, setCity] = useState<string>('');
-  const [pincode, setPincode] = useState<string>('');
-  const [mobile, setMobile] = useState<string>('');
-  const [email, setEmail] = useState<string>('');
+  const [addressType, setAddressType] = useState<string>(shippingDetails?.addressType || 'Home');
+  const [firstName, setFirstName] = useState<string>(shippingDetails?.firstName || '');
+  const [lastName, setLastName] = useState<string>(shippingDetails?.lastName || '');
+  const [streetAddress, setStreetAddress] = useState<string>(shippingDetails?.streetAddress || '');
+  const [city, setCity] = useState<string>(shippingDetails?.city || '');
+  const [pincode, setPincode] = useState<string>(shippingDetails?.pincode || '');
+  const [mobile, setMobile] = useState<string>(shippingDetails?.mobile || '');
+  const [email, setEmail] = useState<string>(shippingDetails?.email || '');
 
   const subTotal = cart.reduce((acc, curr) => {
     let p = curr.product.price;
@@ -38,6 +53,16 @@ export default function CheckoutView({
       alert('Please fill out all required fields.');
       return;
     }
+    onSaveShippingDetails({
+      firstName,
+      lastName,
+      streetAddress,
+      city,
+      pincode,
+      mobile,
+      email,
+      addressType,
+    });
     // Navigate to Payments
     onNavigate('payments');
   };

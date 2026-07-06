@@ -215,6 +215,69 @@ export default function App() {
     triggerToast('✓ Request registered in database!');
   };
 
+  const [shippingDetails, setShippingDetails] = useState<{
+    firstName: string;
+    lastName: string;
+    streetAddress: string;
+    city: string;
+    pincode: string;
+    mobile: string;
+    email: string;
+    addressType: string;
+  } | null>(null);
+
+  const handlePlaceOrder = async (orderId: string, paymentMethod: string) => {
+    if (!shippingDetails) {
+      console.error("Missing shipping details for order placement.");
+      return;
+    }
+
+    const cartItemsSummary = cart.map(item => {
+      let p = item.product.price;
+      if (item.size === 'Queen Size') p -= 5000;
+      if (item.storage === 'Non Storage') p -= 10000;
+      return `${item.product.name} (Qty: ${item.quantity}, Size: ${item.size}, Finish: ${item.finish}, Storage: ${item.storage}) - ₹${p.toLocaleString('en-IN')}`;
+    }).join('\n');
+
+    const totalCost = cart.reduce((acc, curr) => {
+      let p = curr.product.price;
+      if (curr.size === 'Queen Size') p -= 5000;
+      if (curr.storage === 'Non Storage') p -= 10000;
+      return acc + (p * curr.quantity);
+    }, 0);
+    const gst = Math.round(totalCost * 0.18);
+    const totalWithGst = totalCost + gst;
+
+    const summaryMessage = `PLACED SECURE ORDER #${orderId}\n\n` +
+      `Items:\n${cartItemsSummary}\n\n` +
+      `Subtotal: ₹${totalCost.toLocaleString('en-IN')}\n` +
+      `GST (18%): ₹${gst.toLocaleString('en-IN')}\n` +
+      `Grand Total: ₹${totalWithGst.toLocaleString('en-IN')}\n\n` +
+      `Shipping Address:\n${shippingDetails.streetAddress}, ${shippingDetails.city} - ${shippingDetails.pincode} (${shippingDetails.addressType})\n\n` +
+      `Payment Method Chosen: ${paymentMethod.toUpperCase()}`;
+
+    const newInq = {
+      id: `inq-${Date.now()}`,
+      name: `${shippingDetails.firstName} ${shippingDetails.lastName}`,
+      phone: shippingDetails.mobile,
+      city: shippingDetails.city,
+      subject: `Secure Order Placed #${orderId}`,
+      message: summaryMessage,
+      notes: `Order Ref: ${orderId} | Method: ${paymentMethod}`,
+      status: 'Pending',
+      date: new Date().toISOString().split('T')[0]
+    };
+
+    const nextInqs = [newInq, ...inquiries];
+    setInquiries(nextInqs);
+    try {
+      await saveDbInquiry(newInq);
+    } catch (e) {
+      console.error("Firestore sync error:", e);
+    }
+    triggerToast('✓ Secure Order logged in database!');
+  };
+
   // Search filter
   const [searchQuery, setSearchQuery] = useState<string>('');
 
@@ -459,6 +522,8 @@ export default function App() {
               <CheckoutView 
                 onNavigate={handleNavigate}
                 cart={cart}
+                shippingDetails={shippingDetails}
+                onSaveShippingDetails={(details) => setShippingDetails(details)}
               />
             )}
 
@@ -467,6 +532,8 @@ export default function App() {
                 onNavigate={handleNavigate}
                 cart={cart}
                 onClearCart={handleClearCart}
+                shippingDetails={shippingDetails}
+                onPlaceOrder={handlePlaceOrder}
               />
             )}
 
