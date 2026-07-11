@@ -43,24 +43,24 @@ const SUMMER_HERO_SLIDES = [
     id: 1,
     title: 'SUMMER Season Sale',
     subtitle: 'Dining Sets',
-    priceInfo: 'Starting From ₹49,989',
-    img: 'https://images.unsplash.com/photo-1615066390971-03e4e1c36ddf?w=1200&q=80',
+    priceInfo: 'Starting From ₹36,300',
+    img: 'public/images/Home view/Dining1.webP',
     linkCategory: 'dining'
   },
   {
     id: 2,
     title: 'HERITAGE Craftsmanship',
     subtitle: 'Safety Doors',
-    priceInfo: 'Starting From ₹16,000',
-    img: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?w=1200&q=80',
+    priceInfo: 'Starting From ₹24,000',
+    img: 'public/images/Home view/doors.webP',
     linkCategory: 'doors'
   },
   {
     id: 3,
     title: 'SACRED Divine Spaces',
     subtitle: 'Teak Mandirs',
-    priceInfo: 'Starting From ₹12,500',
-    img: 'https://images.unsplash.com/photo-1600121848594-d8644e57abab?w=1200&q=80',
+    priceInfo: 'Starting From ₹20,000',
+    img: 'public/images/Home view/home temple.webP',
     linkCategory: 'mandir'
   }
 ];
@@ -439,7 +439,7 @@ export default function HomeView({
               className="relative rounded-2xl overflow-hidden bg-stone-800 shadow-2xs border border-stone-200 h-[142px] sm:h-[222px] cursor-pointer group"
             >
               <img 
-                src="https://images.unsplash.com/photo-1540518614846-7eded433c457?w=600&q=80" 
+                src="public/images/Home view/sofa.webP" 
                 alt="Mattress Promo" 
                 className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-103"
                 referrerPolicy="no-referrer"
@@ -447,15 +447,15 @@ export default function HomeView({
               <div className="absolute inset-0 bg-stone-900/35"></div>
               
               <div className="absolute inset-0 p-4 sm:p-6 flex flex-col justify-center text-white">
-                <h3 className="font-sans text-stone-100 text-xs font-bold uppercase tracking-widest">Mattresses</h3>
+                <h3 className="font-sans text-stone-100 text-xs font-bold uppercase tracking-widest">Sofa Cum Bed</h3>
                 <h4 className="font-serif text-lg sm:text-2xl font-black text-white italic tracking-tight leading-none my-0.5">
-                  Sleep. Sink. Snooze
+                  Endless Comfort
                 </h4>
                 <p className="text-[10px] text-stone-200 leading-tight max-w-[210px] hidden sm:block">
-                  Comfort that adapts to every move you make
+                  From seating to sleeping, comfort that fits your life.
                 </p>
                 <div className="mt-2 sm:mt-3 text-xs font-black text-[#FBBD18] uppercase tracking-wider">
-                  Starting From <span className="text-sm">₹5,599*</span>
+                  Starting From <span className="text-sm">₹42,000*</span>
                 </div>
               </div>
             </div>
@@ -466,7 +466,7 @@ export default function HomeView({
               className="relative rounded-2xl overflow-hidden bg-stone-800 shadow-2xs border border-stone-200 h-[142px] sm:h-[222px] cursor-pointer group"
             >
               <img 
-                src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=600&q=80" 
+                src="public/images/Home view/beds.webP" 
                 alt="Bed Promo Deal" 
                 className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-103"
                 referrerPolicy="no-referrer"
@@ -483,11 +483,11 @@ export default function HomeView({
                 </div>
                 
                 <div className="mt-3 text-[10px] sm:text-xs">
-                  <span className="text-stone-300">Calmora Bed: </span>
-                  <span className="line-through text-stone-400">₹24,999</span>
+                  {/* <span className="text-stone-300">Calmora Bed: </span> */}
+                  {/* <span className="line-through text-stone-400">₹38,000</span> */}
                 </div>
                 <div className="text-xs sm:text-sm font-black text-white">
-                  NOW AT <span className="text-[#FBBD18] text-base sm:text-lg">₹19,999</span>
+                 Starting From : <span className="text-[#FBBD18] text-base sm:text-lg">₹37,999</span>
                 </div>
               </div>
             </div>
