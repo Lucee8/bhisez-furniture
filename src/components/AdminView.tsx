@@ -2570,7 +2570,7 @@ export default function AdminView({
                       <label className="text-[10px] font-black text-stone-400 uppercase tracking-widest">Store Logo Image Source / Path</label>
                       <input 
                         type="text" 
-                        value={websiteContent.logoUrl || '/bhisez logo.png'}
+                        value={websiteContent.logoUrl || 'public/images/bhisez logo.png'}
                         onChange={(e) => handleUpdateContentField('logoUrl', e.target.value)}
                         className="border border-[#E0D8CF] rounded-xl px-4 py-2 text-xs text-stone-705 bg-white"
                       />

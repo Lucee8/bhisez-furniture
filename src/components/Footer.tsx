@@ -24,7 +24,7 @@ export default function Footer({ onNavigate }: FooterProps) {
           >
             {!logoError ? (
               <img 
-                src="/bhisez%20logo.png" 
+                src="public/images/bhisez logo.png" 
                 alt="Bhisez Furniture" 
                 className="h-10 sm:h-12 w-auto object-contain block py-0.5" 
                 onError={() => setLogoError(true)}
