@@ -29,6 +29,17 @@ import {
   Film
 } from 'lucide-react';
 
+// FIX: these files all live in `../assets/`, not `../public/images/Home view/`.
+// Import them the same way as `beds`, matching the actual folder they're in.
+import beds from '../../assets/beds.webP';
+import dining1 from '../../assets/Dining1.webP';
+// import dining2 from '../../assets/Dining2.webP';
+import doors1 from '../../assets/doors.webP';
+import home from '../../assets/home temple.webP';
+// import living from '../../assets/living.webP';
+import sofa from '../../assets/sofa.webP';
+
+
 interface HomeViewProps {
   onNavigate: (view: ViewState) => void;
   onSelectCategory: (category: string) => void;
@@ -44,7 +55,7 @@ const SUMMER_HERO_SLIDES = [
     title: 'SUMMER Season Sale',
     subtitle: 'Dining Sets',
     priceInfo: 'Starting From ₹36,300',
-    img: 'public/images/Home view/Dining1.webP',
+    img: dining1,
     linkCategory: 'dining'
   },
   {
@@ -52,7 +63,7 @@ const SUMMER_HERO_SLIDES = [
     title: 'HERITAGE Craftsmanship',
     subtitle: 'Safety Doors',
     priceInfo: 'Starting From ₹24,000',
-    img: 'public/images/Home view/doors.webP',
+    img: doors1,
     linkCategory: 'doors'
   },
   {
@@ -60,7 +71,7 @@ const SUMMER_HERO_SLIDES = [
     title: 'SACRED Divine Spaces',
     subtitle: 'Teak Mandirs',
     priceInfo: 'Starting From ₹20,000',
-    img: 'public/images/Home view/home temple.webP',
+    img: home,
     linkCategory: 'mandir'
   }
 ];
@@ -168,7 +179,7 @@ const STYLE_STORIES = [
     discount: '41% OFF',
     stars: 5,
     count: 198,
-    img: '/images/Common/bunkbed.webP ',
+    img: '/images/Common/bunkbed.webP',
     id: 'bed-3'
   },
   {
@@ -439,7 +450,7 @@ export default function HomeView({
               className="relative rounded-2xl overflow-hidden bg-stone-800 shadow-2xs border border-stone-200 h-[142px] sm:h-[222px] cursor-pointer group"
             >
               <img 
-                src="public/images/Home view/sofa.webP" 
+                src={sofa} 
                 alt="Mattress Promo" 
                 className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-103"
                 referrerPolicy="no-referrer"
@@ -466,7 +477,7 @@ export default function HomeView({
               className="relative rounded-2xl overflow-hidden bg-stone-800 shadow-2xs border border-stone-200 h-[142px] sm:h-[222px] cursor-pointer group"
             >
               <img 
-                src="public/images/Home view/beds.webP" 
+                src={beds}
                 alt="Bed Promo Deal" 
                 className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-103"
                 referrerPolicy="no-referrer"
@@ -1079,4 +1090,4 @@ export default function HomeView({
 
     </div>
   );
-}
+}     
