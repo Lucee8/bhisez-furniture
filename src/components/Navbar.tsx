@@ -48,9 +48,9 @@ export default function Navbar({
     if (!logoError) {
       return (
         <img 
-          src="/bhisez%20logo.png" 
+          src="public/images/bhisez logo.png" 
           alt="Bhisez Furniture" 
-          className="h-8 sm:h-9 w-auto object-contain block py-0.5" 
+          className="h-12 sm:h-20 mb-[-20px] mt-[-10px] w-auto object-contain block py-0.5" 
           onError={() => setLogoError(true)}
           referrerPolicy="no-referrer"
         />
