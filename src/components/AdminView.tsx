@@ -948,29 +948,6 @@ export default function AdminView({
             
             {/* 1. DASHBOARD OVERVIEW TEMPLATE */}
             {activeTab === 'dashboard' && (() => {
-              // Calculate dynamic analytics from live data
-              const categoryChartData = categories.map((cat) => {
-                const prodCount = products.filter(p => p.category === cat.slug).length;
-                const matchedInquiries = inquiries.filter(inq => {
-                  const txt = `${inq.subject || ''} ${inq.message || ''} ${inq.category || ''}`.toLowerCase();
-                  return txt.includes(cat.slug) || txt.includes(cat.name.toLowerCase());
-                }).length;
-
-                return {
-                  name: cat.name.split(' ')[0], // short label
-                  fullName: cat.name,
-                  'Catalog Items': prodCount,
-                  'Inquiry Interest': matchedInquiries || (prodCount * 2) + Math.floor(Math.random() * 3) + 1
-                };
-              });
-
-              const weeklyTrendData = [
-                { week: 'Wk 1', 'Inquiries': Math.max(3, Math.floor(inquiries.length * 0.4)) },
-                { week: 'Wk 2', 'Inquiries': Math.max(4, Math.floor(inquiries.length * 0.6)) },
-                { week: 'Wk 3', 'Inquiries': Math.max(5, Math.floor(inquiries.length * 0.8)) },
-                { week: 'Wk 4 (Current)', 'Inquiries': inquiries.length || 7 }
-              ];
-
               const totalProductsCount = products.length;
               const totalOrdersCount = inquiries.length;
               const pendingOrdersCount = inquiries.filter(inq => !['Resolved', 'Converted', 'Lost'].includes(inq.status || 'New')).length;
@@ -1080,67 +1057,6 @@ export default function AdminView({
                       <div className="flex justify-between items-baseline">
                         <span className="text-2xl font-serif font-black text-emerald-800">₹{(totalCatalogAssessedValue / 100000).toFixed(1)} Lakhs</span>
                         <span className="text-[10px] text-stone-400 font-bold">Standard sum</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* 📊 RECHARTS ANALYTICS GRAPHS */}
-                  <div className="bg-white border border-[#E0D8CF] rounded-3xl p-6 space-y-6 shadow-2xs">
-                    <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 pb-3 border-b border-stone-100">
-                      <div>
-                        <span className="text-[10px] font-black text-amber-800 uppercase tracking-widest block mb-1">Engagement & Growth Reports</span>
-                        <h3 className="font-serif text-base font-black text-stone-800">Visual Analytics Dashboard</h3>
-                      </div>
-                      <div className="text-[10px] font-mono font-bold text-stone-400 bg-stone-50 border border-stone-200 px-2.5 py-1 rounded-lg">
-                        Auto-refresh active
-                      </div>
-                    </div>
-
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                      {/* Bar Chart */}
-                      <div className="space-y-2">
-                        <div className="flex justify-between items-center">
-                          <h4 className="text-[11px] font-black text-stone-500 uppercase tracking-wider">Lumber Interest Density by Category</h4>
-                          <span className="text-[9px] text-emerald-600 font-bold bg-emerald-50 px-2 py-0.5 rounded-full">Interactive Feed</span>
-                        </div>
-                        <div className="h-64 w-full bg-[#FAF7F2]/50 border border-stone-200/50 rounded-2xl p-2 pt-4">
-                          <ResponsiveContainer width="100%" height="100%">
-                            <BarChart data={categoryChartData}>
-                              <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#EBE4DB" />
-                              <XAxis dataKey="name" stroke="#78716C" fontSize={9} fontWeight="bold" tickLine={false} />
-                              <YAxis stroke="#78716C" fontSize={9} tickLine={false} axisLine={false} />
-                              <Tooltip contentStyle={{ background: '#FFF', borderRadius: '12px', borderColor: '#E0D8CF', fontSize: '11px' }} />
-                              <Legend wrapperStyle={{ fontSize: '10px', paddingTop: '10px' }} />
-                              <Bar name="Catalog Models" dataKey="Catalog Items" fill="#8B6F5C" radius={[4, 4, 0, 0]} />
-                              <Bar name="Inquiry Volume" dataKey="Inquiry Interest" fill="#D97706" radius={[4, 4, 0, 0]} />
-                            </BarChart>
-                          </ResponsiveContainer>
-                        </div>
-                      </div>
-
-                      {/* Area Chart */}
-                      <div className="space-y-2">
-                        <div className="flex justify-between items-center">
-                          <h4 className="text-[11px] font-black text-stone-500 uppercase tracking-wider">Custom Inquiries Inflow Curve</h4>
-                          <span className="text-[9px] text-amber-600 font-bold bg-amber-50 px-2 py-0.5 rounded-full">Growth Trend</span>
-                        </div>
-                        <div className="h-64 w-full bg-[#FAF7F2]/50 border border-stone-200/50 rounded-2xl p-2 pt-4">
-                          <ResponsiveContainer width="100%" height="100%">
-                            <AreaChart data={weeklyTrendData}>
-                              <defs>
-                                <linearGradient id="colorInqGrad" x1="0" y1="0" x2="0" y2="1">
-                                  <stop offset="5%" stopColor="#3D2B1F" stopOpacity={0.25}/>
-                                  <stop offset="95%" stopColor="#3D2B1F" stopOpacity={0}/>
-                                </linearGradient>
-                              </defs>
-                              <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#EBE4DB" />
-                              <XAxis dataKey="week" stroke="#78716C" fontSize={9} fontWeight="bold" tickLine={false} />
-                              <YAxis stroke="#78716C" fontSize={9} tickLine={false} axisLine={false} />
-                              <Tooltip contentStyle={{ background: '#FFF', borderRadius: '12px', borderColor: '#E0D8CF', fontSize: '11px' }} />
-                              <Area name="Weekly Tickets" type="monotone" dataKey="Inquiries" stroke="#3D2B1F" strokeWidth={2.5} fillOpacity={1} fill="url(#colorInqGrad)" />
-                            </AreaChart>
-                          </ResponsiveContainer>
-                        </div>
                       </div>
                     </div>
                   </div>
@@ -2570,7 +2486,7 @@ export default function AdminView({
                       <label className="text-[10px] font-black text-stone-400 uppercase tracking-widest">Store Logo Image Source / Path</label>
                       <input 
                         type="text" 
-                        value={websiteContent.logoUrl || 'public/images/bhisez logo.png'}
+                        value={websiteContent.logoUrl || '/images/bhisez%20logo.png'}
                         onChange={(e) => handleUpdateContentField('logoUrl', e.target.value)}
                         className="border border-[#E0D8CF] rounded-xl px-4 py-2 text-xs text-stone-705 bg-white"
                       />

@@ -41,63 +41,15 @@ export default function Navbar({
 }: NavbarProps) {
   const [activeMegaCat, setActiveMegaCat] = useState<string | null>(null);
 
-  const [logoError, setLogoError] = useState(false);
-
-  // Brand Logo component exactly matching the given style
-  const renderLogo = (isLightBg = true) => {
-    if (!logoError) {
-      return (
-        <img 
-          src="public/images/bhisez logo.png" 
-          alt="Bhisez Furniture" 
-          className="h-12 sm:h-20 mb-[-20px] mt-[-10px] w-auto object-contain block py-0.5" 
-          onError={() => setLogoError(true)}
-          referrerPolicy="no-referrer"
-        />
-      );
-    }
-
-    const mainColor = "#FBBD18"; // Brilliant Golden Yellow from image
-    const dotColor = "#E52E2D"; // Vivid Crimson Red from image
-    const textColor = isLightBg ? "#4A2511" : "#FAF7F2"; // Deep Mahogany brown on light, warm white on dark
-    const lineColor = isLightBg ? "#4A2511" : "#FAF7F2"; // Match line color with text color for cohesive border
-
+  // Brand Logo component
+  const renderLogo = () => {
     return (
-      <div className="flex flex-col items-start select-none text-left">
-        {/* "Bhisez" with custom dotless i and precise Red dot */}
-        <div 
-          className="text-3xl font-black tracking-tight leading-none relative flex items-baseline" 
-          style={{ color: mainColor, fontFamily: '"Playfair Display", Georgia, serif' }}
-        >
-          <span>Bh</span>
-          <span className="relative inline-flex items-center justify-center">
-            ı
-            <span 
-              className="absolute -top-[0.25em] left-[52%] -translate-x-1/2 rounded-full" 
-              style={{ 
-                backgroundColor: dotColor,
-                width: "0.26em",
-                height: "0.26em"
-              }}
-            ></span>
-          </span>
-          <span>sez</span>
-        </div>
-        {/* Underline Rule & FURNITURE */}
-        <div className="flex items-center w-full max-w-[104px] mt-1 bg-transparent">
-          <div className="h-[1.5px] flex-1" style={{ backgroundColor: lineColor }}></div>
-          <span 
-            className="text-[8px] font-black tracking-[0.16em] px-2 leading-none mt-0.5" 
-            style={{ 
-              color: textColor,
-              fontFamily: '"DM Sans", "Space Grotesk", sans-serif'
-            }}
-          >
-            FURNITURE
-          </span>
-          <div className="h-[1.5px] flex-1" style={{ backgroundColor: lineColor }}></div>
-        </div>
-      </div>
+      <img 
+        src="/images/bhisez%20logo.png" 
+        alt="Bhisez Furniture" 
+        className="h-12 sm:h-20 mb-[-20px] mt-[-10px] w-auto object-contain block py-0.5"
+        referrerPolicy="no-referrer"
+      />
     );
   };
 
@@ -183,7 +135,7 @@ export default function Navbar({
             className="flex items-center bg-transparent border-none cursor-pointer focus:outline-none shrink-0"
             id="nav-logo-btn"
           >
-            {renderLogo(true)}
+            {renderLogo()}
           </button>
 
           {/* Centered Large Search Bar (Wooden Street style) */}
@@ -417,7 +369,7 @@ export default function Navbar({
             <div>
               {/* Drawer header */}
               <div className="flex justify-between items-center mb-8 pb-4 border-b border-[#E0D8CF]">
-                {renderLogo(true)}
+                {renderLogo()}
                 <button 
                   onClick={() => setMobileMenuOpen(false)} 
                   className="rounded-full p-1 hover:bg-stone-200 text-stone-400 cursor-pointer"
