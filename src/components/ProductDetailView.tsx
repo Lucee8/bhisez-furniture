@@ -282,7 +282,7 @@ export default function ProductDetailView({
             {/* Main Stage Frame */}
             <div className="relative aspect-1.1/1 rounded-2xl overflow-hidden border border-[#E0D8CF] bg-white">
               <img 
-                src={mainImageUrl} 
+                src={product.img} 
                 alt={product.name} 
                 className="w-full h-full object-cover transition-transform duration-500"
                 referrerPolicy="no-referrer"
@@ -309,32 +309,6 @@ export default function ProductDetailView({
               <div className="absolute bottom-4 left-4 text-[10px] font-bold text-white bg-black/40 px-3 py-1 rounded-sm uppercase tracking-widest pointer-events-none">
                 📍 Tested Carpenter seasoned
               </div>
-            </div>
-
-            {/* Thumbnail Slabs strip */}
-            <div className="grid grid-cols-5 gap-3">
-              <button 
-                onClick={() => setMainImageUrl(product.img)}
-                className={`aspect-1 bg-white border rounded-xl overflow-hidden focus:outline-none ${mainImageUrl === product.img ? 'border-amber-700 ring-1 ring-amber-700' : 'border-[#E0D8CF]'}`}
-              >
-                <img src={product.img} alt="Thumbnail 1" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
-              </button>
-              
-              {/* Fallback Unsplash wood details thumbs */}
-              {[
-                'https://images.unsplash.com/photo-1540518614846-7eded433c457?w=600&q=80',
-                'https://images.unsplash.com/photo-1506439773649-6e0eb8cfb237?w=500&q=80',
-                'https://images.unsplash.com/photo-1538688525198-9b88f6f53126?w=500&q=80',
-                'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=500&q=80'
-              ].map((url, index) => (
-                <button 
-                  key={index}
-                  onClick={() => setMainImageUrl(url)}
-                  className={`aspect-1 bg-white border rounded-xl overflow-hidden focus:outline-none ${mainImageUrl === url ? 'border-amber-700 ring-1 ring-amber-700' : 'border-[#E0D8CF]'}`}
-                >
-                  <img src={url} alt={`Thumbnail ${index+2}`} className="w-full h-full object-cover" referrerPolicy="no-referrer" />
-                </button>
-              ))}
             </div>
 
           </div>
