@@ -112,7 +112,7 @@ export default function Navbar({
               Help Center
             </button>
             <span className="text-stone-300">|</span>
-            <a 
+            {/* <a 
               href="?view=admin"
               target="_blank"
               rel="noopener noreferrer"
@@ -120,7 +120,7 @@ export default function Navbar({
               id="navbar-admin-btn"
             >
               🔒 Admin Panel
-            </a>
+            </a> */}
           </div>
         </div>
       </div>
