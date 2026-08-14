@@ -81,7 +81,7 @@ Message: ${message}`;
         {/* Intro header */}
         <div className="text-center max-w-xl mx-auto space-y-3">
           <span className="text-xs font-black tracking-widest text-[#8B6F5C] uppercase block">Workshop direct link</span>
-          <h1 className="font-serif text-3xl font-extrabold text-[#3D2B1F]">Connect With Ramesh</h1>
+          <h1 className="font-serif text-3xl font-extrabold text-[#3D2B1F]">Connect With Us</h1>
           <p className="text-stone-500 text-xs sm:text-sm leading-relaxed font-light">
             Do you require specific dimensional custom frames, polish stain guides, or catalog estimates? Submit an inquiry - we verify immediately.
           </p>
