@@ -14,7 +14,7 @@ export const PRODUCT_DESCRIPTIONS: Record<string, { shortDesc: string; descripti
   },
   "beds-premium-bed-4": {
     shortDesc: "Ornate premium teak bed with full-panel carved headboard and footboard.",
-    description: "Premium Bed #04 is the most elaborate offering in the series — both headboard and footboard are fully carved with interlocking vine and peacock motifs, a hallmark of Ramesh Bhise's fine craftsmanship. Thick 4-inch square legs taper elegantly at the base. Finished in a rich walnut PU satin coat. A generational heirloom piece built for those who value true artisanal excellence."
+    description: "Premium Bed #04 is the most elaborate offering in the series — both headboard and footboard are fully carved with interlocking vine and peacock motifs, a hallmark of Bhisez fine craftsmanship. Thick 4-inch square legs taper elegantly at the base. Finished in a rich walnut PU satin coat. A generational heirloom piece built for those who value true artisanal excellence."
   },
 
   // ── BEDS — OPEN BED ──

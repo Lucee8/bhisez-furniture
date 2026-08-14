@@ -228,7 +228,7 @@ export default function AdminView({
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.setAttribute('href', url);
-    link.setAttribute('download', `Ramesh_Bhise_Workshop_CRM_Inquiries_${new Date().toISOString().slice(0, 10)}.csv`);
+    link.setAttribute('download', `Bhisez_Workshop_CRM_Inquiries_${new Date().toISOString().slice(0, 10)}.csv`);
     link.style.visibility = 'hidden';
     document.body.appendChild(link);
     link.click();
@@ -259,7 +259,7 @@ export default function AdminView({
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.setAttribute('href', url);
-    link.setAttribute('download', `Ramesh_Bhise_Workshop_Products_${new Date().toISOString().slice(0, 10)}.csv`);
+    link.setAttribute('download', `Bhisez_Workshop_Products_${new Date().toISOString().slice(0, 10)}.csv`);
     link.style.visibility = 'hidden';
     document.body.appendChild(link);
     link.click();
@@ -280,7 +280,7 @@ export default function AdminView({
     printWindow.document.write(`
       <html>
         <head>
-          <title>Ramesh Bhise Carpenter Workshop - Job Card #${inq.id || 'BHISE'}</title>
+          <title>Bhisez Carpenter Workshop - Job Card #${inq.id || 'BHISE'}</title>
           <style>
             body {
               font-family: 'Courier New', Courier, monospace;
@@ -384,7 +384,7 @@ export default function AdminView({
             <button onclick="window.print()" style="padding: 8px 16px; font-weight: bold; cursor: pointer; background-color: #000; color: #fff; border: none; border-radius: 4px;">🖨️ PRINT JOB CARD</button>
           </div>
           <div class="header">
-            <div class="title">Ramesh Bhise Workshop</div>
+            <div class="title">Bhisez Workshop</div>
             <div class="subtitle">Custom Furniture & Woodcarving Artisan Job Card</div>
             <div style="font-size: 11px; margin-top: 5px;">Sukalwad NH-66 & Malvan Road Showrooms, Sindhudurg</div>
           </div>
@@ -430,7 +430,7 @@ export default function AdminView({
           </div>
 
           <div class="footer-notes">
-            Ramesh Bhise Workshop, Sindhudurg. Handcrafting Heirloom Quality Since 1995.
+            Bhisez Workshop, Sindhudurg. Handcrafting Heirloom Quality Since 1995.
           </div>
         </body>
       </html>
@@ -938,7 +938,7 @@ export default function AdminView({
               <h4 className="font-serif text-sm font-black text-amber-950 uppercase tracking-widest pb-2 border-b border-stone-100">Quick Helper</h4>
               <div className="space-y-2 text-stone-500 font-light leading-relaxed">
                 <p><strong>Editing products:</strong> Edits you perform update your client app state dynamically and persist through local storage sessions.</p>
-                <p><strong>WhatsApp Hook:</strong> Customer inquiries include quick action triggers to generate pre-filled chat messages direct to Ramesh Bhise's desk.</p>
+                <p><strong>WhatsApp Hook:</strong> Customer inquiries include quick action triggers to generate pre-filled chat messages direct to Bhisez desk.</p>
               </div>
             </div>
           </div>
@@ -2247,7 +2247,7 @@ export default function AdminView({
                     </div>
 
                     <div className="flex flex-col space-y-1.5">
-                      <label className="text-[10px] font-black text-stone-400 uppercase tracking-widest">Ramesh Bhise Slogan quote</label>
+                      <label className="text-[10px] font-black text-stone-400 uppercase tracking-widest">Bhisez Slogan quote</label>
                       <textarea 
                         value={websiteContent.aboutQuote}
                         onChange={(e) => handleUpdateContentField('aboutQuote', e.target.value)}
@@ -2420,7 +2420,7 @@ export default function AdminView({
 
                 <div className="bg-[#FAF7F2] border border-[#E0D8CF] rounded-2xl p-4 flex justify-between items-center text-xs">
                   <div>
-                    Active Operator Authority Role: <strong>{adminRole === 'owner' ? '👑 Owner Admin (Ramesh Bhise / Full Master Privilege)' : '🛠️ Staff Worker (Read & Update-only access)'}</strong>
+                    Active Operator Authority Role: <strong>{adminRole === 'owner' ? '👑 Owner Admin (Bhise / Full Master Privilege)' : '🛠️ Staff Worker (Read & Update-only access)'}</strong>
                   </div>
                   <div className="text-[10px] text-stone-400 uppercase font-bold tracking-widest bg-white border border-stone-200 px-3 py-1 rounded-full">
                     Logs: {activityLogs.length}
@@ -2476,7 +2476,7 @@ export default function AdminView({
                       <label className="text-[10px] font-black text-stone-400 uppercase tracking-widest">Business Storefront Name</label>
                       <input 
                         type="text" 
-                        value={websiteContent.businessName || 'Ramesh Bhise Carpenter Workshop'}
+                        value={websiteContent.businessName || 'Bhisez Carpenter Workshop'}
                         onChange={(e) => handleUpdateContentField('businessName', e.target.value)}
                         className="border border-[#E0D8CF] rounded-xl px-4 py-2 text-xs text-stone-705 bg-white font-bold"
                       />

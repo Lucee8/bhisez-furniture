@@ -45,14 +45,14 @@ const DEFAULT_INQUIRIES = [
     phone: '+91 91672 55431',
     city: 'Kudal',
     subject: 'Showroom visit guide',
-    message: 'Planning to visit Sukalwad NH-66 showroom to lock premium double beds with hydraulic storage. Will Ramesh be there on Saturday?',
+    message: 'Planning to visit Sukalwad NH-66 showroom to lock premium double beds with hydraulic storage. Will Bhisez master artisans be there on Saturday?',
     notes: 'Premium double bed, hydraulic storage',
     status: 'Reviewed',
     date: '2026-06-09'
   },
   {
     id: 'inq-3',
-    name: 'Ramesh Patil',
+    name: 'Rajesh Patil',
     phone: '+91 93245 67781',
     city: 'Sawantwadi',
     subject: 'Bulk/Commercial quote',
@@ -65,7 +65,7 @@ const DEFAULT_INQUIRIES = [
 
 const DEFAULT_WEBSITE_CONTENT = {
   heroTitle: 'Genuine Malvani Hardwoods. Masterfully Carved.',
-  heroSubtitle: 'By Ramesh Bhise Carpenter Workshop. Direct heirloom luxury for doors, double-beds, and customized Mandirs since 1995.',
+  heroSubtitle: 'By Bhisez Carpenter Workshop. Direct heirloom luxury for doors, double-beds, and customized Mandirs since 1995.',
   aboutQuote: "Every ring in a log represents a monsoon we stood together. We don't just shape wood; we preserve Malvan's heritage in your living quarters.",
   whatsappLine: '+91 70574 41122',
   malvanAddress: 'Main Market Road, Malvan, Sindhudurg, Maharashtra – 416606',

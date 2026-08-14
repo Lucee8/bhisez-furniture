@@ -47,7 +47,7 @@ export const PRODUCT_OVERRIDES: Record<string, Partial<Product>> = {
     },
     deliverySubtext: "Includes free local white-glove installation & GST invoice.", // ⭐️ standard as requested
     shortDesc: "Pristine Handcarved Royal Traditional Bed in Teakwood.",
-    description: "Designed and perfected in Bhisez Sindhudurg workshop of Ramesh Bhise, this premium bed is a fine specimen of Indian carpentry. Features premium selected grains, borer resistant seasoning, and flawless double coat PU satin finish."
+    description: "Designed and perfected in Bhisez Sindhudurg workshop, this premium bed is a fine specimen of Indian carpentry. Features premium selected grains, borer resistant seasoning, and flawless double coat PU satin finish."
   },
   "beds-premium-bed-2": {
     name: "BED - premium bed #02",
@@ -73,7 +73,7 @@ export const PRODUCT_OVERRIDES: Record<string, Partial<Product>> = {
       origOptionAdjustments: { "Hydraulic Storage": 0, "Non Storage": -14000 }
     },
     shortDesc: "Handcrafted with seasoned native timber wood. Built using durable standard premium joinery.",
-    description: "Designed and perfected in Bhisez Sindhudurg workshop of Ramesh Bhise, this premium bed is a fine specimen of Indian carpentry."
+    description: "Designed and perfected in Bhisez Sindhudurg workshop, this premium bed is a fine specimen of Indian carpentry."
   },
   "beds-premium-bed-3": {
     name: "BED - premium bed #03",

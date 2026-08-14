@@ -465,7 +465,7 @@ export default function App() {
       {loadingDb && (
         <div className="bg-[#EAE1D5]/80 backdrop-blur-md text-[#3D2B1F] text-[10px] sm:text-xs font-semibold py-2 px-4 text-center border-b border-[#E0D8CF] flex items-center justify-center gap-2 select-none z-[100] transition-opacity">
           <span className="w-3 h-3 rounded-full border-2 border-[#3D2B1F] border-t-transparent animate-spin shrink-0"></span>
-          <span>Connecting to live Ramesh Bhise Workshop Firebase Database...</span>
+          <span>Connecting to live Bhisez Workshop Firebase Database...</span>
         </div>
       )}
 
@@ -630,7 +630,7 @@ export default function App() {
       {/* Ambient Floating WhatsApp helper button */}
       {!isAdminRoute() && currentView !== 'admin' && (
         <a 
-          href={`https://wa.me/917057441122?text=${encodeURIComponent(`Hi Ramesh! I'd like to get an estimate for solid hardwood furniture.`)}`}
+          href={`https://wa.me/917057441122?text=${encodeURIComponent(`Hi Bhisez! I'd like to get an estimate for solid hardwood furniture.`)}`}
           target="_blank"
           className="fixed bottom-6 left-6 z-[90] w-12 h-12 bg-[#25D366] hover:bg-[#1ebd59] text-white rounded-full flex items-center justify-center shadow-lg transition-transform hover:scale-110"
           rel="noreferrer"

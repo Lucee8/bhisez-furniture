@@ -417,7 +417,7 @@ export default function ProductDetailView({
             ) : (
               <div className="bg-white border border-[#E0D8CF] p-5 rounded-2xl flex flex-col items-start space-y-1">
                 <span className="text-xs font-bold text-amber-800">🛠️ Price Upon Custom Quote</span>
-                <p className="text-[11px] text-stone-500">Contact Ramesh directly to provide custom dimensional sketches or wood finishes.</p>
+                <p className="text-[11px] text-stone-500">Contact Bhisez directly to provide custom dimensional sketches or wood finishes.</p>
               </div>
             )}
 
@@ -508,7 +508,7 @@ export default function ProductDetailView({
               )}
 
               <a 
-                href={`https://wa.me/917057441122?text=${encodeURIComponent(`Hi Ramesh! I want to order/enquire details.\nProduct: ${product.name}${product.availableSize ? `\nAvailable Size: ${product.availableSize}` : (sizesList.length > 0 ? `\n${sizingLabel}: ${selectedSize}` : '')}\nWood Type: ${selectedWoodType}${optionsList.length > 0 && optionsLabel ? `\n${optionsLabel}: ${selectedStorage}` : ''}\nQty: ${quantity}`)}`}
+                href={`https://wa.me/917057441122?text=${encodeURIComponent(`Hi Bhisez! I want to order/enquire details.\nProduct: ${product.name}${product.availableSize ? `\nAvailable Size: ${product.availableSize}` : (sizesList.length > 0 ? `\n${sizingLabel}: ${selectedSize}` : '')}\nWood Type: ${selectedWoodType}${optionsList.length > 0 && optionsLabel ? `\n${optionsLabel}: ${selectedStorage}` : ''}\nQty: ${quantity}`)}`}
                 target="_blank"
                 rel="noreferrer"
                 className="w-full bg-[#25D366] hover:bg-[#1ebd59] text-white font-bold text-xs uppercase tracking-wider py-4 rounded-xl flex items-center justify-center gap-2 shadow-xs text-center"
@@ -554,7 +554,7 @@ export default function ProductDetailView({
                   )
                 ) : (
                   <>
-                    <p>Designed and seasoned meticulously within our regional workshops in Malvan, Sindhudurg. This custom product has been the absolute masterpiece of Ramesh Bhise’s traditional structural cabinetry range.</p>
+                    <p>Designed and seasoned meticulously within our regional workshops in Malvan, Sindhudurg. This custom product has been the absolute masterpiece of Bhisez traditional structural cabinetry range.</p>
                     <p>Constructed completely using seasoned grade solid hardwood boards. Each frame segment undergo double-jointed lockouts preventing alignment failures under extreme humidity levels, accompanied by eco-friendly polyurethane hand lacquer finish.</p>
                   </>
                 )}

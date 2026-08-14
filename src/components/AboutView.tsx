@@ -29,11 +29,11 @@ export default function AboutView({ onNavigate }: AboutViewProps) {
             </h1>
             
             <p className="text-stone-500 text-xs sm:text-sm leading-relaxed font-light">
-              We are more than just a brand catalog. We are carpenter-led team who believe that seasoned Teakwood, Sheesham (Indian Rosewood), and Mango timber holds active soul within its grains. What started as Ramesh Bhise’s standalone Southern Konkan workshop has evolved into Sindhudurg’s most reliable custom woodwork house.
+              We are more than just a brand catalog. We are carpenter-led team who believe that seasoned Teakwood, Sheesham (Indian Rosewood), and Mango timber holds active soul within its grains. What started as Bhisez standalone Southern Konkan workshop has evolved into Sindhudurg’s most reliable custom woodwork house.
             </p>
 
             <div className="flex border-l-2 border-[#C9983A] pl-4 italic text-stone-500 text-xs leading-relaxed max-w-sm">
-              "We season every timber log under the coastal atmospheric moisture levels so that your beds, mandirs, and dining suites do not creak or distort." <br />— Ramesh Bhise, Founder
+              "We season every timber log under the coastal atmospheric moisture levels so that your beds, mandirs, and dining suites do not creak or distort." <br />— Bhisez Artisans
             </div>
           </div>
 
@@ -45,7 +45,7 @@ export default function AboutView({ onNavigate }: AboutViewProps) {
               referrerPolicy="no-referrer"
             />
             <div className="absolute inset-x-0 bottom-0 bg-stone-950/60 p-4 text-center">
-              <span className="text-white text-xs font-serif italic">Ramesh & Sunita, managing woodcarvings to custom polishes</span>
+              <span className="text-white text-xs font-serif italic">Bhisez master artisans, managing woodcarvings to custom polishes</span>
             </div>
           </div>
 

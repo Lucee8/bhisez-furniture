@@ -759,7 +759,7 @@ const getCategoryDefaults = (categorySlug: string) => {
       sizeAdjustments: { "Full Size": 0 },
       optionAdjustments: { "Waterproof Lacquer Shield": 0, "Traditional Wood Finish Only": -1200 }
     },
-    deliverySubtext: "Proudly handcrafted in Ramesh Bhise's Sindhudurg workshop."
+    deliverySubtext: "Proudly handcrafted in Bhisez Sindhudurg workshop."
   };
 };
 
@@ -799,7 +799,7 @@ const generateProducts = (): Product[] => {
 
         const descOverride = PRODUCT_DESCRIPTIONS[id];
         const shortDesc = descOverride?.shortDesc || `Handcrafted with seasoned native timber wood. Built using durable standard premium joinery for generation-lasting strength.`;
-        const description = descOverride?.description || `Designed and perfected in Bhisez Sindhudurg workshop of Ramesh Bhise, this ${sub.name} is a fine specimen of Indian carpentry. Features premium selected grains, borer resistant seasoning, and flawless double coat PU satin finish. Excellent ergonomics matching compact as well as royal traditional architecture.`;
+        const description = descOverride?.description || `Designed and perfected in Bhisez Sindhudurg workshop, this ${sub.name} is a fine specimen of Indian carpentry. Features premium selected grains, borer resistant seasoning, and flawless double coat PU satin finish. Excellent ergonomics matching compact as well as royal traditional architecture.`;
 
         // Retrieve specs mapped from CSV file
         const csvSpecs = getCsvSpecs(cat.slug, sub.slug, i);
@@ -882,7 +882,7 @@ export const TESTIMONIALS = [
     name: 'Rahul Desai',
     location: 'Malvan',
     stars: 5,
-    text: 'Got our complete solid teak bedroom bed and wardrobes from Bhise\'z. The quality of seasoned timber is outstanding and delivery was fully set up in our room. Highly recommend रमेश (Ramesh) Bhise!'
+    text: 'Got our complete solid teak bedroom bed and wardrobes from Bhise\'z. The quality of seasoned timber is outstanding and delivery was fully set up in our room. Highly recommend Bhisez!'
   },
   {
     name: 'Sunita Naik',
@@ -894,7 +894,7 @@ export const TESTIMONIALS = [
     name: 'Manoj Sawant',
     location: 'Ratnagiri',
     stars: 5,
-    text: 'Ramesh made us a custom layout sofa-bed matching our drawing room dimensions. They understood our fabric tastes and crafted a masterpiece!'
+    text: 'Bhisez made us a custom layout sofa-bed matching our drawing room dimensions. They understood our fabric tastes and crafted a masterpiece!'
   }
 ];
 
@@ -916,14 +916,14 @@ export const DEFAULT_INQUIRIES = [
     phone: '+91 91672 55431',
     city: 'Kudal',
     subject: 'Showroom visit guide',
-    message: 'Planning to visit Sukalwad NH-66 showroom to lock premium double beds with hydraulic storage. Will Ramesh be there on Saturday?',
+    message: 'Planning to visit Sukalwad NH-66 showroom to lock premium double beds with hydraulic storage. Will Bhisez master artisans be there on Saturday?',
     notes: 'Premium double bed, hydraulic storage',
     status: 'Reviewed',
     date: '2026-06-09'
   },
   {
     id: 'inq-3',
-    name: 'Ramesh Patil',
+    name: 'Rajesh Patil',
     phone: '+91 93245 67781',
     city: 'Sawantwadi',
     subject: 'Bulk/Commercial quote',
@@ -936,7 +936,7 @@ export const DEFAULT_INQUIRIES = [
 
 export const DEFAULT_WEBSITE_CONTENT = {
   heroTitle: 'Genuine Malvani Hardwoods. Masterfully Carved.',
-  heroSubtitle: 'By Ramesh Bhise Carpenter Workshop. Direct heirloom luxury for doors, double-beds, and customized Mandirs since 1995.',
+  heroSubtitle: 'By Bhisez Carpenter Workshop. Direct heirloom luxury for doors, double-beds, and customized Mandirs since 1995.',
   aboutQuote: "Every ring in a log represents a monsoon we stood together. We don't just shape wood; we preserve Malvan's heritage in your living quarters.",
   whatsappLine: '+91 70574 41122',
   malvanAddress: 'Main Market Road, Malvan, Sindhudurg, Maharashtra – 416606',

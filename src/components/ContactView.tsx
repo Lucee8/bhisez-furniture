@@ -81,7 +81,7 @@ Message: ${message}`;
         {/* Intro header */}
         <div className="text-center max-w-xl mx-auto space-y-3">
           <span className="text-xs font-black tracking-widest text-[#8B6F5C] uppercase block">Workshop direct link</span>
-          <h1 className="font-serif text-3xl font-extrabold text-[#3D2B1F]">Connect With Us</h1>
+          <h1 className="font-serif text-3xl font-extrabold text-[#3D2B1F]">Connect With Bhisez</h1>
           <p className="text-stone-500 text-xs sm:text-sm leading-relaxed font-light">
             Do you require specific dimensional custom frames, polish stain guides, or catalog estimates? Submit an inquiry - we verify immediately.
           </p>
@@ -107,7 +107,7 @@ Message: ${message}`;
                 <span className="text-lg shrink-0">💬</span>
                 <div>
                   <span className="font-bold text-stone-800">WhatsApp Sales desk</span>
-                  <p className="mt-0.5"><a href="https://wa.me/917057441122" target="_blank" rel="noreferrer" className="text-emerald-600 font-bold hover:underline">Message Ramesh Bhise (+91 70574 41122)</a></p>
+                  <p className="mt-0.5"><a href="https://wa.me/917057441122" target="_blank" rel="noreferrer" className="text-emerald-600 font-bold hover:underline">Message Bhisez (+91 70574 41122)</a></p>
                 </div>
               </div>
 
@@ -124,7 +124,7 @@ Message: ${message}`;
             <div className="p-4 bg-amber-50 border border-amber-200 text-amber-800 rounded-2xl text-xs space-y-2 max-w-sm">
               <span className="font-bold flex items-center gap-1"><Sparkles size={12} className="text-amber-600" /> Custom Wood Seasoning</span>
               <p className="leading-relaxed font-light">
-                Send your floor plan blueprint drawings or Pinterest furniture screenshots. Ramesh will advice correct thicknesses and teak grain layouts over call.
+                Send your floor plan blueprint drawings or Pinterest furniture screenshots. Our master carpenters will advise correct thicknesses and teak grain layouts over call.
               </p>
             </div>
 

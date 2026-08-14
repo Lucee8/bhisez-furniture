@@ -340,7 +340,7 @@ export default function Navbar({
                         {currentCat.promoOffer}
                       </span>
                       <h4 className="font-serif text-[15px] font-bold leading-tight uppercase tracking-wide text-white">{currentCat.promoTitle}</h4>
-                      <p className="text-stone-300 text-[11px] mt-0.5">By Ramesh Bhise Carpenters</p>
+                      <p className="text-stone-300 text-[11px] mt-0.5">By Bhisez Carpenters</p>
                       
                       <button
                         onClick={() => {
@@ -436,7 +436,7 @@ export default function Navbar({
                 rel="noreferrer"
                 className="w-full text-center bg-[#25D366] text-white text-xs font-bold py-2.5 px-4 rounded-lg flex items-center justify-center gap-2"
               >
-                💬 WhatsApp Ramesh
+                💬 WhatsApp Bhisez
               </a>
               {isLoggedIn ? (
                 <button 

@@ -317,7 +317,7 @@ export default function HomeView({
   const [featuresList, setFeaturesList] = useState([
     { id: 'landing', label: 'Main Website Platform & Landing Grid', price: 12000, checked: true, required: true },
     { id: 'beds-cat', label: 'Seasoned Wood Catalog & Multi-Filters', price: 3500, checked: true },
-    { id: 'wa-enquiry', label: 'Ramesh Chat Direct Whatsapp Custom Order Form', price: 2500, checked: true },
+    { id: 'wa-enquiry', label: 'Bhisez Direct Whatsapp Custom Order Form', price: 2500, checked: true },
     { id: 'showroom', label: 'Showroom Map & Succinct Interactive Guides', price: 2000, checked: true },
     { id: 'wishlist', label: 'User Wishlist Storage & Dynamic Shopping Bag System', price: 2500, checked: true },
     { id: 'admin', label: 'Secured Premium Member Account Login Console', price: 1500, checked: false },
@@ -869,7 +869,7 @@ export default function HomeView({
                   </div>
                   
                   <span className="text-[11px] font-black text-emerald-600">
-                    Ask Ramesh
+                    Ask Bhisez
                   </span>
                 </div>
               </div>
@@ -990,7 +990,7 @@ export default function HomeView({
                 <div className="bg-[#FCFAF8]/5 border border-amber-500/10 rounded-xl p-4 text-xs space-y-2 text-stone-300">
                   <p className="font-bold text-white text-sm">💡 Pitch Strategy for Bhise'z Furniture</p>
                   <p className="leading-relaxed font-light">
-                    This interactive simulator helps you prove the website's high market value tosunita, ramesh, or anyone at 
+                    This interactive simulator helps you prove the website's high market value to the team at 
                     <strong className="text-white"> Bhise'z Furniture (Malvan Shop)</strong>. Toggle custom items on/off to target a highly-optimized package ranging between <strong className="text-[#FBBD18]">₹18,000 and ₹25,000</strong>.
                   </p>
                 </div>
@@ -1069,11 +1069,11 @@ export default function HomeView({
               {/* PDF or WhatsApp Pitch call-to-action button */}
               <div className="p-6 border-t border-stone-850 bg-stone-850 space-y-3">
                 <div className="text-[11px] text-stone-400 text-center font-light leading-relaxed">
-                  "Show Ramesh Bhise & Sunitaji this exact running website on your phone, then open this side-panel to prove catalog modular value!"
+                  "Show Bhisez management this exact running website on your phone, then open this side-panel to prove catalog modular value!"
                 </div>
                 
                 <a 
-                  href={`https://wa.me/917057441122?text=${encodeURIComponent(`Hi Ramesh Bhise! Here is the detailed website proposal customized for ${clientName} in ${clientLocation}:\n\n*Selected Package Features*:\n${featuresList.filter(f=>f.checked).map((f, i)=>(i+1)+'. '+f.label+' (₹'+f.price+')').join('\n')}\n\n*Total Proposed Cost*: ₹${activeFeaturesTotal.toLocaleString('en-IN')}\n\nThis consists of beautiful Wooden Street layouts, custom Teak Bed configurations, and instant WhatsApp booking maps. Let me know when we can review!`)}`}
+                  href={`https://wa.me/917057441122?text=${encodeURIComponent(`Hi Bhisez! Here is the detailed website proposal customized for ${clientName} in ${clientLocation}:\n\n*Selected Package Features*:\n${featuresList.filter(f=>f.checked).map((f, i)=>(i+1)+'. '+f.label+' (₹'+f.price+')').join('\n')}\n\n*Total Proposed Cost*: ₹${activeFeaturesTotal.toLocaleString('en-IN')}\n\nThis consists of beautiful Wooden Street layouts, custom Teak Bed configurations, and instant WhatsApp booking maps. Let me know when we can review!`)}`}
                   target="_blank"
                   rel="noreferrer"
                   className="w-full bg-[#25D366] hover:bg-emerald-600 text-white font-bold py-3 px-4 rounded-lg flex items-center justify-center gap-2 text-xs uppercase tracking-widest text-center shadow-lg transition-transform active:scale-98 cursor-pointer"

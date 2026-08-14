@@ -83,7 +83,7 @@ export default function PaymentsView({
             </div>
 
             <p className="text-xs text-stone-500 leading-relaxed font-light">
-              Ramesh Bhise's workshop will contact you over WhatsApp shortly to verify shipping coordinates, arrange a delivery slot, and review custom woodwork details!
+              Bhisez workshop will contact you over WhatsApp shortly to verify shipping coordinates, arrange a delivery slot, and review custom woodwork details!
             </p>
 
             <div className="pt-2 flex flex-col space-y-3">

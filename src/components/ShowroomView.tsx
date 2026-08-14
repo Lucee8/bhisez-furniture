@@ -301,7 +301,7 @@ Notes: ${walkthroughForm.notes}`;
             <span className="text-xs font-bold text-[#8B6F5C] uppercase tracking-wider block">Private Walkthroughs</span>
             <h2 className="font-serif text-2xl font-black text-amber-950 leading-tight">Book a Private Guided Tour</h2>
             <p className="text-stone-500 text-xs leading-relaxed font-light">
-              Are you furnishing an entire house or bedroom suite? Schedule a dedicated, 1-hour slots with Ramesh Bhise. We will have models room organized matching your wood preferences and specifications, saving you vital hours.
+              Are you furnishing an entire house or bedroom suite? Schedule a dedicated, 1-hour slot with Bhisez master artisans. We will have models room organized matching your wood preferences and specifications, saving you vital hours.
             </p>
             
             <div className="bg-[#FAF7F2] border border-[#E0D8CF] p-4 rounded-2xl space-y-2 text-xs text-stone-600 max-w-sm">

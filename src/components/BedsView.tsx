@@ -649,12 +649,12 @@ export default function BedsView({
               
               <h3 className="font-serif text-lg font-bold text-stone-900">Showroom Live Walkthrough</h3>
               <p className="text-xs text-stone-500 leading-relaxed max-w-xs mx-auto">
-                Connect directly with Ramesh Bhise or store representatives for a live HD WhatsApp video walkthrough to inspect the teak grades, drawer joints, or fabric finishes of our showroom items in real-time!
+                Connect directly with Bhisez or store representatives for a live HD WhatsApp video walkthrough to inspect the teak grades, drawer joints, or fabric finishes of our showroom items in real-time!
               </p>
 
               <div className="pt-3 flex flex-col space-y-2 bg-transparent">
                 <a
-                  href={`https://wa.me/917057441122?text=${encodeURIComponent(`Hi Ramesh! I would like to schedule/initiate a Live WhatsApp Video Walkthrough of the showrooms to see the furniture designs in real-time.`)}`}
+                  href={`https://wa.me/917057441122?text=${encodeURIComponent(`Hi Bhisez! I would like to schedule/initiate a Live WhatsApp Video Walkthrough of the showrooms to see the furniture designs in real-time.`)}`}
                   target="_blank"
                   rel="noreferrer"
                   onClick={() => setIsLiveVideoOpen(false)}

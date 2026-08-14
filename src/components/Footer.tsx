@@ -114,7 +114,7 @@ export default function Footer({ onNavigate }: FooterProps) {
         <div className="flex space-x-6 mt-4 md:mt-0">
           <button onClick={() => onNavigate('contact')} className="hover:underline bg-transparent border-none text-stone-500 cursor-pointer">Inquire</button>
           <span>·</span>
-          <span className="text-[#C9983A]">Ramesh & Sunita Bhise master designs</span>
+          <span className="text-[#C9983A]">Bhisez master designs</span>
         </div>
       </div>
 
