@@ -106,35 +106,6 @@ export default function AboutView({ onNavigate }: AboutViewProps) {
 
           </div>
         </section>
-
-        {/* MEET TEAM WOODWORK */}
-        <section className="space-y-8">
-          <div className="text-center max-w-xl mx-auto space-y-2">
-            <span className="text-xs font-bold text-[#8B6F5C] uppercase tracking-wider block">Carpentry lineage</span>
-            <h2 className="font-serif text-2xl font-black text-amber-950">The Hands in our Workshop</h2>
-            <p className="text-stone-500 text-xs leading-relaxed font-light">Ramesh leads a tightly knit guild of 14 native karigars who keep the south Maharashtra joinery traditions alive.</p>
-          </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center text-xs">
-            {[
-              { name: 'Ramesh Bhise', role: 'Founder & Principal Sculptor', label: 'RB' },
-              { name: 'Sunita Bhise', role: 'Head Polish Master', label: 'SB' },
-              { name: 'Prakash Naik', role: 'Joinery & Assembly Lead', label: 'PN' },
-              { name: 'Anil Desai', role: 'Customer Customisations Coordinator', label: 'AD' }
-            ].map((m, idx) => (
-              <div key={idx} className="bg-white border border-[#E0D8CF] rounded-2xl overflow-hidden shadow-xs pb-4">
-                <div className="py-12 bg-amber-50/40 select-none font-serif text-2xl font-extrabold text-[#8B6F5C]">
-                  {m.label}
-                </div>
-                <div className="pt-4 px-4 space-y-1">
-                  <h4 className="font-bold text-stone-800 text-sm">{m.name}</h4>
-                  <p className="text-stone-400 text-[10px] uppercase tracking-wider font-semibold">{m.role}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-
       </div>
     </div>
   );
