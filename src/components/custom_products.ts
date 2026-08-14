@@ -27,7 +27,7 @@ export const PRODUCT_OVERRIDES: Record<string, Partial<Product>> = {
     badge: "bs",  // 'bs' = Bestseller, 'new' = New Arrival, 'cus' = Custom, null = No badge
     img: "/images/BED/premium bed 01.webP", // Set your local image path here
     seriesName: "seasoned hardwood series",  // ⭐️ "seasoned hardwood series" as requested
-    brandName: "Bhise'z Furniture Showroom",  // ⭐️ "By Bhise'z Furniture Showroom" as requested
+    brandName: "Bhisez Furniture Showroom",  // ⭐️ "By Bhisez Furniture Showroom" as requested
     sizingLabel: "Dimensions / Bed Sizing",   // ⭐️ "Dimensions / Bed Sizing" as requested
     sizesList: ["King Size", "Queen Size"],  // ⭐️ "King Size", "Queen Size" as requested
     finishesLabel: "Hardwood Finish / Seal",  // ⭐️ "Hardwood Finish / Seal" as requested
@@ -55,7 +55,7 @@ export const PRODUCT_OVERRIDES: Record<string, Partial<Product>> = {
     badge: "new",
     img: "/images/BED/premium bed 02.webP",
     seriesName: "artisan cane & timber collection",
-    brandName: "Bhise'z Furniture Showroom",
+    brandName: "Bhisez Furniture Showroom",
     sizingLabel: "Dimensions / Bed Sizing",
     sizesList: ["King Size", "Queen Size"],
     finishesLabel: "Hardwood Finish / Seal",
@@ -109,7 +109,7 @@ export const PRODUCT_OVERRIDES: Record<string, Partial<Product>> = {
     badge: "bs",
     img: "/images/SOFA/sofa 01.webP",
     seriesName: "modular lounge series",
-    brandName: "Bhise'z Furniture Showroom",
+    brandName: "Bhisez Furniture Showroom",
     sizingLabel: "Seating Capacity",
     sizesList: ["3 Seater", "2 Seater", "1 Seater"],
     finishesLabel: "Premium Polish and Wax Coating",

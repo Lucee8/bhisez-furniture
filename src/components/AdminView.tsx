@@ -752,7 +752,7 @@ export default function AdminView({
           </div>
 
           <div className="space-y-1.5">
-            <h1 className="font-serif text-xl font-black text-[#3D2B1F]">Bhise'z Workshop Portal</h1>
+            <h1 className="font-serif text-xl font-black text-[#3D2B1F]">Bhisez Workshop Portal</h1>
             <p className="text-stone-500 text-xs font-light">Enter secure passcode to manage products, view inquiries, and edit website layout variables.</p>
           </div>
 
@@ -1838,7 +1838,7 @@ export default function AdminView({
 
                           <div className="flex-1 space-y-3.5 overflow-y-auto">
                             {colInquiries.map((inq, i) => {
-                              const clientPayload = `Hi ${inq.name}! Thank you for submitting your custom inquiry for Bhise'z Furniture Showrooms. We are pleased to process your quote request...`;
+                              const clientPayload = `Hi ${inq.name}! Thank you for submitting your custom inquiry for Bhisez Furniture Showrooms. We are pleased to process your quote request...`;
                               const whatsappLink = `https://wa.me/${inq.phone.replace(/[^\d]/g, '')}?text=${encodeURIComponent(clientPayload)}`;
 
                               return (
@@ -1954,7 +1954,7 @@ export default function AdminView({
                                                     ? ` with dimensions ${item.customLength}x${item.customWidth} inches`
                                                     : '';
                                                   const woodText = item.woodGrade ? ` in seasoned ${item.woodGrade}` : '';
-                                                  return `Hello ${item.name}! रमेश भिसे here from Bhise'z Workshop. We received your website request for ${categoryText}${dimensionsText}${woodText}. The hand-carving custom rate is ₹[Insert Price] with free white-glove setup. Would you like to proceed?`;
+                                                  return `Hello ${item.name}! Team Bhisez here. We received your website request for ${categoryText}${dimensionsText}${woodText}. The hand-carving custom rate is ₹[Insert Price] with free white-glove setup. Would you like to proceed?`;
                                                 }
                                               },
                                               {
@@ -1973,7 +1973,7 @@ export default function AdminView({
                                               {
                                                 label: '🚚 Dispatch Polishing Done',
                                                 builder: (item: any) => {
-                                                  return `Hi ${item.name}! Great news from Bhise'z Workshop. Your handcrafted seasoned timber unit is polished, polyurethane-sealed, and ready for shipping to ${item.city || 'your city'}. We will arrange the logistics shortly!`;
+                                                  return `Hi ${item.name}! Great news from Bhisez Workshop. Your handcrafted seasoned timber unit is polished, polyurethane-sealed, and ready for shipping to ${item.city || 'your city'}. We will arrange the logistics shortly!`;
                                                 }
                                               }
                                             ].map((tpl, idx) => {
@@ -2015,7 +2015,7 @@ export default function AdminView({
                   /* 📋 TABLE LIST VIEW */
                   <div className="space-y-4">
                     {inquiries.map((inq, i) => {
-                      const clientPayload = `Hi ${inq.name}! Thank you for submitting your custom inquiry for Bhise'z Furniture Showrooms. We are pleased to process your quote request...`;
+                      const clientPayload = `Hi ${inq.name}! Thank you for submitting your custom inquiry for Bhisez Furniture Showrooms. We are pleased to process your quote request...`;
                       const whatsappLink = `https://wa.me/${inq.phone.replace(/[^\d]/g, '')}?text=${encodeURIComponent(clientPayload)}`;
 
                       return (
@@ -2158,7 +2158,7 @@ export default function AdminView({
                                             ? ` with dimensions ${item.customLength}x${item.customWidth} inches`
                                             : '';
                                           const woodText = item.woodGrade ? ` in seasoned ${item.woodGrade}` : '';
-                                          return `Hello ${item.name}! रमेश भिसे here from Bhise'z Workshop. We received your website request for ${categoryText}${dimensionsText}${woodText}. The hand-carving custom rate is ₹[Insert Price] with free white-glove setup. Would you like to proceed?`;
+                                          return `Hello ${item.name}! Team Bhisez here. We received your website request for ${categoryText}${dimensionsText}${woodText}. The hand-carving custom rate is ₹[Insert Price] with free white-glove setup. Would you like to proceed?`;
                                         }
                                       },
                                       {
@@ -2177,7 +2177,7 @@ export default function AdminView({
                                       {
                                         label: '🚚 Dispatch Polishing Done',
                                         builder: (item: any) => {
-                                          return `Hi ${item.name}! Great news from Bhise'z Workshop. Your handcrafted seasoned timber unit is polished, polyurethane-sealed, and ready for shipping to ${item.city || 'your city'}. We will arrange the logistics shortly!`;
+                                          return `Hi ${item.name}! Great news from Bhisez Workshop. Your handcrafted seasoned timber unit is polished, polyurethane-sealed, and ready for shipping to ${item.city || 'your city'}. We will arrange the logistics shortly!`;
                                         }
                                       }
                                     ].map((tpl, idx) => {
@@ -2317,7 +2317,7 @@ export default function AdminView({
                         const text = prompt('Enter testimonial text:');
                         if (name && text) {
                           const currentTestimonials = websiteContent.testimonialsList || [
-                            { name: 'Rahul Desai', location: 'Malvan', stars: 5, text: "Got our complete solid teak bedroom bed and wardrobes from Bhise'z. The quality of seasoned timber is outstanding." },
+                      { name: 'Rahul Desai', location: 'Malvan', stars: 5, text: "Got our complete solid teak bedroom bed and wardrobes from Bhisez. The quality of seasoned timber is outstanding." },
                             { name: 'Sunita Naik', location: 'Kudal', stars: 5, text: "The home pooja mandir they hand-polished is incredibly gorgeous. Karigars here are masters!" }
                           ];
                           const nextTestimonials = [
@@ -2337,7 +2337,7 @@ export default function AdminView({
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {(websiteContent.testimonialsList || [
-                      { name: 'Rahul Desai', location: 'Malvan', stars: 5, text: "Got our complete solid teak bedroom bed and wardrobes from Bhise'z. The quality of seasoned timber is outstanding." },
+                      { name: 'Rahul Desai', location: 'Malvan', stars: 5, text: "Got our complete solid teak bedroom bed and wardrobes from Bhisez. The quality of seasoned timber is outstanding." },
                       { name: 'Sunita Naik', location: 'Kudal', stars: 5, text: "The home pooja mandir they hand-polished is incredibly gorgeous. Karigars here are masters!" }
                     ]).map((test: any, idx: number) => (
                       <div key={idx} className="p-4 bg-stone-50 border border-stone-200 rounded-2xl flex flex-col justify-between">
@@ -2359,7 +2359,7 @@ export default function AdminView({
                             onClick={() => {
                               if (confirm('Delete this testimonial card?')) {
                                 const currentTestimonials = websiteContent.testimonialsList || [
-                                  { name: 'Rahul Desai', location: 'Malvan', stars: 5, text: "Got our complete solid teak bedroom bed and wardrobes from Bhise'z. The quality of seasoned timber is outstanding." },
+                                  { name: 'Rahul Desai', location: 'Malvan', stars: 5, text: "Got our complete solid teak bedroom bed and wardrobes from Bhisez. The quality of seasoned timber is outstanding." },
                                   { name: 'Sunita Naik', location: 'Kudal', stars: 5, text: "The home pooja mandir they hand-polished is incredibly gorgeous. Karigars here are masters!" }
                                 ];
                                 const nextTestimonials = currentTestimonials.filter((_: any, i: number) => i !== idx);

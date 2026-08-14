@@ -312,7 +312,7 @@ export default function HomeView({
 
   // Proposal State for Pitch Assistant
   const [showPitchDrawer, setShowPitchDrawer] = useState(false);
-  const [clientName, setClientName] = useState('Bhise\'z Furniture Showroom');
+  const [clientName, setClientName] = useState('Bhisez Furniture Showroom');
   const [clientLocation, setClientLocation] = useState('Malvan, Sindhudurg');
   const [featuresList, setFeaturesList] = useState([
     { id: 'landing', label: 'Main Website Platform & Landing Grid', price: 12000, checked: true, required: true },
@@ -988,10 +988,10 @@ export default function HomeView({
                 
                 {/* Visual Sales Tag */}
                 <div className="bg-[#FCFAF8]/5 border border-amber-500/10 rounded-xl p-4 text-xs space-y-2 text-stone-300">
-                  <p className="font-bold text-white text-sm">💡 Pitch Strategy for Bhise'z Furniture</p>
+                  <p className="font-bold text-white text-sm">💡 Pitch Strategy for Bhisez Furniture</p>
                   <p className="leading-relaxed font-light">
                     This interactive simulator helps you prove the website's high market value to the team at 
-                    <strong className="text-white"> Bhise'z Furniture (Malvan Shop)</strong>. Toggle custom items on/off to target a highly-optimized package ranging between <strong className="text-[#FBBD18]">₹18,000 and ₹25,000</strong>.
+                    <strong className="text-white"> Bhisez Furniture (Malvan Shop)</strong>. Toggle custom items on/off to target a highly-optimized package ranging between <strong className="text-[#FBBD18]">₹18,000 and ₹25,000</strong>.
                   </p>
                 </div>
 

@@ -524,7 +524,7 @@ export default function BedsView({
                     <div className="space-y-1 text-left">
                       {/* Brand name */}
                       <span className="text-[10px] sm:text-[11px] font-bold text-stone-400 uppercase tracking-wider block">
-                        BHISE'Z FURNITURE
+                        BHISEZ FURNITURE
                       </span>
                       {/* Title description inline-clamped */}
                       <h3 className="text-xs sm:text-sm font-semibold text-stone-800 leading-snug line-clamp-2 min-h-[34px] group-hover:text-[#f06e38] transition-colors">

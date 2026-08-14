@@ -16,7 +16,7 @@ export interface Product {
 
   // 🎨 Customized layout overrides matching screenshot requirements
   seriesName?: string;       // e.g. "SEASONED HARDWOOD SERIES"
-  brandName?: string;        // e.g. "Bhise'z Furniture Showroom"
+  brandName?: string;        // e.g. "Bhisez Furniture Showroom"
   sizingLabel?: string;      // e.g. "Dimensions / Bed Sizing" or "Dimensions / Sofa Sizing"
   sizesList?: string[];      // e.g. ["King Size", "Queen Size"]
   finishesLabel?: string;    // e.g. "Hardwood Finish / Seal"

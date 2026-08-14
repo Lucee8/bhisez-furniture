@@ -35,7 +35,7 @@ export default function ProductDetailView({
 }: ProductDetailViewProps) {
   // Determine dynamic options & labels based on product configurations
   const seriesName = product.seriesName || "seasoned hardwood series";
-  const brandName = product.brandName || "Bhise'z Furniture Showroom";
+  const brandName = product.brandName || "Bhisez Furniture Showroom";
 
   const isBedProduct = (product.category === 'beds' || product.subCategory?.includes('bed') || product.id?.toString().startsWith('beds-')) && product.category !== 'sofa-cum-beds';
 

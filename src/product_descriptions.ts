@@ -2,7 +2,7 @@ export const PRODUCT_DESCRIPTIONS: Record<string, { shortDesc: string; descripti
   // ── BEDS — PREMIUM BED ──
   "beds-premium-bed-1": {
     shortDesc: "Grand king-size premium teak bed with deeply carved floral headboard.",
-    description: "This premium bed, #01 from Bhise'z workshop, is built from first-grade A-class seasoned teak. The towering headboard carries intricate floral motifs hand-chiselled by master karigar. Reinforced mortise-and-tenon joints ensure lifetime rigidity. Double-coat PU satin finish brings out the rich wrap grain. Ideal for spacious master bedrooms seeking a statement centrepiece."
+    description: "This premium bed, #01 from Bhisez workshop, is built from first-grade A-class seasoned teak. The towering headboard carries intricate floral motifs hand-chiselled by master karigar. Reinforced mortise-and-tenon joints ensure lifetime rigidity. Double-coat PU satin finish brings out the rich wrap grain. Ideal for spacious master bedrooms seeking a statement centrepiece."
   },
   "beds-premium-bed-2": { 
     shortDesc: "Royal carved premium bed with pillar accents and deep mahogany finish.",
@@ -20,7 +20,7 @@ export const PRODUCT_DESCRIPTIONS: Record<string, { shortDesc: string; descripti
   // ── BEDS — OPEN BED ──
   "beds-open-bed-1": {
     shortDesc: "Classic open teak bed with simple arched headboard, timeless appeal.",
-    description: "Open Bed #01 is the foundational design from Bhise'z — a clean arched headboard in solid teak with no-frills elegance. Perfect for minimalist rooms. Seasoned timber, mortise joints, and a natural teak-satin PU finish make this a lifetime investment. Fits standard 5×6 queen mattress."
+    description: "Open Bed #01 is the foundational design from Bhisez — a clean arched headboard in solid teak with no-frills elegance. Perfect for minimalist rooms. Seasoned timber, mortise joints, and a natural teak-satin PU finish make this a lifetime investment. Fits standard 5×6 queen mattress."
   },
   "beds-open-bed-2": {
     shortDesc: "Open teak bed with slatted headboard for a breezy, airy bedroom look.",
@@ -66,7 +66,7 @@ export const PRODUCT_DESCRIPTIONS: Record<string, { shortDesc: string; descripti
   // ── BEDS — FLOATING BED ──
   "beds-floating-bed-1": {
     shortDesc: "Modern floating teak bed with recessed base for a hovering visual effect.",
-    description: "This floating bed from Bhise'z achieves its levitating look through a recessed platform base set 4 inches inward from the perimeter — creating a clean shadow gap all around. Solid seasoned teak with a low-profile headboard in natural grain finish. Perfect for modern, minimal, or Scandinavian-influenced interiors. Fits standard 6×6 king mattresses."
+    description: "This floating bed from Bhisez achieves its levitating look through a recessed platform base set 4 inches inward from the perimeter — creating a clean shadow gap all around. Solid seasoned teak with a low-profile headboard in natural grain finish. Perfect for modern, minimal, or Scandinavian-influenced interiors. Fits standard 6×6 king mattresses."
   },
 
   // ── BEDS — BOX BED ──
@@ -144,13 +144,13 @@ export const PRODUCT_DESCRIPTIONS: Record<string, { shortDesc: string; descripti
   // ── BEDS — POSTER BED ──
   "beds-poster-bed-1": {
     shortDesc: "Majestic four-poster teak bed with carved canopy corner pillars.",
-    description: "The Poster Bed is Bhise'z most regal offering — four towering turned-and-carved corner pillars support an optional canopy frame above. The headboard carries a full carved panel of traditional floral and vine motifs. Solid first-grade teak, kiln-seasoned and borer-treated. Dark rosewood PU finish. Made to order; transforms any bedroom into a palace suite."
+    description: "The Poster Bed is Bhisez most regal offering — four towering turned-and-carved corner pillars support an optional canopy frame above. The headboard carries a full carved panel of traditional floral and vine motifs. Solid first-grade teak, kiln-seasoned and borer-treated. Dark rosewood PU finish. Made to order; transforms any bedroom into a palace suite."
   },
 
   // ── BEDS — BUNK BED ──
   "beds-bunk-bed-1": {
     shortDesc: "Solid teak bunk bed with safety rail and sturdy fixed ladder.",
-    description: "The Bunk Bed from Bhise'z is built for safety and durability — thick teak uprights, full-length guard rails on the upper bunk, and a fixed-angle ladder with wide anti-slip rungs. Both bunks accommodate standard 3×6 single mattresses. Mortise-and-tenon joints at every connection. Natural teak PU finish. Ideal for children's rooms and hostels."
+    description: "The Bunk Bed from Bhisez is built for safety and durability — thick teak uprights, full-length guard rails on the upper bunk, and a fixed-angle ladder with wide anti-slip rungs. Both bunks accommodate standard 3×6 single mattresses. Mortise-and-tenon joints at every connection. Natural teak PU finish. Ideal for children's rooms and hostels."
   },
 
   // ── BEDS — HYDRAULIC BED ──
@@ -162,7 +162,7 @@ export const PRODUCT_DESCRIPTIONS: Record<string, { shortDesc: string; descripti
   // ── WOODEN CHAIRS ──
   "wooden-chairs-cane-rocking-chair-1": {
     shortDesc: "Cane-seat rocking chair in seasoned teak with curved backrest.",
-    description: "The Cane Rocking Chair from Bhise'z pairs a solid teak rocker frame with a hand-woven natural cane seat and backrest. The gentle arc of the rockers and the slight recline of the backrest provide effortless comfort. Ideal for verandas, reading corners, and elderly family members. Borer-treated teak, clear satin PU finish preserving both wood and cane tones."
+    description: "The Cane Rocking Chair from Bhisez pairs a solid teak rocker frame with a hand-woven natural cane seat and backrest. The gentle arc of the rockers and the slight recline of the backrest provide effortless comfort. Ideal for verandas, reading corners, and elderly family members. Borer-treated teak, clear satin PU finish preserving both wood and cane tones."
   },
   "wooden-chairs-rocking-chair-1": {
     shortDesc: "Classic solid teak rocking chair with padded seat option.",
@@ -190,7 +190,7 @@ export const PRODUCT_DESCRIPTIONS: Record<string, { shortDesc: string; descripti
   },
   "wooden-chairs-chair-2": {
     shortDesc: "Dining chair with carved top rail and solid teak seat.",
-    description: "Chair #02 replaces the cane back with a solid teak carved-rail backrest — a single wide horizontal splat with a carved rope motif. Solid wood seat with a slight dish for comfort. Thick turned legs. Walnut PU finish. A more traditional look that pairs beautifully with the carved dining tables from Bhise'z."
+    description: "Chair #02 replaces the cane back with a solid teak carved-rail backrest — a single wide horizontal splat with a carved rope motif. Solid wood seat with a slight dish for comfort. Thick turned legs. Walnut PU finish. A more traditional look that pairs beautifully with the carved dining tables from Bhisez."
   },
   "wooden-chairs-chair-3": {
     shortDesc: "Ladder-back teak chair with three rungs, cottage-style elegance.",
@@ -288,7 +288,7 @@ export const PRODUCT_DESCRIPTIONS: Record<string, { shortDesc: string; descripti
   },
   "door-frames-set-16": {
     shortDesc: "Teak door set with full carved backboard and plain frame, Design #16.",
-    description: "Set #16 uses a fully carved shutter face — every square inch worked with a repeating vine-and-flower pattern — set within a deliberately plain, heavy-section frame. The contrast between intricate shutter and simple frame is striking. Solid teak, dark walnut PU coat. A masterpiece of Bhise'z craftsmanship."
+    description: "Set #16 uses a fully carved shutter face — every square inch worked with a repeating vine-and-flower pattern — set within a deliberately plain, heavy-section frame. The contrast between intricate shutter and simple frame is striking. Solid teak, dark walnut PU coat. A masterpiece of Bhisez craftsmanship."
   },
   "door-frames-set-17": {
     shortDesc: "Solid teak door set with ribbed horizontal pattern, Design #17.",
@@ -352,7 +352,7 @@ export const PRODUCT_DESCRIPTIONS: Record<string, { shortDesc: string; descripti
   },
   "door-frames-set-32": {
     shortDesc: "Teak door set with full carved shutter and matching carved threshold, Design #32.",
-    description: "Set #32 is a complete package — carved shutter, carved frame, and a matching carved hardwood threshold with a step-profile. The shutter carries an all-over floral-vine pattern, and the frame echoes it with a carved inner moulding. Solid first-grade teak, dark rosewood PU finish. The most complete and coordinated door set in the Bhise'z range."
+    description: "Set #32 is a complete package — carved shutter, carved frame, and a matching carved hardwood threshold with a step-profile. The shutter carries an all-over floral-vine pattern, and the frame echoes it with a carved inner moulding. Solid first-grade teak, dark rosewood PU finish. The most complete and coordinated door set in the Bhisez range."
   },
   "door-frames-set-33": {
     shortDesc: "Teak door set with Lakshmi-pada auspicious carving, Design #33.",
@@ -366,7 +366,7 @@ export const PRODUCT_DESCRIPTIONS: Record<string, { shortDesc: string; descripti
   },
   "door-frames-mandir-room-2": {
     shortDesc: "Mandir room door with Ganesha carved panel and arched top, Design #02.",
-    description: "Mandir Room Door #02 features a Ganesha carving on the central panel within an arched top shutter — the arch adding a temple-like framing. Solid teak frame and shutter, all hand-finished. Dark mahogany PU coat. Pairs beautifully with the mandir shrines from the Bhise'z wooden mandirs range."
+    description: "Mandir Room Door #02 features a Ganesha carving on the central panel within an arched top shutter — the arch adding a temple-like framing. Solid teak frame and shutter, all hand-finished. Dark mahogany PU coat. Pairs beautifully with the mandir shrines from the Bhisez wooden mandirs range."
   },
   "door-frames-mandir-room-3": {
     shortDesc: "Mandir door with Diya (lamp) carved motif and lattice border.",
@@ -480,15 +480,15 @@ export const PRODUCT_DESCRIPTIONS: Record<string, { shortDesc: string; descripti
   // ── DOOR FRAMES — FRAME ──
   "door-frames-frame-1": {
     shortDesc: "Solid teak door frame only, plain rebated section, standard 7×3.",
-    description: "Frame #01 is a plain rebated solid-teak door frame — two side jambs and a top lintel, all in seasoned first-grade teak. Simple square-section with a plain rebate. Natural teak PU finish. Supplied without shutter. Pre-drilled for hinge screws and strike plate. For use with any standard 7×3 shutter, including those from the Bhise'z door range."
+    description: "Frame #01 is a plain rebated solid-teak door frame — two side jambs and a top lintel, all in seasoned first-grade teak. Simple square-section with a plain rebate. Natural teak PU finish. Supplied without shutter. Pre-drilled for hinge screws and strike plate. For use with any standard 7×3 shutter, including those from the Bhisez door range."
   },
   "door-frames-frame-2": {
     shortDesc: "Teak door frame with moulded inner bead, suits panelled shutters.",
-    description: "Frame #02 adds an ogee moulding to the inner rebate face — a subtle decorative element that complements panelled shutters. Solid seasoned teak, walnut PU finish. Jambs and lintel set for 7×3 openings. Pre-fitted hinge mortises. Pairs particularly well with the four- and six-panel shutters from the Bhise'z door collection."
+    description: "Frame #02 adds an ogee moulding to the inner rebate face — a subtle decorative element that complements panelled shutters. Solid seasoned teak, walnut PU finish. Jambs and lintel set for 7×3 openings. Pre-fitted hinge mortises. Pairs particularly well with the four- and six-panel shutters from the Bhisez door collection."
   },
   "door-frames-frame-3": {
     shortDesc: "Premium carved teak door frame with vine moulding on all three sides.",
-    description: "Frame #03 is the most decorative frame option — a hand-carved vine-and-leaf moulding running continuously along all three members (both jambs and lintel). Solid first-grade teak, dark rosewood PU coat. Made to complement the elaborately carved shutters in the Bhise'z range. Transforms even a plain shutter into an ornate entrance when used as the surrounding frame."
+    description: "Frame #03 is the most decorative frame option — a hand-carved vine-and-leaf moulding running continuously along all three members (both jambs and lintel). Solid first-grade teak, dark rosewood PU coat. Made to complement the elaborately carved shutters in the Bhisez range. Transforms even a plain shutter into an ornate entrance when used as the surrounding frame."
   },
 
   // ── WOODEN SAFETY DOORS ──
@@ -502,7 +502,7 @@ export const PRODUCT_DESCRIPTIONS: Record<string, { shortDesc: string; descripti
   },
   "wooden-safety-doors-safety-doors-3": {
     shortDesc: "Teak safety door with decorative floral grille pattern, Design #03.",
-    description: "Safety Door #03 replaces plain bars with a decorative wrought-iron floral-scroll grille set within a solid teak frame. The grille pattern echoes the carved motifs found on Bhise'z main doors. Teak frame, rosewood PU finish, antique-bronze powder-coat on ironwork. Provides excellent security with maximum visual appeal."
+    description: "Safety Door #03 replaces plain bars with a decorative wrought-iron floral-scroll grille set within a solid teak frame. The grille pattern echoes the carved motifs found on Bhisez main doors. Teak frame, rosewood PU finish, antique-bronze powder-coat on ironwork. Provides excellent security with maximum visual appeal."
   },
   "wooden-safety-doors-safety-doors-4": {
     shortDesc: "Teak safety door with diamond-mesh grille and plain wide frame.",
@@ -520,7 +520,7 @@ export const PRODUCT_DESCRIPTIONS: Record<string, { shortDesc: string; descripti
   // ── DRESSING TABLE ──
   "dressing-table-dt-1": {
     shortDesc: "Classic teak dressing table with oval mirror and three drawers.",
-    description: "Dressing Table #01 is the cornerstone of the Bhise'z vanity range — a wide teak base with three drawers (one deep, two shallow), a central knee-recess, and a large oval swing mirror on turned uprights. Solid seasoned teak throughout, natural honey-teak PU finish. Fits a standard bedroom corner. Mirror glass is 5mm bevel-edged. Includes matching stool (sold separately)."
+    description: "Dressing Table #01 is the cornerstone of the Bhisez vanity range — a wide teak base with three drawers (one deep, two shallow), a central knee-recess, and a large oval swing mirror on turned uprights. Solid seasoned teak throughout, natural honey-teak PU finish. Fits a standard bedroom corner. Mirror glass is 5mm bevel-edged. Includes matching stool (sold separately)."
   },
   "dressing-table-dt-2": {
     shortDesc: "Royal dressing table with carved mirror frame and five-drawer base.",
@@ -566,7 +566,7 @@ export const PRODUCT_DESCRIPTIONS: Record<string, { shortDesc: string; descripti
   },
   "wooden-swings-swing-7": {
     shortDesc: "Swing with storage bench — hidden compartment under seat lid.",
-    description: "Swing #07 adds a clever feature — the bench seat has a hinged lid that opens to reveal a storage compartment beneath. Perfect for storing cushions, throws, or children's toys. Solid teak frame and bench box. Walnut PU finish. Galvanised chain suspension. The most practical swing in the Bhise'z range."
+    description: "Swing #07 adds a clever feature — the bench seat has a hinged lid that opens to reveal a storage compartment beneath. Perfect for storing cushions, throws, or children's toys. Solid teak frame and bench box. Walnut PU finish. Galvanised chain suspension. The most practical swing in the Bhisez range."
   },
   "wooden-swings-swing-8": {
     shortDesc: "Swing with high back carved arch and double-chain suspension per side.",
@@ -596,7 +596,7 @@ export const PRODUCT_DESCRIPTIONS: Record<string, { shortDesc: string; descripti
   },
   "wooden-mandirs-mandir-6": {
     shortDesc: "Compact teak mandir with single door and Om carved backboard.",
-    description: "Mandir #06 is a minimalist wall-mount mandir — a single hinged door with a carved Om panel, opening to reveal a small shelf and a deeply carved Om on the backboard. Solid teak, natural PU finish. Ideal for bedrooms, offices, and student accommodations. The smallest fully-featured shrine in the Bhise'z range."
+    description: "Mandir #06 is a minimalist wall-mount mandir — a single hinged door with a carved Om panel, opening to reveal a small shelf and a deeply carved Om on the backboard. Solid teak, natural PU finish. Ideal for bedrooms, offices, and student accommodations. The smallest fully-featured shrine in the Bhisez range."
   },
   "wooden-mandirs-mandir-7": {
     shortDesc: "Teak mandir with carved peacock columns and multi-tier shelves.",
@@ -608,7 +608,7 @@ export const PRODUCT_DESCRIPTIONS: Record<string, { shortDesc: string; descripti
   },
   "wooden-mandirs-mandir-9": {
     shortDesc: "Large teak mandir with full carved exterior and drawer storage base.",
-    description: "Mandir #09 is a large floor-standing model — full carved exterior, double doors, multi-tier idol shelf, and a base cabinet with two drawers for storing pooja accessories, agarbattis, and holy books. Solid first-grade teak, dark mahogany PU finish. Brass fittings throughout. The most feature-complete mandir in the Bhise'z standard range."
+    description: "Mandir #09 is a large floor-standing model — full carved exterior, double doors, multi-tier idol shelf, and a base cabinet with two drawers for storing pooja accessories, agarbattis, and holy books. Solid first-grade teak, dark mahogany PU finish. Brass fittings throughout. The most feature-complete mandir in the Bhisez standard range."
   },
   "wooden-mandirs-mandir-10": {
     shortDesc: "Teak mandir with Lakshmi carved door panels and gold-accent finish.",
@@ -620,7 +620,7 @@ export const PRODUCT_DESCRIPTIONS: Record<string, { shortDesc: string; descripti
   },
   "wooden-mandirs-mandir-12": {
     shortDesc: "Teak mandir with arched triple-niche interior, suits three deity idols.",
-    description: "Mandir #12 has a triple-arched interior — three independent arched niches, each sized for one idol. Ideal for households that worship Brahma-Vishnu-Shiva, or the divine Trinity. Solid teak, dark rosewood PU finish. Single carved front door. The three-niche layout is unique in the Bhise'z mandir range."
+    description: "Mandir #12 has a triple-arched interior — three independent arched niches, each sized for one idol. Ideal for households that worship Brahma-Vishnu-Shiva, or the divine Trinity. Solid teak, dark rosewood PU finish. Single carved front door. The three-niche layout is unique in the Bhisez mandir range."
   },
   "wooden-mandirs-mandir-13": {
     shortDesc: "Kerala-style teak mandir with sloped roof and carved namaskar columns.",
@@ -684,7 +684,7 @@ export const PRODUCT_DESCRIPTIONS: Record<string, { shortDesc: string; descripti
   },
   "wooden-mandirs-mandir-28": {
     shortDesc: "Teak mandir with rotating base platform for 360° idol display.",
-    description: "Mandir #28 includes a rotating wooden base platform on ball bearings inside the shrine — allowing the idol to be turned to face in any direction during pooja without moving the shrine itself. Solid teak exterior with carved double doors. Walnut PU finish. A thoughtful functional detail unique in the Bhise'z mandir range."
+    description: "Mandir #28 includes a rotating wooden base platform on ball bearings inside the shrine — allowing the idol to be turned to face in any direction during pooja without moving the shrine itself. Solid teak exterior with carved double doors. Walnut PU finish. A thoughtful functional detail unique in the Bhisez mandir range."
   },
   "wooden-mandirs-mandir-29": {
     shortDesc: "Teak mandir with Devi Mahalakshmi carved façade and mirror backpanel.",
@@ -696,7 +696,7 @@ export const PRODUCT_DESCRIPTIONS: Record<string, { shortDesc: string; descripti
   },
   "wooden-mandirs-mandir-31": {
     shortDesc: "Teak mandir with carved banana-leaf column motifs, South Indian temple style.",
-    description: "Mandir #31 draws from South Indian Dravidian architecture — banana-leaf column capitals, a layered gopuram-style cornice, and densely carved friezes on all faces. Solid first-grade teak, dark rosewood PU coat. The most architecturally elaborate mandir in the Bhise'z standard range. Suited for large dedicated pooja rooms."
+    description: "Mandir #31 draws from South Indian Dravidian architecture — banana-leaf column capitals, a layered gopuram-style cornice, and densely carved friezes on all faces. Solid first-grade teak, dark rosewood PU coat. The most architecturally elaborate mandir in the Bhisez standard range. Suited for large dedicated pooja rooms."
   },
   "wooden-mandirs-mandir-32": {
     shortDesc: "Teak mandir with carved Tulsi Vivah scene on backpanel.",
@@ -711,8 +711,8 @@ export const PRODUCT_DESCRIPTIONS: Record<string, { shortDesc: string; descripti
     description: "Mandir #34 is designed for Shakta practitioners — the Shri Yantra (the supreme yantra of Goddess Tripura Sundari) is carved in exact geometric precision on the backpanel. The interior shelves have precise proportional dimensions per Vastu recommendations. Solid teak, dark mahogany PU coat. Brass fittings. A sacred geometric installation for serious practitioners."
   },
   "wooden-mandirs-mandir-35": {
-    shortDesc: "Grand floor-standing teak mandir — the most elaborate in the Bhise'z range.",
-    description: "Mandir #35 is the crown jewel of the Bhise'z shrine collection — a towering floor-standing mandir over 6 feet tall, with a full shikhara roof, carved pillar columns, carved door panels, multiple interior levels, a base cabinet with drawers, and a continuous narrative frieze around the body. Solid first-grade seasoned teak, dark rosewood PU. Made to order with 60-day lead time. The ultimate expression of devotion and craftsmanship."
+    shortDesc: "Grand floor-standing teak mandir — the most elaborate in the Bhisez range.",
+    description: "Mandir #35 is the crown jewel of the Bhisez shrine collection — a towering floor-standing mandir over 6 feet tall, with a full shikhara roof, carved pillar columns, carved door panels, multiple interior levels, a base cabinet with drawers, and a continuous narrative frieze around the body. Solid first-grade seasoned teak, dark rosewood PU. Made to order with 60-day lead time. The ultimate expression of devotion and craftsmanship."
   },
 
   // ── WOODEN MANDIRS — RAJASANS ──
@@ -770,7 +770,7 @@ export const PRODUCT_DESCRIPTIONS: Record<string, { shortDesc: string; descripti
   },
   "wooden-mandirs-rajasans-14": {
     shortDesc: "Tall-leg teak rajasan, elevated platform for wall-mounted mandir.",
-    description: "Rajasan #14 has elongated legs — raising the platform height to match wall-mounted mandirs installed above a counter or cabinet. Solid teak, dark rosewood PU finish. The extra height means the deity is at eye level when worshipped standing. Carved border on top face. The tallest rajasan in the Bhise'z range."
+    description: "Rajasan #14 has elongated legs — raising the platform height to match wall-mounted mandirs installed above a counter or cabinet. Solid teak, dark rosewood PU finish. The extra height means the deity is at eye level when worshipped standing. Carved border on top face. The tallest rajasan in the Bhisez range."
   },
 
   // ── WOODEN MANDIRS — POOJA MANDIR ──
@@ -800,7 +800,7 @@ export const PRODUCT_DESCRIPTIONS: Record<string, { shortDesc: string; descripti
   },
   "wooden-mandirs-pooja-mandir-7": {
     shortDesc: "Pooja mandir with copper-sheet inlaid doors and carved teak body.",
-    description: "Pooja Mandir #07 uses thin embossed copper sheets mounted on the door panels — the copper embossing carries a Lakshmi-Ganesha design. Teak body with dark walnut PU coat. The copper doors glow warmly under diya light and develop a natural patina over time. A fusion of metal and wood craft unique in the Bhise'z range."
+    description: "Pooja Mandir #07 uses thin embossed copper sheets mounted on the door panels — the copper embossing carries a Lakshmi-Ganesha design. Teak body with dark walnut PU coat. The copper doors glow warmly under diya light and develop a natural patina over time. A fusion of metal and wood craft unique in the Bhisez range."
   },
   "wooden-mandirs-pooja-mandir-8": {
     shortDesc: "Pooja mandir with rotating prayer wheel (mini chakra) on top.",
@@ -808,7 +808,7 @@ export const PRODUCT_DESCRIPTIONS: Record<string, { shortDesc: string; descripti
   },
   "wooden-mandirs-pooja-mandir-9": {
     shortDesc: "Premium pooja mandir — full carved body, brass fittings, marble base, LED valance.",
-    description: "Pooja Mandir #09 is the most premium compact shrine in the Bhise'z range — full carved teak outer frame, glass-shelved display side cabinets, an open centre TV shelf with LED strip lighting inside the top cornice, and a lower drawer-and-cabinet base. Solid first-grade teak, dark rosewood PU coat. Five shelves, magnetic door closure. Everything a devotional household could ask for in a single shrine."
+    description: "Pooja Mandir #09 is the most premium compact shrine in the Bhisez range — full carved teak outer frame, glass-shelved display side cabinets, an open centre TV shelf with LED strip lighting inside the top cornice, and a lower drawer-and-cabinet base. Solid first-grade teak, dark rosewood PU coat. Five shelves, magnetic door closure. Everything a devotional household could ask for in a single shrine."
   },
 
   // ── TEAPOYS AND COFFEE TABLES ──
@@ -834,7 +834,7 @@ export const PRODUCT_DESCRIPTIONS: Record<string, { shortDesc: string; descripti
   },
   "teapoys-coffee-tables-teapoy-6": {
     shortDesc: "Teak teapoy with carved elephant-motif apron, Konkan heritage design.",
-    description: "Teapoy #06 carries a hand-carved elephant motif on the front apron — the Bhise'z signature Konkan motif applied even to small furniture. Solid teak, rosewood PU finish. Square top with routed edge. Four turned legs. A small table that carries a big design statement."
+    description: "Teapoy #06 carries a hand-carved elephant motif on the front apron — the Bhisez signature Konkan motif applied even to small furniture. Solid teak, rosewood PU finish. Square top with routed edge. Four turned legs. A small table that carries a big design statement."
   },
   "teapoys-coffee-tables-teapoy-7": {
     shortDesc: "Nesting set of two teak teapoys, space-efficient pair.",
@@ -912,7 +912,7 @@ export const PRODUCT_DESCRIPTIONS: Record<string, { shortDesc: string; descripti
   },
   "wooden-sofas-sofa-8": {
     shortDesc: "Full carved teak 3-seater sofa, Konkan heritage design.",
-    description: "Sofa #08 is the most ornate sofa in the Bhise'z range — every visible surface of the backrest, armrests, and apron carries hand-carved Konkan motifs. Solid first-grade teak, dark rosewood PU finish. Drop-in fabric cushions in deep red cotton. A powerful, assertive piece for traditional and heritage interior settings."
+    description: "Sofa #08 is the most ornate sofa in the Bhisez range — every visible surface of the backrest, armrests, and apron carries hand-carved Konkan motifs. Solid first-grade teak, dark rosewood PU finish. Drop-in fabric cushions in deep red cotton. A powerful, assertive piece for traditional and heritage interior settings."
   },
   "wooden-sofas-sofa-9": {
     shortDesc: "Teak L-shaped corner sofa, maximises living room seating capacity.",
@@ -940,7 +940,7 @@ export const PRODUCT_DESCRIPTIONS: Record<string, { shortDesc: string; descripti
   },
   "wooden-sofas-sofa-15": {
     shortDesc: "Premium 5-seater teak sofa set — 3+1+1 with carved frame and teapoy included.",
-    description: "Sofa #15 is the flagship drawing room set — a 3-seater sofa, two single armchairs, and a matching carved-apron teapoy, all in coordinated solid first-grade teak. Full carved backrest rails on all pieces, matching walnut PU finish throughout. Premium high-density foam, cotton fabric cushions. A complete, coordinated, and magnificent drawing room suite from Bhise'z workshop."
+    description: "Sofa #15 is the flagship drawing room set — a 3-seater sofa, two single armchairs, and a matching carved-apron teapoy, all in coordinated solid first-grade teak. Full carved backrest rails on all pieces, matching walnut PU finish throughout. Premium high-density foam, cotton fabric cushions. A complete, coordinated, and magnificent drawing room suite from Bhisez workshop."
   },
 
   // ── SOFA CUM BEDS ──
@@ -988,7 +988,7 @@ export const PRODUCT_DESCRIPTIONS: Record<string, { shortDesc: string; descripti
   },
   "dining-tables-dining-2": {
     shortDesc: "6-seater teak dining set with carved apron and sturdy spindle chairs.",
-    description: "Dining Set #02 is the classic family set — a six-seater rectangular table with a deeply carved apron and six spindle-back chairs. Solid teak, dark walnut PU finish. Table top: 5×3 feet. Chairs have carved crest rail and turned legs. The most popular dining configuration from Bhise'z workshop — a staple of Indian family homes."
+    description: "Dining Set #02 is the classic family set — a six-seater rectangular table with a deeply carved apron and six spindle-back chairs. Solid teak, dark walnut PU finish. Table top: 5×3 feet. Chairs have carved crest rail and turned legs. The most popular dining configuration from Bhisez workshop — a staple of Indian family homes."
   },
   "dining-tables-dining-3": {
     shortDesc: "6-seater teak dining set with glass-top surface frame.",
@@ -1016,7 +1016,7 @@ export const PRODUCT_DESCRIPTIONS: Record<string, { shortDesc: string; descripti
   },
   "dining-tables-dining-9": {
     shortDesc: "Premium 6-seater teak dining set with detailed master joinery.",
-    description: "Dining Set #09 is the flagship dining room suite from Bhise'z — a six-seater table with a fully carved apron on all four sides, six chairs with matching carved backrest and carved apron, all in first-grade seasoned teak. Dark rosewood PU coat throughout. Every joint hand-fitted. A complete, coordinated, heirloom-quality dining room."
+    description: "Dining Set #09 is the flagship dining room suite from Bhisez — a six-seater table with a fully carved apron on all four sides, six chairs with matching carved backrest and carved apron, all in first-grade seasoned teak. Dark rosewood PU coat throughout. Every joint hand-fitted. A complete, coordinated, heirloom-quality dining room."
   },
 
   // ── WARDROBES ──
@@ -1026,7 +1026,7 @@ export const PRODUCT_DESCRIPTIONS: Record<string, { shortDesc: string; descripti
   },
   "wardrobes-wardrobe-2": {
     shortDesc: "3-door teak wardrobe with mirror panel and custom drawer layout.",
-    description: "Wardrobe #02 adds a full-length mirror to the central door — no need for a separate dressing mirror. Three doors, multiple shelf configurations inside. Solid teak outer frame, engineered-wood interior panels. Walnut PU finish. 6×6 feet. Mirror with bevel edge. The most popular wardrobe in the Bhise'z range for master bedrooms."
+    description: "Wardrobe #02 adds a full-length mirror to the central door — no need for a separate dressing mirror. Three doors, multiple shelf configurations inside. Solid teak outer frame, engineered-wood interior panels. Walnut PU finish. 6×6 feet. Mirror with bevel edge. The most popular wardrobe in the Bhisez range for master bedrooms."
   },
   "wardrobes-wardrobe-3": {
     shortDesc: "2-door teak wardrobe with carved panels and solid base boxes.",
@@ -1042,7 +1042,7 @@ export const PRODUCT_DESCRIPTIONS: Record<string, { shortDesc: string; descripti
   },
   "wardrobes-wardrobe-6": {
     shortDesc: "Walk-in teak wardrobe unit with open shelves and hanging rods.",
-    description: "Wardrobe #06 is configured for a walk-in wardrobe alcove — open-face shelving units and hanging rails without enclosing doors, designed to be installed against three walls of a dressing room. Solid teak frame, natural PU coat. Custom dimensions available. The most flexible configuration in the Bhise'z wardrobe range."
+    description: "Wardrobe #06 is configured for a walk-in wardrobe alcove — open-face shelving units and hanging rails without enclosing doors, designed to be installed against three walls of a dressing room. Solid teak frame, natural PU coat. Custom dimensions available. The most flexible configuration in the Bhisez wardrobe range."
   },
   "wardrobes-wardrobe-7": {
     shortDesc: "Teak wardrobe with carved door panels and brass latching details.",
@@ -1066,7 +1066,7 @@ export const PRODUCT_DESCRIPTIONS: Record<string, { shortDesc: string; descripti
   },
   "wardrobes-wardrobe-12": {
     shortDesc: "Premium 4-door teak wardrobe with elite carvings and fittings.",
-    description: "Wardrobe #12 is the flagship wardrobe from Bhise'z — four doors, all carved with matching motifs; a central full-length mirror section; a base drawer bank; multiple hanging rails at different heights; and antique-finish brass hardware throughout. Solid first-grade seasoned teak, dark rosewood PU coat. 7×7 feet. The ultimate bedroom storage suite. Made to order with 35-day lead time."
+    description: "Wardrobe #12 is the flagship wardrobe from Bhisez — four doors, all carved with matching motifs; a central full-length mirror section; a base drawer bank; multiple hanging rails at different heights; and antique-finish brass hardware throughout. Solid first-grade seasoned teak, dark rosewood PU coat. 7×7 feet. The ultimate bedroom storage suite. Made to order with 35-day lead time."
   },
 
   // ── T.V UNITS ──
@@ -1096,7 +1096,7 @@ export const PRODUCT_DESCRIPTIONS: Record<string, { shortDesc: string; descripti
   },
   "tv-units-tv-unit-7": {
     shortDesc: "Premium entertainment media suite with warm LED backlighting.",
-    description: "TV Unit #07 is the flagship entertainment unit from Bhise'z — full carved teak outer frame, glass-shelved display side cabinets, an open centre TV shelf with LED strip lighting inside the top cornice, and a lower drawer-and-cabinet base. First-grade seasoned teak, dark rosewood PU coat. 7 feet wide, 6.5 feet tall. A complete, luminous, magnificent entertainment wall. Made to order."
+    description: "TV Unit #07 is the flagship entertainment unit from Bhisez — full carved teak outer frame, glass-shelved display side cabinets, an open centre TV shelf with LED strip lighting inside the top cornice, and a lower drawer-and-cabinet base. First-grade seasoned teak, dark rosewood PU coat. 7 feet wide, 6.5 feet tall. A complete, luminous, magnificent entertainment wall. Made to order."
   },
 
   // ── CHAURANG AND PAATS ──

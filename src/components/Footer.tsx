@@ -91,7 +91,7 @@ export default function Footer({ onNavigate }: FooterProps) {
           </p>
           <div className="flex flex-col space-y-2">
             <a 
-              href="https://wa.me/917057441122?text=Hi Bhise'z! I'd like to get a pricing quote for teak furniture." 
+              href="https://wa.me/917057441122?text=Hi Bhisez! I'd like to get a pricing quote for teak furniture." 
               target="_blank" 
               rel="noreferrer"
               className="text-center bg-[#C9983A] hover:bg-[#E8B84B] text-amber-950 font-bold text-xs py-2 px-4 rounded-md transition-colors"
@@ -110,7 +110,7 @@ export default function Footer({ onNavigate }: FooterProps) {
       </div>
 
       <div className="max-w-7xl mx-auto mt-16 pt-8 border-t border-[#3D2B1F] flex flex-col md:flex-row justify-between items-center text-xs text-stone-500">
-        <p>© 2026 Bhise'z Furniture. Handcrafted with Care in Southern Konkan (Maharashtra). All rights reserved.</p>
+        <p>© 2026 Bhisez Furniture. Handcrafted with Care in Southern Konkan (Maharashtra). All rights reserved.</p>
         <div className="flex space-x-6 mt-4 md:mt-0">
           <button onClick={() => onNavigate('contact')} className="hover:underline bg-transparent border-none text-stone-500 cursor-pointer">Inquire</button>
           <span>·</span>

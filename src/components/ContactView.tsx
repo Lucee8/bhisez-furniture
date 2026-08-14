@@ -62,7 +62,7 @@ export default function ContactView({ onAddInquiry }: ContactViewProps) {
       });
     }
 
-    const payload = `Hi Bhise'z! I'd like to submit an inquiry over the website.
+    const payload = `Hi Bhisez! I'd like to submit an inquiry over the website.
 Name: ${name}
 Phone: ${phone}
 City: ${city}

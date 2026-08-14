@@ -581,7 +581,7 @@ const getCategoryDefaults = (categorySlug: string) => {
   if (categorySlug === 'beds') {
     return {
       seriesName: "seasoned hardwood series",
-      brandName: "Bhise'z Furniture Showroom",
+      brandName: "Bhisez Furniture Showroom",
       sizingLabel: "Dimensions / Bed Sizing",
       sizesList: ["King Size", "Queen Size"],
       finishesLabel: "Hardwood Finish / Seal",
@@ -601,7 +601,7 @@ const getCategoryDefaults = (categorySlug: string) => {
   if (categorySlug === 'wooden-sofas' || categorySlug === 'sofa-cum-beds') {
     return {
       seriesName: "modular lounge series",
-      brandName: "Bhise'z Furniture Showroom",
+      brandName: "Bhisez Furniture Showroom",
       sizingLabel: "Seating Capacity / Lounge Sizing",
       sizesList: ["3 Seater", "2 Seater", "1 Seater"],
       finishesLabel: "Wood Finish & Polish",
@@ -625,7 +625,7 @@ const getCategoryDefaults = (categorySlug: string) => {
   if (categorySlug === 'wooden-chairs') {
     return {
       seriesName: "ergonomic seating series",
-      brandName: "Bhise'z Furniture Showroom",
+      brandName: "Bhisez Furniture Showroom",
       sizingLabel: "Seating Elevation / Height",
       sizesList: ["Standard Dining Height", "Counter Height (+₹1,500)"],
       finishesLabel: "Sealer Coating & Stain",
@@ -645,7 +645,7 @@ const getCategoryDefaults = (categorySlug: string) => {
   if (categorySlug === 'wooden-mandirs') {
     return {
       seriesName: "divine sanctuary collection",
-      brandName: "Bhise'z Furniture Showroom",
+      brandName: "Bhisez Furniture Showroom",
       sizingLabel: "Temple Width & Height Sizing",
       sizesList: ["Standard Width (24\")", "Wide Width (36\") (+₹6,000)"],
       finishesLabel: "Glow polish luster",
@@ -668,7 +668,7 @@ const getCategoryDefaults = (categorySlug: string) => {
   if (categorySlug === 'door-frames' || categorySlug === 'wooden-safety-doors') {
     return {
       seriesName: "seasoned structural wood series",
-      brandName: "Bhise'z Furniture Showroom",
+      brandName: "Bhisez Furniture Showroom",
       sizingLabel: "Thickness & Sizing",
       sizesList: ["Standard Size (7' x 3')", "Large Size (8' x 4') (+₹5,000)"],
       finishesLabel: "Hardwood Weatherproof Shield",
@@ -688,7 +688,7 @@ const getCategoryDefaults = (categorySlug: string) => {
   if (categorySlug === 'teapoys-coffee-tables' || categorySlug === 'dining-tables') {
     return {
       seriesName: "classic tabletop collection",
-      brandName: "Bhise'z Furniture Showroom",
+      brandName: "Bhisez Furniture Showroom",
       sizingLabel: "Tabletop Dimensions",
       sizesList: ["Standard Oval/Rectangle", "Premium Large Extension (+₹4,500)"],
       finishesLabel: "Spill-resistant PU Seal",
@@ -708,7 +708,7 @@ const getCategoryDefaults = (categorySlug: string) => {
   if (categorySlug === 'wardrobes' || categorySlug === 'dressing-table' || categorySlug === 'tv-units') {
     return {
       seriesName: "premium utility cabinetry",
-      brandName: "Bhise'z Furniture Showroom",
+      brandName: "Bhisez Furniture Showroom",
       sizingLabel: "Layout & Sizing Options",
       sizesList: ["Standard Cabinet", "Royal Combo (+₹5,500)"],
       finishesLabel: "Premium Lamination Polish",
@@ -728,7 +728,7 @@ const getCategoryDefaults = (categorySlug: string) => {
   if (categorySlug === 'wooden-swings') {
     return {
       seriesName: "royal timber swings",
-      brandName: "Bhise'z Furniture Showroom",
+      brandName: "Bhisez Furniture Showroom",
       sizingLabel: "Swing Plank Length",
       sizesList: ["4.5 Feet (Double-Seater)", "5.5 Feet (Triple-Seater) (+₹5,000)"],
       finishesLabel: "Glossy Waterproof Polish",
@@ -748,7 +748,7 @@ const getCategoryDefaults = (categorySlug: string) => {
   // General Fallback (e.g. Chaurang, Diwan, etc.)
   return {
     seriesName: "seasoned timber workshop series",
-    brandName: "Bhise'z Furniture Showroom",
+    brandName: "Bhisez Furniture Showroom",
     sizingLabel: "Standard Sizing",
     sizesList: ["Full Size"],
     finishesLabel: "Premium Sealer Wax",
@@ -882,7 +882,7 @@ export const TESTIMONIALS = [
     name: 'Rahul Desai',
     location: 'Malvan',
     stars: 5,
-    text: 'Got our complete solid teak bedroom bed and wardrobes from Bhise\'z. The quality of seasoned timber is outstanding and delivery was fully set up in our room. Highly recommend Bhisez!'
+    text: 'Got our complete solid teak bedroom bed and wardrobes from Bhisez. The quality of seasoned timber is outstanding and delivery was fully set up in our room. Highly recommend Bhisez!'
   },
   {
     name: 'Sunita Naik',

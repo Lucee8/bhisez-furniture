@@ -88,7 +88,7 @@ export default function PaymentsView({
 
             <div className="pt-2 flex flex-col space-y-3">
               <a 
-                href={`https://wa.me/917057441122?text=${encodeURIComponent(`Hi Bhise'z! I just placed an order. Order Reference ID: ${orderId}`)}`}
+                href={`https://wa.me/917057441122?text=${encodeURIComponent(`Hi Bhisez! I just placed an order. Order Reference ID: ${orderId}`)}`}
                 target="_blank"
                 rel="noreferrer"
                 className="w-full py-3 bg-[#25D366] text-white hover:bg-[#1ebd59] text-xs font-bold rounded-xl flex justify-center items-center gap-1 shadow-xs"
