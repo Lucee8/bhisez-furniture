@@ -118,7 +118,7 @@ export default function WishlistView({
                         </button>
 
                         <a 
-                          href={`https://wa.me/919999999999?text=${encodeURIComponent(`Hi Bhise'z! I am interested in ordering/getting a quote for: ${p.name}`)}`}
+                          href={`https://wa.me/917057441122?text=${encodeURIComponent(`Hi Bhise'z! I am interested in ordering/getting a quote for: ${p.name}`)}`}
                           target="_blank"
                           rel="noreferrer"
                           onClick={(e) => e.stopPropagation()}

@@ -508,7 +508,7 @@ export default function ProductDetailView({
               )}
 
               <a 
-                href={`https://wa.me/919999999999?text=${encodeURIComponent(`Hi Ramesh! I want to order/enquire details.\nProduct: ${product.name}${product.availableSize ? `\nAvailable Size: ${product.availableSize}` : (sizesList.length > 0 ? `\n${sizingLabel}: ${selectedSize}` : '')}\nWood Type: ${selectedWoodType}${optionsList.length > 0 && optionsLabel ? `\n${optionsLabel}: ${selectedStorage}` : ''}\nQty: ${quantity}`)}`}
+                href={`https://wa.me/917057441122?text=${encodeURIComponent(`Hi Ramesh! I want to order/enquire details.\nProduct: ${product.name}${product.availableSize ? `\nAvailable Size: ${product.availableSize}` : (sizesList.length > 0 ? `\n${sizingLabel}: ${selectedSize}` : '')}\nWood Type: ${selectedWoodType}${optionsList.length > 0 && optionsLabel ? `\n${optionsLabel}: ${selectedStorage}` : ''}\nQty: ${quantity}`)}`}
                 target="_blank"
                 rel="noreferrer"
                 className="w-full bg-[#25D366] hover:bg-[#1ebd59] text-white font-bold text-xs uppercase tracking-wider py-4 rounded-xl flex items-center justify-center gap-2 shadow-xs text-center"

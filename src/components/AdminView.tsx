@@ -2264,7 +2264,7 @@ export default function AdminView({
                       <label className="text-[10px] font-black text-stone-400 uppercase tracking-widest">WhatsApp Enquiries Line Number</label>
                       <input 
                         type="text" 
-                        value={websiteContent.whatsappLine || '+91 9314444747'}
+                        value={websiteContent.whatsappLine || '+91 70574 41122'}
                         onChange={(e) => handleUpdateContentField('whatsappLine', e.target.value)}
                         className="border border-[#E0D8CF] rounded-xl px-4 py-2.5 text-xs text-stone-700 bg-[#FAF7F2]"
                       />
@@ -2513,7 +2513,7 @@ export default function AdminView({
                       <label className="text-[10px] font-black text-stone-400 uppercase tracking-widest">Primary Contact Number</label>
                       <input 
                         type="text" 
-                        value={websiteContent.contactNumber || '+91 98201 12234'}
+                        value={websiteContent.contactNumber || '+91 70574 41122'}
                         onChange={(e) => handleUpdateContentField('contactNumber', e.target.value)}
                         className="border border-[#E0D8CF] rounded-xl px-4 py-2 text-xs text-stone-705 bg-white font-bold"
                       />
@@ -2533,7 +2533,7 @@ export default function AdminView({
                       <label className="text-[10px] font-black text-stone-400 uppercase tracking-widest">WhatsApp settings (API Redirect Template)</label>
                       <input 
                         type="text" 
-                        value={websiteContent.whatsappSettings || 'Active line: +91 9314444747 (Auto-Template: Hello, interested in custom order)'}
+                        value={websiteContent.whatsappSettings || 'Active line: +91 70574 41122 (Auto-Template: Hello, interested in custom order)'}
                         onChange={(e) => handleUpdateContentField('whatsappSettings', e.target.value)}
                         className="border border-[#E0D8CF] rounded-xl px-4 py-2 text-xs text-stone-705 bg-white"
                       />

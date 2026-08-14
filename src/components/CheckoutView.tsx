@@ -195,7 +195,7 @@ export default function CheckoutView({
                   <input 
                     type="tel" 
                     required 
-                    placeholder="+91 99999 99999"
+                    placeholder="+91 70574 41122"
                     value={mobile}
                     onChange={(e) => setMobile(e.target.value.replace(/[^\d+ ]/g, ''))}
                     className="border border-[#E0D8CF] rounded-xl px-4 py-2.5 text-xs text-stone-800 bg-[#FAF7F2] focus:ring-1 focus:ring-amber-500 outline-none"

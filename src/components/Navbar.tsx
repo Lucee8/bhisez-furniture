@@ -84,11 +84,11 @@ export default function Navbar({
           {/* Right Ribbon Links */}
           <div className="flex items-center space-x-6 text-stone-500">
             <a 
-              href="tel:+919314444747" 
+              href="tel:+917057441122" 
               className="flex items-center gap-1 hover:text-stone-900 transition-colors font-bold"
             >
               <PhoneCall size={11} className="text-stone-400" />
-              +91-9314444747
+              +91 70574 41122
             </a>
             <span className="text-stone-300">|</span>
             <button 
@@ -431,7 +431,7 @@ export default function Navbar({
             {/* Mobile Footer Area */}
             <div className="border-t border-[#E0D8CF] pt-4 flex flex-col space-y-3">
               <a 
-                href="https://wa.me/919999999999?text=Hi! I Want to Enquire About Custom Furniture." 
+                href="https://wa.me/917057441122?text=Hi! I Want to Enquire About Custom Furniture." 
                 target="_blank" 
                 rel="noreferrer"
                 className="w-full text-center bg-[#25D366] text-white text-xs font-bold py-2.5 px-4 rounded-lg flex items-center justify-center gap-2"

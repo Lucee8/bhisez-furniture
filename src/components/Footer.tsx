@@ -91,7 +91,7 @@ export default function Footer({ onNavigate }: FooterProps) {
           </p>
           <div className="flex flex-col space-y-2">
             <a 
-              href="https://wa.me/919999999999?text=Hi Bhise'z! I'd like to get a pricing quote for teak furniture." 
+              href="https://wa.me/917057441122?text=Hi Bhise'z! I'd like to get a pricing quote for teak furniture." 
               target="_blank" 
               rel="noreferrer"
               className="text-center bg-[#C9983A] hover:bg-[#E8B84B] text-amber-950 font-bold text-xs py-2 px-4 rounded-md transition-colors"
@@ -99,10 +99,10 @@ export default function Footer({ onNavigate }: FooterProps) {
               💬 Chat on WhatsApp
             </a>
             <a 
-              href="tel:+919999999999" 
+              href="tel:+917057441122" 
               className="text-center border border-[#3D2B1F] text-amber-50 hover:bg-stone-800 text-xs font-semibold py-2 px-4 rounded-md transition-all"
             >
-              📞 Call +91 99999 99999
+              📞 Call +91 70574 41122
             </a>
           </div>
         </div>

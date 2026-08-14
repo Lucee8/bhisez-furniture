@@ -29,8 +29,7 @@ import {
   Film
 } from 'lucide-react';
 
-// FIX: these files all live in `../assets/`, not `../public/images/Home view/`.
-// Import them the same way as `beds`, matching the actual folder they're in.
+// These files live in the project-level `assets/` folder.
 import beds from '../../assets/beds.webP';
 import dining1 from '../../assets/Dining1.webP';
 // import dining2 from '../../assets/Dining2.webP';
@@ -1074,7 +1073,7 @@ export default function HomeView({
                 </div>
                 
                 <a 
-                  href={`https://wa.me/919314444747?text=${encodeURIComponent(`Hi Ramesh Bhise! Here is the detailed website proposal customized for ${clientName} in ${clientLocation}:\n\n*Selected Package Features*:\n${featuresList.filter(f=>f.checked).map((f, i)=>(i+1)+'. '+f.label+' (₹'+f.price+')').join('\n')}\n\n*Total Proposed Cost*: ₹${activeFeaturesTotal.toLocaleString('en-IN')}\n\nThis consists of beautiful Wooden Street layouts, custom Teak Bed configurations, and instant WhatsApp booking maps. Let me know when we can review!`)}`}
+                  href={`https://wa.me/917057441122?text=${encodeURIComponent(`Hi Ramesh Bhise! Here is the detailed website proposal customized for ${clientName} in ${clientLocation}:\n\n*Selected Package Features*:\n${featuresList.filter(f=>f.checked).map((f, i)=>(i+1)+'. '+f.label+' (₹'+f.price+')').join('\n')}\n\n*Total Proposed Cost*: ₹${activeFeaturesTotal.toLocaleString('en-IN')}\n\nThis consists of beautiful Wooden Street layouts, custom Teak Bed configurations, and instant WhatsApp booking maps. Let me know when we can review!`)}`}
                   target="_blank"
                   rel="noreferrer"
                   className="w-full bg-[#25D366] hover:bg-emerald-600 text-white font-bold py-3 px-4 rounded-lg flex items-center justify-center gap-2 text-xs uppercase tracking-widest text-center shadow-lg transition-transform active:scale-98 cursor-pointer"

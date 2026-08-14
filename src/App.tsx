@@ -630,11 +630,11 @@ export default function App() {
       {/* Ambient Floating WhatsApp helper button */}
       {!isAdminRoute() && currentView !== 'admin' && (
         <a 
-          href={`https://wa.me/919999999999?text=${encodeURIComponent(`Hi Ramesh! I'd like to get an estimate for solid hardwood furniture.`)}`}
+          href={`https://wa.me/917057441122?text=${encodeURIComponent(`Hi Ramesh! I'd like to get an estimate for solid hardwood furniture.`)}`}
           target="_blank"
           className="fixed bottom-6 left-6 z-[90] w-12 h-12 bg-[#25D366] hover:bg-[#1ebd59] text-white rounded-full flex items-center justify-center shadow-lg transition-transform hover:scale-110"
           rel="noreferrer"
-          title="Chat on WhatsApp"
+          title="Chat on WhatsApp (+91 70574 41122)"
           id="whatsapp-floating-btn"
         >
           <MessageCircle size={22} className="fill-current text-white stroke-none" />

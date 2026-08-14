@@ -654,7 +654,7 @@ export default function BedsView({
 
               <div className="pt-3 flex flex-col space-y-2 bg-transparent">
                 <a
-                  href={`https://wa.me/919999999999?text=${encodeURIComponent(`Hi Ramesh! I would like to schedule/initiate a Live WhatsApp Video Walkthrough of the showrooms to see the furniture designs in real-time.`)}`}
+                  href={`https://wa.me/917057441122?text=${encodeURIComponent(`Hi Ramesh! I would like to schedule/initiate a Live WhatsApp Video Walkthrough of the showrooms to see the furniture designs in real-time.`)}`}
                   target="_blank"
                   rel="noreferrer"
                   onClick={() => setIsLiveVideoOpen(false)}

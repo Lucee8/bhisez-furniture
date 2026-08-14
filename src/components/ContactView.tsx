@@ -70,7 +70,7 @@ Subject: ${subject}${useCustomGrid ? `\n--- Custom Sizing Grid --- \nLength: ${c
 Message: ${message}`;
 
     setTimeout(() => {
-      window.open(`https://wa.me/919999999999?text=${encodeURIComponent(payload)}`, '_blank');
+      window.open(`https://wa.me/917057441122?text=${encodeURIComponent(payload)}`, '_blank');
     }, 1200);
   };
 
@@ -99,7 +99,7 @@ Message: ${message}`;
                 <span className="text-lg shrink-0">📞</span>
                 <div>
                   <span className="font-bold text-stone-800">Malvan Flagship Line</span>
-                  <p className="mt-0.5"><a href="tel:+919999999999" className="text-[#3D2B1F] font-bold hover:underline">+91 99999 99999</a></p>
+                  <p className="mt-0.5"><a href="tel:+917057441122" className="text-[#3D2B1F] font-bold hover:underline">+91 70574 41122</a></p>
                 </div>
               </div>
 
@@ -107,7 +107,7 @@ Message: ${message}`;
                 <span className="text-lg shrink-0">💬</span>
                 <div>
                   <span className="font-bold text-stone-800">WhatsApp Sales desk</span>
-                  <p className="mt-0.5"><a href="https://wa.me/919999999999" target="_blank" rel="noreferrer" className="text-emerald-600 font-bold hover:underline">Message Ramesh Bhise</a></p>
+                  <p className="mt-0.5"><a href="https://wa.me/917057441122" target="_blank" rel="noreferrer" className="text-emerald-600 font-bold hover:underline">Message Ramesh Bhise (+91 70574 41122)</a></p>
                 </div>
               </div>
 
@@ -153,7 +153,7 @@ Message: ${message}`;
                   <input
                     type="tel"
                     required
-                    placeholder="E.g. +91 99999 99999"
+                    placeholder="E.g. +91 70574 41122"
                     value={phone}
                     onChange={(e) => setPhone(e.target.value.replace(/[^\d+ ]/g, ''))}
                     className="border border-[#E0D8CF] rounded-xl px-4 py-2.5 text-xs text-stone-700 outline-none focus:ring-1 focus:ring-amber-500 bg-[#FAF7F2]"

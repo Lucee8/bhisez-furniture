@@ -67,10 +67,10 @@ const DEFAULT_WEBSITE_CONTENT = {
   heroTitle: 'Genuine Malvani Hardwoods. Masterfully Carved.',
   heroSubtitle: 'By Ramesh Bhise Carpenter Workshop. Direct heirloom luxury for doors, double-beds, and customized Mandirs since 1995.',
   aboutQuote: "Every ring in a log represents a monsoon we stood together. We don't just shape wood; we preserve Malvan's heritage in your living quarters.",
-  whatsappLine: '+91 9314444747',
+  whatsappLine: '+91 70574 41122',
   malvanAddress: 'Main Market Road, Malvan, Sindhudurg, Maharashtra – 416606',
   sukalwadAddress: 'NH-66 Highway, Sukalwad, Sindhudurg, Maharashtra – 416520',
-  adminPasscode: '1234',
+  adminPasscode: '',
   currencySymbol: '₹',
   gstPercent: 18
 };

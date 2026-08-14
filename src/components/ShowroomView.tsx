@@ -78,7 +78,7 @@ Notes: ${walkthroughForm.notes}`;
 
     // Open prefilled WhatsApp
     setTimeout(() => {
-      window.open(`https://wa.me/919999999999?text=${encodeURIComponent(textPayload)}`, '_blank');
+      window.open(`https://wa.me/917057441122?text=${encodeURIComponent(textPayload)}`, '_blank');
     }, 1200);
   };
 
@@ -220,7 +220,7 @@ Notes: ${walkthroughForm.notes}`;
                     🗺️ Open in Google Maps
                   </a>
                   <a 
-                    href={`https://wa.me/919999999999?text=${encodeURIComponent(`Hi Bhise'z! I'd like to visit the ${activeShowroom === 'malvan' ? 'Malvan' : 'Sukalwad'} Showroom.`)}`}
+                    href={`https://wa.me/917057441122?text=${encodeURIComponent(`Hi Bhise'z! I'd like to visit the ${activeShowroom === 'malvan' ? 'Malvan' : 'Sukalwad'} Showroom.`)}`}
                     target="_blank"
                     rel="noreferrer"
                     className="flex-1 text-center border border-[#E0D8CF] hover:bg-stone-50 text-[#3D2B1F] text-xs font-bold py-3.5 rounded-xl transition-all active:scale-95 duration-200"
@@ -335,7 +335,7 @@ Notes: ${walkthroughForm.notes}`;
                   <input 
                     type="tel" 
                     required 
-                    placeholder="E.g. +91 99999 99999"
+                    placeholder="E.g. +91 70574 41122"
                     value={walkthroughForm.phone}
                     onChange={(e) => setWalkthroughForm({...walkthroughForm, phone: e.target.value.replace(/[^\d+ ]/g, '')})}
                     className="border border-[#E0D8CF] rounded-xl px-4 py-2.5 text-xs text-stone-700 outline-none focus:ring-1 focus:ring-amber-500"
